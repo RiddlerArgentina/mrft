@@ -9,8 +9,7 @@ transformations and noise
 - [`jDrawingLib`](https://github.com/dktcoding/jdrawinglib): Plotting functions,
 and creating images and animations
 - [`FileDrop`](http://iharder.sourceforge.net/current/java/filedrop/): Drag & Drop support
-- [`Java ECG Generator`](http://www.mit.edu/~gari/CODE/ECGSYN/JAVA/
-  APPLET2/ecgsyn/ecg-java/source.html): Synthetic ECG (training example)
+- [`Java ECG Generator`](http://www.mit.edu/~gari/CODE/ECGSYN/JAVA/APPLET2/ecgsyn/ecg-java/source.html): Synthetic ECG (training example)
 - Others (that I will name in time)
 
 Objectives
