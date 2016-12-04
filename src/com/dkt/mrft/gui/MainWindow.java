@@ -2514,8 +2514,8 @@ public final class MainWindow extends javax.swing.JFrame {
         }
         
         if (errorPoints[TRAIN] == null) {
-            errorPoints[TRAIN] = new GPath(128);
-            errorPoints[VALID] = new GPath(128);
+            errorPoints[TRAIN] = new GPath(errRes + 10);
+            errorPoints[VALID] = new GPath(errRes + 10);
             errorPoints[TRAIN].setStroke(errStroke);
             errorPoints[VALID].setStroke(errStroke);
             
@@ -2585,8 +2585,8 @@ public final class MainWindow extends javax.swing.JFrame {
             return;
         }
         if (errorPoints[TRAIN] == null) {
-            errorPoints[TRAIN] = new GPointArray(128);
-            errorPoints[VALID] = new GPointArray(128);
+            errorPoints[TRAIN] = new GPointArray(512);
+            errorPoints[VALID] = new GPointArray(512);
             errs.add(errorPoints[TRAIN]);
             errs.add(errorPoints[VALID]);
         }
