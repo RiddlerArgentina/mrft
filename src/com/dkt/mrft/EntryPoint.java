@@ -27,6 +27,7 @@ import com.dkt.mrft.gui.MainWindow;
 import com.dkt.mrft.utils.BundleDecorator;
 import com.dkt.mrft.utils.Config;
 import java.io.File;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -49,8 +50,12 @@ public class EntryPoint {
             boolean csv = false;
             boolean tsv = false;
             boolean help = false;
+            
             String fname = "";
             ArrayList<Double> vals = new ArrayList<>();
+            
+            PrintStream out = System.out;
+            
             for (String arg : args) {
                 switch(arg) {
                     case "-csv": csv = true; break;
@@ -64,7 +69,7 @@ public class EntryPoint {
                             try {
                                 vals.add(Double.parseDouble(arg));
                             } catch (Exception e) {
-                                System.out.println(i18n.__("'%s' doesn't seem to be a number", arg));
+                                out.println(i18n.__("Err: '%s' doesn't seem to be a number", arg));
                                 System.exit(0);
                             }
                         }
@@ -75,17 +80,17 @@ public class EntryPoint {
             if (!help) {
                 File file = new File(fname);
                 if (!file.exists()) {
-                    System.out.println(i18n.__("Unable to parse '%s'", fname));
+                    out.println(i18n.__("Err: Unable to parse '%s'", fname));
                     System.exit(0);
                 }
                 
                 MLP mlp = MLP.open(fname);
                 if (mlp == null) {
-                    System.out.println(i18n.__("'%s' doesn't seem to have a valid matrix", fname));
+                    out.println(i18n.__("Err: '%s' doesn't seem to have a valid matrix", fname));
                     System.exit(0);
                 } 
                 if (vals.isEmpty()) {
-                    System.out.println(i18n.__("Input values needed"));
+                    out.println(i18n.__("Err: Input values needed"));
                     System.exit(0);
                 }
                 Matrix m = new Matrix(1,1);
@@ -93,23 +98,23 @@ public class EntryPoint {
                     m.position(0, 0, v);
                     double res = mlp.simulate(m).position(0, 0);
                     if (csv) {
-                        System.out.println(i18n.__("%f, %f%n", v, res));
+                        out.println(i18n.__("%f, %f%n", v, res));
                     } else if (tsv) {
-                        System.out.println(i18n.__("%f\t%f%n", v, res));
+                        out.println(i18n.__("%f\t%f%n", v, res));
                     } else {
-                        System.out.println(res);
+                        out.println(res);
                     }
                 }
             }
             
             if (help) {
-                System.out.println(i18n.__("Usage:     java -jar FinalAI.jar FLAG DAT_FILR VALUES"));
-                System.out.println(i18n.__("java -jar FinalAI.jar -csv matrix.dat 0.1 0.2 0.3 0.4"));
-                System.out.println(i18n.__("Flags:"));
-                System.out.println(i18n.__(" -h --help  -> This help"));
-                System.out.println(i18n.__(" -csv       -> comma separated std::out"));
-                System.out.println(i18n.__(" -tsv       -> tab separated std::out"));
-                System.out.println(i18n.__("            -> returns the value of the prediction"));
+                out.println(i18n.__("Usage:     java -jar FinalAI.jar FLAG DAT_FILR VALUES"));
+                out.println(i18n.__("java -jar FinalAI.jar -csv matrix.dat 0.1 0.2 0.3 0.4"));
+                out.println(i18n.__("Flags:"));
+                out.println(i18n.__(" -h --help  -> This help"));
+                out.println(i18n.__(" -csv       -> comma separated std::out"));
+                out.println(i18n.__(" -tsv       -> tab separated std::out"));
+                out.println(i18n.__("            -> returns the value of the prediction"));
             }
             
             System.exit(0);
