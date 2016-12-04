@@ -199,43 +199,65 @@ public final class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        final JLabel jLabel6 = new JLabel();
-        final JLabel jLabel7 = new JLabel();
-        final JLabel jLabel1 = new JLabel();
-        final JLabel jLabel18 = new JLabel();
-        final JLabel jLabel8 = new JLabel();
-        final JLabel jLabel9 = new JLabel();
-        final JLabel jLabel10 = new JLabel();
-        final JLabel jLabel11 = new JLabel();
-        final JLabel jLabel12 = new JLabel();
-        final JButton jButton11 = new JButton();
-        final JButton jButton12 = new JButton();
-        final JButton jButton13 = new JButton();
-        final JMenu jMenu1 = new JMenu();
-        final JMenuItem jMenuItem37 = new JMenuItem();
-        final JPopupMenu.Separator jSeparator2 = new JPopupMenu.Separator();
-        final JMenuItem jMenuItem5 = new JMenuItem();
-        final JMenu jMenu9 = new JMenu();
-        final JMenuItem jMenuItem33 = new JMenuItem();
-        final JMenuItem jMenuItem34 = new JMenuItem();
-        final JMenuItem jMenuItem35 = new JMenuItem();
-        final JMenuItem jMenuItem36 = new JMenuItem();
-        final JMenu jMenu3 = new JMenu();
-        final JMenuItem jMenuItem6 = new JMenuItem();
-        final JMenuItem jMenuItem7 = new JMenuItem();
-        final JMenuItem jMenuItem8 = new JMenuItem();
-        final JMenu jMenu6 = new JMenu();
-        final JMenuItem jMenuItem2 = new JMenuItem();
-        final JMenuItem jMenuItem14 = new JMenuItem();
-        final JMenuItem jMenuItem10 = new JMenuItem();
-        final JMenuItem jMenuItem11 = new JMenuItem();
-        final JMenu jMenu4 = new JMenu();
-        final JMenuItem jMenuItem4 = new JMenuItem();
-        final JMenuItem jMenuItem12 = new JMenuItem();
-        final JMenuItem jMenuItem26 = new JMenuItem();
-        final JMenu jMenu8 = new JMenu();
-        final JMenu jMenu10 = new JMenu();
-        final JMenuItem jMenuItem29 = new JMenuItem();
+        final JScrollPane trainTableScrollPane = new JScrollPane();
+        final JScrollPane validTableScrollPane = new JScrollPane();
+        final JScrollPane generTableScrollPane = new JScrollPane();
+        final JPanel selectionPanel = new JPanel();
+        final JLabel destinationLabel = new JLabel();
+        final JButton selectAllButton = new JButton();
+        final JButton selectNonButton = new JButton();
+        final JButton toggleSelButton = new JButton();
+        final JSeparator selectionSeparator1 = new JSeparator();
+        final JButton selectPercentageButton = new JButton();
+        final JButton selectNumberButton = new JButton();
+        final JButton moveSelectedButton = new JButton();
+        final JButton copySelectedButton = new JButton();
+        final JPanel layersPanel = new JPanel();
+        final JScrollPane layersScrollPane = new JScrollPane();
+        final JLabel layersLabel = new JLabel();
+        final JLabel backpropLabel = new JLabel();
+        final JLabel learningRateLabel = new JLabel();
+        final JLabel degradationLabel = new JLabel();
+        final JPanel trainingConfPanel = new JPanel();
+        final JLabel mseLabel = new JLabel();
+        final JLabel maxEpochsLabel = new JLabel();
+        final JLabel saveEveryLabel = new JLabel();
+        final JPanel outputPanel = new JPanel();
+        final JLabel pathLabel = new JLabel();
+        final JLabel weightLabel = new JLabel();
+        final JPanel plotsPanel = new JPanel();
+        final JPanel optionsPanel = new JPanel();
+        final JButton trainColorButton = new JButton();
+        final JButton validColorButton = new JButton();
+        final JButton generColorButton = new JButton();
+        final JScrollPane errorTableScrollPane = new JScrollPane();
+        final JPanel logOutputPanel = new JPanel();
+        final JScrollPane logsScroll = new JScrollPane();
+        final JMenu fileMenu = new JMenu();
+        final JMenuItem loadConfigMI = new JMenuItem();
+        final JPopupMenu.Separator menuSeparator1 = new JPopupMenu.Separator();
+        final JMenuItem quitMI = new JMenuItem();
+        final JMenu viewMenu = new JMenu();
+        final JMenuItem dataPanelMI = new JMenuItem();
+        final JMenuItem topologyPanelMI = new JMenuItem();
+        final JMenuItem errorPlotPanelMI = new JMenuItem();
+        final JMenuItem outputPanelMI = new JMenuItem();
+        final JMenu populateMenu = new JMenu();
+        final JMenuItem popFuncMonoMI = new JMenuItem();
+        final JMenuItem popFuncRandMI = new JMenuItem();
+        final JMenuItem popFuncGaussMI = new JMenuItem();
+        final JMenu transformMenu = new JMenu();
+        final JMenuItem transAutoscaleAllMI = new JMenuItem();
+        final JMenuItem transCustFuncAllMI = new JMenuItem();
+        final JMenuItem dataAddRowMI = new JMenuItem();
+        final JMenuItem dataRemSelRowsMI = new JMenuItem();
+        final JMenu plotsMenu = new JMenu();
+        final JMenuItem saveImageMI = new JMenuItem();
+        final JMenuItem saveErrorMI = new JMenuItem();
+        final JMenuItem saveGifMI = new JMenuItem();
+        final JMenu helpMenu = new JMenu();
+        final JMenu debugMenu = new JMenu();
+        final JMenuItem aboutMI = new JMenuItem();
 
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("MLP Real Function Trainer - v1.0");
@@ -245,14 +267,14 @@ public final class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jTabbedPane1.addFocusListener(new FocusAdapter() {
+        tabbedPane.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent evt) {
-                jTabbedPane1FocusGained(evt);
+                tabbedPaneFocusGained(evt);
             }
         });
 
-        jTable2.setAutoCreateRowSorter(true);
-        jTable2.setModel(new DefaultTableModel(
+        trainTable.setAutoCreateRowSorter(true);
+        trainTable.setModel(new DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -270,17 +292,17 @@ public final class MainWindow extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        trainTableScrollPane.setViewportView(trainTable);
 
-        jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+        trainLabel.setHorizontalAlignment(SwingConstants.CENTER);
         ResourceBundle bundle = ResourceBundle.getBundle("res/i18n/strings"); // NOI18N
-        jLabel2.setText(bundle.getString("TBL_LAB_TRAIN")); // NOI18N
+        trainLabel.setText(bundle.getString("TBL_LAB_TRAIN")); // NOI18N
 
-        jLabel3.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel3.setText(bundle.getString("TBL_LBL_VALID")); // NOI18N
+        validLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        validLabel.setText(bundle.getString("TBL_LBL_VALID")); // NOI18N
 
-        jTable3.setAutoCreateRowSorter(true);
-        jTable3.setModel(new DefaultTableModel(
+        validTable.setAutoCreateRowSorter(true);
+        validTable.setModel(new DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -298,13 +320,13 @@ public final class MainWindow extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        validTableScrollPane.setViewportView(validTable);
 
-        jLabel4.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel4.setText(bundle.getString("TBL_LBL_GENER")); // NOI18N
+        generLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        generLabel.setText(bundle.getString("TBL_LBL_GENER")); // NOI18N
 
-        jTable4.setAutoCreateRowSorter(true);
-        jTable4.setModel(new DefaultTableModel(
+        generTable.setAutoCreateRowSorter(true);
+        generTable.setModel(new DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -322,232 +344,232 @@ public final class MainWindow extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable4);
+        generTableScrollPane.setViewportView(generTable);
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText(bundle.getString("TBL_SEL_TRAIN")); // NOI18N
-        jRadioButton1.addActionListener(new ActionListener() {
+        buttonGroup1.add(selTrainButton);
+        selTrainButton.setText(bundle.getString("TBL_SEL_TRAIN")); // NOI18N
+        selTrainButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                selTrainButtonActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText(bundle.getString("TBL_SEL_VALID")); // NOI18N
-        jRadioButton2.setActionCommand(bundle.getString("TBL_SEL_VALID")); // NOI18N
-        jRadioButton2.addActionListener(new ActionListener() {
+        buttonGroup1.add(selValidButton);
+        selValidButton.setText(bundle.getString("TBL_SEL_VALID")); // NOI18N
+        selValidButton.setActionCommand(bundle.getString("TBL_SEL_VALID")); // NOI18N
+        selValidButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                selValidButtonActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText(bundle.getString("TBL_SEL_GENER")); // NOI18N
-        jRadioButton3.addActionListener(new ActionListener() {
+        buttonGroup1.add(selGenerButton);
+        selGenerButton.setText(bundle.getString("TBL_SEL_GENER")); // NOI18N
+        selGenerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                selGenerButtonActionPerformed(evt);
             }
         });
 
-        jPanel5.setBorder(BorderFactory.createTitledBorder(bundle.getString("PNL_SEL"))); // NOI18N
+        selectionPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("PNL_SEL"))); // NOI18N
 
-        jLabel5.setText(bundle.getString("PNL_SEL_DESTINATION")); // NOI18N
+        destinationLabel.setText(bundle.getString("PNL_SEL_DESTINATION")); // NOI18N
 
-        jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Training"), i18n.__("Validation"), i18n.__("Generalization") }));
+        destinationBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Training"), i18n.__("Validation"), i18n.__("Generalization") }));
 
-        jButton1.setText(bundle.getString("PNL_SEL_ALL")); // NOI18N
-        jButton1.addActionListener(new ActionListener() {
+        selectAllButton.setText(bundle.getString("PNL_SEL_ALL")); // NOI18N
+        selectAllButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                selectAllButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText(bundle.getString("PNL_SEL_NONE")); // NOI18N
-        jButton2.addActionListener(new ActionListener() {
+        selectNonButton.setText(bundle.getString("PNL_SEL_NONE")); // NOI18N
+        selectNonButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                selectNonButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText(bundle.getString("PNL_SEL_TOGGLE")); // NOI18N
-        jButton3.addActionListener(new ActionListener() {
+        toggleSelButton.setText(bundle.getString("PNL_SEL_TOGGLE")); // NOI18N
+        toggleSelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                toggleSelButtonActionPerformed(evt);
             }
         });
 
-        jSeparator4.setOrientation(SwingConstants.VERTICAL);
+        selectionSeparator1.setOrientation(SwingConstants.VERTICAL);
 
-        jFormattedTextField1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(NumberFormat.getPercentInstance())));
-        jFormattedTextField1.setText("10%");
+        selectPercentageField.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(NumberFormat.getPercentInstance())));
+        selectPercentageField.setText("10%");
 
-        jButton4.setText(bundle.getString("PNL_SEL_SELECT")); // NOI18N
-        jButton4.addActionListener(new ActionListener() {
+        selectPercentageButton.setText(bundle.getString("PNL_SEL_SELECT")); // NOI18N
+        selectPercentageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                selectPercentageButtonActionPerformed(evt);
             }
         });
 
-        jFormattedTextField2.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(NumberFormat.getIntegerInstance())));
-        jFormattedTextField2.setText("50");
+        selectNumberField.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(NumberFormat.getIntegerInstance())));
+        selectNumberField.setText("50");
 
-        jButton5.setText(bundle.getString("PNL_SEL_SELECT")); // NOI18N
-        jButton5.addActionListener(new ActionListener() {
+        selectNumberButton.setText(bundle.getString("PNL_SEL_SELECT")); // NOI18N
+        selectNumberButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                selectNumberButtonActionPerformed(evt);
             }
         });
 
-        jCheckBox1.setSelected(true);
-        jCheckBox1.setText(bundle.getString("PNL_SEL_RAND")); // NOI18N
-        jCheckBox1.setHorizontalAlignment(SwingConstants.TRAILING);
-        jCheckBox1.setHorizontalTextPosition(SwingConstants.LEADING);
+        randomSelectionCheck.setSelected(true);
+        randomSelectionCheck.setText(bundle.getString("PNL_SEL_RAND")); // NOI18N
+        randomSelectionCheck.setHorizontalAlignment(SwingConstants.TRAILING);
+        randomSelectionCheck.setHorizontalTextPosition(SwingConstants.LEADING);
 
-        jSeparator5.setOrientation(SwingConstants.VERTICAL);
+        selectionSeparator2.setOrientation(SwingConstants.VERTICAL);
 
-        jButton6.setText(bundle.getString("PNL_SEL_MOVE")); // NOI18N
-        jButton6.addActionListener(new ActionListener() {
+        moveSelectedButton.setText(bundle.getString("PNL_SEL_MOVE")); // NOI18N
+        moveSelectedButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                moveSelectedButtonActionPerformed(evt);
             }
         });
 
-        jButton8.setText(bundle.getString("PNL_SEL_COPY")); // NOI18N
-        jButton8.addActionListener(new ActionListener() {
+        copySelectedButton.setText(bundle.getString("PNL_SEL_COPY")); // NOI18N
+        copySelectedButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                copySelectedButtonActionPerformed(evt);
             }
         });
 
-        GroupLayout jPanel5Layout = new GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        GroupLayout selectionPanelLayout = new GroupLayout(selectionPanel);
+        selectionPanel.setLayout(selectionPanelLayout);
+        selectionPanelLayout.setHorizontalGroup(selectionPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(selectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
+                .addGroup(selectionPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(selectNonButton, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectAllButton, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(toggleSelButton, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator4, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+                .addComponent(selectionSeparator1, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jFormattedTextField1, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+                .addGroup(selectionPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addGroup(selectionPanelLayout.createSequentialGroup()
+                        .addComponent(selectPercentageField, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jCheckBox1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
+                        .addComponent(selectPercentageButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(selectionPanelLayout.createSequentialGroup()
+                        .addGroup(selectionPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(randomSelectionCheck, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selectNumberField, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)))
+                        .addComponent(selectNumberButton)))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator5, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+                .addComponent(selectionSeparator2, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                .addGroup(selectionPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(selectionPanelLayout.createSequentialGroup()
+                        .addComponent(destinationLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton6, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(destinationBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(moveSelectedButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(copySelectedButton, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jPanel5Layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {jButton1, jButton2, jButton3});
+        selectionPanelLayout.linkSize(SwingConstants.HORIZONTAL, new Component[] {selectAllButton, selectNonButton, toggleSelButton});
 
-        jPanel5Layout.setVerticalGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        selectionPanelLayout.setVerticalGroup(selectionPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, selectionPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator5, GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator4, GroupLayout.Alignment.LEADING)
-                    .addGroup(GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addGroup(GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jComboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(selectionPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addComponent(selectionSeparator2, GroupLayout.Alignment.LEADING)
+                    .addComponent(selectionSeparator1, GroupLayout.Alignment.LEADING)
+                    .addGroup(GroupLayout.Alignment.LEADING, selectionPanelLayout.createSequentialGroup()
+                        .addGroup(selectionPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addGroup(GroupLayout.Alignment.LEADING, selectionPanelLayout.createSequentialGroup()
+                                .addGroup(selectionPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(destinationLabel)
+                                    .addComponent(destinationBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6)
+                                .addComponent(moveSelectedButton)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton8))
-                            .addGroup(GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jFormattedTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton4))
+                                .addComponent(copySelectedButton))
+                            .addGroup(GroupLayout.Alignment.LEADING, selectionPanelLayout.createSequentialGroup()
+                                .addGroup(selectionPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(selectPercentageField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(selectPercentageButton))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jFormattedTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton5))
+                                .addGroup(selectionPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                    .addComponent(selectNumberField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(selectNumberButton))
                                 .addGap(18, 18, 18)
-                                .addComponent(jCheckBox1))
-                            .addGroup(GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(randomSelectionCheck))
+                            .addGroup(GroupLayout.Alignment.LEADING, selectionPanelLayout.createSequentialGroup()
+                                .addComponent(selectAllButton)
                                 .addGap(9, 9, 9)
-                                .addComponent(jButton3)
+                                .addComponent(toggleSelButton)
                                 .addGap(7, 7, 7)
-                                .addComponent(jButton2)))
+                                .addComponent(selectNonButton)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        GroupLayout dataPanelLayout = new GroupLayout(dataPanel);
+        dataPanel.setLayout(dataPanelLayout);
+        dataPanelLayout.setHorizontalGroup(dataPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, dataPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRadioButton1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(dataPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addComponent(selectionPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(dataPanelLayout.createSequentialGroup()
+                        .addGroup(dataPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(selTrainButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(trainTableScrollPane, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(trainLabel, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButton2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(dataPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(validTableScrollPane, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(validLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selValidButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButton3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(dataPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(generTableScrollPane, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(generLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selGenerButton, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        dataPanelLayout.setVerticalGroup(dataPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(dataPanelLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                .addGroup(dataPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(dataPanelLayout.createSequentialGroup()
+                        .addComponent(generLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
-                    .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(generTableScrollPane, GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
+                    .addGroup(GroupLayout.Alignment.TRAILING, dataPanelLayout.createSequentialGroup()
+                        .addComponent(validLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(validTableScrollPane, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(dataPanelLayout.createSequentialGroup()
+                        .addComponent(trainLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(trainTableScrollPane, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                .addGroup(dataPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(selTrainButton)
+                    .addComponent(selValidButton)
+                    .addComponent(selGenerButton))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(selectionPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11))
         );
 
-        jTabbedPane1.addTab(bundle.getString("PNL_DATA"), jPanel1); // NOI18N
+        tabbedPane.addTab(bundle.getString("PNL_DATA"), dataPanel); // NOI18N
 
-        jPanel10.setBorder(BorderFactory.createTitledBorder(bundle.getString("TOPO_LAYERS"))); // NOI18N
+        layersPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("TOPO_LAYERS"))); // NOI18N
 
-        jTable1.setModel(new DefaultTableModel(
+        layerTable.setModel(new DefaultTableModel(
             new Object [][] {
                 {"I",  new Integer(1), "Identidad"},
                 {"1",  new Integer(4), "Sigmoide"},
@@ -566,383 +588,383 @@ public final class MainWindow extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(jTable1);
+        layersScrollPane.setViewportView(layerTable);
 
-        jLabel6.setText(bundle.getString("TOPO_HIDDEN_NUMBER")); // NOI18N
+        layersLabel.setText(bundle.getString("TOPO_HIDDEN_NUMBER")); // NOI18N
 
-        jSpinner1.setModel(new SpinnerNumberModel(1, 1, 10, 1));
-        jSpinner1.addChangeListener(new ChangeListener() {
+        layersSpinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
+        layersSpinner.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
-                jSpinner1StateChanged(evt);
+                layersSpinnerStateChanged(evt);
             }
         });
 
-        jLabel7.setText(bundle.getString("TOPO_BACKPROP")); // NOI18N
+        backpropLabel.setText(bundle.getString("TOPO_BACKPROP")); // NOI18N
 
-        jComboBox2.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Standard"), i18n.__("Momentum"), i18n.__("Resilient") }));
+        backpropBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Standard"), i18n.__("Momentum"), i18n.__("Resilient") }));
 
-        jLabel1.setText(bundle.getString("TOPO_LEARN_RATE")); // NOI18N
+        learningRateLabel.setText(bundle.getString("TOPO_LEARN_RATE")); // NOI18N
 
-        jLabel18.setText(bundle.getString("TOPO_DEGRADATION")); // NOI18N
+        degradationLabel.setText(bundle.getString("TOPO_DEGRADATION")); // NOI18N
 
-        jFormattedTextField4.setValue(0.001);
-        jFormattedTextField4.setHorizontalAlignment(JTextField.TRAILING);
+        learningRateField.setValue(0.001);
+        learningRateField.setHorizontalAlignment(JTextField.TRAILING);
 
-        jFormattedTextField5.setValue(1);
-        jFormattedTextField5.setHorizontalAlignment(JTextField.TRAILING);
+        degradationField.setValue(1);
+        degradationField.setHorizontalAlignment(JTextField.TRAILING);
 
-        GroupLayout jPanel10Layout = new GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(jPanel10Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+        GroupLayout layersPanelLayout = new GroupLayout(layersPanel);
+        layersPanel.setLayout(layersPanelLayout);
+        layersPanelLayout.setHorizontalGroup(layersPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layersPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGroup(jPanel10Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layersPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(layersScrollPane)
+                    .addGroup(layersPanelLayout.createSequentialGroup()
+                        .addGroup(layersPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layersPanelLayout.createSequentialGroup()
+                                .addComponent(learningRateLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextField4, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(learningRateField, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layersPanelLayout.createSequentialGroup()
+                                .addComponent(layersLabel)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinner1, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(layersSpinner, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel10Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel18, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layersPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                            .addComponent(backpropLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(degradationLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel10Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, 0, 207, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField5))))
+                        .addGroup(layersPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(backpropBox, 0, 207, Short.MAX_VALUE)
+                            .addComponent(degradationField))))
                 .addContainerGap())
         );
-        jPanel10Layout.setVerticalGroup(jPanel10Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+        layersPanelLayout.setVerticalGroup(layersPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layersPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
+                .addComponent(layersScrollPane, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jSpinner1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(layersPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(layersLabel)
+                    .addComponent(layersSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backpropLabel)
+                    .addComponent(backpropBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel10Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel18)
-                        .addComponent(jFormattedTextField5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jFormattedTextField4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layersPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(layersPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(degradationLabel)
+                        .addComponent(degradationField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layersPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(learningRateLabel)
+                        .addComponent(learningRateField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
-        jPanel12.setBorder(BorderFactory.createTitledBorder(bundle.getString("TOPO_TRAIN"))); // NOI18N
+        trainingConfPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("TOPO_TRAIN"))); // NOI18N
 
-        jLabel8.setText(bundle.getString("TOPO_MSE")); // NOI18N
+        mseLabel.setText(bundle.getString("TOPO_MSE")); // NOI18N
 
-        jLabel9.setText(bundle.getString("TOPO_EPOCHS")); // NOI18N
+        maxEpochsLabel.setText(bundle.getString("TOPO_EPOCHS")); // NOI18N
 
-        jLabel10.setText(bundle.getString("TOPO_SAVE_WEIGHTS")); // NOI18N
+        saveEveryLabel.setText(bundle.getString("TOPO_SAVE_WEIGHTS")); // NOI18N
 
-        jFormattedTextField3.setValue(0.0001);
-        jFormattedTextField3.setHorizontalAlignment(JTextField.TRAILING);
+        mseField.setValue(0.0001);
+        mseField.setHorizontalAlignment(JTextField.TRAILING);
 
-        jSpinner2.setModel(new SpinnerNumberModel(500000, 1, 100000000, 50));
+        maxEpochsSpinner.setModel(new SpinnerNumberModel(500000, 1, 100000000, 50));
 
-        jSpinner3.setModel(new SpinnerNumberModel(50, 1, 1000, 50));
+        saveEverySpinner.setModel(new SpinnerNumberModel(50, 1, 1000, 50));
 
-        GroupLayout jPanel12Layout = new GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(jPanel12Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+        GroupLayout trainingConfPanelLayout = new GroupLayout(trainingConfPanel);
+        trainingConfPanel.setLayout(trainingConfPanelLayout);
+        trainingConfPanelLayout.setHorizontalGroup(trainingConfPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(trainingConfPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel10))
+                .addGroup(trainingConfPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(maxEpochsLabel)
+                    .addComponent(mseLabel)
+                    .addComponent(saveEveryLabel))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel12Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jSpinner2, GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
-                    .addComponent(jSpinner3)
-                    .addComponent(jFormattedTextField3))
+                .addGroup(trainingConfPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(maxEpochsSpinner, GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                    .addComponent(saveEverySpinner)
+                    .addComponent(mseField))
                 .addContainerGap())
         );
-        jPanel12Layout.setVerticalGroup(jPanel12Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+        trainingConfPanelLayout.setVerticalGroup(trainingConfPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(trainingConfPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jFormattedTextField3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(trainingConfPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(mseLabel)
+                    .addComponent(mseField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel12Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jSpinner2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(trainingConfPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(maxEpochsLabel)
+                    .addComponent(maxEpochsSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel12Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jSpinner3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(trainingConfPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveEveryLabel)
+                    .addComponent(saveEverySpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel13.setBorder(BorderFactory.createTitledBorder(bundle.getString("TOPO_OUTPUT"))); // NOI18N
+        outputPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("TOPO_OUTPUT"))); // NOI18N
 
-        jLabel11.setText(bundle.getString("TOPO_FOLDER_PATH")); // NOI18N
+        pathLabel.setText(bundle.getString("TOPO_FOLDER_PATH")); // NOI18N
 
-        jTextField1.setText("/dev/shm/FinalIA");
+        pathField.setText("/dev/shm/FinalIA");
 
-        jButton7.setIcon(new ImageIcon(getClass().getResource("/res/icons/find.png"))); // NOI18N
-        jButton7.addActionListener(new ActionListener() {
+        pathSelectionButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/find.png"))); // NOI18N
+        pathSelectionButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                pathSelectionButtonActionPerformed(evt);
             }
         });
 
-        jLabel12.setText(bundle.getString("TOPO_WEIGHTS_NAME")); // NOI18N
+        weightLabel.setText(bundle.getString("TOPO_WEIGHTS_NAME")); // NOI18N
 
-        jTextField2.setText("foo_{epoch}_algo.dat");
+        weightField.setText("foo_{epoch}_algo.dat");
 
-        GroupLayout jPanel13Layout = new GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(jPanel13Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        GroupLayout outputPanelLayout = new GroupLayout(outputPanel);
+        outputPanel.setLayout(outputPanelLayout);
+        outputPanelLayout.setHorizontalGroup(outputPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(outputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel11))
+                .addGroup(outputPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(weightLabel)
+                    .addComponent(pathLabel))
                 .addGap(26, 26, 26)
-                .addGroup(jPanel13Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jTextField1, GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+                .addGroup(outputPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(outputPanelLayout.createSequentialGroup()
+                        .addComponent(pathField, GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7))
-                    .addComponent(jTextField2))
+                        .addComponent(pathSelectionButton))
+                    .addComponent(weightField))
                 .addContainerGap())
         );
-        jPanel13Layout.setVerticalGroup(jPanel13Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        outputPanelLayout.setVerticalGroup(outputPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(outputPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel13Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7))
+                .addGroup(outputPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(pathLabel)
+                    .addComponent(pathField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pathSelectionButton))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel13Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(outputPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(weightLabel)
+                    .addComponent(weightField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        GroupLayout topologyPanelLayout = new GroupLayout(topologyPanel);
+        topologyPanel.setLayout(topologyPanelLayout);
+        topologyPanelLayout.setHorizontalGroup(topologyPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(topologyPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel10, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel13, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel12, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(topologyPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(layersPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(outputPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(trainingConfPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        topologyPanelLayout.setVerticalGroup(topologyPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(topologyPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(layersPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel12, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(trainingConfPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(outputPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab(bundle.getString("PNL_TOPOLOGY"), jPanel2); // NOI18N
+        tabbedPane.addTab(bundle.getString("PNL_TOPOLOGY"), topologyPanel); // NOI18N
 
-        jPanel3.addComponentListener(new ComponentAdapter() {
+        plotsPanel.addComponentListener(new ComponentAdapter() {
             public void componentShown(ComponentEvent evt) {
-                jPanel3ComponentShown(evt);
+                plotsPanelComponentShown(evt);
             }
         });
 
-        jPanel8.setBorder(BorderFactory.createTitledBorder(bundle.getString("PLOT_FORMAT"))); // NOI18N
+        optionsPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("PLOT_FORMAT"))); // NOI18N
 
-        jComboBox7.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
-        jComboBox7.addActionListener(new ActionListener() {
+        validBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
+        validBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jComboBox7ActionPerformed(evt);
+                validBoxActionPerformed(evt);
             }
         });
 
-        jCheckBox2.setText(bundle.getString("PLOT_OPT_TRAIN")); // NOI18N
-        jCheckBox2.addActionListener(new ActionListener() {
+        trainPlotCheck.setText(bundle.getString("PLOT_OPT_TRAIN")); // NOI18N
+        trainPlotCheck.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                trainPlotCheckActionPerformed(evt);
             }
         });
 
-        jCheckBox3.setText(bundle.getString("PLOT_OPT_VALID")); // NOI18N
-        jCheckBox3.addActionListener(new ActionListener() {
+        validPlotCheck.setText(bundle.getString("PLOT_OPT_VALID")); // NOI18N
+        validPlotCheck.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
+                validPlotCheckActionPerformed(evt);
             }
         });
 
-        jCheckBox4.setSelected(true);
-        jCheckBox4.setText(bundle.getString("PLOT_OPT_GENER")); // NOI18N
-        jCheckBox4.setEnabled(false);
-        jCheckBox4.addActionListener(new ActionListener() {
+        generPlotCheck.setSelected(true);
+        generPlotCheck.setText(bundle.getString("PLOT_OPT_GENER")); // NOI18N
+        generPlotCheck.setEnabled(false);
+        generPlotCheck.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jCheckBox4ActionPerformed(evt);
+                generPlotCheckActionPerformed(evt);
             }
         });
 
-        jComboBox8.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
-        jComboBox8.addActionListener(new ActionListener() {
+        generBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
+        generBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jComboBox8ActionPerformed(evt);
+                generBoxActionPerformed(evt);
             }
         });
 
-        jComboBox9.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
-        jComboBox9.addActionListener(new ActionListener() {
+        trainBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
+        trainBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jComboBox9ActionPerformed(evt);
+                trainBoxActionPerformed(evt);
             }
         });
 
-        jButton11.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
-        jButton11.addActionListener(new ActionListener() {
+        trainColorButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
+        trainColorButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                trainColorButtonActionPerformed(evt);
             }
         });
 
-        jButton12.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
-        jButton12.addActionListener(new ActionListener() {
+        validColorButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
+        validColorButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                validColorButtonActionPerformed(evt);
             }
         });
 
-        jButton13.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
-        jButton13.addActionListener(new ActionListener() {
+        generColorButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
+        generColorButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                generColorButtonActionPerformed(evt);
             }
         });
 
-        jSeparator3.setOrientation(SwingConstants.VERTICAL);
+        optionsSeparator.setOrientation(SwingConstants.VERTICAL);
 
-        jProgressBar1.setStringPainted(true);
+        trainingProgress.setStringPainted(true);
 
-        jCheckBox5.setSelected(true);
-        jCheckBox5.setText(bundle.getString("PLOT_SMOOTH")); // NOI18N
-        jCheckBox5.addActionListener(new ActionListener() {
+        smoothErroCheck.setSelected(true);
+        smoothErroCheck.setText(bundle.getString("PLOT_SMOOTH")); // NOI18N
+        smoothErroCheck.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jCheckBox5ActionPerformed(evt);
+                smoothErroCheckActionPerformed(evt);
             }
         });
 
-        jButton14.setIcon(new ImageIcon(getClass().getResource("/res/icons/play.png"))); // NOI18N
-        jButton14.setEnabled(false);
-        jButton14.addActionListener(new ActionListener() {
+        playPauseButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/play.png"))); // NOI18N
+        playPauseButton.setEnabled(false);
+        playPauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                playPauseButtonActionPerformed(evt);
             }
         });
 
-        jButton16.setIcon(new ImageIcon(getClass().getResource("/res/icons/stop.png"))); // NOI18N
-        jButton16.setEnabled(false);
-        jButton16.addActionListener(new ActionListener() {
+        stopButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/stop.png"))); // NOI18N
+        stopButton.setEnabled(false);
+        stopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+                stopButtonActionPerformed(evt);
             }
         });
 
-        jCheckBox6.setSelected(true);
-        jCheckBox6.setText(bundle.getString("PLOT_SHOW_LABELS")); // NOI18N
-        jCheckBox6.addActionListener(new ActionListener() {
+        showLabelsCheck.setSelected(true);
+        showLabelsCheck.setText(bundle.getString("PLOT_SHOW_LABELS")); // NOI18N
+        showLabelsCheck.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jCheckBox6ActionPerformed(evt);
+                showLabelsCheckActionPerformed(evt);
             }
         });
 
-        GroupLayout jPanel8Layout = new GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        GroupLayout optionsPanelLayout = new GroupLayout(optionsPanel);
+        optionsPanel.setLayout(optionsPanelLayout);
+        optionsPanelLayout.setHorizontalGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(optionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jCheckBox4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox3, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(generPlotCheck, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(validPlotCheck, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(trainPlotCheck, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox9, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox7, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox8, 0, 200, Short.MAX_VALUE))
+                .addGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addComponent(trainBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(validBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(generBox, 0, 200, Short.MAX_VALUE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton11)
-                    .addComponent(jButton12)
-                    .addComponent(jButton13))
+                .addGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(trainColorButton)
+                    .addComponent(validColorButton)
+                    .addComponent(generColorButton))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(optionsSeparator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jButton14)
+                .addGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(smoothErroCheck, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addComponent(playPauseButton)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton16)
+                        .addComponent(stopButton)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jProgressBar1, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jCheckBox6)
+                        .addComponent(trainingProgress, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addComponent(showLabelsCheck)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel8Layout.setVerticalGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+        optionsPanelLayout.setVerticalGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, optionsPanelLayout.createSequentialGroup()
                 .addGap(1, 1, 1)
-                .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator3)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jComboBox9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton11))
+                .addGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(optionsSeparator)
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(trainPlotCheck)
+                            .addComponent(trainBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(trainColorButton))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(jCheckBox3)
-                                .addComponent(jComboBox7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton12))
+                        .addGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(validPlotCheck)
+                                .addComponent(validBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(validColorButton))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(jCheckBox4)
-                                .addComponent(jComboBox8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton13))
+                        .addGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(generPlotCheck)
+                                .addComponent(generBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(generColorButton))
                         .addGap(0, 3, Short.MAX_VALUE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jCheckBox5)
+                    .addGroup(optionsPanelLayout.createSequentialGroup()
+                        .addComponent(smoothErroCheck)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox6)
+                        .addComponent(showLabelsCheck)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel8Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton16)
-                            .addComponent(jButton14)
-                            .addComponent(jProgressBar1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(optionsPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(stopButton)
+                            .addComponent(playPauseButton)
+                            .addComponent(trainingProgress, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
-        jPanel8Layout.linkSize(SwingConstants.VERTICAL, new Component[] {jButton16, jProgressBar1});
+        optionsPanelLayout.linkSize(SwingConstants.VERTICAL, new Component[] {stopButton, trainingProgress});
 
-        jSplitPane1.setDividerLocation(250);
+        horizontalSplit.setDividerLocation(250);
 
-        jTable5.setModel(new DefaultTableModel(
+        errorTable.setModel(new DefaultTableModel(
             new Object [][] {
                 { new Integer(0), null, null},
                 { new Integer(5), null, null},
@@ -968,510 +990,510 @@ public final class MainWindow extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable5.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane6.setViewportView(jTable5);
+        errorTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        errorTableScrollPane.setViewportView(errorTable);
 
-        jSplitPane1.setLeftComponent(jScrollPane6);
+        horizontalSplit.setLeftComponent(errorTableScrollPane);
 
-        jSplitPane2.setDividerLocation(100);
-        jSplitPane2.setOrientation(JSplitPane.VERTICAL_SPLIT);
+        verticalSplit.setDividerLocation(100);
+        verticalSplit.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
-        jPanel6.setBorder(BorderFactory.createTitledBorder(bundle.getString("PLOT_FUNCTION"))); // NOI18N
-        jPanel6.setDoubleBuffered(false);
+        functPlotPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("PLOT_FUNCTION"))); // NOI18N
+        functPlotPanel.setDoubleBuffered(false);
 
-        GroupLayout jPanel6Layout = new GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(jPanel6Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        GroupLayout functPlotPanelLayout = new GroupLayout(functPlotPanel);
+        functPlotPanel.setLayout(functPlotPanelLayout);
+        functPlotPanelLayout.setHorizontalGroup(functPlotPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(jPanel6Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jSplitPane2.setTopComponent(jPanel6);
-
-        jPanel7.setBorder(BorderFactory.createTitledBorder(bundle.getString("PLOT_ERRS"))); // NOI18N
-        jPanel7.setDoubleBuffered(false);
-
-        GroupLayout jPanel7Layout = new GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(jPanel7Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(jPanel7Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        functPlotPanelLayout.setVerticalGroup(functPlotPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jSplitPane2.setRightComponent(jPanel7);
+        verticalSplit.setTopComponent(functPlotPanel);
 
-        jSplitPane1.setRightComponent(jSplitPane2);
+        errorPlotPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("PLOT_ERRS"))); // NOI18N
+        errorPlotPanel.setDoubleBuffered(false);
 
-        GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        GroupLayout errorPlotPanelLayout = new GroupLayout(errorPlotPanel);
+        errorPlotPanel.setLayout(errorPlotPanelLayout);
+        errorPlotPanelLayout.setHorizontalGroup(errorPlotPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        errorPlotPanelLayout.setVerticalGroup(errorPlotPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        verticalSplit.setRightComponent(errorPlotPanel);
+
+        horizontalSplit.setRightComponent(verticalSplit);
+
+        GroupLayout plotsPanelLayout = new GroupLayout(plotsPanel);
+        plotsPanel.setLayout(plotsPanelLayout);
+        plotsPanelLayout.setHorizontalGroup(plotsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, plotsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSplitPane1, GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
-                    .addComponent(jPanel8, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(plotsPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                    .addComponent(horizontalSplit, GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+                    .addComponent(optionsPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        plotsPanelLayout.setVerticalGroup(plotsPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(plotsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1, GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                .addComponent(horizontalSplit, GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(optionsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab(bundle.getString("PNL_ERR_PLOTS"), jPanel3); // NOI18N
+        tabbedPane.addTab(bundle.getString("PNL_ERR_PLOTS"), plotsPanel); // NOI18N
 
-        jScrollPane1.setViewportView(jTextPane1);
+        logsScroll.setViewportView(logsTextPane);
 
-        GroupLayout jPanel9Layout = new GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(jPanel9Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
+        GroupLayout logOutputPanelLayout = new GroupLayout(logOutputPanel);
+        logOutputPanel.setLayout(logOutputPanelLayout);
+        logOutputPanelLayout.setHorizontalGroup(logOutputPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(logsScroll, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
         );
-        jPanel9Layout.setVerticalGroup(jPanel9Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+        logOutputPanelLayout.setVerticalGroup(logOutputPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(logsScroll, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab(bundle.getString("PNL_OUTPUT"), jPanel9); // NOI18N
+        tabbedPane.addTab(bundle.getString("PNL_OUTPUT"), logOutputPanel); // NOI18N
 
-        jMenu1.setMnemonic('A');
+        fileMenu.setMnemonic('A');
         ResourceBundle bundle1 = ResourceBundle.getBundle("res/i18n/menu"); // NOI18N
-        jMenu1.setText(bundle1.getString("FILE")); // NOI18N
+        fileMenu.setText(bundle1.getString("FILE")); // NOI18N
 
-        jMenuItem37.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
-        jMenuItem37.setMnemonic('c');
-        jMenuItem37.setText(bundle1.getString("FILE_LOAD_CONF")); // NOI18N
-        jMenuItem37.addActionListener(new ActionListener() {
+        loadConfigMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        loadConfigMI.setMnemonic('c');
+        loadConfigMI.setText(bundle1.getString("FILE_LOAD_CONF")); // NOI18N
+        loadConfigMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem37ActionPerformed(evt);
+                loadConfigMIActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem37);
-        jMenu1.add(jSeparator2);
+        fileMenu.add(loadConfigMI);
+        fileMenu.add(menuSeparator1);
 
-        jMenuItem5.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
-        jMenuItem5.setMnemonic('s');
-        jMenuItem5.setText(bundle1.getString("FILE_QUIT")); // NOI18N
-        jMenuItem5.addActionListener(new ActionListener() {
+        quitMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
+        quitMI.setMnemonic('s');
+        quitMI.setText(bundle1.getString("FILE_QUIT")); // NOI18N
+        quitMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                quitMIActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem5);
+        fileMenu.add(quitMI);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(fileMenu);
 
-        jMenu9.setMnemonic('V');
-        jMenu9.setText(bundle1.getString("VIEW")); // NOI18N
+        viewMenu.setMnemonic('V');
+        viewMenu.setText(bundle1.getString("VIEW")); // NOI18N
 
-        jMenuItem33.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_MASK));
-        jMenuItem33.setMnemonic('d');
-        jMenuItem33.setText(bundle1.getString("VIEW_PANEL_DATA")); // NOI18N
-        jMenuItem33.addActionListener(new ActionListener() {
+        dataPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_MASK));
+        dataPanelMI.setMnemonic('d');
+        dataPanelMI.setText(bundle1.getString("VIEW_PANEL_DATA")); // NOI18N
+        dataPanelMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem33ActionPerformed(evt);
+                dataPanelMIActionPerformed(evt);
             }
         });
-        jMenu9.add(jMenuItem33);
+        viewMenu.add(dataPanelMI);
 
-        jMenuItem34.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK));
-        jMenuItem34.setMnemonic('t');
-        jMenuItem34.setText(bundle1.getString("VIEW_PANEL_TOPOLOGY")); // NOI18N
-        jMenuItem34.addActionListener(new ActionListener() {
+        topologyPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK));
+        topologyPanelMI.setMnemonic('t');
+        topologyPanelMI.setText(bundle1.getString("VIEW_PANEL_TOPOLOGY")); // NOI18N
+        topologyPanelMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem34ActionPerformed(evt);
+                topologyPanelMIActionPerformed(evt);
             }
         });
-        jMenu9.add(jMenuItem34);
+        viewMenu.add(topologyPanelMI);
 
-        jMenuItem35.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_MASK));
-        jMenuItem35.setMnemonic('f');
-        jMenuItem35.setText(bundle1.getString("VIEW_PANEL_ERROR_PLOT")); // NOI18N
-        jMenuItem35.addActionListener(new ActionListener() {
+        errorPlotPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_MASK));
+        errorPlotPanelMI.setMnemonic('f');
+        errorPlotPanelMI.setText(bundle1.getString("VIEW_PANEL_ERROR_PLOT")); // NOI18N
+        errorPlotPanelMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem35ActionPerformed(evt);
+                errorPlotPanelMIActionPerformed(evt);
             }
         });
-        jMenu9.add(jMenuItem35);
+        viewMenu.add(errorPlotPanelMI);
 
-        jMenuItem36.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_MASK));
-        jMenuItem36.setMnemonic('i');
-        jMenuItem36.setText(bundle1.getString("VIEW_PANEL_OUTPUT")); // NOI18N
-        jMenuItem36.addActionListener(new ActionListener() {
+        outputPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_MASK));
+        outputPanelMI.setMnemonic('i');
+        outputPanelMI.setText(bundle1.getString("VIEW_PANEL_OUTPUT")); // NOI18N
+        outputPanelMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem36ActionPerformed(evt);
+                outputPanelMIActionPerformed(evt);
             }
         });
-        jMenu9.add(jMenuItem36);
+        viewMenu.add(outputPanelMI);
 
-        jMenuBar1.add(jMenu9);
+        jMenuBar1.add(viewMenu);
 
-        jMenu2.setMnemonic('T');
-        jMenu2.setText(bundle1.getString("DATA")); // NOI18N
+        datasetMenu.setMnemonic('T');
+        datasetMenu.setText(bundle1.getString("DATA")); // NOI18N
 
-        jMenu3.setText(bundle1.getString("DATA_FILL")); // NOI18N
+        populateMenu.setText(bundle1.getString("DATA_FILL")); // NOI18N
 
-        jMenuItem6.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
-        jMenuItem6.setText(bundle1.getString("DATA_FILL_MONO")); // NOI18N
-        jMenuItem6.addActionListener(new ActionListener() {
+        popFuncMonoMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        popFuncMonoMI.setText(bundle1.getString("DATA_FILL_MONO")); // NOI18N
+        popFuncMonoMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                popFuncMonoMIActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem6);
+        populateMenu.add(popFuncMonoMI);
 
-        jMenuItem7.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
-        jMenuItem7.setText(bundle1.getString("DATA_FILL_RAND")); // NOI18N
-        jMenuItem7.addActionListener(new ActionListener() {
+        popFuncRandMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        popFuncRandMI.setText(bundle1.getString("DATA_FILL_RAND")); // NOI18N
+        popFuncRandMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                popFuncRandMIActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem7);
+        populateMenu.add(popFuncRandMI);
 
-        jMenuItem8.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
-        jMenuItem8.setText(bundle1.getString("DATA_FILL_RAND_GAUSS")); // NOI18N
-        jMenuItem8.addActionListener(new ActionListener() {
+        popFuncGaussMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        popFuncGaussMI.setText(bundle1.getString("DATA_FILL_RAND_GAUSS")); // NOI18N
+        popFuncGaussMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                popFuncGaussMIActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem8);
+        populateMenu.add(popFuncGaussMI);
 
-        jMenu2.add(jMenu3);
+        datasetMenu.add(populateMenu);
 
-        jMenu6.setText(bundle1.getString("DATA_TRANSFORM")); // NOI18N
+        transformMenu.setText(bundle1.getString("DATA_TRANSFORM")); // NOI18N
 
-        jMenuItem2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
-        jMenuItem2.setText(bundle1.getString("DATA_TRANSFORM_AUTO_ALL")); // NOI18N
-        jMenuItem2.addActionListener(new ActionListener() {
+        transAutoscaleAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        transAutoscaleAllMI.setText(bundle1.getString("DATA_TRANSFORM_AUTO_ALL")); // NOI18N
+        transAutoscaleAllMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                transAutoscaleAllMIActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem2);
+        transformMenu.add(transAutoscaleAllMI);
 
-        jMenuItem14.setText(bundle1.getString("DATA_TRANSFORM_CUST_ALL")); // NOI18N
-        jMenuItem14.addActionListener(new ActionListener() {
+        transCustFuncAllMI.setText(bundle1.getString("DATA_TRANSFORM_CUST_ALL")); // NOI18N
+        transCustFuncAllMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                transCustFuncAllMIActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem14);
+        transformMenu.add(transCustFuncAllMI);
 
-        jMenuItem25.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
-        jMenuItem25.setText(bundle1.getString("DATA_TRANSFORM_AUTO_SEL")); // NOI18N
-        jMenuItem25.addActionListener(new ActionListener() {
+        transAutoscaleSelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
+        transAutoscaleSelMI.setText(bundle1.getString("DATA_TRANSFORM_AUTO_SEL")); // NOI18N
+        transAutoscaleSelMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem25ActionPerformed(evt);
+                transAutoscaleSelMIActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem25);
+        transformMenu.add(transAutoscaleSelMI);
 
-        jMenuItem24.setText(bundle1.getString("DATA_TRANSFORM_CUST_SEL")); // NOI18N
-        jMenuItem24.addActionListener(new ActionListener() {
+        transCustFuncSelMI.setText(bundle1.getString("DATA_TRANSFORM_CUST_SEL")); // NOI18N
+        transCustFuncSelMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem24ActionPerformed(evt);
+                transCustFuncSelMIActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem24);
+        transformMenu.add(transCustFuncSelMI);
 
-        jMenu2.add(jMenu6);
+        datasetMenu.add(transformMenu);
 
-        jMenuItem10.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, 0));
-        jMenuItem10.setText(bundle1.getString("DATA_ADD_ROW")); // NOI18N
-        jMenuItem10.addActionListener(new ActionListener() {
+        dataAddRowMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, 0));
+        dataAddRowMI.setText(bundle1.getString("DATA_ADD_ROW")); // NOI18N
+        dataAddRowMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                dataAddRowMIActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem10);
+        datasetMenu.add(dataAddRowMI);
 
-        jMenuItem11.setText(bundle1.getString("DATA_REMOVE_SELECTED")); // NOI18N
-        jMenuItem11.addActionListener(new ActionListener() {
+        dataRemSelRowsMI.setText(bundle1.getString("DATA_REMOVE_SELECTED")); // NOI18N
+        dataRemSelRowsMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
+                dataRemSelRowsMIActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem11);
+        datasetMenu.add(dataRemSelRowsMI);
 
-        jMenuItem9.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_MASK));
-        jMenuItem9.setText(bundle1.getString("DATA_CLEAR_SELECTED_DATASET")); // NOI18N
-        jMenuItem9.addActionListener(new ActionListener() {
+        dataClearSelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_MASK));
+        dataClearSelMI.setText(bundle1.getString("DATA_CLEAR_SELECTED_DATASET")); // NOI18N
+        dataClearSelMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                dataClearSelMIActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem9);
+        datasetMenu.add(dataClearSelMI);
 
-        jMenuItem1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
-        jMenuItem1.setText(bundle1.getString("DATA_CLEAR_ALL")); // NOI18N
-        jMenuItem1.addActionListener(new ActionListener() {
+        dataClearAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        dataClearAllMI.setText(bundle1.getString("DATA_CLEAR_ALL")); // NOI18N
+        dataClearAllMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                dataClearAllMIActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        datasetMenu.add(dataClearAllMI);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(datasetMenu);
 
-        jMenu5.setMnemonic('E');
-        jMenu5.setText(bundle1.getString("TRAIN")); // NOI18N
+        trainMenu.setMnemonic('E');
+        trainMenu.setText(bundle1.getString("TRAIN")); // NOI18N
 
-        jMenuItem15.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
-        jMenuItem15.setText(bundle1.getString("TRAIN_NOW")); // NOI18N
-        jMenuItem15.setEnabled(false);
-        jMenuItem15.addActionListener(new ActionListener() {
+        trainStartMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
+        trainStartMI.setText(bundle1.getString("TRAIN_NOW")); // NOI18N
+        trainStartMI.setEnabled(false);
+        trainStartMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
+                trainStartMIActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem15);
+        trainMenu.add(trainStartMI);
 
-        jMenuItem27.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
-        jMenuItem27.setText(bundle1.getString("TRAIN_PAUSE")); // NOI18N
-        jMenuItem27.setEnabled(false);
-        jMenuItem27.addActionListener(new ActionListener() {
+        trainPauseMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
+        trainPauseMI.setText(bundle1.getString("TRAIN_PAUSE")); // NOI18N
+        trainPauseMI.setEnabled(false);
+        trainPauseMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem27ActionPerformed(evt);
+                trainPauseMIActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem27);
+        trainMenu.add(trainPauseMI);
 
-        jMenuItem3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
-        jMenuItem3.setText(bundle1.getString("TRAIN_STOP")); // NOI18N
-        jMenuItem3.setEnabled(false);
-        jMenuItem3.addActionListener(new ActionListener() {
+        trainStopMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
+        trainStopMI.setText(bundle1.getString("TRAIN_STOP")); // NOI18N
+        trainStopMI.setEnabled(false);
+        trainStopMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                trainStopMIActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem3);
+        trainMenu.add(trainStopMI);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(trainMenu);
 
-        jMenu4.setMnemonic('G');
-        jMenu4.setText(bundle1.getString("PLOTS")); // NOI18N
+        plotsMenu.setMnemonic('G');
+        plotsMenu.setText(bundle1.getString("PLOTS")); // NOI18N
 
-        jMenuItem4.setText(bundle1.getString("PLOTS_SAVE_IMG")); // NOI18N
-        jMenuItem4.addActionListener(new ActionListener() {
+        saveImageMI.setText(bundle1.getString("PLOTS_SAVE_IMG")); // NOI18N
+        saveImageMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                saveImageMIActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem4);
+        plotsMenu.add(saveImageMI);
 
-        jMenuItem12.setText(bundle1.getString("PLOTS_SAVE_ERRORS")); // NOI18N
-        jMenuItem12.addActionListener(new ActionListener() {
+        saveErrorMI.setText(bundle1.getString("PLOTS_SAVE_ERRORS")); // NOI18N
+        saveErrorMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
+                saveErrorMIActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem12);
+        plotsMenu.add(saveErrorMI);
 
-        jMenuItem26.setText(bundle1.getString("PLOTS_SAVE_GIF")); // NOI18N
-        jMenuItem26.addActionListener(new ActionListener() {
+        saveGifMI.setText(bundle1.getString("PLOTS_SAVE_GIF")); // NOI18N
+        saveGifMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem26ActionPerformed(evt);
+                saveGifMIActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem26);
+        plotsMenu.add(saveGifMI);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(plotsMenu);
 
-        jMenu7.setMnemonic('j');
-        jMenu7.setText(bundle1.getString("EXAMPLES")); // NOI18N
+        examplesMenu.setMnemonic('j');
+        examplesMenu.setText(bundle1.getString("EXAMPLES")); // NOI18N
 
-        jMenuItem32.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
-        jMenuItem32.setText(bundle1.getString("EXAMPLES_RELOAD")); // NOI18N
-        jMenuItem32.setEnabled(false);
-        jMenuItem32.addActionListener(new ActionListener() {
+        reloadExampleMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
+        reloadExampleMI.setText(bundle1.getString("EXAMPLES_RELOAD")); // NOI18N
+        reloadExampleMI.setEnabled(false);
+        reloadExampleMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem32ActionPerformed(evt);
+                reloadExampleMIActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem32);
-        jMenu7.add(jSeparator1);
+        examplesMenu.add(reloadExampleMI);
+        examplesMenu.add(menuSeparator2);
 
-        jMenuItem13.setText(bundle1.getString("EXAMPLES_SIN")); // NOI18N
-        jMenuItem13.addActionListener(new ActionListener() {
+        exampleSinMI.setText(bundle1.getString("EXAMPLES_SIN")); // NOI18N
+        exampleSinMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
+                exampleSinMIActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem13);
+        examplesMenu.add(exampleSinMI);
 
-        jMenuItem16.setText(bundle1.getString("EXAMPLES_COS")); // NOI18N
-        jMenuItem16.addActionListener(new ActionListener() {
+        exampleCosMI.setText(bundle1.getString("EXAMPLES_COS")); // NOI18N
+        exampleCosMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
+                exampleCosMIActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem16);
+        examplesMenu.add(exampleCosMI);
 
-        jMenuItem23.setText(bundle1.getString("EXAMPLES_SINC")); // NOI18N
-        jMenuItem23.addActionListener(new ActionListener() {
+        exampleSincMI.setText(bundle1.getString("EXAMPLES_SINC")); // NOI18N
+        exampleSincMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem23ActionPerformed(evt);
+                exampleSincMIActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem23);
+        examplesMenu.add(exampleSincMI);
 
-        jMenuItem17.setText(bundle1.getString("EXAMPLES_JUMPY")); // NOI18N
-        jMenuItem17.addActionListener(new ActionListener() {
+        exampleJumpyMI.setText(bundle1.getString("EXAMPLES_JUMPY")); // NOI18N
+        exampleJumpyMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem17ActionPerformed(evt);
+                exampleJumpyMIActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem17);
+        examplesMenu.add(exampleJumpyMI);
 
-        jMenuItem30.setText(bundle1.getString("EXAMPLES_VERY_JUMPY")); // NOI18N
-        jMenuItem30.addActionListener(new ActionListener() {
+        exampleVeryJumpyMI.setText(bundle1.getString("EXAMPLES_VERY_JUMPY")); // NOI18N
+        exampleVeryJumpyMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem30ActionPerformed(evt);
+                exampleVeryJumpyMIActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem30);
+        examplesMenu.add(exampleVeryJumpyMI);
 
-        jMenuItem18.setText(bundle1.getString("EXAMPLES_TRIANGLE")); // NOI18N
-        jMenuItem18.addActionListener(new ActionListener() {
+        exampleTriangleMI.setText(bundle1.getString("EXAMPLES_TRIANGLE")); // NOI18N
+        exampleTriangleMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem18ActionPerformed(evt);
+                exampleTriangleMIActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem18);
+        examplesMenu.add(exampleTriangleMI);
 
-        jMenuItem19.setText(bundle1.getString("EXAMPLES_SQARE")); // NOI18N
-        jMenuItem19.addActionListener(new ActionListener() {
+        exampleSquareMI.setText(bundle1.getString("EXAMPLES_SQARE")); // NOI18N
+        exampleSquareMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem19ActionPerformed(evt);
+                exampleSquareMIActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem19);
+        examplesMenu.add(exampleSquareMI);
 
-        jMenuItem21.setText(bundle1.getString("EXAMPLES_DUNNO")); // NOI18N
-        jMenuItem21.addActionListener(new ActionListener() {
+        exampleDunnoMI.setText(bundle1.getString("EXAMPLES_DUNNO")); // NOI18N
+        exampleDunnoMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem21ActionPerformed(evt);
+                exampleDunnoMIActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem21);
+        examplesMenu.add(exampleDunnoMI);
 
-        jMenuItem22.setText(bundle1.getString("EXAMPLES_BATMAN")); // NOI18N
-        jMenuItem22.addActionListener(new ActionListener() {
+        exampleBatmanMI.setText(bundle1.getString("EXAMPLES_BATMAN")); // NOI18N
+        exampleBatmanMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem22ActionPerformed(evt);
+                exampleBatmanMIActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem22);
+        examplesMenu.add(exampleBatmanMI);
 
-        jMenuItem28.setText(bundle1.getString("EXAMPLES_EKG_SYNTH")); // NOI18N
-        jMenuItem28.addActionListener(new ActionListener() {
+        exampleEkgSynthMI.setText(bundle1.getString("EXAMPLES_EKG_SYNTH")); // NOI18N
+        exampleEkgSynthMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem28ActionPerformed(evt);
+                exampleEkgSynthMIActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem28);
+        examplesMenu.add(exampleEkgSynthMI);
 
-        jMenuItem20.setText(bundle1.getString("EXAMPLES_EKG_REAL")); // NOI18N
-        jMenuItem20.addActionListener(new ActionListener() {
+        exampleEkgRealMI.setText(bundle1.getString("EXAMPLES_EKG_REAL")); // NOI18N
+        exampleEkgRealMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem20ActionPerformed(evt);
+                exampleEkgRealMIActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem20);
+        examplesMenu.add(exampleEkgRealMI);
 
-        jMenuBar1.add(jMenu7);
+        jMenuBar1.add(examplesMenu);
 
-        jMenu8.setMnemonic('?');
-        jMenu8.setText("?");
+        helpMenu.setMnemonic('?');
+        helpMenu.setText("?");
 
-        jMenu10.setText(bundle1.getString("DEBUG")); // NOI18N
+        debugMenu.setText(bundle1.getString("DEBUG")); // NOI18N
 
-        jCheckBoxMenuItem3.setText(bundle1.getString("DEBUG_SHOW")); // NOI18N
-        jCheckBoxMenuItem3.addActionListener(new ActionListener() {
+        debugPrintMI.setText(bundle1.getString("DEBUG_SHOW")); // NOI18N
+        debugPrintMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jCheckBoxMenuItem3ActionPerformed(evt);
+                debugPrintMIActionPerformed(evt);
             }
         });
-        jMenu10.add(jCheckBoxMenuItem3);
+        debugMenu.add(debugPrintMI);
 
-        jCheckBoxMenuItem4.setSelected(true);
-        jCheckBoxMenuItem4.setText(bundle1.getString("DEBUG_STD_OUT")); // NOI18N
-        jCheckBoxMenuItem4.addActionListener(new ActionListener() {
+        debugStdoutMI.setSelected(true);
+        debugStdoutMI.setText(bundle1.getString("DEBUG_STD_OUT")); // NOI18N
+        debugStdoutMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jCheckBoxMenuItem4ActionPerformed(evt);
+                debugStdoutMIActionPerformed(evt);
             }
         });
-        jMenu10.add(jCheckBoxMenuItem4);
+        debugMenu.add(debugStdoutMI);
 
-        jCheckBoxMenuItem1.setSelected(true);
-        jCheckBoxMenuItem1.setText(bundle1.getString("DEBUG_AA")); // NOI18N
-        jCheckBoxMenuItem1.addActionListener(new ActionListener() {
+        debugUseAAMI.setSelected(true);
+        debugUseAAMI.setText(bundle1.getString("DEBUG_AA")); // NOI18N
+        debugUseAAMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jCheckBoxMenuItem1ActionPerformed(evt);
+                debugUseAAMIActionPerformed(evt);
             }
         });
-        jMenu10.add(jCheckBoxMenuItem1);
+        debugMenu.add(debugUseAAMI);
 
-        jCheckBoxMenuItem2.setText(bundle1.getString("DEBUG_FPS")); // NOI18N
-        jCheckBoxMenuItem2.addActionListener(new ActionListener() {
+        debugShowFpsMI.setText(bundle1.getString("DEBUG_FPS")); // NOI18N
+        debugShowFpsMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jCheckBoxMenuItem2ActionPerformed(evt);
+                debugShowFpsMIActionPerformed(evt);
             }
         });
-        jMenu10.add(jCheckBoxMenuItem2);
+        debugMenu.add(debugShowFpsMI);
 
-        jMenu8.add(jMenu10);
+        helpMenu.add(debugMenu);
 
-        jMenuItem29.setText(bundle1.getString("ABOUT")); // NOI18N
-        jMenuItem29.addActionListener(new ActionListener() {
+        aboutMI.setText(bundle1.getString("ABOUT")); // NOI18N
+        aboutMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jMenuItem29ActionPerformed(evt);
+                aboutMIActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem29);
+        helpMenu.add(aboutMI);
 
-        jMenuBar1.add(jMenu8);
+        jMenuBar1.add(helpMenu);
 
         setJMenuBar(jMenuBar1);
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, GroupLayout.Alignment.TRAILING)
+            .addComponent(tabbedPane, GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabbedPane)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
     private FunctionMonospaced dialogMonospaced;
-    private void jMenuItem6ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void popFuncMonoMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_popFuncMonoMIActionPerformed
         if(dialogMonospaced == null) dialogMonospaced = new FunctionMonospaced(MainWindow.this);
         dialogMonospaced.setVisible(true);
         selected.addAll(dialogMonospaced.getData());
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_popFuncMonoMIActionPerformed
 
-    private void jRadioButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void selTrainButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selTrainButtonActionPerformed
         setSelected(train);
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_selTrainButtonActionPerformed
 
-    private void jRadioButton2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void selValidButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selValidButtonActionPerformed
         setSelected(validate);
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_selValidButtonActionPerformed
 
-    private void jRadioButton3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void selGenerButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selGenerButtonActionPerformed
         setSelected(generalize);
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    }//GEN-LAST:event_selGenerButtonActionPerformed
         
     private final BundleDecorator MSTR = new BundleDecorator("res.i18n.menu");
     private void setSelected(DatasetTableModel model) {
@@ -1479,52 +1501,52 @@ public final class MainWindow extends javax.swing.JFrame {
         train     .selectEnabled(model == train);
         validate  .selectEnabled(model == validate);
         generalize.selectEnabled(model == generalize);
-        jMenuItem9 .setText(i18n.__("Clear Selected Dataset (%s)", selected.getName()));
-        jMenuItem25.setText(MSTR.__("DATA_TRANSFORM_AUTO_SEL", selected.getName()));
-        jMenuItem24.setText(MSTR.__("DATA_TRANSFORM_CUST_SEL", selected.getName()));
+        dataClearSelMI .setText(i18n.__("Clear Selected Dataset (%s)", selected.getName()));
+        transAutoscaleSelMI.setText(MSTR.__("DATA_TRANSFORM_AUTO_SEL", selected.getName()));
+        transCustFuncSelMI.setText(MSTR.__("DATA_TRANSFORM_CUST_SEL", selected.getName()));
     }
-    private void jButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void selectAllButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selectAllButtonActionPerformed
         selected.selectAll();
         info("Selecting all elements of the '%s' dataset", selected.getName());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_selectAllButtonActionPerformed
 
-    private void jButton3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void toggleSelButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_toggleSelButtonActionPerformed
         selected.selectToggle();
         info("Inverting selection of the '%s' dataset", selected.getName());
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_toggleSelButtonActionPerformed
 
-    private void jButton2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void selectNonButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selectNonButtonActionPerformed
         selected.selectNone();
         info("Removing selection of the '%s' dataset", selected.getName());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_selectNonButtonActionPerformed
 
-    private void jButton4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void selectPercentageButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selectPercentageButtonActionPerformed
         try {
-            jFormattedTextField1.commitEdit();
-            final double valor = ((Number)jFormattedTextField1.getValue()).doubleValue();
+            selectPercentageField.commitEdit();
+            final double value = ((Number)selectPercentageField.getValue()).doubleValue();
             final int nEleme = selected.getRowCount();
-            selectElements((int)Math.round(nEleme * valor));     
-            info("Selection %5.2f%% of the elements of %s %s", valor * 100.,
-                  selected.getName(), jCheckBox1.isSelected() ? i18n.__("(Random)") : "");
+            selectElements((int)Math.round(nEleme * value));     
+            info("Selection %5.2f%% of the elements of %s %s", value * 100.,
+                  selected.getName(), randomSelectionCheck.isSelected() ? i18n.__("(Random)") : "");
         } catch (ParseException ignoreMe) {
-            error("'%s' is not a decimal number", jFormattedTextField1.getText());
+            error("'%s' is not a decimal number", selectPercentageField.getText());
         }   
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_selectPercentageButtonActionPerformed
 
-    private void jButton5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void selectNumberButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selectNumberButtonActionPerformed
         try {
-            jFormattedTextField2.commitEdit();
-            final int valor = ((Number)jFormattedTextField2.getValue()).intValue();
-            selectElements(valor);       
-            info("Selecting %d elements from the %s dataset %s", valor,
-                  selected.getName(), jCheckBox1.isSelected() ? i18n.__("(Random)") : "");
+            selectNumberField.commitEdit();
+            final int value = ((Number)selectNumberField.getValue()).intValue();
+            selectElements(value);       
+            info("Selecting %d elements from the %s dataset %s", value,
+                  selected.getName(), randomSelectionCheck.isSelected() ? i18n.__("(Random)") : "");
         } catch (ParseException ignoreMe) {
-            error("'%s' is not an integer", jFormattedTextField2.getText());
+            error("'%s' is not an integer", selectNumberField.getText());
         } 
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_selectNumberButtonActionPerformed
 
-    private void jButton6ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        final int idx = jComboBox1.getSelectedIndex();
+    private void moveSelectedButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_moveSelectedButtonActionPerformed
+        final int idx = destinationBox.getSelectedIndex();
         final ArrayList<DatasetTableModel.Row> foo = selected.removeSelected();
         final String dest;
         switch (idx) {
@@ -1533,41 +1555,41 @@ public final class MainWindow extends javax.swing.JFrame {
             default: generalize.addAll(foo); dest = generalize.getName(); break;
         }
         info("Moving %d elements from '%s' -> '%s'", foo.size(), selected.getName(), dest);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_moveSelectedButtonActionPerformed
 
-    private void jMenuItem11ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+    private void dataRemSelRowsMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_dataRemSelRowsMIActionPerformed
         selected.removeSelected();
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
+    }//GEN-LAST:event_dataRemSelRowsMIActionPerformed
 
     private FunctionMonospacedRand dialogMonospacedRand;
-    private void jMenuItem7ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void popFuncRandMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_popFuncRandMIActionPerformed
         if (dialogMonospacedRand == null) dialogMonospacedRand = new FunctionMonospacedRand(MainWindow.this);
         dialogMonospacedRand.setVisible(true);
         selected.addAll(dialogMonospacedRand.getData());
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_popFuncRandMIActionPerformed
     
     private FunctionGaussianRand dialogGaussianRand;
-    private void jMenuItem8ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void popFuncGaussMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_popFuncGaussMIActionPerformed
         if (dialogGaussianRand == null) dialogGaussianRand = new FunctionGaussianRand(MainWindow.this);
         dialogGaussianRand.setVisible(true);
         selected.addAll(dialogGaussianRand.getData());
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_popFuncGaussMIActionPerformed
 
-    private void jMenuItem9ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void dataClearSelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_dataClearSelMIActionPerformed
         selected.selectAll();
         selected.removeSelected();
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }//GEN-LAST:event_dataClearSelMIActionPerformed
 
-    private void jMenuItem1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void dataClearAllMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_dataClearAllMIActionPerformed
         train.selectAll();
         validate.selectAll();
         generalize.selectAll();
         train.removeSelected();
         validate.removeSelected();
         generalize.removeSelected();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_dataClearAllMIActionPerformed
 
-    private void jMenuItem2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void transAutoscaleAllMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_transAutoscaleAllMIActionPerformed
         double maxVal = train.getMax();
         maxVal = Math.max(maxVal, validate  .getMax());
         maxVal = Math.max(maxVal, generalize.getMax());
@@ -1576,62 +1598,62 @@ public final class MainWindow extends javax.swing.JFrame {
         validate  .scale(scale);
         generalize.scale(scale);
         info("Table values scaled using s = %f", scale);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_transAutoscaleAllMIActionPerformed
 
-    private void jCheckBox2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        if (!jCheckBox2.isSelected()) {
+    private void trainPlotCheckActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainPlotCheckActionPerformed
+        if (!trainPlotCheck.isSelected()) {
             func.remove(points[0]);
             func.repaint();
         }
         updateGraphics(TRAIN);
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+    }//GEN-LAST:event_trainPlotCheckActionPerformed
 
-    private void jComboBox9ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jComboBox9ActionPerformed
+    private void trainBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainBoxActionPerformed
         updateGraphics(TRAIN);
-    }//GEN-LAST:event_jComboBox9ActionPerformed
+    }//GEN-LAST:event_trainBoxActionPerformed
 
-    private void jCheckBox4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
-        if (!jCheckBox4.isSelected()) {
+    private void generPlotCheckActionPerformed(ActionEvent evt) {//GEN-FIRST:event_generPlotCheckActionPerformed
+        if (!generPlotCheck.isSelected()) {
             func.remove(points[2]);
             func.repaint();
         }
         updateGraphics(GENER);
-    }//GEN-LAST:event_jCheckBox4ActionPerformed
+    }//GEN-LAST:event_generPlotCheckActionPerformed
 
-    private void jCheckBox3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
-        if (!jCheckBox3.isSelected()) {
+    private void validPlotCheckActionPerformed(ActionEvent evt) {//GEN-FIRST:event_validPlotCheckActionPerformed
+        if (!validPlotCheck.isSelected()) {
             func.remove(points[1]);
             func.repaint();
         }
         updateGraphics(VALID);
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
+    }//GEN-LAST:event_validPlotCheckActionPerformed
 
-    private void jComboBox7ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
+    private void validBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_validBoxActionPerformed
         updateGraphics(VALID);
-    }//GEN-LAST:event_jComboBox7ActionPerformed
+    }//GEN-LAST:event_validBoxActionPerformed
 
-    private void jComboBox8ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jComboBox8ActionPerformed
+    private void generBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_generBoxActionPerformed
         updateGraphics(GENER);
-    }//GEN-LAST:event_jComboBox8ActionPerformed
+    }//GEN-LAST:event_generBoxActionPerformed
     
     private final GString strTrain = new GString(0, 0, i18n.__("Training"));
     private final GString strValid = new GString(0, 0, i18n.__("Validation"));
-    private void jButton11ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void trainColorButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainColorButtonActionPerformed
         chooseColor(i18n.__("Color for training"), TRAIN);
         drawErrors();
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_trainColorButtonActionPerformed
 
-    private void jButton12ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void validColorButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_validColorButtonActionPerformed
         chooseColor(i18n.__("Color for validation"), VALID);
         drawErrors();
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_validColorButtonActionPerformed
 
-    private void jButton13ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void generColorButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_generColorButtonActionPerformed
         chooseColor(i18n.__("Color for generalization"), GENER);
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_generColorButtonActionPerformed
 
-    private void jButton8ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        final int idx = jComboBox1.getSelectedIndex();
+    private void copySelectedButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_copySelectedButtonActionPerformed
+        final int idx = destinationBox.getSelectedIndex();
         final ArrayList<DatasetTableModel.Row> foo = selected.removeSelected();
         selected.addAll(foo);
         final String dest;
@@ -1641,15 +1663,15 @@ public final class MainWindow extends javax.swing.JFrame {
             default: generalize.addAll(foo); dest = generalize.getName(); break;
         }
         info("Copying %d elements from '%s' -> '%s'", foo.size(), selected.getName(), dest);
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_copySelectedButtonActionPerformed
 
-    private void jSpinner1StateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
-        final int newNum = (Integer)jSpinner1.getValue();
+    private void layersSpinnerStateChanged(ChangeEvent evt) {//GEN-FIRST:event_layersSpinnerStateChanged
+        final int newNum = (Integer)layersSpinner.getValue();
         while (layers.getRowCount() - 2 < newNum) layers.addRow   ();
         while (layers.getRowCount() - 2 > newNum) layers.removeRow();
-    }//GEN-LAST:event_jSpinner1StateChanged
+    }//GEN-LAST:event_layersSpinnerStateChanged
     private CustomFunction dialogCustomFunc;
-    private void jMenuItem14ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+    private void transCustFuncAllMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_transCustFuncAllMIActionPerformed
         if (dialogCustomFunc == null) dialogCustomFunc = new CustomFunction();
         dialogCustomFunc.setVisible(true);
         if (dialogCustomFunc.getExp4X() != null) {
@@ -1665,13 +1687,13 @@ public final class MainWindow extends javax.swing.JFrame {
             info("Applying '%s' to all the '%s'", sexp4x,  "x");
             info("Applying '%s' to all the '%s'", sexp4fx, "f(x)");
         }
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
+    }//GEN-LAST:event_transCustFuncAllMIActionPerformed
 
     private SwingWorker<Void, ErrorTableModel.Row> worker;
     private volatile boolean paused;
     private MLP mlp;
-    private void jMenuItem15ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        jTabbedPane1.setSelectedIndex(2);
+    private void trainStartMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainStartMIActionPerformed
+        tabbedPane.setSelectedIndex(2);
         if (worker != null) {
             worker.cancel(true);
         }
@@ -1681,8 +1703,8 @@ public final class MainWindow extends javax.swing.JFrame {
             protected Void doInBackground() throws Exception {
                 paused = false;
                 try{
-                    final String path = jTextField1.getText();
-                    final String name = jTextField2.getText();
+                    final String path = pathField.getText();
+                    final String name = weightField.getText();
                     final File foo = new File(path);
                     
                     if (!foo.exists()) foo.mkdirs();
@@ -1710,17 +1732,17 @@ public final class MainWindow extends javax.swing.JFrame {
 
                     mlp = new MLP(layers.getLayers(), layers.getLayerActivation());
 
-                    jFormattedTextField3.commitEdit();
-                    jFormattedTextField4.commitEdit();
-                    jFormattedTextField5.commitEdit();
+                    mseField.commitEdit();
+                    learningRateField.commitEdit();
+                    degradationField.commitEdit();
                     
-                    final int maxEpochs = (Integer)jSpinner2.getValue();
-                    final double mse    = ((Number)jFormattedTextField3.getValue()).doubleValue();
-                    final int saveEvery = (Integer)jSpinner3.getValue();
-                    final double degradation = ((Number)jFormattedTextField5.getValue()).doubleValue();
-                          double learnRate   = ((Number)jFormattedTextField4.getValue()).doubleValue();
+                    final int maxEpochs = (Integer)maxEpochsSpinner.getValue();
+                    final double mse    = ((Number)mseField.getValue()).doubleValue();
+                    final int saveEvery = (Integer)saveEverySpinner.getValue();
+                    final double degradation = ((Number)degradationField.getValue()).doubleValue();
+                          double learnRate   = ((Number)learningRateField.getValue()).doubleValue();
 
-                    switch (jComboBox2.getSelectedIndex()) {
+                    switch (backpropBox.getSelectedIndex()) {
                         case 0:  mlp.setTrainingType(MLP.STANDARD_BACKPROPAGATION); break;
                         case 1:  mlp.setTrainingType(MLP.MOMEMTUM_BACKPROPAGATION, 0.4); break;
                         default: mlp.setTrainingType(MLP.RESILENT_BACKPROPAGATION); break;
@@ -1750,8 +1772,8 @@ public final class MainWindow extends javax.swing.JFrame {
                         }
 
                         while (paused && !worker.isCancelled()) {
-                            jProgressBar1.setString(i18n.__("Paused"));
-                            jProgressBar1.setIndeterminate(true);
+                            trainingProgress.setString(i18n.__("Paused"));
+                            trainingProgress.setIndeterminate(true);
                             try {
                                 Thread.sleep(100);
                             } catch (InterruptedException ignoreMe) {
@@ -1762,18 +1784,18 @@ public final class MainWindow extends javax.swing.JFrame {
                         
                         if (worker.isCancelled()) {
                             tt.toc();
-                            jProgressBar1.setString(i18n.__("Aborted"));
-                            jProgressBar1.setIndeterminate(false);
+                            trainingProgress.setString(i18n.__("Aborted"));
+                            trainingProgress.setIndeterminate(false);
                             info("Training aborted by user at %.4fs", tt.getSecsTime());
                             break;
                         }
 
                         learnRate *= degradation;
                         
-                        jProgressBar1.setIndeterminate(false);
-                        jProgressBar1.setStringPainted(true);
-                        jProgressBar1.setString(null);
-                        jProgressBar1.setValue(currEpoch * 100 / maxEpochs);
+                        trainingProgress.setIndeterminate(false);
+                        trainingProgress.setStringPainted(true);
+                        trainingProgress.setString(null);
+                        trainingProgress.setValue(currEpoch * 100 / maxEpochs);
                     }
                     
                     if (!worker.isCancelled()) {
@@ -1784,7 +1806,7 @@ public final class MainWindow extends javax.swing.JFrame {
                     saveConfig(path);
                     saveData(path);
                     saveErrors(path);
-                    jCheckBox4.setEnabled(true);
+                    generPlotCheck.setEnabled(true);
                     return null;
                 } catch(Exception e) {
                     error("Training error: %s", e.toString());
@@ -1805,27 +1827,27 @@ public final class MainWindow extends javax.swing.JFrame {
             }
         };
         worker.execute();
-    }//GEN-LAST:event_jMenuItem15ActionPerformed
+    }//GEN-LAST:event_trainStartMIActionPerformed
 
     private final ImageIcon play  = new ImageIcon(getClass().getResource("/res/icons/play.png"));
     private final ImageIcon pause = new ImageIcon(getClass().getResource("/res/icons/pause.png"));
     private boolean currently_training;
     private void setTraining(boolean training) {
         currently_training = training;
-        jMenuItem15.setEnabled(!training);
-        jButton14.setIcon(training ? pause : play);
-        jMenuItem27.setEnabled(training);
-        jMenuItem3.setEnabled(training);
-        jButton16.setEnabled(training);
-        jMenu7.setEnabled(!training);
-        jMenu2.setEnabled(!training);
-        jTable5.setEnabled(!training);
-        enableComponents(jPanel1, !training);
-        enableComponents(jPanel2, !training);
+        trainStartMI.setEnabled(!training);
+        playPauseButton.setIcon(training ? pause : play);
+        trainPauseMI.setEnabled(training);
+        trainStopMI.setEnabled(training);
+        stopButton.setEnabled(training);
+        examplesMenu.setEnabled(!training);
+        datasetMenu.setEnabled(!training);
+        errorTable.setEnabled(!training);
+        enableComponents(dataPanel, !training);
+        enableComponents(topologyPanel, !training);
     }
     
-    private void jButton7ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        JFileChooser jfc = new JFileChooser(jTextField1.getText()){
+    private void pathSelectionButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_pathSelectionButtonActionPerformed
+        JFileChooser jfc = new JFileChooser(pathField.getText()){
             @Override
             public void approveSelection() {
                 if (!getSelectedFile().isFile()) {
@@ -1838,12 +1860,12 @@ public final class MainWindow extends javax.swing.JFrame {
         jfc.setMultiSelectionEnabled(false);
         jfc.showDialog(null, i18n.__("Select Folder"));
         if (jfc.getSelectedFile() != null) {
-            jTextField1.setText(jfc.getSelectedFile().getAbsolutePath() + File.separator);
-            info("Current working directory: %s", jTextField1.getText());
+            pathField.setText(jfc.getSelectedFile().getAbsolutePath() + File.separator);
+            info("Current working directory: %s", pathField.getText());
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_pathSelectionButtonActionPerformed
 
-    private void jMenuItem5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void quitMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_quitMIActionPerformed
         final int opt = JOptionPane.showConfirmDialog(null, 
                 i18n.__("Do really want to quit?"), 
                 i18n.__("Are you sure?"),
@@ -1856,69 +1878,69 @@ public final class MainWindow extends javax.swing.JFrame {
             }
             System.exit(0);
         }
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_quitMIActionPerformed
 
-    private void jMenuItem3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void trainStopMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainStopMIActionPerformed
         if (worker != null){
             worker.cancel(true);
             paused = false;
         }
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_trainStopMIActionPerformed
 
-    private void jMenuItem4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void saveImageMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_saveImageMIActionPerformed
         savePlot(i18n.__("Data"), func);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_saveImageMIActionPerformed
 
-    private void jMenuItem12ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+    private void saveErrorMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_saveErrorMIActionPerformed
         savePlot(i18n.__("Errors"), errs);
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
+    }//GEN-LAST:event_saveErrorMIActionPerformed
 
-    private void jMenuItem13ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        loadExample(jMenuItem13, new ExampleSin());
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
+    private void exampleSinMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleSinMIActionPerformed
+        loadExample(exampleSinMI, new ExampleSin());
+    }//GEN-LAST:event_exampleSinMIActionPerformed
 
-    private void jMenuItem16ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        loadExample(jMenuItem16, new ExampleCos());
-    }//GEN-LAST:event_jMenuItem16ActionPerformed
+    private void exampleCosMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleCosMIActionPerformed
+        loadExample(exampleCosMI, new ExampleCos());
+    }//GEN-LAST:event_exampleCosMIActionPerformed
 
-    private void jMenuItem17ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        loadExample(jMenuItem17, new ExampleJumpy());
-    }//GEN-LAST:event_jMenuItem17ActionPerformed
+    private void exampleJumpyMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleJumpyMIActionPerformed
+        loadExample(exampleJumpyMI, new ExampleJumpy());
+    }//GEN-LAST:event_exampleJumpyMIActionPerformed
 
-    private void jMenuItem18ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-        loadExample(jMenuItem18, new ExampleTriangles());
-    }//GEN-LAST:event_jMenuItem18ActionPerformed
+    private void exampleTriangleMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleTriangleMIActionPerformed
+        loadExample(exampleTriangleMI, new ExampleTriangles());
+    }//GEN-LAST:event_exampleTriangleMIActionPerformed
 
-    private void jMenuItem19ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
-        loadExample(jMenuItem19, new ExampleSquare());
-    }//GEN-LAST:event_jMenuItem19ActionPerformed
+    private void exampleSquareMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleSquareMIActionPerformed
+        loadExample(exampleSquareMI, new ExampleSquare());
+    }//GEN-LAST:event_exampleSquareMIActionPerformed
 
-    private void jMenuItem21ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        loadExample(jMenuItem21, new ExampleMetodos());
-    }//GEN-LAST:event_jMenuItem21ActionPerformed
+    private void exampleDunnoMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleDunnoMIActionPerformed
+        loadExample(exampleDunnoMI, new ExampleMetodos());
+    }//GEN-LAST:event_exampleDunnoMIActionPerformed
 
-    private void jMenuItem22ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-        loadExample(jMenuItem22, new ExampleBatman());
-    }//GEN-LAST:event_jMenuItem22ActionPerformed
+    private void exampleBatmanMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleBatmanMIActionPerformed
+        loadExample(exampleBatmanMI, new ExampleBatman());
+    }//GEN-LAST:event_exampleBatmanMIActionPerformed
 
-    private void jMenuItem23ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
-        loadExample(jMenuItem23, new ExampleSinc());
-    }//GEN-LAST:event_jMenuItem23ActionPerformed
+    private void exampleSincMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleSincMIActionPerformed
+        loadExample(exampleSincMI, new ExampleSinc());
+    }//GEN-LAST:event_exampleSincMIActionPerformed
 
-    private void jMenuItem20ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-        loadExample(jMenuItem20, new ExampleEKG());
-    }//GEN-LAST:event_jMenuItem20ActionPerformed
+    private void exampleEkgRealMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleEkgRealMIActionPerformed
+        loadExample(exampleEkgRealMI, new ExampleEKG());
+    }//GEN-LAST:event_exampleEkgRealMIActionPerformed
 
-    private void jMenuItem25ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
+    private void transAutoscaleSelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_transAutoscaleSelMIActionPerformed
         double maxVal = train.getMax();
         maxVal = Math.max(maxVal, validate  .getMax());
         maxVal = Math.max(maxVal, generalize.getMax());
         final double scale = 1 / maxVal;
         selected.scale(scale);
         info("Table '%s' values scaled using s = %f", selected.getName(), scale);
-    }//GEN-LAST:event_jMenuItem25ActionPerformed
+    }//GEN-LAST:event_transAutoscaleSelMIActionPerformed
 
-    private void jMenuItem24ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
+    private void transCustFuncSelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_transCustFuncSelMIActionPerformed
         if (dialogCustomFunc == null) dialogCustomFunc = new CustomFunction();
         dialogCustomFunc.setVisible(true);
         if (dialogCustomFunc.getExp4X() != null) {
@@ -1934,21 +1956,21 @@ public final class MainWindow extends javax.swing.JFrame {
             info("Applying '%s' to all the '%s' of table '%s'", sexp4x,  "x", sname);
             info("Applying '%s' to all the '%s' of table '%s'", sexp4fx, "f(x)", sname);
         }
-    }//GEN-LAST:event_jMenuItem24ActionPerformed
+    }//GEN-LAST:event_transCustFuncSelMIActionPerformed
 
-    private void jMenuItem10ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    private void dataAddRowMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_dataAddRowMIActionPerformed
         selected.addRow(null, null);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }//GEN-LAST:event_dataAddRowMIActionPerformed
 
-    private void jMenuItem26ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
-        final JFileChooser jfc = new JFileChooser(jTextField1.getText());
-        jfc.setSelectedFile(new File(jTextField1.getText(), "funcion.gif"));
+    private void saveGifMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_saveGifMIActionPerformed
+        final JFileChooser jfc = new JFileChooser(pathField.getText());
+        jfc.setSelectedFile(new File(pathField.getText(), "funcion.gif"));
         final int res = jfc.showSaveDialog(null);
         if (res != JFileChooser.APPROVE_OPTION) {
             return;
         }
         final Gif gif = new Gif(func);
-        final int pRow = jTable5.getSelectedRow();
+        final int pRow = errorTable.getSelectedRow();
         
         final int xoff =  func.getXSize() / 2 - 100;
         final int yoff = -func.getYSize() / 2 + 5;
@@ -1956,77 +1978,77 @@ public final class MainWindow extends javax.swing.JFrame {
             final GString gs = new GString(xoff, yoff, i18n.__("Epoch: %d", errors.getEpoch(i)));
             gs.setPaint(Color.DARK_GRAY);
             func.add(gs);
-            final int row = jTable5.convertRowIndexToView(i);
-            jTable5.setRowSelectionInterval(row, row);
+            final int row = errorTable.convertRowIndexToView(i);
+            errorTable.setRowSelectionInterval(row, row);
             gif.snapshot();
             func.remove(gs);
         }
         
-        if (pRow != -1) jTable5.setRowSelectionInterval(pRow, pRow);
+        if (pRow != -1) errorTable.setRowSelectionInterval(pRow, pRow);
         gif.write(jfc.getSelectedFile().getAbsolutePath());
-    }//GEN-LAST:event_jMenuItem26ActionPerformed
+    }//GEN-LAST:event_saveGifMIActionPerformed
 
-    private void jCheckBox5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
+    private void smoothErroCheckActionPerformed(ActionEvent evt) {//GEN-FIRST:event_smoothErroCheckActionPerformed
         errs.remove(errorPoints[TRAIN]);
         errs.remove(errorPoints[VALID]);
         errorPoints[TRAIN] = null;
         errorPoints[VALID] = null;
         drawErrors();
-    }//GEN-LAST:event_jCheckBox5ActionPerformed
+    }//GEN-LAST:event_smoothErroCheckActionPerformed
 
-    private void jMenuItem27ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed
+    private void trainPauseMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainPauseMIActionPerformed
         paused = !paused;
-        jMenuItem27.setText(paused ? i18n.__("Resume") : i18n.__("Pause"));
-        jButton14.setIcon(paused ? play : pause);
-    }//GEN-LAST:event_jMenuItem27ActionPerformed
+        trainPauseMI.setText(paused ? i18n.__("Resume") : i18n.__("Pause"));
+        playPauseButton.setIcon(paused ? play : pause);
+    }//GEN-LAST:event_trainPauseMIActionPerformed
 
-    private void jButton14ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+    private void playPauseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_playPauseButtonActionPerformed
         if (worker != null && !worker.isCancelled()) {
-            jMenuItem27.doClick(0);
+            trainPauseMI.doClick(0);
         } 
-        jMenuItem15.doClick(0);
-    }//GEN-LAST:event_jButton14ActionPerformed
+        trainStartMI.doClick(0);
+    }//GEN-LAST:event_playPauseButtonActionPerformed
 
-    private void jButton16ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        jMenuItem3.doClick(0);
-    }//GEN-LAST:event_jButton16ActionPerformed
+    private void stopButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
+        trainStopMI.doClick(0);
+    }//GEN-LAST:event_stopButtonActionPerformed
 
-    private void jCheckBox6ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBox6ActionPerformed
+    private void showLabelsCheckActionPerformed(ActionEvent evt) {//GEN-FIRST:event_showLabelsCheckActionPerformed
         updateGraphics(TRAIN);
         drawErrors();
-    }//GEN-LAST:event_jCheckBox6ActionPerformed
+    }//GEN-LAST:event_showLabelsCheckActionPerformed
 
-    private void jMenuItem29ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
+    private void aboutMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_aboutMIActionPerformed
         new AboutDialog(this).setVisible(true);
-    }//GEN-LAST:event_jMenuItem29ActionPerformed
+    }//GEN-LAST:event_aboutMIActionPerformed
 
-    private void jMenuItem28ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
-        loadExample(jMenuItem28, new ExampleSyntheticEKG());
-    }//GEN-LAST:event_jMenuItem28ActionPerformed
+    private void exampleEkgSynthMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleEkgSynthMIActionPerformed
+        loadExample(exampleEkgSynthMI, new ExampleSyntheticEKG());
+    }//GEN-LAST:event_exampleEkgSynthMIActionPerformed
 
-    private void jMenuItem30ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
-        loadExample(jMenuItem30, new ExampleVeryJumpy());
-    }//GEN-LAST:event_jMenuItem30ActionPerformed
+    private void exampleVeryJumpyMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleVeryJumpyMIActionPerformed
+        loadExample(exampleVeryJumpyMI, new ExampleVeryJumpy());
+    }//GEN-LAST:event_exampleVeryJumpyMIActionPerformed
 
-    private void jMenuItem32ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem32ActionPerformed
+    private void reloadExampleMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_reloadExampleMIActionPerformed
         loadExample(lastItem, null);
-    }//GEN-LAST:event_jMenuItem32ActionPerformed
+    }//GEN-LAST:event_reloadExampleMIActionPerformed
 
-    private void jMenuItem34ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem34ActionPerformed
-        jTabbedPane1.setSelectedIndex(1);
-    }//GEN-LAST:event_jMenuItem34ActionPerformed
+    private void topologyPanelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_topologyPanelMIActionPerformed
+        tabbedPane.setSelectedIndex(1);
+    }//GEN-LAST:event_topologyPanelMIActionPerformed
 
-    private void jMenuItem33ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem33ActionPerformed
-        jTabbedPane1.setSelectedIndex(0);
-    }//GEN-LAST:event_jMenuItem33ActionPerformed
+    private void dataPanelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_dataPanelMIActionPerformed
+        tabbedPane.setSelectedIndex(0);
+    }//GEN-LAST:event_dataPanelMIActionPerformed
 
-    private void jMenuItem35ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem35ActionPerformed
-        jTabbedPane1.setSelectedIndex(2);
-    }//GEN-LAST:event_jMenuItem35ActionPerformed
+    private void errorPlotPanelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_errorPlotPanelMIActionPerformed
+        tabbedPane.setSelectedIndex(2);
+    }//GEN-LAST:event_errorPlotPanelMIActionPerformed
 
-    private void jMenuItem36ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem36ActionPerformed
-        jTabbedPane1.setSelectedIndex(3);
-    }//GEN-LAST:event_jMenuItem36ActionPerformed
+    private void outputPanelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_outputPanelMIActionPerformed
+        tabbedPane.setSelectedIndex(3);
+    }//GEN-LAST:event_outputPanelMIActionPerformed
 
     private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         final int opt = JOptionPane.showConfirmDialog(null, 
@@ -2046,8 +2068,8 @@ public final class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    private void jMenuItem37ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem37ActionPerformed
-        final JFileChooser jfc = new JFileChooser(jTextField1.getText());
+    private void loadConfigMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_loadConfigMIActionPerformed
+        final JFileChooser jfc = new JFileChooser(pathField.getText());
         jfc.setFileFilter(new FileNameExtensionFilter("MLP config", "conf"));
         
         final int opt = jfc.showOpenDialog(null);
@@ -2059,39 +2081,39 @@ public final class MainWindow extends javax.swing.JFrame {
         if (file != null && file.exists()) {
             readConfig(file);
         }
-    }//GEN-LAST:event_jMenuItem37ActionPerformed
+    }//GEN-LAST:event_loadConfigMIActionPerformed
 
-    private void jPanel3ComponentShown(ComponentEvent evt) {//GEN-FIRST:event_jPanel3ComponentShown
+    private void plotsPanelComponentShown(ComponentEvent evt) {//GEN-FIRST:event_plotsPanelComponentShown
         updateGraphics(TRAIN);
         updateGraphics(VALID);
         updateGraphics(GENER);
-    }//GEN-LAST:event_jPanel3ComponentShown
+    }//GEN-LAST:event_plotsPanelComponentShown
 
-    private void jCheckBoxMenuItem1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
-        errs.setUseAntiAliasing(jCheckBoxMenuItem1.isSelected());
-        func.setUseAntiAliasing(jCheckBoxMenuItem1.isSelected());
-        c4g.put("use.aa", jCheckBoxMenuItem1.isSelected());
-    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+    private void debugUseAAMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_debugUseAAMIActionPerformed
+        errs.setUseAntiAliasing(debugUseAAMI.isSelected());
+        func.setUseAntiAliasing(debugUseAAMI.isSelected());
+        c4g.put("use.aa", debugUseAAMI.isSelected());
+    }//GEN-LAST:event_debugUseAAMIActionPerformed
 
-    private void jCheckBoxMenuItem2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem2ActionPerformed
-        errs.setShowFPS(jCheckBoxMenuItem2.isSelected());
-        func.setShowFPS(jCheckBoxMenuItem2.isSelected());
-        c4g.put("show.fps", jCheckBoxMenuItem2.isSelected());
-    }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
+    private void debugShowFpsMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_debugShowFpsMIActionPerformed
+        errs.setShowFPS(debugShowFpsMI.isSelected());
+        func.setShowFPS(debugShowFpsMI.isSelected());
+        c4g.put("show.fps", debugShowFpsMI.isSelected());
+    }//GEN-LAST:event_debugShowFpsMIActionPerformed
 
-    private void jCheckBoxMenuItem3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem3ActionPerformed
-        DEBUG_ENABLED = jCheckBoxMenuItem3.isSelected();
+    private void debugPrintMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_debugPrintMIActionPerformed
+        DEBUG_ENABLED = debugPrintMI.isSelected();
         c4g.put("enable.debug", DEBUG_ENABLED);
-    }//GEN-LAST:event_jCheckBoxMenuItem3ActionPerformed
+    }//GEN-LAST:event_debugPrintMIActionPerformed
 
-    private void jCheckBoxMenuItem4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem4ActionPerformed
-        PS = jCheckBoxMenuItem4.isSelected() ? System.out : NullPrintStream.getInstance();
-        c4g.put("use.std.out", jCheckBoxMenuItem4.isSelected());
-    }//GEN-LAST:event_jCheckBoxMenuItem4ActionPerformed
+    private void debugStdoutMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_debugStdoutMIActionPerformed
+        PS = debugStdoutMI.isSelected() ? System.out : NullPrintStream.getInstance();
+        c4g.put("use.std.out", debugStdoutMI.isSelected());
+    }//GEN-LAST:event_debugStdoutMIActionPerformed
 
-    private void jTabbedPane1FocusGained(FocusEvent evt) {//GEN-FIRST:event_jTabbedPane1FocusGained
+    private void tabbedPaneFocusGained(FocusEvent evt) {//GEN-FIRST:event_tabbedPaneFocusGained
         drawErrors();
-    }//GEN-LAST:event_jTabbedPane1FocusGained
+    }//GEN-LAST:event_tabbedPaneFocusGained
     
     private void chooseColor(String title, int idx) {
         final Color c = JColorChooser.showDialog(null, title, colors[idx]);
@@ -2109,7 +2131,7 @@ public final class MainWindow extends javax.swing.JFrame {
         if (value >= selected.getRowCount()) {
             selected.selectAll();
         } else {
-            if (jCheckBox1.isSelected()) {
+            if (randomSelectionCheck.isSelected()) {
                 final Random rand = ThreadLocalRandom.current();
                 while (selected.getSelectedCount() < value) {
                     selected.setValueAt(true, rand.nextInt(selected.getRowCount()), 0);
@@ -2123,118 +2145,96 @@ public final class MainWindow extends javax.swing.JFrame {
     }    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private final JComboBox<String> backpropBox = new JComboBox<>();
     private final ButtonGroup buttonGroup1 = new ButtonGroup();
-    private final JButton jButton1 = new JButton();
-    private final JButton jButton14 = new JButton();
-    private final JButton jButton16 = new JButton();
-    private final JButton jButton2 = new JButton();
-    private final JButton jButton3 = new JButton();
-    private final JButton jButton4 = new JButton();
-    private final JButton jButton5 = new JButton();
-    private final JButton jButton6 = new JButton();
-    private final JButton jButton7 = new JButton();
-    private final JButton jButton8 = new JButton();
-    private final JCheckBox jCheckBox1 = new JCheckBox();
-    private final JCheckBox jCheckBox2 = new JCheckBox();
-    private final JCheckBox jCheckBox3 = new JCheckBox();
-    private final JCheckBox jCheckBox4 = new JCheckBox();
-    private final JCheckBox jCheckBox5 = new JCheckBox();
-    private final JCheckBox jCheckBox6 = new JCheckBox();
-    private final JCheckBoxMenuItem jCheckBoxMenuItem1 = new JCheckBoxMenuItem();
-    private final JCheckBoxMenuItem jCheckBoxMenuItem2 = new JCheckBoxMenuItem();
-    private final JCheckBoxMenuItem jCheckBoxMenuItem3 = new JCheckBoxMenuItem();
-    private final JCheckBoxMenuItem jCheckBoxMenuItem4 = new JCheckBoxMenuItem();
-    private final JComboBox<String> jComboBox1 = new JComboBox<>();
-    private final JComboBox<String> jComboBox2 = new JComboBox<>();
-    private final JComboBox<String> jComboBox7 = new JComboBox<>();
-    private final JComboBox<String> jComboBox8 = new JComboBox<>();
-    private final JComboBox<String> jComboBox9 = new JComboBox<>();
-    private final JFormattedTextField jFormattedTextField1 = new JFormattedTextField();
-    private final JFormattedTextField jFormattedTextField2 = new JFormattedTextField();
-    private final JFormattedTextField jFormattedTextField3 = new JFormattedTextField(FORMATTER);
-    private final JFormattedTextField jFormattedTextField4 = new JFormattedTextField(FORMATTER);
-    private final JFormattedTextField jFormattedTextField5 = new JFormattedTextField(FORMATTER);
-    private final JLabel jLabel2 = new JLabel();
-    private final JLabel jLabel3 = new JLabel();
-    private final JLabel jLabel4 = new JLabel();
-    private final JLabel jLabel5 = new JLabel();
-    private final JMenu jMenu2 = new JMenu();
-    private final JMenu jMenu5 = new JMenu();
-    private final JMenu jMenu7 = new JMenu();
+    private final JMenuItem dataClearAllMI = new JMenuItem();
+    private final JMenuItem dataClearSelMI = new JMenuItem();
+    private final JPanel dataPanel = new JPanel();
+    private final JMenu datasetMenu = new JMenu();
+    private final JCheckBoxMenuItem debugPrintMI = new JCheckBoxMenuItem();
+    private final JCheckBoxMenuItem debugShowFpsMI = new JCheckBoxMenuItem();
+    private final JCheckBoxMenuItem debugStdoutMI = new JCheckBoxMenuItem();
+    private final JCheckBoxMenuItem debugUseAAMI = new JCheckBoxMenuItem();
+    private final JFormattedTextField degradationField = new JFormattedTextField(FORMATTER);
+    private final JComboBox<String> destinationBox = new JComboBox<>();
+    private final JPanel errorPlotPanel = new JPanel();
+    private final JTable errorTable = new JTable();
+    private final JMenuItem exampleBatmanMI = new JMenuItem();
+    private final JMenuItem exampleCosMI = new JMenuItem();
+    private final JMenuItem exampleDunnoMI = new JMenuItem();
+    private final JMenuItem exampleEkgRealMI = new JMenuItem();
+    private final JMenuItem exampleEkgSynthMI = new JMenuItem();
+    private final JMenuItem exampleJumpyMI = new JMenuItem();
+    private final JMenuItem exampleSinMI = new JMenuItem();
+    private final JMenuItem exampleSincMI = new JMenuItem();
+    private final JMenuItem exampleSquareMI = new JMenuItem();
+    private final JMenuItem exampleTriangleMI = new JMenuItem();
+    private final JMenuItem exampleVeryJumpyMI = new JMenuItem();
+    private final JMenu examplesMenu = new JMenu();
+    private final JPanel functPlotPanel = new JPanel();
+    private final JComboBox<String> generBox = new JComboBox<>();
+    private final JLabel generLabel = new JLabel();
+    private final JCheckBox generPlotCheck = new JCheckBox();
+    private final JTable generTable = new JTable();
+    private final JSplitPane horizontalSplit = new JSplitPane();
     private final JMenuBar jMenuBar1 = new JMenuBar();
-    private final JMenuItem jMenuItem1 = new JMenuItem();
-    private final JMenuItem jMenuItem13 = new JMenuItem();
-    private final JMenuItem jMenuItem15 = new JMenuItem();
-    private final JMenuItem jMenuItem16 = new JMenuItem();
-    private final JMenuItem jMenuItem17 = new JMenuItem();
-    private final JMenuItem jMenuItem18 = new JMenuItem();
-    private final JMenuItem jMenuItem19 = new JMenuItem();
-    private final JMenuItem jMenuItem20 = new JMenuItem();
-    private final JMenuItem jMenuItem21 = new JMenuItem();
-    private final JMenuItem jMenuItem22 = new JMenuItem();
-    private final JMenuItem jMenuItem23 = new JMenuItem();
-    private final JMenuItem jMenuItem24 = new JMenuItem();
-    private final JMenuItem jMenuItem25 = new JMenuItem();
-    private final JMenuItem jMenuItem27 = new JMenuItem();
-    private final JMenuItem jMenuItem28 = new JMenuItem();
-    private final JMenuItem jMenuItem3 = new JMenuItem();
-    private final JMenuItem jMenuItem30 = new JMenuItem();
-    private final JMenuItem jMenuItem32 = new JMenuItem();
-    private final JMenuItem jMenuItem9 = new JMenuItem();
-    private final JPanel jPanel1 = new JPanel();
-    private final JPanel jPanel10 = new JPanel();
-    private final JPanel jPanel12 = new JPanel();
-    private final JPanel jPanel13 = new JPanel();
-    private final JPanel jPanel2 = new JPanel();
-    private final JPanel jPanel3 = new JPanel();
-    private final JPanel jPanel5 = new JPanel();
-    private final JPanel jPanel6 = new JPanel();
-    private final JPanel jPanel7 = new JPanel();
-    private final JPanel jPanel8 = new JPanel();
-    private final JPanel jPanel9 = new JPanel();
-    private final JProgressBar jProgressBar1 = new JProgressBar();
-    private final JRadioButton jRadioButton1 = new JRadioButton();
-    private final JRadioButton jRadioButton2 = new JRadioButton();
-    private final JRadioButton jRadioButton3 = new JRadioButton();
-    private final JScrollPane jScrollPane1 = new JScrollPane();
-    private final JScrollPane jScrollPane2 = new JScrollPane();
-    private final JScrollPane jScrollPane3 = new JScrollPane();
-    private final JScrollPane jScrollPane4 = new JScrollPane();
-    private final JScrollPane jScrollPane5 = new JScrollPane();
-    private final JScrollPane jScrollPane6 = new JScrollPane();
-    private final JPopupMenu.Separator jSeparator1 = new JPopupMenu.Separator();
-    private final JSeparator jSeparator3 = new JSeparator();
-    private final JSeparator jSeparator4 = new JSeparator();
-    private final JSeparator jSeparator5 = new JSeparator();
-    private final JSpinner jSpinner1 = new JSpinner();
-    private final JSpinner jSpinner2 = new JSpinner();
-    private final JSpinner jSpinner3 = new JSpinner();
-    private final JSplitPane jSplitPane1 = new JSplitPane();
-    private final JSplitPane jSplitPane2 = new JSplitPane();
-    private final JTabbedPane jTabbedPane1 = new JTabbedPane();
-    private final JTable jTable1 = new JTable();
-    private final JTable jTable2 = new JTable();
-    private final JTable jTable3 = new JTable();
-    private final JTable jTable4 = new JTable();
-    private final JTable jTable5 = new JTable();
-    private final JTextField jTextField1 = new JTextField();
-    private final JTextField jTextField2 = new JTextField();
-    private final JTextPane jTextPane1 = new JTextPane();
+    private final JTable layerTable = new JTable();
+    private final JSpinner layersSpinner = new JSpinner();
+    private final JFormattedTextField learningRateField = new JFormattedTextField(FORMATTER);
+    private final JTextPane logsTextPane = new JTextPane();
+    private final JSpinner maxEpochsSpinner = new JSpinner();
+    private final JPopupMenu.Separator menuSeparator2 = new JPopupMenu.Separator();
+    private final JFormattedTextField mseField = new JFormattedTextField(FORMATTER);
+    private final JSeparator optionsSeparator = new JSeparator();
+    private final JTextField pathField = new JTextField();
+    private final JButton pathSelectionButton = new JButton();
+    private final JButton playPauseButton = new JButton();
+    private final JCheckBox randomSelectionCheck = new JCheckBox();
+    private final JMenuItem reloadExampleMI = new JMenuItem();
+    private final JSpinner saveEverySpinner = new JSpinner();
+    private final JRadioButton selGenerButton = new JRadioButton();
+    private final JRadioButton selTrainButton = new JRadioButton();
+    private final JRadioButton selValidButton = new JRadioButton();
+    private final JFormattedTextField selectNumberField = new JFormattedTextField();
+    private final JFormattedTextField selectPercentageField = new JFormattedTextField();
+    private final JSeparator selectionSeparator2 = new JSeparator();
+    private final JCheckBox showLabelsCheck = new JCheckBox();
+    private final JCheckBox smoothErroCheck = new JCheckBox();
+    private final JButton stopButton = new JButton();
+    private final JTabbedPane tabbedPane = new JTabbedPane();
+    private final JPanel topologyPanel = new JPanel();
+    private final JComboBox<String> trainBox = new JComboBox<>();
+    private final JLabel trainLabel = new JLabel();
+    private final JMenu trainMenu = new JMenu();
+    private final JMenuItem trainPauseMI = new JMenuItem();
+    private final JCheckBox trainPlotCheck = new JCheckBox();
+    private final JMenuItem trainStartMI = new JMenuItem();
+    private final JMenuItem trainStopMI = new JMenuItem();
+    private final JTable trainTable = new JTable();
+    private final JProgressBar trainingProgress = new JProgressBar();
+    private final JMenuItem transAutoscaleSelMI = new JMenuItem();
+    private final JMenuItem transCustFuncSelMI = new JMenuItem();
+    private final JComboBox<String> validBox = new JComboBox<>();
+    private final JLabel validLabel = new JLabel();
+    private final JCheckBox validPlotCheck = new JCheckBox();
+    private final JTable validTable = new JTable();
+    private final JSplitPane verticalSplit = new JSplitPane();
+    private final JTextField weightField = new JTextField();
     // End of variables declaration//GEN-END:variables
 
     private void centerHeaders() {
-        jTable1.setDefaultRenderer(Double.class, new DecimalFormatRenderer());
-        jTable2.setDefaultRenderer(Double.class, new DecimalFormatRenderer());
-        jTable3.setDefaultRenderer(Double.class, new DecimalFormatRenderer());
-        jTable4.setDefaultRenderer(Double.class, new DecimalFormatRenderer());
-        jTable5.setDefaultRenderer(Double.class, new DecimalFormatRenderer());
+        layerTable.setDefaultRenderer(Double.class, new DecimalFormatRenderer());
+        trainTable.setDefaultRenderer(Double.class, new DecimalFormatRenderer());
+        validTable.setDefaultRenderer(Double.class, new DecimalFormatRenderer());
+        generTable.setDefaultRenderer(Double.class, new DecimalFormatRenderer());
+        errorTable.setDefaultRenderer(Double.class, new DecimalFormatRenderer());
     }
 
     private void centerCells() {
-        ((JLabel)jTable1.getDefaultRenderer(String.class))
-                        .setHorizontalAlignment(SwingConstants.CENTER);
-        ((JLabel)jTable1.getDefaultRenderer(Integer.class))
-                        .setHorizontalAlignment(SwingConstants.CENTER);
+        ((JLabel)layerTable.getDefaultRenderer(String.class))
+                           .setHorizontalAlignment(SwingConstants.CENTER);
+        ((JLabel)layerTable.getDefaultRenderer(Integer.class))
+                           .setHorizontalAlignment(SwingConstants.CENTER);
     }
     
     public void enableComponents(Container container, boolean enable) {
@@ -2248,18 +2248,18 @@ public final class MainWindow extends javax.swing.JFrame {
 
     private final String header = "<html><b>%s (%d/%d)</b></html>";
     private void initModels() {
-        jTable1.setModel(layers);
-        jTable2.setModel(train);
-        jTable3.setModel(validate);
-        jTable4.setModel(generalize);
-        jTable5.setModel(errors);
-        train  .selectEnabled(true);
+        layerTable.setModel(layers);
+        trainTable.setModel(train);
+        validTable.setModel(validate);
+        generTable.setModel(generalize);
+        errorTable.setModel(errors);
+        train.selectEnabled(true);
         
         train.addTableModelListener(new TableModelListener() {
             @Override public void tableChanged(TableModelEvent e) {
                 final int sel = train.getSelectedCount();
                 final int row = train.getRowCount();
-                jLabel2.setText(String.format(header, i18n.__("Training"), sel, row));
+                trainLabel.setText(String.format(header, i18n.__("Training"), sel, row));
                 checkTrainEnabled();
                 updateGraphics(TRAIN);
             }
@@ -2268,7 +2268,7 @@ public final class MainWindow extends javax.swing.JFrame {
             @Override public void tableChanged(TableModelEvent e) {
                 final int sel = validate.getSelectedCount();
                 final int row = validate.getRowCount();
-                jLabel3.setText(String.format(header, i18n.__("Validation"), sel, row));
+                validLabel.setText(String.format(header, i18n.__("Validation"), sel, row));
                 checkTrainEnabled();
                 updateGraphics(VALID);
             }
@@ -2277,7 +2277,7 @@ public final class MainWindow extends javax.swing.JFrame {
             @Override public void tableChanged(TableModelEvent e) {
                 final int sel = generalize.getSelectedCount();
                 final int row = generalize.getRowCount();
-                jLabel4.setText(String.format(header, i18n.__("Generalization"), sel, row));
+                generLabel.setText(String.format(header, i18n.__("Generalization"), sel, row));
                 checkTrainEnabled();
                 updateGraphics(GENER);
             }
@@ -2290,7 +2290,7 @@ public final class MainWindow extends javax.swing.JFrame {
             }
         });
     
-        final ListSelectionModel tsm = jTable5.getSelectionModel();
+        final ListSelectionModel tsm = errorTable.getSelectionModel();
         tsm.addListSelectionListener(new ListSelectionListener() {
             private int lasIdx = 0;
             @Override
@@ -2302,7 +2302,7 @@ public final class MainWindow extends javax.swing.JFrame {
                     }
                     
                     try {
-                        selectEpoch(jTable5.convertRowIndexToModel(curIdx));
+                        selectEpoch(errorTable.convertRowIndexToModel(curIdx));
                     } catch (Exception ex) {}
                     
                     lasIdx = curIdx;
@@ -2330,13 +2330,13 @@ public final class MainWindow extends javax.swing.JFrame {
             }
         };
         
-        jTable5.setRowSorter(sorter);
+        errorTable.setRowSorter(sorter);
         
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jTable2.getTableHeader().setReorderingAllowed(false);
-        jTable3.getTableHeader().setReorderingAllowed(false);
-        jTable4.getTableHeader().setReorderingAllowed(false);
-        jTable5.getTableHeader().setReorderingAllowed(false);
+        trainTable.getTableHeader().setReorderingAllowed(false);
+        validTable.getTableHeader().setReorderingAllowed(false);
+        generTable.getTableHeader().setReorderingAllowed(false);
+        layerTable.getTableHeader().setReorderingAllowed(false);
+        errorTable.getTableHeader().setReorderingAllowed(false);
     }
     
     private GLine epLine;
@@ -2360,8 +2360,8 @@ public final class MainWindow extends javax.swing.JFrame {
     private MLP loadMlp(int epoch) {
         if (epoch == -1) return null;
         
-        final String path = jTextField1.getText();
-        final String name = jTextField2.getText();
+        final String path = pathField.getText();
+        final String name = weightField.getText();
         final String fname = path + name.replace("{epoch}", "" + epoch);
         debug("Reading MLP from '%s'", fname);
                 
@@ -2376,8 +2376,8 @@ public final class MainWindow extends javax.swing.JFrame {
     }
     private void initGraphs() {
         BorderLayout layout = new BorderLayout();
-        jPanel6.setLayout(layout);
-        jPanel6.add(func, BorderLayout.CENTER);
+        functPlotPanel.setLayout(layout);
+        functPlotPanel.add(func, BorderLayout.CENTER);
         func.setVisible(true);
         func.setUseFullArea(true);
         func.setCenterOrigin(true);
@@ -2403,8 +2403,8 @@ public final class MainWindow extends javax.swing.JFrame {
         });
         
         layout = new BorderLayout();
-        jPanel7.setLayout(layout);
-        jPanel7.add(errs, BorderLayout.CENTER);
+        errorPlotPanel.setLayout(layout);
+        errorPlotPanel.add(errs, BorderLayout.CENTER);
         errs.setVisible(true);
         errs.setUseFullArea(true);
         errs.setCenterOrigin(false);
@@ -2442,37 +2442,37 @@ public final class MainWindow extends javax.swing.JFrame {
         comboBox.addItem("Gaussian");
         comboBox.addItem("Sinc");
         
-        TableColumn tc = jTable1.getColumnModel().getColumn(2);
+        TableColumn tc = layerTable.getColumnModel().getColumn(2);
         tc.setCellEditor(new DefaultCellEditor(comboBox));
         String home = c4g.get("last.path").isEmpty()
                     ? System.getProperty("user.home") 
                     : c4g.get("last.path");
         
-        jTextField1.setText(home
-                          + File.separator + "mrft"
-                          + File.separator + i18n.__("Project_1")
-                          + File.separator);
+        pathField.setText(home
+                        + File.separator + "mrft"
+                        + File.separator + i18n.__("Project_1")
+                        + File.separator);
         
-        Font tFnt = jTable1.getFont();
+        Font tFnt = layerTable.getFont();
              tFnt = new Font(Font.MONOSPACED, tFnt.getStyle(), tFnt.getSize());
              
-        jTable1.setFont(tFnt);
-        jTable2.setFont(tFnt);
+        layerTable.setFont(tFnt);
+        trainTable.setFont(tFnt);
         
-        Font lFnt = jLabel2.getFont().deriveFont(Font.BOLD);
-        jLabel2.setFont(lFnt);
-        jLabel3.setFont(lFnt);
-        jLabel4.setFont(lFnt);
+        Font lFnt = trainLabel.getFont().deriveFont(Font.BOLD);
+        trainLabel.setFont(lFnt);
+        validLabel.setFont(lFnt);
+        generLabel.setFont(lFnt);
         
-        jSplitPane2.setDividerLocation(0.5);
-        jSplitPane2.setResizeWeight(0.5);
-        jSplitPane1.setDividerLocation(190);
-        jSplitPane1.setResizeWeight(0);
+        verticalSplit.setDividerLocation(0.5);
+        verticalSplit.setResizeWeight(0.5);
+        horizontalSplit.setDividerLocation(190);
+        horizontalSplit.setResizeWeight(0);
         
-        jCheckBoxMenuItem1.setSelected(c4g.getBool("use.aa"));
-        jCheckBoxMenuItem2.setSelected(c4g.getBool("show.fps"));
-        jCheckBoxMenuItem3.setSelected(c4g.getBool("enable.debug"));
-        jCheckBoxMenuItem4.setSelected(c4g.getBool("use.std.out"));
+        debugUseAAMI.setSelected(c4g.getBool("use.aa"));
+        debugShowFpsMI.setSelected(c4g.getBool("show.fps"));
+        debugPrintMI.setSelected(c4g.getBool("enable.debug"));
+        debugStdoutMI.setSelected(c4g.getBool("use.std.out"));
         
         if (c4g.getBool("agressive.redraw")) {
             errs.setAutoRepaint(true);
@@ -2486,19 +2486,19 @@ public final class MainWindow extends javax.swing.JFrame {
         errs.setShowFPS(c4g.getBool("show.fps"));
         func.setShowFPS(c4g.getBool("show.fps"));
         
-        jCheckBox2.setSelected(c4g.getBool("train.plot"));
-        jCheckBox3.setSelected(c4g.getBool("valid.plot"));
-        jCheckBox4.setSelected(c4g.getBool("gener.plot"));
+        trainPlotCheck.setSelected(c4g.getBool("train.plot"));
+        validPlotCheck.setSelected(c4g.getBool("valid.plot"));
+        generPlotCheck.setSelected(c4g.getBool("gener.plot"));
         
-        jComboBox9.setSelectedIndex(c4g.getInt("train.format"));
-        jComboBox7.setSelectedIndex(c4g.getInt("valid.format"));
-        jComboBox8.setSelectedIndex(c4g.getInt("gener.format"));
+        trainBox.setSelectedIndex(c4g.getInt("train.format"));
+        validBox.setSelectedIndex(c4g.getInt("valid.format"));
+        generBox.setSelectedIndex(c4g.getInt("gener.format"));
         
         colors[TRAIN] = c4g.getColor("train.color");
         colors[VALID] = c4g.getColor("valid.color");
         colors[GENER] = c4g.getColor("gener.color");
         
-        jRadioButton1.doClick(0);
+        selTrainButton.doClick(0);
     }
     
     private void readFiles(File[] files, DatasetTableModel table) {
@@ -2557,7 +2557,7 @@ public final class MainWindow extends javax.swing.JFrame {
     }
 
     private void savePlot(String name, Canvas canvas) {
-        final JFileChooser jfc = new JFileChooser(jTextField1.getText());
+        final JFileChooser jfc = new JFileChooser(pathField.getText());
         final int out = jfc.showSaveDialog(null);
         
         if (out != JFileChooser.APPROVE_OPTION) {
@@ -2596,55 +2596,55 @@ public final class MainWindow extends javax.swing.JFrame {
             info("Example '%s' loaded", ex.getName());
         }
         
-        jMenuItem32.setText(i18n.__("<html>Reload <code>'%s'</code></html>", ex.getName()));
-        jMenuItem32.setEnabled(true);
+        reloadExampleMI.setText(i18n.__("<html>Reload <code>'%s'</code></html>", ex.getName()));
+        reloadExampleMI.setEnabled(true);
         lastItem = menu;
-        jMenuItem1.doClick(0);
+        dataClearAllMI.doClick(0);
         errors.removeAll();
-        jSpinner1.setValue(ex.loadTable(layers));
+        layersSpinner.setValue(ex.loadTable(layers));
         ex.loadTrainData(train);
         ex.loadValidationData(validate);
         ex.loadGeneralizationData(generalize);
-        jComboBox2.setSelectedIndex(ex.backpropagation());
-        jSpinner2.setValue(ex.maxEpochs());
-        jSpinner3.setValue(ex.saveEvery());
-        jFormattedTextField4.setValue(ex.learnRate());
-        jFormattedTextField5.setValue(ex.degradation());
-        jFormattedTextField3.setValue(ex.mse());
-        jTextField1.setText(ex.getFolder());
-        jTextField2.setText(ex.getWeightFile());
-        jCheckBox2.setSelected(ex.plotTraining());
-        jComboBox9.setSelectedIndex(ex.trainingFormat());
-        jCheckBox3.setSelected(ex.plotValidation());
-        jComboBox7.setSelectedIndex(ex.validationFormat());
-        jCheckBox4.setSelected(ex.plotGeneralization());
-        jComboBox8.setSelectedIndex(ex.generalizationFormat());
-        jCheckBox5.setSelected(ex.smoothError());
-        jCheckBox6.setSelected(ex.showLabels());
+        backpropBox.setSelectedIndex(ex.backpropagation());
+        maxEpochsSpinner.setValue(ex.maxEpochs());
+        saveEverySpinner.setValue(ex.saveEvery());
+        learningRateField.setValue(ex.learnRate());
+        degradationField.setValue(ex.degradation());
+        mseField.setValue(ex.mse());
+        pathField.setText(ex.getFolder());
+        weightField.setText(ex.getWeightFile());
+        trainPlotCheck.setSelected(ex.plotTraining());
+        trainBox.setSelectedIndex(ex.trainingFormat());
+        validPlotCheck.setSelected(ex.plotValidation());
+        validBox.setSelectedIndex(ex.validationFormat());
+        generPlotCheck.setSelected(ex.plotGeneralization());
+        generBox.setSelectedIndex(ex.generalizationFormat());
+        smoothErroCheck.setSelected(ex.smoothError());
+        showLabelsCheck.setSelected(ex.showLabels());
     }
     
     private static final DecimalFormat FORMATTER = new DecimalFormat(c4g.get("number.format"));
 
     private void initListners() {
-        FileDrop fd = new FileDrop(jScrollPane2, new FileDrop.Listener() {
+        FileDrop fd = new FileDrop(trainTable, new FileDrop.Listener() {
             @Override
             public void filesDropped(File[] files) {
                 readFiles(files, train);
             }
         });
-        fd = new FileDrop(jScrollPane3, new FileDrop.Listener() {
+        fd = new FileDrop(validTable, new FileDrop.Listener() {
             @Override
             public void filesDropped(File[] files) {
                 readFiles(files, validate);
             }
         });
-        fd = new FileDrop(jScrollPane4, new FileDrop.Listener() {
+        fd = new FileDrop(generTable, new FileDrop.Listener() {
             @Override
             public void filesDropped(File[] files) {
                 readFiles(files, generalize);
             }
         });
-        fd = new FileDrop(jPanel2, new FileDrop.Listener() {
+        fd = new FileDrop(topologyPanel, new FileDrop.Listener() {
             @Override
             public void filesDropped(File[] files) {
                 readFiles(files, null);
@@ -2654,7 +2654,7 @@ public final class MainWindow extends javax.swing.JFrame {
     
     private boolean shouldDraw() {
         //@TODO should redraw after a DEICONIZATION...
-        return jTabbedPane1.getSelectedIndex() == 2 && (getExtendedState() & ICONIFIED) == 0;
+        return tabbedPane.getSelectedIndex() == 2 && (getExtendedState() & ICONIFIED) == 0;
     }
     
     private synchronized void drawErrors() {
@@ -2663,7 +2663,7 @@ public final class MainWindow extends javax.swing.JFrame {
         errs.remove(strTrain);
         errs.remove(strValid);
         
-        if (jCheckBox6.isSelected()) {
+        if (showLabelsCheck.isSelected()) {
             final int xs = errs.getXSize() - ERR_X_OFFSET;
             final int ys = errs.getYSize() - ERR_Y_OFFSET;
             strTrain.move(xs - 120, ys - 15);
@@ -2674,7 +2674,7 @@ public final class MainWindow extends javax.swing.JFrame {
             strValid.setPaint(colors[1]);
         } 
         
-        if (jCheckBox5.isSelected()) {
+        if (smoothErroCheck.isSelected()) {
             drawErrors0();
         } else {
             drawErrors1();
@@ -2802,9 +2802,9 @@ public final class MainWindow extends javax.swing.JFrame {
     
     private GString labTrain, labValid, labGen;
     private final GMultiPoint[] points = new GMultiPoint[3];
-    private final JComboBox<?>[] list = {jComboBox9, jComboBox7, jComboBox8};
+    private final JComboBox<?>[] list = {trainBox, validBox, generBox};
     private final DatasetTableModel[] datas = {train, validate, generalize};
-    private final JCheckBox[] selections = {jCheckBox2, jCheckBox3, jCheckBox4};
+    private final JCheckBox[] selections = {trainPlotCheck, validPlotCheck, generPlotCheck};
     private final Color[] colors = {new Color(0x6666FF), new Color(0xFF9900), new Color(0xFF0000)};
     private synchronized void updateGraphics(int idx) {
         if (!shouldDraw()) return;
@@ -2813,24 +2813,24 @@ public final class MainWindow extends javax.swing.JFrame {
         func.remove(labValid);
         func.remove(labGen);
         
-        if (jCheckBox6.isSelected()) {
+        if (showLabelsCheck.isSelected()) {
             final int xs = func.getXSize() / 2;
             final int ys = func.getYSize() / 2;
             int posy = 15;
             
-            if (jCheckBox2.isSelected()) {
+            if (trainPlotCheck.isSelected()) {
                 labTrain = new GString(xs - 120, ys - posy, i18n.__("Training"));
                 labTrain.setPaint(colors[TRAIN]);
                 func.add(labTrain);
                 posy += 15;
             }
-            if (jCheckBox3.isSelected()) {
+            if (validPlotCheck.isSelected()) {
                 labValid = new GString(xs - 120, ys - posy, i18n.__("Validation"));
                 labValid.setPaint(colors[VALID]);
                 func.add(labValid);
                 posy += 15;
             }
-            if (jCheckBox4.isSelected()) {
+            if (generPlotCheck.isSelected()) {
                 labGen = new GString(xs - 120, ys - posy, i18n.__("Generalization"));
                 labGen.setPaint(colors[GENER]);
                 func.add(labGen);
@@ -2839,12 +2839,12 @@ public final class MainWindow extends javax.swing.JFrame {
         } 
         
         if (list[idx] == null) {
-            list[TRAIN] = jComboBox9;
-            list[VALID] = jComboBox7;
-            list[GENER] = jComboBox8;
-            selections[TRAIN] = jCheckBox2;
-            selections[VALID] = jCheckBox3;
-            selections[GENER] = jCheckBox4;
+            list[TRAIN] = trainBox;
+            list[VALID] = validBox;
+            list[GENER] = generBox;
+            selections[TRAIN] = trainPlotCheck;
+            selections[VALID] = validPlotCheck;
+            selections[GENER] = generPlotCheck;
             func.repaint();
             return;
         }
@@ -2962,11 +2962,11 @@ public final class MainWindow extends javax.swing.JFrame {
 
     private void readConfig(File file) {
         info("Cleaning current data");
-        jMenuItem1.doClick(0);
+        dataClearAllMI.doClick(0);
         System.out.println(file);
         String path = file.getParent() + File.separator;
         System.out.println(path);
-        jTextField1.setText(path);
+        pathField.setText(path);
         
         info("Loading Configuration File '%s'", file.getName());
         try (FileInputStream fis = new FileInputStream(file)) {
@@ -3007,30 +3007,30 @@ public final class MainWindow extends javax.swing.JFrame {
             warn("Unable to read the default template! (%s)", ex.getLocalizedMessage());
         }
         
-        save.put("max.epochs", jSpinner2.getValue());
-        save.put("save.every", jSpinner3.getValue());
-        save.put("mce", ((Number) jFormattedTextField3.getValue()).doubleValue());
-        save.put("leaning.rate", ((Number) jFormattedTextField4.getValue()).doubleValue());
-        save.put("degradation", ((Number)jFormattedTextField5.getValue()).doubleValue());
-        save.put("backpropagation", jComboBox2.getSelectedIndex());
+        save.put("max.epochs", maxEpochsSpinner.getValue());
+        save.put("save.every", saveEverySpinner.getValue());
+        save.put("mce", ((Number) mseField.getValue()).doubleValue());
+        save.put("leaning.rate", ((Number) learningRateField.getValue()).doubleValue());
+        save.put("degradation", ((Number)degradationField.getValue()).doubleValue());
+        save.put("backpropagation", backpropBox.getSelectedIndex());
         save.put("topology", layers.toString());
-        save.put("working.directory", jTextField1.getText());
-        save.put("weight.file", jTextField2.getText());
+        save.put("working.directory", pathField.getText());
+        save.put("weight.file", weightField.getText());
         save.put("data.train", sfiles[TRAIN]);
         save.put("data.valid", sfiles[VALID]);
         save.put("data.gener", sfiles[GENER]);
         save.put("data.error", sfiles[ERROR]);
-        save.put("plot.train", jCheckBox2.isSelected());
-        save.put("plot.train.format", jComboBox9.getSelectedIndex());
+        save.put("plot.train", trainPlotCheck.isSelected());
+        save.put("plot.train.format", trainBox.getSelectedIndex());
         save.put("plot.train.color", Integer.toHexString(colors[0].getRGB()));
-        save.put("plot.valid", jCheckBox3.isSelected());
-        save.put("plot.valid.format", jComboBox7.getSelectedIndex());
+        save.put("plot.valid", validPlotCheck.isSelected());
+        save.put("plot.valid.format", validBox.getSelectedIndex());
         save.put("plot.valid.color", Integer.toHexString(colors[1].getRGB()));
-        save.put("plot.gener", jCheckBox4.isSelected());
-        save.put("plot.gener.format", jComboBox8.getSelectedIndex());
+        save.put("plot.gener", generPlotCheck.isSelected());
+        save.put("plot.gener.format", generBox.getSelectedIndex());
         save.put("plot.gener.color", Integer.toHexString(colors[2].getRGB()));
-        save.put("smooth.errors", jCheckBox5.isSelected());
-        save.put("show.labels", jCheckBox6.isSelected());
+        save.put("smooth.errors", smoothErroCheck.isSelected());
+        save.put("show.labels", showLabelsCheck.isSelected());
         
         try (PrintStream out = new PrintStream(fname + "__mlp.conf")) {
             save.store(out, "");
@@ -3059,7 +3059,7 @@ public final class MainWindow extends javax.swing.JFrame {
         StyleConstants.setBold      (STYLE_ERROR,   true);
     }
         
-    private final StyledDocument doc = jTextPane1.getStyledDocument();
+    private final StyledDocument doc = logsTextPane.getStyledDocument();
     private final static long START = System.nanoTime();
     
     private PrintStream PS = c4g.getBool("use.std.out") ? System.out : NullPrintStream.getInstance();
@@ -3094,7 +3094,7 @@ public final class MainWindow extends javax.swing.JFrame {
         try {
             doc.insertString(doc.getLength(), stime, type);
             doc.insertString(doc.getLength(), stmsg, type);
-            jTextPane1.setCaretPosition(doc.getLength());
+            logsTextPane.setCaretPosition(doc.getLength());
         } catch(BadLocationException e) { 
             PS.println(e); 
         }
@@ -3105,8 +3105,8 @@ public final class MainWindow extends javax.swing.JFrame {
                                      validate  .getRowCount() > 0 &&
                                      generalize.getRowCount() > 0;
         
-        jMenuItem15.setEnabled(trainEnabled);
-        jButton14.setEnabled(trainEnabled);
+        trainStartMI.setEnabled(trainEnabled);
+        playPauseButton.setEnabled(trainEnabled);
     }
     
     private final class DecimalFormatRenderer extends DefaultTableCellRenderer {
