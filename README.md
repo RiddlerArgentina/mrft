@@ -10,7 +10,10 @@ transformations and noise
 and creating images and animations
 - [`FileDrop`](http://iharder.sourceforge.net/current/java/filedrop/): Drag & Drop support
 - [`Java ECG Generator`](http://www.mit.edu/~gari/CODE/ECGSYN/JAVA/APPLET2/ecgsyn/ecg-java/source.html): Synthetic ECG (training example)
-- Others (that I will name in time)
+- [`Spline`](https://source.android.com/): Error smoothing
+- [`GNU Octave`](https://www.gnu.org/software/octave/): Not directly used, but lot's of testing were done thanks to 
+  GNU Octave
+- Others...
 
 Objectives
 ----------
