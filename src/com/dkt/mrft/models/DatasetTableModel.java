@@ -246,8 +246,9 @@ public class DatasetTableModel extends AbstractTableModel {
 
     public void applyToX(Expression exp4X, String exp) {
         synchronized (data) {
-            final boolean hasx  = exp.replace ("fx", "").contains("x");
-            final boolean hasfx = exp.contains("fx");
+            
+            final boolean hasx  = exp4X.containsVariable("x");
+            final boolean hasfx = exp4X.containsVariable("fx");
             for (final Row e : data) {
                 if (hasx)  exp4X.setVariable("x",  e.second);
                 if (hasfx) exp4X.setVariable("fx", e.third);
@@ -259,8 +260,8 @@ public class DatasetTableModel extends AbstractTableModel {
 
     public void applyToFX(Expression exp4FX, String exp) {
         synchronized (data) {
-            final boolean hasx  = exp.replace("fx", "").contains("x");
-            final boolean hasfx = exp.contains("fx");
+            final boolean hasx  = exp4FX.containsVariable("x");
+            final boolean hasfx = exp4FX.containsVariable("fx");
             for (final Row e : data) {
                 if (hasx)  exp4FX.setVariable("x",  e.second);
                 if (hasfx) exp4FX.setVariable("fx", e.third);
@@ -274,10 +275,10 @@ public class DatasetTableModel extends AbstractTableModel {
         synchronized (data) {
             //This is necesarry because the current version of exp4j fails when setting an
             //inexistent variable
-            final boolean xhasx  = expX .replace ("fx", "").contains("x");
-            final boolean xhasfx = expX .contains("fx");
-            final boolean fhasx  = expFX.replace ("fx", "").contains("x");
-            final boolean fhasfx = expFX.contains("fx");
+            final boolean xhasx  = exp4X .containsVariable("x");
+            final boolean xhasfx = exp4X .containsVariable("fx");
+            final boolean fhasx  = exp4FX.containsVariable("x");
+            final boolean fhasfx = exp4FX.containsVariable("fx");
             
             for (final Row e : data) {
                 final double x  = e.second;

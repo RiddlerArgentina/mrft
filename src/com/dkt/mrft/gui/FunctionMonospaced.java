@@ -269,7 +269,7 @@ public final class FunctionMonospaced extends JDialog {
             exp.functions(FunctionsMisc.getFunctions());
             exp.functions(FunctionsBoolean.getFunctions());
             exp.functions(FunctionsRandom.getFunctions());
-            exp.operator (OperatorsComparison.getOperators());
+            exp.operators(OperatorsComparison.getOperators());
             
             Expression e = exp.build().setVariable("x", 1);
             ValidationResult vr = e.validate();
@@ -307,7 +307,7 @@ public final class FunctionMonospaced extends JDialog {
             exp.functions(FunctionsBoolean.getFunctions());
             exp.functions(FunctionsMisc.getFunctions());
             exp.functions(FunctionsRandom.getFunctions());
-            exp.operator (OperatorsComparison.getOperators());
+            exp.operators(OperatorsComparison.getOperators());
             Expression f = exp.build(true);
             
             for (double x = start; x <= end; x += step) {

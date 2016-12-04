@@ -205,19 +205,14 @@ public final class CustomFunction extends javax.swing.JDialog {
         
         try {
             ExpressionBuilder exp = new ExpressionBuilder(expString);
-            HashMap<String, Double> map = new HashMap<>(2);
-            //@TODO Remove this dirty hack with the next exp4j version
-            if (expString.replace("fx", "").contains("x" )) map.put("x", 1d);
-            if (expString.contains("fx"))map.put("fx", 1d);
-            
-            exp.variables(map.keySet());            
+            exp.variables("x", "fx");
             exp.functions(FunctionsMisc.getFunctions());
             exp.functions(FunctionsBoolean.getFunctions());
             exp.functions(FunctionsRandom.getFunctions());
-            exp.operator (OperatorsComparison.getOperators());
+            exp.operators(OperatorsComparison.getOperators());
             
-            Expression e = exp.build().setVariables(map);
-            ValidationResult vr = e.validate();
+            Expression e = exp.build(true);
+            ValidationResult vr = e.validate(false);
             
             if (vr.isValid()) {
                 label.setIcon(a_ok);
@@ -227,7 +222,6 @@ public final class CustomFunction extends javax.swing.JDialog {
                 label.setIcon(warn);
                 return false;
             }
-            
         } catch (Exception ex) {
             label.setToolTipText(ex.getMessage());
             label.setIcon(warn);
@@ -251,14 +245,11 @@ public final class CustomFunction extends javax.swing.JDialog {
         
         String expString = expXTextField.getText();
         ExpressionBuilder exp = new ExpressionBuilder(expString);
-        //@TODO Remove this dirty hack with the next exp4j version
-        if (expString.replace("fx", "").contains("x" ))exp.variable("x" );
-        if (expString.contains("fx"))exp.variable("fx");
-        
+        exp.variables("x", "fx");
         exp.functions(FunctionsMisc.getFunctions());
         exp.functions(FunctionsBoolean.getFunctions());
         exp.functions(FunctionsRandom.getFunctions());
-        exp.operator (OperatorsComparison.getOperators());
+        exp.operators(OperatorsComparison.getOperators());
         
         return exp.build(true);
     }
@@ -268,14 +259,11 @@ public final class CustomFunction extends javax.swing.JDialog {
         
         String expString = expFXTextField.getText();
         ExpressionBuilder exp = new ExpressionBuilder(expString);
-        //@TODO Remove this dirty hack with the next exp4j version
-        if (expString.replace("fx", "").contains("x" ))exp.variable("x" );
-        if (expString.contains("fx"))exp.variable("fx");
-        
+        exp.variables("x", "fx");
         exp.functions(FunctionsMisc.getFunctions());
         exp.functions(FunctionsBoolean.getFunctions());
         exp.functions(FunctionsRandom.getFunctions());
-        exp.operator (OperatorsComparison.getOperators());
+        exp.operators(OperatorsComparison.getOperators());
         
         return exp.build(true);
     }

@@ -298,11 +298,12 @@ public final class FunctionGaussianRand extends JDialog {
             return false;
         }
         
-        double start = ((Number)startField.getValue()).doubleValue();
-        double end   = ((Number)endField.getValue()).doubleValue();
-        int    nval  = ((Number)pointsField.getValue()).intValue();
-        double mean  = ((Number)averageField.getValue()).doubleValue();
-        double var   = ((Number)varianceField.getValue()).doubleValue();
+        final double start = ((Number)startField.getValue()).doubleValue();
+        final double end   = ((Number)endField.getValue()).doubleValue();
+        final int    nval  = ((Number)pointsField.getValue()).intValue();
+        final double mean  = ((Number)averageField.getValue()).doubleValue();
+        final double var   = ((Number)varianceField.getValue()).doubleValue();
+        
         boolean status = start < end && nval > 0;   
         status = status && mean >= start && mean <= end;
         status = status && var > 0;
@@ -329,9 +330,10 @@ public final class FunctionGaussianRand extends JDialog {
             exp.functions(FunctionsMisc.getFunctions());
             exp.functions(FunctionsBoolean.getFunctions());
             exp.functions(FunctionsRandom.getFunctions());
-            exp.operator (OperatorsComparison.getOperators());
-            Expression e = exp.build().setVariable("x", 1);
-            ValidationResult vr = e.validate();
+            exp.operators(OperatorsComparison.getOperators());
+            Expression e = exp.build(true);
+            ValidationResult vr = e.validate(false);
+            
             if (vr.isValid()) {
                 validExpLabel.setIcon(a_ok);
                 validExpLabel.setToolTipText("");
@@ -353,12 +355,12 @@ public final class FunctionGaussianRand extends JDialog {
             return new ArrayList<>(0);
         }
         
-        double start = ((Number)startField.getValue()).doubleValue();
-        double end   = ((Number)endField.getValue()).doubleValue();
-        int    nval  = ((Number)pointsField.getValue()).intValue();
-        long   seed  = ((Number)seedField.getValue()).longValue();
-        double mean  = ((Number)averageField.getValue()).doubleValue();
-        double var   = ((Number)varianceField.getValue()).doubleValue();
+        final double start = ((Number)startField.getValue()).doubleValue();
+        final double end   = ((Number)endField.getValue()).doubleValue();
+        final int    nval  = ((Number)pointsField.getValue()).intValue();
+        final long   seed  = ((Number)seedField.getValue()).longValue();
+        final double mean  = ((Number)averageField.getValue()).doubleValue();
+        final double var   = ((Number)varianceField.getValue()).doubleValue();
         
         ArrayList<DatasetTableModel.Row> ret = new ArrayList<>(nval);
         
@@ -368,7 +370,7 @@ public final class FunctionGaussianRand extends JDialog {
             exp.functions(FunctionsBoolean.getFunctions());
             exp.functions(FunctionsMisc.getFunctions());
             exp.functions(FunctionsRandom.getFunctions());
-            exp.operator (OperatorsComparison.getOperators());
+            exp.operators(OperatorsComparison.getOperators());
             Expression f = exp.build(true);
             Random rand  = new Random(seed);
             for (int i = 0; i < nval; i++) {

@@ -286,9 +286,10 @@ public final class FunctionMonospacedRand extends JDialog {
             exp.functions(FunctionsMisc.getFunctions());
             exp.functions(FunctionsBoolean.getFunctions());
             exp.functions(FunctionsRandom.getFunctions());
-            exp.operator (OperatorsComparison.getOperators());
+            exp.operators(OperatorsComparison.getOperators());
             Expression e = exp.build().setVariable("x", 1);
             ValidationResult vr = e.validate();
+            
             if (vr.isValid()) {
                 validExpLabel.setIcon(a_ok);
                 validExpLabel.setToolTipText("");
@@ -323,7 +324,7 @@ public final class FunctionMonospacedRand extends JDialog {
             exp.functions(FunctionsBoolean.getFunctions());
             exp.functions(FunctionsMisc.getFunctions());
             exp.functions(FunctionsRandom.getFunctions());
-            exp.operator (OperatorsComparison.getOperators());
+            exp.operators(OperatorsComparison.getOperators());
             Expression f = exp.build(true);
             Random rand  = new Random(seed);
             for (int i = 0; i < nval; i++) {
