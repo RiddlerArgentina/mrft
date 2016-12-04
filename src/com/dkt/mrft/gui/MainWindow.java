@@ -64,12 +64,15 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
@@ -183,9 +186,6 @@ public final class MainWindow extends javax.swing.JFrame {
     private static final int ERR_X_OFFSET = 15;
     private static final int ERR_Y_OFFSET = 15;
     
-    /**
-     * Creates new form MainWindow
-     */
     public MainWindow() {
         initComponents();
         info("Program Started - %s", new Date());
@@ -201,13 +201,57 @@ public final class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        FormListener formListener = new FormListener();
+        final JLabel jLabel6 = new JLabel();
+        final JLabel jLabel7 = new JLabel();
+        final JLabel jLabel1 = new JLabel();
+        final JLabel jLabel18 = new JLabel();
+        final JLabel jLabel8 = new JLabel();
+        final JLabel jLabel9 = new JLabel();
+        final JLabel jLabel10 = new JLabel();
+        final JLabel jLabel11 = new JLabel();
+        final JLabel jLabel12 = new JLabel();
+        final JButton jButton11 = new JButton();
+        final JButton jButton12 = new JButton();
+        final JButton jButton13 = new JButton();
+        final JMenu jMenu1 = new JMenu();
+        final JMenuItem jMenuItem37 = new JMenuItem();
+        final JPopupMenu.Separator jSeparator2 = new JPopupMenu.Separator();
+        final JMenuItem jMenuItem5 = new JMenuItem();
+        final JMenu jMenu9 = new JMenu();
+        final JMenuItem jMenuItem33 = new JMenuItem();
+        final JMenuItem jMenuItem34 = new JMenuItem();
+        final JMenuItem jMenuItem35 = new JMenuItem();
+        final JMenuItem jMenuItem36 = new JMenuItem();
+        final JMenu jMenu3 = new JMenu();
+        final JMenuItem jMenuItem6 = new JMenuItem();
+        final JMenuItem jMenuItem7 = new JMenuItem();
+        final JMenuItem jMenuItem8 = new JMenuItem();
+        final JMenu jMenu6 = new JMenu();
+        final JMenuItem jMenuItem2 = new JMenuItem();
+        final JMenuItem jMenuItem14 = new JMenuItem();
+        final JMenuItem jMenuItem10 = new JMenuItem();
+        final JMenuItem jMenuItem11 = new JMenuItem();
+        final JMenu jMenu4 = new JMenu();
+        final JMenuItem jMenuItem4 = new JMenuItem();
+        final JMenuItem jMenuItem12 = new JMenuItem();
+        final JMenuItem jMenuItem26 = new JMenuItem();
+        final JMenu jMenu8 = new JMenu();
+        final JMenu jMenu10 = new JMenu();
+        final JMenuItem jMenuItem29 = new JMenuItem();
 
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("MLP Real Function Trainer - v1.0");
-        addWindowListener(formListener);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
-        jTabbedPane1.addFocusListener(formListener);
+        jTabbedPane1.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                jTabbedPane1FocusGained(evt);
+            }
+        });
 
         jTable2.setAutoCreateRowSorter(true);
         jTable2.setModel(new DefaultTableModel(
@@ -284,16 +328,28 @@ public final class MainWindow extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText(bundle.getString("TBL_SEL_TRAIN")); // NOI18N
-        jRadioButton1.addActionListener(formListener);
+        jRadioButton1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText(bundle.getString("TBL_SEL_VALID")); // NOI18N
         jRadioButton2.setActionCommand(bundle.getString("TBL_SEL_VALID")); // NOI18N
-        jRadioButton2.addActionListener(formListener);
+        jRadioButton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText(bundle.getString("TBL_SEL_GENER")); // NOI18N
-        jRadioButton3.addActionListener(formListener);
+        jRadioButton3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
 
         jPanel5.setBorder(BorderFactory.createTitledBorder(bundle.getString("PNL_SEL"))); // NOI18N
 
@@ -302,13 +358,25 @@ public final class MainWindow extends javax.swing.JFrame {
         jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Training"), i18n.__("Validation"), i18n.__("Generalization") }));
 
         jButton1.setText(bundle.getString("PNL_SEL_ALL")); // NOI18N
-        jButton1.addActionListener(formListener);
+        jButton1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText(bundle.getString("PNL_SEL_NONE")); // NOI18N
-        jButton2.addActionListener(formListener);
+        jButton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText(bundle.getString("PNL_SEL_TOGGLE")); // NOI18N
-        jButton3.addActionListener(formListener);
+        jButton3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jSeparator4.setOrientation(SwingConstants.VERTICAL);
 
@@ -316,13 +384,21 @@ public final class MainWindow extends javax.swing.JFrame {
         jFormattedTextField1.setText("10%");
 
         jButton4.setText(bundle.getString("PNL_SEL_SELECT")); // NOI18N
-        jButton4.addActionListener(formListener);
+        jButton4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jFormattedTextField2.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(NumberFormat.getIntegerInstance())));
         jFormattedTextField2.setText("50");
 
         jButton5.setText(bundle.getString("PNL_SEL_SELECT")); // NOI18N
-        jButton5.addActionListener(formListener);
+        jButton5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jCheckBox1.setSelected(true);
         jCheckBox1.setText(bundle.getString("PNL_SEL_RAND")); // NOI18N
@@ -332,10 +408,18 @@ public final class MainWindow extends javax.swing.JFrame {
         jSeparator5.setOrientation(SwingConstants.VERTICAL);
 
         jButton6.setText(bundle.getString("PNL_SEL_MOVE")); // NOI18N
-        jButton6.addActionListener(formListener);
+        jButton6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText(bundle.getString("PNL_SEL_COPY")); // NOI18N
-        jButton8.addActionListener(formListener);
+        jButton8.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         GroupLayout jPanel5Layout = new GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -489,7 +573,11 @@ public final class MainWindow extends javax.swing.JFrame {
         jLabel6.setText(bundle.getString("TOPO_HIDDEN_NUMBER")); // NOI18N
 
         jSpinner1.setModel(new SpinnerNumberModel(1, 1, 10, 1));
-        jSpinner1.addChangeListener(formListener);
+        jSpinner1.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent evt) {
+                jSpinner1StateChanged(evt);
+            }
+        });
 
         jLabel7.setText(bundle.getString("TOPO_BACKPROP")); // NOI18N
 
@@ -608,7 +696,11 @@ public final class MainWindow extends javax.swing.JFrame {
         jTextField1.setText("/dev/shm/FinalIA");
 
         jButton7.setIcon(new ImageIcon(getClass().getResource("/res/icons/find.png"))); // NOI18N
-        jButton7.addActionListener(formListener);
+        jButton7.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText(bundle.getString("TOPO_WEIGHTS_NAME")); // NOI18N
 
@@ -669,38 +761,78 @@ public final class MainWindow extends javax.swing.JFrame {
 
         jTabbedPane1.addTab(bundle.getString("PNL_TOPOLOGY"), jPanel2); // NOI18N
 
-        jPanel3.addComponentListener(formListener);
+        jPanel3.addComponentListener(new ComponentAdapter() {
+            public void componentShown(ComponentEvent evt) {
+                jPanel3ComponentShown(evt);
+            }
+        });
 
         jPanel8.setBorder(BorderFactory.createTitledBorder(bundle.getString("PLOT_FORMAT"))); // NOI18N
 
         jComboBox7.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
-        jComboBox7.addActionListener(formListener);
+        jComboBox7.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jComboBox7ActionPerformed(evt);
+            }
+        });
 
         jCheckBox2.setText(bundle.getString("PLOT_OPT_TRAIN")); // NOI18N
-        jCheckBox2.addActionListener(formListener);
+        jCheckBox2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
 
         jCheckBox3.setText(bundle.getString("PLOT_OPT_VALID")); // NOI18N
-        jCheckBox3.addActionListener(formListener);
+        jCheckBox3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBox3ActionPerformed(evt);
+            }
+        });
 
         jCheckBox4.setSelected(true);
         jCheckBox4.setText(bundle.getString("PLOT_OPT_GENER")); // NOI18N
         jCheckBox4.setEnabled(false);
-        jCheckBox4.addActionListener(formListener);
+        jCheckBox4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBox4ActionPerformed(evt);
+            }
+        });
 
         jComboBox8.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
-        jComboBox8.addActionListener(formListener);
+        jComboBox8.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jComboBox8ActionPerformed(evt);
+            }
+        });
 
         jComboBox9.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
-        jComboBox9.addActionListener(formListener);
+        jComboBox9.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jComboBox9ActionPerformed(evt);
+            }
+        });
 
         jButton11.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
-        jButton11.addActionListener(formListener);
+        jButton11.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jButton12.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
-        jButton12.addActionListener(formListener);
+        jButton12.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         jButton13.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
-        jButton13.addActionListener(formListener);
+        jButton13.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jSeparator3.setOrientation(SwingConstants.VERTICAL);
 
@@ -708,19 +840,35 @@ public final class MainWindow extends javax.swing.JFrame {
 
         jCheckBox5.setSelected(true);
         jCheckBox5.setText(bundle.getString("PLOT_SMOOTH")); // NOI18N
-        jCheckBox5.addActionListener(formListener);
+        jCheckBox5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBox5ActionPerformed(evt);
+            }
+        });
 
         jButton14.setIcon(new ImageIcon(getClass().getResource("/res/icons/play.png"))); // NOI18N
         jButton14.setEnabled(false);
-        jButton14.addActionListener(formListener);
+        jButton14.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jButton16.setIcon(new ImageIcon(getClass().getResource("/res/icons/stop.png"))); // NOI18N
         jButton16.setEnabled(false);
-        jButton16.addActionListener(formListener);
+        jButton16.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         jCheckBox6.setSelected(true);
         jCheckBox6.setText(bundle.getString("PLOT_SHOW_LABELS")); // NOI18N
-        jCheckBox6.addActionListener(formListener);
+        jCheckBox6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBox6ActionPerformed(evt);
+            }
+        });
 
         GroupLayout jPanel8Layout = new GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -901,14 +1049,22 @@ public final class MainWindow extends javax.swing.JFrame {
         jMenuItem37.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
         jMenuItem37.setMnemonic('c');
         jMenuItem37.setText(bundle1.getString("FILE_LOAD_CONF")); // NOI18N
-        jMenuItem37.addActionListener(formListener);
+        jMenuItem37.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem37ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem37);
         jMenu1.add(jSeparator2);
 
         jMenuItem5.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
         jMenuItem5.setMnemonic('s');
         jMenuItem5.setText(bundle1.getString("FILE_QUIT")); // NOI18N
-        jMenuItem5.addActionListener(formListener);
+        jMenuItem5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
@@ -919,25 +1075,41 @@ public final class MainWindow extends javax.swing.JFrame {
         jMenuItem33.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_MASK));
         jMenuItem33.setMnemonic('d');
         jMenuItem33.setText(bundle1.getString("VIEW_PANEL_DATA")); // NOI18N
-        jMenuItem33.addActionListener(formListener);
+        jMenuItem33.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem33ActionPerformed(evt);
+            }
+        });
         jMenu9.add(jMenuItem33);
 
         jMenuItem34.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK));
         jMenuItem34.setMnemonic('t');
         jMenuItem34.setText(bundle1.getString("VIEW_PANEL_TOPOLOGY")); // NOI18N
-        jMenuItem34.addActionListener(formListener);
+        jMenuItem34.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem34ActionPerformed(evt);
+            }
+        });
         jMenu9.add(jMenuItem34);
 
         jMenuItem35.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_MASK));
         jMenuItem35.setMnemonic('f');
         jMenuItem35.setText(bundle1.getString("VIEW_PANEL_ERROR_PLOT")); // NOI18N
-        jMenuItem35.addActionListener(formListener);
+        jMenuItem35.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem35ActionPerformed(evt);
+            }
+        });
         jMenu9.add(jMenuItem35);
 
         jMenuItem36.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_MASK));
         jMenuItem36.setMnemonic('i');
         jMenuItem36.setText(bundle1.getString("VIEW_PANEL_OUTPUT")); // NOI18N
-        jMenuItem36.addActionListener(formListener);
+        jMenuItem36.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem36ActionPerformed(evt);
+            }
+        });
         jMenu9.add(jMenuItem36);
 
         jMenuBar1.add(jMenu9);
@@ -949,17 +1121,29 @@ public final class MainWindow extends javax.swing.JFrame {
 
         jMenuItem6.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
         jMenuItem6.setText(bundle1.getString("DATA_FILL_MONO")); // NOI18N
-        jMenuItem6.addActionListener(formListener);
+        jMenuItem6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem6);
 
         jMenuItem7.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
         jMenuItem7.setText(bundle1.getString("DATA_FILL_RAND")); // NOI18N
-        jMenuItem7.addActionListener(formListener);
+        jMenuItem7.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
 
         jMenuItem8.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
         jMenuItem8.setText(bundle1.getString("DATA_FILL_RAND_GAUSS")); // NOI18N
-        jMenuItem8.addActionListener(formListener);
+        jMenuItem8.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem8);
 
         jMenu2.add(jMenu3);
@@ -968,41 +1152,73 @@ public final class MainWindow extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
         jMenuItem2.setText(bundle1.getString("DATA_TRANSFORM_AUTO_ALL")); // NOI18N
-        jMenuItem2.addActionListener(formListener);
+        jMenuItem2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem2);
 
         jMenuItem14.setText(bundle1.getString("DATA_TRANSFORM_CUST_ALL")); // NOI18N
-        jMenuItem14.addActionListener(formListener);
+        jMenuItem14.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem14);
 
         jMenuItem25.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
         jMenuItem25.setText(bundle1.getString("DATA_TRANSFORM_AUTO_SEL")); // NOI18N
-        jMenuItem25.addActionListener(formListener);
+        jMenuItem25.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem25ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem25);
 
         jMenuItem24.setText(bundle1.getString("DATA_TRANSFORM_CUST_SEL")); // NOI18N
-        jMenuItem24.addActionListener(formListener);
+        jMenuItem24.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem24ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem24);
 
         jMenu2.add(jMenu6);
 
         jMenuItem10.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, 0));
         jMenuItem10.setText(bundle1.getString("DATA_ADD_ROW")); // NOI18N
-        jMenuItem10.addActionListener(formListener);
+        jMenuItem10.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem10);
 
         jMenuItem11.setText(bundle1.getString("DATA_REMOVE_SELECTED")); // NOI18N
-        jMenuItem11.addActionListener(formListener);
+        jMenuItem11.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem11);
 
         jMenuItem9.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_MASK));
         jMenuItem9.setText(bundle1.getString("DATA_CLEAR_SELECTED_DATASET")); // NOI18N
-        jMenuItem9.addActionListener(formListener);
+        jMenuItem9.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem9);
 
         jMenuItem1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
         jMenuItem1.setText(bundle1.getString("DATA_CLEAR_ALL")); // NOI18N
-        jMenuItem1.addActionListener(formListener);
+        jMenuItem1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem1);
 
         jMenuBar1.add(jMenu2);
@@ -1013,19 +1229,31 @@ public final class MainWindow extends javax.swing.JFrame {
         jMenuItem15.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
         jMenuItem15.setText(bundle1.getString("TRAIN_NOW")); // NOI18N
         jMenuItem15.setEnabled(false);
-        jMenuItem15.addActionListener(formListener);
+        jMenuItem15.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem15);
 
         jMenuItem27.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
         jMenuItem27.setText(bundle1.getString("TRAIN_PAUSE")); // NOI18N
         jMenuItem27.setEnabled(false);
-        jMenuItem27.addActionListener(formListener);
+        jMenuItem27.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem27ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem27);
 
         jMenuItem3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
         jMenuItem3.setText(bundle1.getString("TRAIN_STOP")); // NOI18N
         jMenuItem3.setEnabled(false);
-        jMenuItem3.addActionListener(formListener);
+        jMenuItem3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem3);
 
         jMenuBar1.add(jMenu5);
@@ -1034,15 +1262,27 @@ public final class MainWindow extends javax.swing.JFrame {
         jMenu4.setText(bundle1.getString("PLOTS")); // NOI18N
 
         jMenuItem4.setText(bundle1.getString("PLOTS_SAVE_IMG")); // NOI18N
-        jMenuItem4.addActionListener(formListener);
+        jMenuItem4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem4);
 
         jMenuItem12.setText(bundle1.getString("PLOTS_SAVE_ERRORS")); // NOI18N
-        jMenuItem12.addActionListener(formListener);
+        jMenuItem12.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem12);
 
         jMenuItem26.setText(bundle1.getString("PLOTS_SAVE_GIF")); // NOI18N
-        jMenuItem26.addActionListener(formListener);
+        jMenuItem26.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem26ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem26);
 
         jMenuBar1.add(jMenu4);
@@ -1053,52 +1293,100 @@ public final class MainWindow extends javax.swing.JFrame {
         jMenuItem32.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
         jMenuItem32.setText(bundle1.getString("EXAMPLES_RELOAD")); // NOI18N
         jMenuItem32.setEnabled(false);
-        jMenuItem32.addActionListener(formListener);
+        jMenuItem32.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem32ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem32);
         jMenu7.add(jSeparator1);
 
         jMenuItem13.setText(bundle1.getString("EXAMPLES_SIN")); // NOI18N
-        jMenuItem13.addActionListener(formListener);
+        jMenuItem13.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem13);
 
         jMenuItem16.setText(bundle1.getString("EXAMPLES_COS")); // NOI18N
-        jMenuItem16.addActionListener(formListener);
+        jMenuItem16.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem16);
 
         jMenuItem23.setText(bundle1.getString("EXAMPLES_SINC")); // NOI18N
-        jMenuItem23.addActionListener(formListener);
+        jMenuItem23.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem23ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem23);
 
         jMenuItem17.setText(bundle1.getString("EXAMPLES_JUMPY")); // NOI18N
-        jMenuItem17.addActionListener(formListener);
+        jMenuItem17.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem17);
 
         jMenuItem30.setText(bundle1.getString("EXAMPLES_VERY_JUMPY")); // NOI18N
-        jMenuItem30.addActionListener(formListener);
+        jMenuItem30.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem30ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem30);
 
         jMenuItem18.setText(bundle1.getString("EXAMPLES_TRIANGLE")); // NOI18N
-        jMenuItem18.addActionListener(formListener);
+        jMenuItem18.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem18);
 
         jMenuItem19.setText(bundle1.getString("EXAMPLES_SQARE")); // NOI18N
-        jMenuItem19.addActionListener(formListener);
+        jMenuItem19.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem19);
 
         jMenuItem21.setText(bundle1.getString("EXAMPLES_DUNNO")); // NOI18N
-        jMenuItem21.addActionListener(formListener);
+        jMenuItem21.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem21);
 
         jMenuItem22.setText(bundle1.getString("EXAMPLES_BATMAN")); // NOI18N
-        jMenuItem22.addActionListener(formListener);
+        jMenuItem22.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem22);
 
         jMenuItem28.setText(bundle1.getString("EXAMPLES_EKG_SYNTH")); // NOI18N
-        jMenuItem28.addActionListener(formListener);
+        jMenuItem28.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem28ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem28);
 
         jMenuItem20.setText(bundle1.getString("EXAMPLES_EKG_REAL")); // NOI18N
-        jMenuItem20.addActionListener(formListener);
+        jMenuItem20.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem20);
 
         jMenuBar1.add(jMenu7);
@@ -1109,27 +1397,47 @@ public final class MainWindow extends javax.swing.JFrame {
         jMenu10.setText(bundle1.getString("DEBUG")); // NOI18N
 
         jCheckBoxMenuItem3.setText(bundle1.getString("DEBUG_SHOW")); // NOI18N
-        jCheckBoxMenuItem3.addActionListener(formListener);
+        jCheckBoxMenuItem3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBoxMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu10.add(jCheckBoxMenuItem3);
 
         jCheckBoxMenuItem4.setSelected(true);
         jCheckBoxMenuItem4.setText(bundle1.getString("DEBUG_STD_OUT")); // NOI18N
-        jCheckBoxMenuItem4.addActionListener(formListener);
+        jCheckBoxMenuItem4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBoxMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu10.add(jCheckBoxMenuItem4);
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText(bundle1.getString("DEBUG_AA")); // NOI18N
-        jCheckBoxMenuItem1.addActionListener(formListener);
+        jCheckBoxMenuItem1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu10.add(jCheckBoxMenuItem1);
 
         jCheckBoxMenuItem2.setText(bundle1.getString("DEBUG_FPS")); // NOI18N
-        jCheckBoxMenuItem2.addActionListener(formListener);
+        jCheckBoxMenuItem2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jCheckBoxMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu10.add(jCheckBoxMenuItem2);
 
         jMenu8.add(jMenu10);
 
         jMenuItem29.setText(bundle1.getString("ABOUT")); // NOI18N
-        jMenuItem29.addActionListener(formListener);
+        jMenuItem29.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jMenuItem29ActionPerformed(evt);
+            }
+        });
         jMenu8.add(jMenuItem29);
 
         jMenuBar1.add(jMenu8);
@@ -1146,260 +1454,6 @@ public final class MainWindow extends javax.swing.JFrame {
         );
 
         pack();
-    }
-
-    // Code for dispatching events from components to event handlers.
-
-    private class FormListener implements ActionListener, ComponentListener, FocusListener, WindowListener, ChangeListener {
-        FormListener() {}
-        public void actionPerformed(ActionEvent evt) {
-            if (evt.getSource() == jRadioButton1) {
-                MainWindow.this.jRadioButton1ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jRadioButton2) {
-                MainWindow.this.jRadioButton2ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jRadioButton3) {
-                MainWindow.this.jRadioButton3ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton1) {
-                MainWindow.this.jButton1ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton2) {
-                MainWindow.this.jButton2ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton3) {
-                MainWindow.this.jButton3ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton4) {
-                MainWindow.this.jButton4ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton5) {
-                MainWindow.this.jButton5ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton6) {
-                MainWindow.this.jButton6ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton8) {
-                MainWindow.this.jButton8ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton7) {
-                MainWindow.this.jButton7ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jComboBox7) {
-                MainWindow.this.jComboBox7ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jCheckBox2) {
-                MainWindow.this.jCheckBox2ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jCheckBox3) {
-                MainWindow.this.jCheckBox3ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jCheckBox4) {
-                MainWindow.this.jCheckBox4ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jComboBox8) {
-                MainWindow.this.jComboBox8ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jComboBox9) {
-                MainWindow.this.jComboBox9ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton11) {
-                MainWindow.this.jButton11ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton12) {
-                MainWindow.this.jButton12ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton13) {
-                MainWindow.this.jButton13ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jCheckBox5) {
-                MainWindow.this.jCheckBox5ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton14) {
-                MainWindow.this.jButton14ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton16) {
-                MainWindow.this.jButton16ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jCheckBox6) {
-                MainWindow.this.jCheckBox6ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem37) {
-                MainWindow.this.jMenuItem37ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem5) {
-                MainWindow.this.jMenuItem5ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem33) {
-                MainWindow.this.jMenuItem33ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem34) {
-                MainWindow.this.jMenuItem34ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem35) {
-                MainWindow.this.jMenuItem35ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem36) {
-                MainWindow.this.jMenuItem36ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem6) {
-                MainWindow.this.jMenuItem6ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem7) {
-                MainWindow.this.jMenuItem7ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem8) {
-                MainWindow.this.jMenuItem8ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem2) {
-                MainWindow.this.jMenuItem2ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem14) {
-                MainWindow.this.jMenuItem14ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem25) {
-                MainWindow.this.jMenuItem25ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem24) {
-                MainWindow.this.jMenuItem24ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem10) {
-                MainWindow.this.jMenuItem10ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem11) {
-                MainWindow.this.jMenuItem11ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem9) {
-                MainWindow.this.jMenuItem9ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem1) {
-                MainWindow.this.jMenuItem1ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem15) {
-                MainWindow.this.jMenuItem15ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem27) {
-                MainWindow.this.jMenuItem27ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem3) {
-                MainWindow.this.jMenuItem3ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem4) {
-                MainWindow.this.jMenuItem4ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem12) {
-                MainWindow.this.jMenuItem12ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem26) {
-                MainWindow.this.jMenuItem26ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem32) {
-                MainWindow.this.jMenuItem32ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem13) {
-                MainWindow.this.jMenuItem13ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem16) {
-                MainWindow.this.jMenuItem16ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem23) {
-                MainWindow.this.jMenuItem23ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem17) {
-                MainWindow.this.jMenuItem17ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem30) {
-                MainWindow.this.jMenuItem30ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem18) {
-                MainWindow.this.jMenuItem18ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem19) {
-                MainWindow.this.jMenuItem19ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem21) {
-                MainWindow.this.jMenuItem21ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem22) {
-                MainWindow.this.jMenuItem22ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem28) {
-                MainWindow.this.jMenuItem28ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem20) {
-                MainWindow.this.jMenuItem20ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jCheckBoxMenuItem3) {
-                MainWindow.this.jCheckBoxMenuItem3ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jCheckBoxMenuItem4) {
-                MainWindow.this.jCheckBoxMenuItem4ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jCheckBoxMenuItem1) {
-                MainWindow.this.jCheckBoxMenuItem1ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jCheckBoxMenuItem2) {
-                MainWindow.this.jCheckBoxMenuItem2ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jMenuItem29) {
-                MainWindow.this.jMenuItem29ActionPerformed(evt);
-            }
-        }
-
-        public void componentHidden(ComponentEvent evt) {
-        }
-
-        public void componentMoved(ComponentEvent evt) {
-        }
-
-        public void componentResized(ComponentEvent evt) {
-        }
-
-        public void componentShown(ComponentEvent evt) {
-            if (evt.getSource() == jPanel3) {
-                MainWindow.this.jPanel3ComponentShown(evt);
-            }
-        }
-
-        public void focusGained(FocusEvent evt) {
-            if (evt.getSource() == jTabbedPane1) {
-                MainWindow.this.jTabbedPane1FocusGained(evt);
-            }
-        }
-
-        public void focusLost(FocusEvent evt) {
-        }
-
-        public void windowActivated(WindowEvent evt) {
-        }
-
-        public void windowClosed(WindowEvent evt) {
-        }
-
-        public void windowClosing(WindowEvent evt) {
-            if (evt.getSource() == MainWindow.this) {
-                MainWindow.this.formWindowClosing(evt);
-            }
-        }
-
-        public void windowDeactivated(WindowEvent evt) {
-        }
-
-        public void windowDeiconified(WindowEvent evt) {
-        }
-
-        public void windowIconified(WindowEvent evt) {
-        }
-
-        public void windowOpened(WindowEvent evt) {
-        }
-
-        public void stateChanged(ChangeEvent evt) {
-            if (evt.getSource() == jSpinner1) {
-                MainWindow.this.jSpinner1StateChanged(evt);
-            }
-        }
     }// </editor-fold>//GEN-END:initComponents
     
     private FunctionMonospaced dialogMonospaced;
@@ -1427,7 +1481,7 @@ public final class MainWindow extends javax.swing.JFrame {
         train     .selectEnabled(model == train);
         validate  .selectEnabled(model == validate);
         generalize.selectEnabled(model == generalize);
-        jMenuItem9.setText(i18n.__("Clear Selected Dataset (%s)", selected.getName()));
+        jMenuItem9 .setText(i18n.__("Clear Selected Dataset (%s)", selected.getName()));
         jMenuItem25.setText(MSTR.__("DATA_TRANSFORM_AUTO_SEL", selected.getName()));
         jMenuItem24.setText(MSTR.__("DATA_TRANSFORM_CUST_SEL", selected.getName()));
     }
@@ -1598,7 +1652,7 @@ public final class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jSpinner1StateChanged
     private CustomFunction dialogCustomFunc;
     private void jMenuItem14ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        if (dialogCustomFunc == null) dialogCustomFunc = new CustomFunction(MainWindow.this);
+        if (dialogCustomFunc == null) dialogCustomFunc = new CustomFunction();
         dialogCustomFunc.setVisible(true);
         if (dialogCustomFunc.getExp4X() != null) {
             final Expression exp4x  = dialogCustomFunc.getExp4X();
@@ -1863,11 +1917,11 @@ public final class MainWindow extends javax.swing.JFrame {
         maxVal = Math.max(maxVal, generalize.getMax());
         final double scale = 1 / maxVal;
         selected.scale(scale);
-        info("Se escalaron los valores de la tabla '%s' usando s = %f", selected.getName(), scale);
+        info("Table '%s' values scaled using s = %f", selected.getName(), scale);
     }//GEN-LAST:event_jMenuItem25ActionPerformed
 
     private void jMenuItem24ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
-        if (dialogCustomFunc == null) dialogCustomFunc = new CustomFunction(MainWindow.this);
+        if (dialogCustomFunc == null) dialogCustomFunc = new CustomFunction();
         dialogCustomFunc.setVisible(true);
         if (dialogCustomFunc.getExp4X() != null) {
             final Expression exp4x  = dialogCustomFunc.getExp4X();
@@ -1878,8 +1932,9 @@ public final class MainWindow extends javax.swing.JFrame {
             selected.applyToBoth(exp4x, sexp4x, exp4fx, sexp4fx);
             
             final String sname = selected.getName();
-            info("Aplicando '%s' a los valores de '%s' la tabla '%s'", sexp4x, "x", sname);
-            info("Aplicando '%s' a los valores de '%s' la tabla '%s'", sexp4fx, "f(x)", sname);
+            
+            info("Applying '%s' to all the '%s' of table '%s'", sexp4x,  "x", sname);
+            info("Applying '%s' to all the '%s' of table '%s'", sexp4fx, "f(x)", sname);
         }
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
@@ -1923,7 +1978,7 @@ public final class MainWindow extends javax.swing.JFrame {
 
     private void jMenuItem27ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed
         paused = !paused;
-        jMenuItem27.setText(paused ? "Reanudar" : "Pausar");
+        jMenuItem27.setText(paused ? i18n.__("Resume") : i18n.__("Pause"));
         jButton14.setIcon(paused ? play : pause);
     }//GEN-LAST:event_jMenuItem27ActionPerformed
 
@@ -2072,9 +2127,6 @@ public final class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private final ButtonGroup buttonGroup1 = new ButtonGroup();
     private final JButton jButton1 = new JButton();
-    private final JButton jButton11 = new JButton();
-    private final JButton jButton12 = new JButton();
-    private final JButton jButton13 = new JButton();
     private final JButton jButton14 = new JButton();
     private final JButton jButton16 = new JButton();
     private final JButton jButton2 = new JButton();
@@ -2104,65 +2156,32 @@ public final class MainWindow extends javax.swing.JFrame {
     private final JFormattedTextField jFormattedTextField3 = new JFormattedTextField(FORMATTER);
     private final JFormattedTextField jFormattedTextField4 = new JFormattedTextField(FORMATTER);
     private final JFormattedTextField jFormattedTextField5 = new JFormattedTextField(FORMATTER);
-    private final JLabel jLabel1 = new JLabel();
-    private final JLabel jLabel10 = new JLabel();
-    private final JLabel jLabel11 = new JLabel();
-    private final JLabel jLabel12 = new JLabel();
-    private final JLabel jLabel18 = new JLabel();
     private final JLabel jLabel2 = new JLabel();
     private final JLabel jLabel3 = new JLabel();
     private final JLabel jLabel4 = new JLabel();
     private final JLabel jLabel5 = new JLabel();
-    private final JLabel jLabel6 = new JLabel();
-    private final JLabel jLabel7 = new JLabel();
-    private final JLabel jLabel8 = new JLabel();
-    private final JLabel jLabel9 = new JLabel();
-    private final JMenu jMenu1 = new JMenu();
-    private final JMenu jMenu10 = new JMenu();
     private final JMenu jMenu2 = new JMenu();
-    private final JMenu jMenu3 = new JMenu();
-    private final JMenu jMenu4 = new JMenu();
     private final JMenu jMenu5 = new JMenu();
-    private final JMenu jMenu6 = new JMenu();
     private final JMenu jMenu7 = new JMenu();
-    private final JMenu jMenu8 = new JMenu();
-    private final JMenu jMenu9 = new JMenu();
     private final JMenuBar jMenuBar1 = new JMenuBar();
     private final JMenuItem jMenuItem1 = new JMenuItem();
-    private final JMenuItem jMenuItem10 = new JMenuItem();
-    private final JMenuItem jMenuItem11 = new JMenuItem();
-    private final JMenuItem jMenuItem12 = new JMenuItem();
     private final JMenuItem jMenuItem13 = new JMenuItem();
-    private final JMenuItem jMenuItem14 = new JMenuItem();
     private final JMenuItem jMenuItem15 = new JMenuItem();
     private final JMenuItem jMenuItem16 = new JMenuItem();
     private final JMenuItem jMenuItem17 = new JMenuItem();
     private final JMenuItem jMenuItem18 = new JMenuItem();
     private final JMenuItem jMenuItem19 = new JMenuItem();
-    private final JMenuItem jMenuItem2 = new JMenuItem();
     private final JMenuItem jMenuItem20 = new JMenuItem();
     private final JMenuItem jMenuItem21 = new JMenuItem();
     private final JMenuItem jMenuItem22 = new JMenuItem();
     private final JMenuItem jMenuItem23 = new JMenuItem();
     private final JMenuItem jMenuItem24 = new JMenuItem();
     private final JMenuItem jMenuItem25 = new JMenuItem();
-    private final JMenuItem jMenuItem26 = new JMenuItem();
     private final JMenuItem jMenuItem27 = new JMenuItem();
     private final JMenuItem jMenuItem28 = new JMenuItem();
-    private final JMenuItem jMenuItem29 = new JMenuItem();
     private final JMenuItem jMenuItem3 = new JMenuItem();
     private final JMenuItem jMenuItem30 = new JMenuItem();
     private final JMenuItem jMenuItem32 = new JMenuItem();
-    private final JMenuItem jMenuItem33 = new JMenuItem();
-    private final JMenuItem jMenuItem34 = new JMenuItem();
-    private final JMenuItem jMenuItem35 = new JMenuItem();
-    private final JMenuItem jMenuItem36 = new JMenuItem();
-    private final JMenuItem jMenuItem37 = new JMenuItem();
-    private final JMenuItem jMenuItem4 = new JMenuItem();
-    private final JMenuItem jMenuItem5 = new JMenuItem();
-    private final JMenuItem jMenuItem6 = new JMenuItem();
-    private final JMenuItem jMenuItem7 = new JMenuItem();
-    private final JMenuItem jMenuItem8 = new JMenuItem();
     private final JMenuItem jMenuItem9 = new JMenuItem();
     private final JPanel jPanel1 = new JPanel();
     private final JPanel jPanel10 = new JPanel();
@@ -2186,7 +2205,6 @@ public final class MainWindow extends javax.swing.JFrame {
     private final JScrollPane jScrollPane5 = new JScrollPane();
     private final JScrollPane jScrollPane6 = new JScrollPane();
     private final JPopupMenu.Separator jSeparator1 = new JPopupMenu.Separator();
-    private final JPopupMenu.Separator jSeparator2 = new JPopupMenu.Separator();
     private final JSeparator jSeparator3 = new JSeparator();
     private final JSeparator jSeparator4 = new JSeparator();
     private final JSeparator jSeparator5 = new JSeparator();
