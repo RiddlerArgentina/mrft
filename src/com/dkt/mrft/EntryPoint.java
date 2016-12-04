@@ -140,6 +140,13 @@ public class EntryPoint {
                 new MainWindow().setVisible(true);
             }
         });
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(){
+            @Override
+            public void run() {
+                Config.get().save();
+            }
+        });
     }
     
 }

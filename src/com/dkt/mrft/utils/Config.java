@@ -25,9 +25,12 @@ package com.dkt.mrft.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  *  
@@ -52,6 +55,10 @@ public class Config extends CommentedProperties {
     }
 
     private static void loadDefault() {
+        // @FIXME I honestly didn't check it, but if the locale is changed in
+        // '~/.dkt/mrft/conf.properties' and it's different than the system
+        // locale this will not use the appropiate config file, since the 
+        // forced locale is set AFTER the this is read...
         Locale locale = Locale.getDefault();
         String path = null;
         
@@ -79,19 +86,49 @@ public class Config extends CommentedProperties {
             return;
         }
         
-        //Someone could have deleted the file, it's mostly to avoid the exception
         file = new File(PATH + "conf.properties");
+        //Someone could have deleted the file, it's mostly to avoid the exception
         if (!file.exists()) return;
         
-        //@TODO Test what really happens when the config properties differ... (i.e. new property)
+        CommentedProperties props = new CommentedProperties();
         try (InputStream is = new FileInputStream(file)) {
-            INSTANCE.load(is);
+            props.load(is);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        
+        // If systems locale changes we want to update the config file while keeping 
+        // the values
+        for (Map.Entry<Object, Object> entry : INSTANCE.entrySet()) {
+            entry.setValue(props.getOrDefault(entry.getKey(), entry.getValue()));
+        }
     }
     
+    /**
+     * Retrieves the {@code Config} instance
+     * 
+     * @return {@code Config} instance
+     */
     public static Config get() {
         return INSTANCE;
+    }
+
+    /**
+     * Saves the current {@code Config} in {@literal '~/.dkt/mrft/conf.properties'}
+     */
+    public void save() {
+        File file = new File(PATH);
+        
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        
+        file = new File(PATH + "conf.properties");
+        
+        try (OutputStream os = new FileOutputStream(file)) {
+            INSTANCE.store(os, "");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
