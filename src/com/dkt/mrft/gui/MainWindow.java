@@ -132,7 +132,6 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.BadLocationException;
@@ -265,24 +264,6 @@ public final class MainWindow extends javax.swing.JFrame {
         });
 
         trainTable.setAutoCreateRowSorter(true);
-        trainTable.setModel(new DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Selección", "x", "f(x)"
-            }
-        ) {
-            Class[] types = new Class [] {
-                Boolean.class, Double.class, Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
         trainTableScrollPane.setViewportView(trainTable);
 
         trainLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -293,48 +274,12 @@ public final class MainWindow extends javax.swing.JFrame {
         validLabel.setText(bundle.getString("TBL_LBL_VALID")); // NOI18N
 
         validTable.setAutoCreateRowSorter(true);
-        validTable.setModel(new DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Selección", "x", "f(x)"
-            }
-        ) {
-            Class[] types = new Class [] {
-                Boolean.class, Double.class, Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
         validTableScrollPane.setViewportView(validTable);
 
         generLabel.setHorizontalAlignment(SwingConstants.CENTER);
         generLabel.setText(bundle.getString("TBL_LBL_GENER")); // NOI18N
 
         generTable.setAutoCreateRowSorter(true);
-        generTable.setModel(new DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Selección", "x", "f(x)"
-            }
-        ) {
-            Class[] types = new Class [] {
-                Boolean.class, Double.class, Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
         generTableScrollPane.setViewportView(generTable);
 
         buttonGroup1.add(selTrainButton);
@@ -560,25 +505,6 @@ public final class MainWindow extends javax.swing.JFrame {
 
         layersPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("TOPO_LAYERS"))); // NOI18N
 
-        layerTable.setModel(new DefaultTableModel(
-            new Object [][] {
-                {"I",  new Integer(1), "Identidad"},
-                {"1",  new Integer(4), "Sigmoide"},
-                {"2",  new Integer(4), "Gaussiana"},
-                {"O",  new Integer(1), "Identidad"}
-            },
-            new String [] {
-                "# Layer", "Neurons", "Activation"
-            }
-        ) {
-            Class[] types = new Class [] {
-                String.class, Integer.class, String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
         layersScrollPane.setViewportView(layerTable);
 
         layersLabel.setText(bundle.getString("TOPO_HIDDEN_NUMBER")); // NOI18N
@@ -803,7 +729,6 @@ public final class MainWindow extends javax.swing.JFrame {
 
         generPlotCheck.setSelected(true);
         generPlotCheck.setText(bundle.getString("PLOT_OPT_GENER")); // NOI18N
-        generPlotCheck.setEnabled(false);
         generPlotCheck.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 generPlotCheckActionPerformed(evt);
@@ -955,32 +880,6 @@ public final class MainWindow extends javax.swing.JFrame {
 
         horizontalSplit.setDividerLocation(250);
 
-        errorTable.setModel(new DefaultTableModel(
-            new Object [][] {
-                { new Integer(0), null, null},
-                { new Integer(5), null, null},
-                { new Integer(10), null, null},
-                { new Integer(15), null, null}
-            },
-            new String [] {
-                "Época", "E. Entrenamiento", "E. Validación"
-            }
-        ) {
-            Class[] types = new Class [] {
-                Integer.class, Double.class, Double.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
         errorTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         errorTableScrollPane.setViewportView(errorTable);
 

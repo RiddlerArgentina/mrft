@@ -775,13 +775,6 @@
                 <Component class="javax.swing.JTable" name="trainTable">
                   <Properties>
                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="3">
-                        <Column editable="true" title="Selecci&#xf3;n" type="java.lang.Boolean"/>
-                        <Column editable="true" title="x" type="java.lang.Double"/>
-                        <Column editable="true" title="f(x)" type="java.lang.Double"/>
-                      </Table>
-                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -814,13 +807,6 @@
                 <Component class="javax.swing.JTable" name="validTable">
                   <Properties>
                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="3">
-                        <Column editable="true" title="Selecci&#xf3;n" type="java.lang.Boolean"/>
-                        <Column editable="true" title="x" type="java.lang.Double"/>
-                        <Column editable="true" title="f(x)" type="java.lang.Double"/>
-                      </Table>
-                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -845,13 +831,6 @@
                 <Component class="javax.swing.JTable" name="generTable">
                   <Properties>
                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="3">
-                        <Column editable="true" title="Selecci&#xf3;n" type="java.lang.Boolean"/>
-                        <Column editable="true" title="x" type="java.lang.Double"/>
-                        <Column editable="true" title="f(x)" type="java.lang.Double"/>
-                      </Table>
-                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1299,30 +1278,6 @@
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="layerTable">
-                      <Properties>
-                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="3" rowCount="4">
-                            <Column editable="true" title="# Layer" type="java.lang.String">
-                              <Data value="I"/>
-                              <Data value="1"/>
-                              <Data value="2"/>
-                              <Data value="O"/>
-                            </Column>
-                            <Column editable="true" title="Neurons" type="java.lang.Integer">
-                              <Data value="1"/>
-                              <Data value="4"/>
-                              <Data value="4"/>
-                              <Data value="1"/>
-                            </Column>
-                            <Column editable="true" title="Activation" type="java.lang.String">
-                              <Data value="Identidad"/>
-                              <Data value="Sigmoide"/>
-                              <Data value="Gaussiana"/>
-                              <Data value="Identidad"/>
-                            </Column>
-                          </Table>
-                        </Property>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1819,7 +1774,6 @@
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
                       <ResourceString bundle="res/i18n/strings.properties" key="PLOT_OPT_GENER" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                     </Property>
-                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generPlotCheckActionPerformed"/>
@@ -1972,18 +1926,6 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="errorTable">
                       <Properties>
-                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="3" rowCount="4">
-                            <Column editable="false" title="&#xc9;poca" type="java.lang.Integer">
-                              <Data value="0"/>
-                              <Data value="5"/>
-                              <Data value="10"/>
-                              <Data value="15"/>
-                            </Column>
-                            <Column editable="false" title="E. Entrenamiento" type="java.lang.Double"/>
-                            <Column editable="false" title="E. Validaci&#xf3;n" type="java.lang.Double"/>
-                          </Table>
-                        </Property>
                         <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
                           <JTableSelectionModel selectionMode="0"/>
                         </Property>
