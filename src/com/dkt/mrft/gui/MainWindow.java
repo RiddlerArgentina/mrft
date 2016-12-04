@@ -34,17 +34,6 @@ import com.dkt.graphics.utils.Gif;
 import com.dkt.graphics.utils.TicToc;
 import com.dkt.graphics.utils.Utils;
 import com.dkt.mrft.examples.Example;
-import com.dkt.mrft.examples.ExampleBatman;
-import com.dkt.mrft.examples.ExampleCos;
-import com.dkt.mrft.examples.ExampleEKG;
-import com.dkt.mrft.examples.ExampleJumpy;
-import com.dkt.mrft.examples.ExampleMetodos;
-import com.dkt.mrft.examples.ExampleSin;
-import com.dkt.mrft.examples.ExampleSinc;
-import com.dkt.mrft.examples.ExampleSquare;
-import com.dkt.mrft.examples.ExampleSyntheticEKG;
-import com.dkt.mrft.examples.ExampleTriangles;
-import com.dkt.mrft.examples.ExampleVeryJumpy;
 import com.dkt.mrft.examples.ekg.NullPrintStream;
 import com.dkt.mrft.models.DatasetTableModel;
 import com.dkt.mrft.models.ErrorTableModel;
@@ -89,8 +78,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ThreadLocalRandom;
@@ -1322,92 +1313,37 @@ public final class MainWindow extends javax.swing.JFrame {
         examplesMenu.add(menuSeparator2);
 
         exampleSinMI.setText(bundle1.getString("EXAMPLES_SIN")); // NOI18N
-        exampleSinMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                exampleSinMIActionPerformed(evt);
-            }
-        });
         examplesMenu.add(exampleSinMI);
 
         exampleCosMI.setText(bundle1.getString("EXAMPLES_COS")); // NOI18N
-        exampleCosMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                exampleCosMIActionPerformed(evt);
-            }
-        });
         examplesMenu.add(exampleCosMI);
 
         exampleSincMI.setText(bundle1.getString("EXAMPLES_SINC")); // NOI18N
-        exampleSincMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                exampleSincMIActionPerformed(evt);
-            }
-        });
         examplesMenu.add(exampleSincMI);
 
+        exampleSquareMI.setText(bundle1.getString("EXAMPLES_SQARE")); // NOI18N
+        examplesMenu.add(exampleSquareMI);
+
         exampleJumpyMI.setText(bundle1.getString("EXAMPLES_JUMPY")); // NOI18N
-        exampleJumpyMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                exampleJumpyMIActionPerformed(evt);
-            }
-        });
         examplesMenu.add(exampleJumpyMI);
 
         exampleVeryJumpyMI.setText(bundle1.getString("EXAMPLES_VERY_JUMPY")); // NOI18N
-        exampleVeryJumpyMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                exampleVeryJumpyMIActionPerformed(evt);
-            }
-        });
         examplesMenu.add(exampleVeryJumpyMI);
 
         exampleTriangleMI.setText(bundle1.getString("EXAMPLES_TRIANGLE")); // NOI18N
-        exampleTriangleMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                exampleTriangleMIActionPerformed(evt);
-            }
-        });
         examplesMenu.add(exampleTriangleMI);
 
-        exampleSquareMI.setText(bundle1.getString("EXAMPLES_SQARE")); // NOI18N
-        exampleSquareMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                exampleSquareMIActionPerformed(evt);
-            }
-        });
-        examplesMenu.add(exampleSquareMI);
-
         exampleDunnoMI.setText(bundle1.getString("EXAMPLES_DUNNO")); // NOI18N
-        exampleDunnoMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                exampleDunnoMIActionPerformed(evt);
-            }
-        });
         examplesMenu.add(exampleDunnoMI);
 
         exampleBatmanMI.setText(bundle1.getString("EXAMPLES_BATMAN")); // NOI18N
-        exampleBatmanMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                exampleBatmanMIActionPerformed(evt);
-            }
-        });
         examplesMenu.add(exampleBatmanMI);
 
-        exampleEkgSynthMI.setText(bundle1.getString("EXAMPLES_EKG_SYNTH")); // NOI18N
-        exampleEkgSynthMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                exampleEkgSynthMIActionPerformed(evt);
-            }
-        });
-        examplesMenu.add(exampleEkgSynthMI);
-
         exampleEkgRealMI.setText(bundle1.getString("EXAMPLES_EKG_REAL")); // NOI18N
-        exampleEkgRealMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                exampleEkgRealMIActionPerformed(evt);
-            }
-        });
         examplesMenu.add(exampleEkgRealMI);
+
+        exampleEkgSynthMI.setText(bundle1.getString("EXAMPLES_EKG_SYNTH")); // NOI18N
+        examplesMenu.add(exampleEkgSynthMI);
 
         jMenuBar1.add(examplesMenu);
 
@@ -1774,6 +1710,7 @@ public final class MainWindow extends javax.swing.JFrame {
                         while (paused && !worker.isCancelled()) {
                             trainingProgress.setString(i18n.__("Paused"));
                             trainingProgress.setIndeterminate(true);
+                            
                             try {
                                 Thread.sleep(100);
                             } catch (InterruptedException ignoreMe) {
@@ -1855,10 +1792,12 @@ public final class MainWindow extends javax.swing.JFrame {
                 }
             }
         };
+        
         jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         jfc.setDialogTitle(i18n.__("Select a folder to save the data"));
         jfc.setMultiSelectionEnabled(false);
         jfc.showDialog(null, i18n.__("Select Folder"));
+        
         if (jfc.getSelectedFile() != null) {
             pathField.setText(jfc.getSelectedFile().getAbsolutePath() + File.separator);
             info("Current working directory: %s", pathField.getText());
@@ -1894,42 +1833,6 @@ public final class MainWindow extends javax.swing.JFrame {
     private void saveErrorMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_saveErrorMIActionPerformed
         savePlot(i18n.__("Errors"), errs);
     }//GEN-LAST:event_saveErrorMIActionPerformed
-
-    private void exampleSinMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleSinMIActionPerformed
-        loadExample(exampleSinMI, new ExampleSin());
-    }//GEN-LAST:event_exampleSinMIActionPerformed
-
-    private void exampleCosMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleCosMIActionPerformed
-        loadExample(exampleCosMI, new ExampleCos());
-    }//GEN-LAST:event_exampleCosMIActionPerformed
-
-    private void exampleJumpyMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleJumpyMIActionPerformed
-        loadExample(exampleJumpyMI, new ExampleJumpy());
-    }//GEN-LAST:event_exampleJumpyMIActionPerformed
-
-    private void exampleTriangleMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleTriangleMIActionPerformed
-        loadExample(exampleTriangleMI, new ExampleTriangles());
-    }//GEN-LAST:event_exampleTriangleMIActionPerformed
-
-    private void exampleSquareMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleSquareMIActionPerformed
-        loadExample(exampleSquareMI, new ExampleSquare());
-    }//GEN-LAST:event_exampleSquareMIActionPerformed
-
-    private void exampleDunnoMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleDunnoMIActionPerformed
-        loadExample(exampleDunnoMI, new ExampleMetodos());
-    }//GEN-LAST:event_exampleDunnoMIActionPerformed
-
-    private void exampleBatmanMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleBatmanMIActionPerformed
-        loadExample(exampleBatmanMI, new ExampleBatman());
-    }//GEN-LAST:event_exampleBatmanMIActionPerformed
-
-    private void exampleSincMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleSincMIActionPerformed
-        loadExample(exampleSincMI, new ExampleSinc());
-    }//GEN-LAST:event_exampleSincMIActionPerformed
-
-    private void exampleEkgRealMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleEkgRealMIActionPerformed
-        loadExample(exampleEkgRealMI, new ExampleEKG());
-    }//GEN-LAST:event_exampleEkgRealMIActionPerformed
 
     private void transAutoscaleSelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_transAutoscaleSelMIActionPerformed
         double maxVal = train.getMax();
@@ -2021,14 +1924,6 @@ public final class MainWindow extends javax.swing.JFrame {
     private void aboutMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_aboutMIActionPerformed
         new AboutDialog(this).setVisible(true);
     }//GEN-LAST:event_aboutMIActionPerformed
-
-    private void exampleEkgSynthMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleEkgSynthMIActionPerformed
-        loadExample(exampleEkgSynthMI, new ExampleSyntheticEKG());
-    }//GEN-LAST:event_exampleEkgSynthMIActionPerformed
-
-    private void exampleVeryJumpyMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exampleVeryJumpyMIActionPerformed
-        loadExample(exampleVeryJumpyMI, new ExampleVeryJumpy());
-    }//GEN-LAST:event_exampleVeryJumpyMIActionPerformed
 
     private void reloadExampleMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_reloadExampleMIActionPerformed
         loadExample(lastItem, null);
@@ -2624,7 +2519,20 @@ public final class MainWindow extends javax.swing.JFrame {
     }
     
     private static final DecimalFormat FORMATTER = new DecimalFormat(c4g.get("number.format"));
-
+    private final Map<JMenuItem, Example> exampleMap = new HashMap<>(11);
+    {
+        exampleMap.put(exampleSinMI,       new com.dkt.mrft.examples.ExampleSin());
+        exampleMap.put(exampleCosMI,       new com.dkt.mrft.examples.ExampleCos());
+        exampleMap.put(exampleSincMI,      new com.dkt.mrft.examples.ExampleSinc());
+        exampleMap.put(exampleJumpyMI,     new com.dkt.mrft.examples.ExampleJumpy());
+        exampleMap.put(exampleVeryJumpyMI, new com.dkt.mrft.examples.ExampleVeryJumpy());
+        exampleMap.put(exampleTriangleMI,  new com.dkt.mrft.examples.ExampleTriangles());
+        exampleMap.put(exampleSquareMI,    new com.dkt.mrft.examples.ExampleSquare());
+        exampleMap.put(exampleDunnoMI,     new com.dkt.mrft.examples.ExampleMetodos());
+        exampleMap.put(exampleBatmanMI,    new com.dkt.mrft.examples.ExampleBatman());
+        exampleMap.put(exampleEkgRealMI,   new com.dkt.mrft.examples.ExampleEKG());
+        exampleMap.put(exampleEkgSynthMI,  new com.dkt.mrft.examples.ExampleSyntheticEKG());
+    }
     private void initListners() {
         FileDrop fd = new FileDrop(trainTable, new FileDrop.Listener() {
             @Override
@@ -2650,7 +2558,19 @@ public final class MainWindow extends javax.swing.JFrame {
                 readFiles(files, null);
             }
         });
-    }
+        
+        
+        ActionListener exampleListner = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadExample((JMenuItem)e.getSource(), exampleMap.get((JMenuItem)e.getSource()));
+            }
+        };
+        
+        for (JMenuItem mi : exampleMap.keySet()) {
+            mi.addActionListener(exampleListner);
+        }        
+    }              
     
     private boolean shouldDraw() {
         //@TODO should redraw after a DEICONIZATION...
@@ -3022,13 +2942,13 @@ public final class MainWindow extends javax.swing.JFrame {
         save.put("data.error", sfiles[ERROR]);
         save.put("plot.train", trainPlotCheck.isSelected());
         save.put("plot.train.format", trainBox.getSelectedIndex());
-        save.put("plot.train.color", Integer.toHexString(colors[0].getRGB()));
+        save.put("plot.train.color", Integer.toHexString(colors[TRAIN].getRGB()));
         save.put("plot.valid", validPlotCheck.isSelected());
         save.put("plot.valid.format", validBox.getSelectedIndex());
-        save.put("plot.valid.color", Integer.toHexString(colors[1].getRGB()));
+        save.put("plot.valid.color", Integer.toHexString(colors[VALID].getRGB()));
         save.put("plot.gener", generPlotCheck.isSelected());
         save.put("plot.gener.format", generBox.getSelectedIndex());
-        save.put("plot.gener.color", Integer.toHexString(colors[2].getRGB()));
+        save.put("plot.gener.color", Integer.toHexString(colors[GENER].getRGB()));
         save.put("smooth.errors", smoothErroCheck.isSelected());
         save.put("show.labels", showLabelsCheck.isSelected());
         
