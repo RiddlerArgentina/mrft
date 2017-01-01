@@ -2539,7 +2539,7 @@ public final class MainWindow extends javax.swing.JFrame {
         errorPoints[TRAIN].clear();
         errorPoints[VALID].clear();
 
-        //Los datos tienen que estar ordenados para spline
+        //Spline requires data to be sorted
         final double[][] temp = errors.getData();
         final Integer [] idxs = new Integer[temp[0].length];
 
