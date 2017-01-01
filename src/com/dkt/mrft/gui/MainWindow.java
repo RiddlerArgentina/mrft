@@ -2792,9 +2792,7 @@ public final class MainWindow extends javax.swing.JFrame {
     private void readConfig(File file) {
         info("Cleaning current data");
         dataClearAllMI.doClick(0);
-        System.out.println(file);
         String path = file.getParent() + File.separator;
-        System.out.println(path);
         pathField.setText(path);
 
         info("Loading Configuration File '%s'", file.getName());
