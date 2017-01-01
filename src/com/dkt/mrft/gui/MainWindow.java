@@ -2,17 +2,17 @@
  * MIT License
  *
  * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -149,31 +149,40 @@ import net.objecthunter.exp4j.Expression;
  * @author Federico Vera {@literal <fedevera at unc.edu.ar>}
  */
 public final class MainWindow extends javax.swing.JFrame {
-    private static final BundleDecorator i18n = new BundleDecorator("res.i18n.misc");   
+    private static final BundleDecorator i18n = new BundleDecorator("res.i18n.misc");
     private static final Config c4g = Config.get();
-    
+
     private static final int TRAIN = 0;
     private static final int VALID = 1;
     private static final int GENER = 2;
     private static final int ERROR = 3;
-    
-    private static final int PLOT_POINT = 0;
-    private static final int PLOT_CROSS = 1;
-    private static final int PLOT_PATHS = 2;
-    
+
+    /**
+     * Plot the graphs using points
+     */
+    public static final int PLOT_POINT = 0;
+    /**
+     * Plot the graphs using crosses
+     */
+    public static final int PLOT_CROSS = 1;
+    /**
+     * Plot the graphs using paths (joining points)
+     */
+    public static final int PLOT_PATHS = 2;
+
     private final LayersModel       layers     = new LayersModel();
     private final DatasetTableModel train      = new DatasetTableModel(i18n.__("training"));
     private final DatasetTableModel validate   = new DatasetTableModel(i18n.__("validation"));
     private final DatasetTableModel generalize = new DatasetTableModel(i18n.__("generalization"));
     private final ErrorTableModel   errors     = new ErrorTableModel();
     private DatasetTableModel       selected   = train;
-    
+
     private final Canvas func = new Canvas();
     private final Canvas errs = new Canvas();
-    
+
     private static final int ERR_X_OFFSET = 15;
     private static final int ERR_Y_OFFSET = 15;
-    
+
     public MainWindow() {
         initComponents();
         info("Program Started - %s", new Date());
@@ -1310,7 +1319,7 @@ public final class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private FunctionMonospaced dialogMonospaced;
     private void popFuncMonoMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_popFuncMonoMIActionPerformed
         if(dialogMonospaced == null) dialogMonospaced = new FunctionMonospaced(MainWindow.this);
@@ -1329,7 +1338,7 @@ public final class MainWindow extends javax.swing.JFrame {
     private void selGenerButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selGenerButtonActionPerformed
         setSelected(generalize);
     }//GEN-LAST:event_selGenerButtonActionPerformed
-        
+
     private final BundleDecorator MSTR = new BundleDecorator("res.i18n.menu");
     private void setSelected(DatasetTableModel model) {
         selected = model;
@@ -1340,6 +1349,7 @@ public final class MainWindow extends javax.swing.JFrame {
         transAutoscaleSelMI.setText(MSTR.__("DATA_TRANSFORM_AUTO_SEL", selected.getName()));
         transCustFuncSelMI.setText(MSTR.__("DATA_TRANSFORM_CUST_SEL", selected.getName()));
     }
+
     private void selectAllButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selectAllButtonActionPerformed
         selected.selectAll();
         info("Selecting all elements of the '%s' dataset", selected.getName());
@@ -1360,24 +1370,24 @@ public final class MainWindow extends javax.swing.JFrame {
             selectPercentageField.commitEdit();
             final double value = ((Number)selectPercentageField.getValue()).doubleValue();
             final int nEleme = selected.getRowCount();
-            selectElements((int)Math.round(nEleme * value));     
+            selectElements((int)Math.round(nEleme * value));
             info("Selection %5.2f%% of the elements of %s %s", value * 100.,
                   selected.getName(), randomSelectionCheck.isSelected() ? i18n.__("(Random)") : "");
         } catch (ParseException ignoreMe) {
             error("'%s' is not a decimal number", selectPercentageField.getText());
-        }   
+        }
     }//GEN-LAST:event_selectPercentageButtonActionPerformed
 
     private void selectNumberButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selectNumberButtonActionPerformed
         try {
             selectNumberField.commitEdit();
             final int value = ((Number)selectNumberField.getValue()).intValue();
-            selectElements(value);       
+            selectElements(value);
             info("Selecting %d elements from the %s dataset %s", value,
                   selected.getName(), randomSelectionCheck.isSelected() ? i18n.__("(Random)") : "");
         } catch (ParseException ignoreMe) {
             error("'%s' is not an integer", selectNumberField.getText());
-        } 
+        }
     }//GEN-LAST:event_selectNumberButtonActionPerformed
 
     private void moveSelectedButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_moveSelectedButtonActionPerformed
@@ -1385,8 +1395,8 @@ public final class MainWindow extends javax.swing.JFrame {
         final ArrayList<DatasetTableModel.Row> foo = selected.removeSelected();
         final String dest;
         switch (idx) {
-            case  0: train     .addAll(foo); dest = train.getName(); break;
-            case  1: validate  .addAll(foo); dest = validate.getName(); break;
+            case TRAIN: train     .addAll(foo); dest = train.getName(); break;
+            case VALID: validate  .addAll(foo); dest = validate.getName(); break;
             default: generalize.addAll(foo); dest = generalize.getName(); break;
         }
         info("Moving %d elements from '%s' -> '%s'", foo.size(), selected.getName(), dest);
@@ -1402,7 +1412,7 @@ public final class MainWindow extends javax.swing.JFrame {
         dialogMonospacedRand.setVisible(true);
         selected.addAll(dialogMonospacedRand.getData());
     }//GEN-LAST:event_popFuncRandMIActionPerformed
-    
+
     private FunctionGaussianRand dialogGaussianRand;
     private void popFuncGaussMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_popFuncGaussMIActionPerformed
         if (dialogGaussianRand == null) dialogGaussianRand = new FunctionGaussianRand(MainWindow.this);
@@ -1470,7 +1480,7 @@ public final class MainWindow extends javax.swing.JFrame {
     private void generBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_generBoxActionPerformed
         updateGraphics(GENER);
     }//GEN-LAST:event_generBoxActionPerformed
-    
+
     private final GString strTrain = new GString(0, 0, i18n.__("Training"));
     private final GString strValid = new GString(0, 0, i18n.__("Validation"));
     private void trainColorButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainColorButtonActionPerformed
@@ -1493,8 +1503,8 @@ public final class MainWindow extends javax.swing.JFrame {
         selected.addAll(foo);
         final String dest;
         switch (idx) {
-            case  0: train     .addAll(foo); dest = train.getName(); break;
-            case  1: validate  .addAll(foo); dest = validate.getName(); break;
+            case TRAIN: train   .addAll(foo); dest = train.getName(); break;
+            case VALID: validate.addAll(foo); dest = validate.getName(); break;
             default: generalize.addAll(foo); dest = generalize.getName(); break;
         }
         info("Copying %d elements from '%s' -> '%s'", foo.size(), selected.getName(), dest);
@@ -1514,11 +1524,11 @@ public final class MainWindow extends javax.swing.JFrame {
             final Expression exp4fx = dialogCustomFunc.getExp4FX();
             final String    sexp4x  = dialogCustomFunc.getExp4XStr();
             final String    sexp4fx = dialogCustomFunc.getExp4FXStr();
-            
+
             train     .applyToBoth(exp4x, sexp4x, exp4fx, sexp4fx);
             validate  .applyToBoth(exp4x, sexp4x, exp4fx, sexp4fx);
             generalize.applyToBoth(exp4x, sexp4x, exp4fx, sexp4fx);
-            
+
             info("Applying '%s' to all the '%s'", sexp4x,  "x");
             info("Applying '%s' to all the '%s'", sexp4fx, "f(x)");
         }
@@ -1532,7 +1542,7 @@ public final class MainWindow extends javax.swing.JFrame {
         if (worker != null) {
             worker.cancel(true);
         }
-        
+
         worker = new SwingWorker<Void, ErrorTableModel.Row>() {
             @Override
             protected Void doInBackground() throws Exception {
@@ -1541,9 +1551,9 @@ public final class MainWindow extends javax.swing.JFrame {
                     final String path = pathField.getText();
                     final String name = weightField.getText();
                     final File foo = new File(path);
-                    
+
                     if (!foo.exists()) foo.mkdirs();
-                    
+
                     setTraining(true);
                     errors.removeAll();
                     final Matrix[] trainSetI = new Matrix[train.getRowCount()];
@@ -1557,7 +1567,7 @@ public final class MainWindow extends javax.swing.JFrame {
                         trainSetO[i] = new Matrix(1, 1);
                         trainSetO[i].position(0, 0, train.getDouble(i, 1));
                     }
-                    
+
                     for (int i = 0, m = validate.getRowCount(); i < m; i++) {
                         validSetI[i] = new Matrix(1, 1);
                         validSetI[i].position(0, 0, validate.getDouble(i, 0));
@@ -1570,7 +1580,7 @@ public final class MainWindow extends javax.swing.JFrame {
                     mseField.commitEdit();
                     learningRateField.commitEdit();
                     degradationField.commitEdit();
-                    
+
                     final int maxEpochs = (Integer)maxEpochsSpinner.getValue();
                     final double mse    = ((Number)mseField.getValue()).doubleValue();
                     final int saveEvery = (Integer)saveEverySpinner.getValue();
@@ -1609,7 +1619,7 @@ public final class MainWindow extends javax.swing.JFrame {
                         while (paused && !worker.isCancelled()) {
                             trainingProgress.setString(i18n.__("Paused"));
                             trainingProgress.setIndeterminate(true);
-                            
+
                             try {
                                 Thread.sleep(100);
                             } catch (InterruptedException ignoreMe) {
@@ -1617,7 +1627,7 @@ public final class MainWindow extends javax.swing.JFrame {
                                 //immediatly after the pause
                             }
                         }
-                        
+
                         if (worker.isCancelled()) {
                             tt.toc();
                             trainingProgress.setString(i18n.__("Aborted"));
@@ -1627,18 +1637,18 @@ public final class MainWindow extends javax.swing.JFrame {
                         }
 
                         learnRate *= degradation;
-                        
+
                         trainingProgress.setIndeterminate(false);
                         trainingProgress.setStringPainted(true);
                         trainingProgress.setString(null);
                         trainingProgress.setValue(currEpoch * 100 / maxEpochs);
                     }
-                    
+
                     if (!worker.isCancelled()) {
                         tt.toc();
                         info("Training finished successfully in %.4fs", tt.getSecsTime());
                     }
-                    
+
                     saveConfig(path);
                     saveData(path);
                     saveErrors(path);
@@ -1681,7 +1691,7 @@ public final class MainWindow extends javax.swing.JFrame {
         enableComponents(dataPanel, !training);
         enableComponents(topologyPanel, !training);
     }
-    
+
     private void pathSelectionButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_pathSelectionButtonActionPerformed
         JFileChooser jfc = new JFileChooser(pathField.getText()){
             @Override
@@ -1691,12 +1701,12 @@ public final class MainWindow extends javax.swing.JFrame {
                 }
             }
         };
-        
+
         jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         jfc.setDialogTitle(i18n.__("Select a folder to save the data"));
         jfc.setMultiSelectionEnabled(false);
         jfc.showDialog(null, i18n.__("Select Folder"));
-        
+
         if (jfc.getSelectedFile() != null) {
             pathField.setText(jfc.getSelectedFile().getAbsolutePath() + File.separator);
             info("Current working directory: %s", pathField.getText());
@@ -1704,8 +1714,8 @@ public final class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_pathSelectionButtonActionPerformed
 
     private void quitMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_quitMIActionPerformed
-        final int opt = JOptionPane.showConfirmDialog(null, 
-                i18n.__("Do really want to quit?"), 
+        final int opt = JOptionPane.showConfirmDialog(null,
+                i18n.__("Do really want to quit?"),
                 i18n.__("Are you sure?"),
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE
@@ -1750,11 +1760,11 @@ public final class MainWindow extends javax.swing.JFrame {
             final Expression exp4fx = dialogCustomFunc.getExp4FX();
             final String sexp4x     = dialogCustomFunc.getExp4XStr();
             final String sexp4fx    = dialogCustomFunc.getExp4FXStr();
-            
+
             selected.applyToBoth(exp4x, sexp4x, exp4fx, sexp4fx);
-            
+
             final String sname = selected.getName();
-            
+
             info("Applying '%s' to all the '%s' of table '%s'", sexp4x,  "x", sname);
             info("Applying '%s' to all the '%s' of table '%s'", sexp4fx, "f(x)", sname);
         }
@@ -1773,7 +1783,7 @@ public final class MainWindow extends javax.swing.JFrame {
         }
         final Gif gif = new Gif(func);
         final int pRow = errorTable.getSelectedRow();
-        
+
         final int xoff =  func.getXSize() / 2 - 100;
         final int yoff = -func.getYSize() / 2 + 5;
         for (int i = 0; i < errors.getRowCount(); i ++) {
@@ -1785,7 +1795,7 @@ public final class MainWindow extends javax.swing.JFrame {
             gif.snapshot();
             func.remove(gs);
         }
-        
+
         if (pRow != -1) errorTable.setRowSelectionInterval(pRow, pRow);
         gif.write(jfc.getSelectedFile().getAbsolutePath());
     }//GEN-LAST:event_saveGifMIActionPerformed
@@ -1807,7 +1817,7 @@ public final class MainWindow extends javax.swing.JFrame {
     private void playPauseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_playPauseButtonActionPerformed
         if (worker != null && !worker.isCancelled()) {
             trainPauseMI.doClick(0);
-        } 
+        }
         trainStartMI.doClick(0);
     }//GEN-LAST:event_playPauseButtonActionPerformed
 
@@ -1845,13 +1855,13 @@ public final class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_outputPanelMIActionPerformed
 
     private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        final int opt = JOptionPane.showConfirmDialog(null, 
-                i18n.__("Do really want to quit?"), 
+        final int opt = JOptionPane.showConfirmDialog(null,
+                i18n.__("Do really want to quit?"),
                 i18n.__("Are you sure?"),
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE
         );
-        
+
         if (opt == JOptionPane.NO_OPTION) {
             MainWindow.this.setVisible(true);
         } else {
@@ -1865,12 +1875,12 @@ public final class MainWindow extends javax.swing.JFrame {
     private void loadConfigMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_loadConfigMIActionPerformed
         final JFileChooser jfc = new JFileChooser(pathField.getText());
         jfc.setFileFilter(new FileNameExtensionFilter("MLP config", "conf"));
-        
+
         final int opt = jfc.showOpenDialog(null);
         if (opt == JFileChooser.CANCEL_OPTION) {
             return;
         }
-        
+
         final File file = jfc.getSelectedFile();
         if (file != null && file.exists()) {
             readConfig(file);
@@ -1908,19 +1918,19 @@ public final class MainWindow extends javax.swing.JFrame {
     private void tabbedPaneFocusGained(FocusEvent evt) {//GEN-FIRST:event_tabbedPaneFocusGained
         drawErrors();
     }//GEN-LAST:event_tabbedPaneFocusGained
-    
+
     private void chooseColor(String title, int idx) {
         final Color c = JColorChooser.showDialog(null, title, colors[idx]);
         if (c == null) {
             return;
         }
-        
+
         debug("'%s' color was changed to 0x%h'", title, c.getRGB());
         colors[idx] = c;
         updateGraphics(idx);
         drawErrors();
     }
-    
+
     private void selectElements(int value) {
         if (value >= selected.getRowCount()) {
             selected.selectAll();
@@ -1936,8 +1946,8 @@ public final class MainWindow extends javax.swing.JFrame {
                 }
             }
         }
-    }    
-    
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private final JComboBox<String> backpropBox = new JComboBox<>();
     private final ButtonGroup buttonGroup1 = new ButtonGroup();
@@ -2030,7 +2040,7 @@ public final class MainWindow extends javax.swing.JFrame {
         ((JLabel)layerTable.getDefaultRenderer(Integer.class))
                            .setHorizontalAlignment(SwingConstants.CENTER);
     }
-    
+
     public void enableComponents(Container container, boolean enable) {
         for (final Component component : container.getComponents()) {
             component.setEnabled(enable);
@@ -2048,7 +2058,7 @@ public final class MainWindow extends javax.swing.JFrame {
         generTable.setModel(generalize);
         errorTable.setModel(errors);
         train.selectEnabled(true);
-        
+
         train.addTableModelListener(new TableModelListener() {
             @Override public void tableChanged(TableModelEvent e) {
                 final int sel = train.getSelectedCount();
@@ -2083,7 +2093,7 @@ public final class MainWindow extends javax.swing.JFrame {
                 updateGraphics(GENER);
             }
         });
-    
+
         final ListSelectionModel tsm = errorTable.getSelectionModel();
         tsm.addListSelectionListener(new ListSelectionListener() {
             private int lasIdx = 0;
@@ -2094,16 +2104,16 @@ public final class MainWindow extends javax.swing.JFrame {
                     if (lasIdx == curIdx) {
                         curIdx = e.getFirstIndex();
                     }
-                    
+
                     try {
                         selectEpoch(errorTable.convertRowIndexToModel(curIdx));
                     } catch (Exception ex) {}
-                    
+
                     lasIdx = curIdx;
                 }
             }
         });
-        
+
         //Always show epoch error first
         final TableRowSorter<ErrorTableModel> sorter = new TableRowSorter<ErrorTableModel>(errors) {
             {
@@ -2123,23 +2133,23 @@ public final class MainWindow extends javax.swing.JFrame {
                 }
             }
         };
-        
+
         errorTable.setRowSorter(sorter);
-        
+
         trainTable.getTableHeader().setReorderingAllowed(false);
         validTable.getTableHeader().setReorderingAllowed(false);
         generTable.getTableHeader().setReorderingAllowed(false);
         layerTable.getTableHeader().setReorderingAllowed(false);
         errorTable.getTableHeader().setReorderingAllowed(false);
     }
-    
+
     private GLine epLine;
     private void selectEpoch(int epoch) {
         final int epno = Math.round((float)errors.getEpoch(epoch));
         //@TODO check if the epoch is actually in range before plotting...
         errs.remove(epLine);
         if (epno != -1) {
-            final double maxx = errors.getEpoch(errors.getRowCount() - 1);        
+            final double maxx = errors.getEpoch(errors.getRowCount() - 1);
             final double sx   = 1. / maxx * (errs.getXSize() - ERR_X_OFFSET);
             final int offset  = (int)(sx * epno);
             epLine = new GLine(offset, -50, offset, 1000);
@@ -2150,22 +2160,22 @@ public final class MainWindow extends javax.swing.JFrame {
             drawErrors();
         }
     }
-    
+
     private MLP loadMlp(int epoch) {
         if (epoch == -1) return null;
-        
+
         final String path = pathField.getText();
         final String name = weightField.getText();
         final String fname = path + name.replace("{epoch}", "" + epoch);
         debug("Reading MLP from '%s'", fname);
-                
+
         try (FileInputStream fis = new FileInputStream(fname);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
             return (MLP)ois.readObject();
         } catch (Exception ex) {
             error("Error reading MLP from '%s' (%s)", fname, ex);
         }
-        
+
         return null;
     }
     private void initGraphs() {
@@ -2182,7 +2192,7 @@ public final class MainWindow extends javax.swing.JFrame {
         funcAxis.drawLinesH(true);
         funcAxis.drawLinesV(true);
         func.addFixed(funcAxis);
-        
+
         func.addComponentListener(new ComponentListener() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -2195,7 +2205,7 @@ public final class MainWindow extends javax.swing.JFrame {
             @Override public void componentShown(ComponentEvent e) {}
             @Override public void componentHidden(ComponentEvent e) {}
         });
-        
+
         layout = new BorderLayout();
         errorPlotPanel.setLayout(layout);
         errorPlotPanel.add(errs, BorderLayout.CENTER);
@@ -2215,14 +2225,14 @@ public final class MainWindow extends javax.swing.JFrame {
             @Override public void componentShown(ComponentEvent e) {}
             @Override public void componentHidden(ComponentEvent e) {}
         });
-        
+
         GAxis axis = new GAxis(-50, 1500, -50, 500);
         axis.setPaint(Color.GRAY);
         axis.setGridColor(Color.LIGHT_GRAY);
         axis.drawLinesH(true);
         axis.drawLinesV(true);
         errs.addFixed(axis);
-        
+
         updateGraphics(TRAIN);
         updateGraphics(VALID);
         updateGraphics(GENER);
@@ -2235,142 +2245,142 @@ public final class MainWindow extends javax.swing.JFrame {
         comboBox.addItem("TanH");
         comboBox.addItem("Gaussian");
         comboBox.addItem("Sinc");
-        
+
         TableColumn tc = layerTable.getColumnModel().getColumn(2);
         tc.setCellEditor(new DefaultCellEditor(comboBox));
         String home = c4g.get("last.path").isEmpty()
-                    ? System.getProperty("user.home") 
+                    ? System.getProperty("user.home")
                     : c4g.get("last.path");
-        
+
         pathField.setText(home
                         + File.separator + "mrft"
                         + File.separator + i18n.__("Project_1")
                         + File.separator);
-        
+
         Font tFnt = layerTable.getFont();
              tFnt = new Font(Font.MONOSPACED, tFnt.getStyle(), tFnt.getSize());
-             
+
         layerTable.setFont(tFnt);
         trainTable.setFont(tFnt);
-        
+
         Font lFnt = trainLabel.getFont().deriveFont(Font.BOLD);
         trainLabel.setFont(lFnt);
         validLabel.setFont(lFnt);
         generLabel.setFont(lFnt);
-        
+
         verticalSplit.setDividerLocation(0.5);
         verticalSplit.setResizeWeight(0.5);
         horizontalSplit.setDividerLocation(190);
         horizontalSplit.setResizeWeight(0);
-        
+
         debugUseAAMI.setSelected(c4g.getBool("use.aa"));
         debugShowFpsMI.setSelected(c4g.getBool("show.fps"));
         debugPrintMI.setSelected(c4g.getBool("enable.debug"));
         debugStdoutMI.setSelected(c4g.getBool("use.std.out"));
-        
+
         if (c4g.getBool("agressive.redraw")) {
             errs.setAutoRepaint(true);
             func.setAutoRepaint(true);
             errs.setRepaintDelay(c4g.getInt("agressive.redraw.interval"));
             func.setRepaintDelay(c4g.getInt("agressive.redraw.interval"));
-        } 
-        
+        }
+
         errs.setUseAntiAliasing(c4g.getBool("use.aa"));
-        func.setUseAntiAliasing(c4g.getBool("use.aa"));                                                
+        func.setUseAntiAliasing(c4g.getBool("use.aa"));
         errs.setShowFPS(c4g.getBool("show.fps"));
         func.setShowFPS(c4g.getBool("show.fps"));
-        
+
         trainPlotCheck.setSelected(c4g.getBool("train.plot"));
         validPlotCheck.setSelected(c4g.getBool("valid.plot"));
         generPlotCheck.setSelected(c4g.getBool("gener.plot"));
-        
+
         trainBox.setSelectedIndex(c4g.getInt("train.format"));
         validBox.setSelectedIndex(c4g.getInt("valid.format"));
         generBox.setSelectedIndex(c4g.getInt("gener.format"));
-        
+
         colors[TRAIN] = c4g.getColor("train.color");
         colors[VALID] = c4g.getColor("valid.color");
         colors[GENER] = c4g.getColor("gener.color");
-        
+
         selTrainButton.doClick(0);
     }
-    
+
     private void readFiles(File[] files, DatasetTableModel table) {
         if (table == null) {
             table = selected;
         }
-        
+
         for (File file : files) {
             info("Reading file '%s'", file.getName());
             if (file.getName().endsWith(".csv"))  table.addAll(readFile(file));
             if (file.getName().endsWith(".conf")) readConfig(file);
-        }        
+        }
     }
 
     public ArrayList<DatasetTableModel.Row> readFile(File file) {
         ArrayList<DatasetTableModel.Row> ret = new ArrayList<>(128);
-        
+
         try (FileReader fis = new FileReader(file);
              BufferedReader br = new BufferedReader(fis)) {
             String line;
-            
+
             while ((line = br.readLine()) != null) {
                 String[] fo = line.trim().split(",");
-                ret.add(new DatasetTableModel.Row(false, 
-                    Double.parseDouble(fo[0]), 
+                ret.add(new DatasetTableModel.Row(false,
+                    Double.parseDouble(fo[0]),
                     Double.parseDouble(fo[1]))
                 );
             }
         } catch (Exception e) {
             error("Error reading file '%s' (%s)", file.getName(), e);
         }
-        
+
         info("%d rows read from file '%s'", ret.size(), file.getName());
-        
+
         return ret;
     }
-    
+
     public void loadErrorFile(File file) {
         try (FileReader fis = new FileReader(file);
              BufferedReader br = new BufferedReader(fis)) {
             String line;
-            
+
             while ((line = br.readLine()) != null) {
                 String[] fo = line.trim().split(",");
                 errors.addRow(
-                    Integer.parseInt(fo[0]), 
-                    Double.parseDouble(fo[1]), 
+                    Integer.parseInt(fo[0]),
+                    Double.parseDouble(fo[1]),
                     Double.parseDouble(fo[2])
                 );
             }
         } catch (Exception e) {
             error("Error reading file '%s' (%s)", file.getName(), e);
         }
-        
+
         info("%d rows read from file '%s'", errors.getRowCount(), file.getName());
     }
 
     private void savePlot(String name, Canvas canvas) {
         final JFileChooser jfc = new JFileChooser(pathField.getText());
         final int out = jfc.showSaveDialog(null);
-        
+
         if (out != JFileChooser.APPROVE_OPTION) {
             return;
         }
-        
+
         final File file = jfc.getSelectedFile();
         if (file.exists()) {
             final int res = JOptionPane.showConfirmDialog(null,
                     i18n.__("Overwrite file?"),
                     i18n.__("Are you sure?"),
-                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE
             );
             if (res == JOptionPane.NO_OPTION) {
                 return;
             }
         }
-        
+
         try {
             Utils.saveScreenshot(canvas, file.getAbsolutePath(), true);
             info("'%s' plot image saved as '%s'", name, file.getName());
@@ -2385,11 +2395,11 @@ public final class MainWindow extends javax.swing.JFrame {
             menu.doClick(0);
             return;
         }
-        
+
         if (menu != null) {
             info("Example '%s' loaded", ex.getName());
         }
-        
+
         reloadExampleMI.setText(i18n.__("<html>Reload <code>'%s'</code></html>", ex.getName()));
         reloadExampleMI.setEnabled(true);
         lastItem = menu;
@@ -2416,7 +2426,7 @@ public final class MainWindow extends javax.swing.JFrame {
         smoothErroCheck.setSelected(ex.smoothError());
         showLabelsCheck.setSelected(ex.showLabels());
     }
-    
+
     private static final DecimalFormat FORMATTER = new DecimalFormat(c4g.get("number.format"));
     private final Map<JMenuItem, Example> exampleMap = new HashMap<>(11);
     {
@@ -2457,49 +2467,49 @@ public final class MainWindow extends javax.swing.JFrame {
                 readFiles(files, null);
             }
         });
-        
-        
+
+
         ActionListener exampleListner = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loadExample((JMenuItem)e.getSource(), exampleMap.get((JMenuItem)e.getSource()));
             }
         };
-        
+
         for (JMenuItem mi : exampleMap.keySet()) {
             mi.addActionListener(exampleListner);
-        }        
-    }              
-    
+        }
+    }
+
     private boolean shouldDraw() {
         //@TODO should redraw after a DEICONIZATION...
         return tabbedPane.getSelectedIndex() == 2 && (getExtendedState() & ICONIFIED) == 0;
     }
-    
+
     private synchronized void drawErrors() {
         if (!shouldDraw()) return;
         //@FIXME this should only be removed on selection change and on resize events... so lazy...
         errs.remove(strTrain);
         errs.remove(strValid);
-        
+
         if (showLabelsCheck.isSelected()) {
             final int xs = errs.getXSize() - ERR_X_OFFSET;
             final int ys = errs.getYSize() - ERR_Y_OFFSET;
             strTrain.move(xs - 120, ys - 15);
             strValid.move(xs - 120, ys - 30);
             errs.add(strTrain);
-            errs.add(strValid);            
+            errs.add(strValid);
             strTrain.setPaint(colors[0]);
             strValid.setPaint(colors[1]);
-        } 
-        
+        }
+
         if (smoothErroCheck.isSelected()) {
             drawErrors0();
         } else {
             drawErrors1();
         }
     }
-    
+
     private final GMultiPoint[] errorPoints = new GMultiPoint[2];
     private final BasicStroke errStroke = new BasicStroke(1.5f);
     private final int errRes = c4g.getInt("smooth.error.res");
@@ -2508,50 +2518,50 @@ public final class MainWindow extends javax.swing.JFrame {
             errs.repaint();
             return;
         }
-        
+
         if (errors.getRowCount() < 3) {
             return;
         }
-        
+
         if (errorPoints[TRAIN] == null) {
             errorPoints[TRAIN] = new GPath(errRes + 10);
             errorPoints[VALID] = new GPath(errRes + 10);
             errorPoints[TRAIN].setStroke(errStroke);
             errorPoints[VALID].setStroke(errStroke);
-            
+
             errs.add(errorPoints[TRAIN]);
             errs.add(errorPoints[VALID]);
         }
-        
+
         errorPoints[TRAIN].setPaint(colors[TRAIN]);
         errorPoints[VALID].setPaint(colors[VALID]);
-        
+
         errorPoints[TRAIN].clear();
         errorPoints[VALID].clear();
-        
-        //Los datos tienen que estar ordenados para spline
+
+        //Spline requires data to be sorted
         final double[][] temp = errors.getData();
         final Integer [] idxs = new Integer[temp[0].length];
-        
+
         for(int i = 0; i < idxs.length; i++) idxs[i] = i;
-        
+
         Arrays.sort(idxs, new Comparator<Integer>(){
             @Override
             public int compare(Integer o1, Integer o2){
                 return Double.compare(temp[0][o1], temp[0][o2]);
             }
         });
-        
+
         final double[][]data = new double[3][temp[0].length - 1];
         for (int j = 0; j < temp[0].length - 1; j++) {
             data[0][j] = temp[0][idxs[j]];
             data[1][j] = temp[1][idxs[j]];
             data[2][j] = temp[2][idxs[j]];
         }
-        
+
         final Spline spt = Spline.createCubicSpline(data[0], data[1]);
         final Spline spv = Spline.createCubicSpline(data[0], data[2]);
-        
+
         final double step = (data[0][data[0].length - 1] - data[0][0]) / errRes;
         double start = data[0][1];
         final double[][] datafinal = new double[2][errRes];
@@ -2559,15 +2569,15 @@ public final class MainWindow extends javax.swing.JFrame {
             datafinal[TRAIN][i] = spt.interpolate(i * step + start);
             datafinal[VALID][i] = spv.interpolate(i * step + start);
         }
-        
+
         double maxx = data[0][data[0].length - 1];
         double maxy = 0;
-        
+
         for (int i = 0, m = errRes; i < m; i++) {
             maxy = Math.max(maxy, datafinal[TRAIN][i]);
             maxy = Math.max(maxy, datafinal[VALID][i]);
         }
-        
+
         final double sx = 1. / maxx * (errs.getXSize() - ERR_X_OFFSET);
         final double sy = 1. / maxy * (errs.getYSize() - ERR_Y_OFFSET);
         for (int i = 0; i < errRes; i++) {
@@ -2577,7 +2587,7 @@ public final class MainWindow extends javax.swing.JFrame {
         }
         errs.repaint();
     }
-    
+
     private void drawErrors1() {
         //@FIXME this is mostly unnecessary... only new values should be added
         if (errors.getRowCount() == 0) {
@@ -2590,26 +2600,26 @@ public final class MainWindow extends javax.swing.JFrame {
             errs.add(errorPoints[TRAIN]);
             errs.add(errorPoints[VALID]);
         }
-        
+
         errorPoints[TRAIN].clear();
         errorPoints[VALID].clear();
         errorPoints[TRAIN].setPaint(colors[TRAIN]);
         errorPoints[VALID].setPaint(colors[VALID]);
-        
+
         ((GPointArray)errorPoints[TRAIN]).setCrossSize(1);
         ((GPointArray)errorPoints[VALID]).setCrossSize(1);
-        
+
         double maxx = errors.getEpoch(errors.getRowCount() - 1);
         double maxy = 0;
-        
+
         for (int i = 1, m = errors.getRowCount(); i < m; i++) {
             maxy = Math.max(maxy, errors.getDouble(i, TRAIN));
             maxy = Math.max(maxy, errors.getDouble(i, VALID));
         }
-        
+
         final double sx = 1. / maxx * (errs.getXSize() - ERR_X_OFFSET);
         final double sy = 1. / maxy * (errs.getYSize() - ERR_Y_OFFSET);
-        
+
         final int off = ((int)(sx * ERR_X_OFFSET));
         for (int i =  1, m = errors.getRowCount(); i < m; i++) {
             final int ep = (int)(sx * Math.round((float)errors.getEpoch(i))) - off;
@@ -2618,7 +2628,7 @@ public final class MainWindow extends javax.swing.JFrame {
         }
         errs.repaint();
     }
-    
+
     private GString labTrain, labValid, labGen;
     private final GMultiPoint[] points = new GMultiPoint[3];
     private final JComboBox<?>[] list = {trainBox, validBox, generBox};
@@ -2631,12 +2641,12 @@ public final class MainWindow extends javax.swing.JFrame {
         func.remove(labTrain);
         func.remove(labValid);
         func.remove(labGen);
-        
+
         if (showLabelsCheck.isSelected()) {
             final int xs = func.getXSize() / 2;
             final int ys = func.getYSize() / 2;
             int posy = 15;
-            
+
             if (trainPlotCheck.isSelected()) {
                 labTrain = new GString(xs - 120, ys - posy, i18n.__("Training"));
                 labTrain.setPaint(colors[TRAIN]);
@@ -2655,8 +2665,8 @@ public final class MainWindow extends javax.swing.JFrame {
                 func.add(labGen);
                 posy += 15;
             }
-        } 
-        
+        }
+
         if (list[idx] == null) {
             list[TRAIN] = trainBox;
             list[VALID] = validBox;
@@ -2667,18 +2677,18 @@ public final class MainWindow extends javax.swing.JFrame {
             func.repaint();
             return;
         }
-        
+
         if (mlp == null && idx == GENER) {
             return;
         }
-        
+
         func.remove(points[idx]);
-        
+
         if (!selections[idx].isSelected()) {
             func.repaint();
             return;
         }
-        
+
         if (list[idx].getSelectedIndex() == PLOT_PATHS) {
             points[idx] = new GPath(datas[idx].getRowCount());
         } else {
@@ -2687,10 +2697,10 @@ public final class MainWindow extends javax.swing.JFrame {
                 ((GPointArray)points[idx]).setCrossSize(1);
             }
         }
-        
+
         points[idx].setPaint(colors[idx]);
         final double[] maxs = maxs();
-        
+
         final double sx = 1. / maxs[0] *  func.getXSize() / 2;
         final double sy = 1. / maxs[1] * (func.getYSize() / 2 - 10);
 
@@ -2705,14 +2715,14 @@ public final class MainWindow extends javax.swing.JFrame {
             for (int i = 0, m = dtm.getRowCount(); i < m; i++) {
                 pattern.position(0, 0, dtm.getDouble(i, 0));
                 points[GENER].append(
-                    (int)(sx * dtm.getDouble(i, 0)), 
+                    (int)(sx * dtm.getDouble(i, 0)),
                     (int)(sy * mlp2.simulate(pattern).position(0, 0))
                 );
             }
         } else {
             for (int i = 0, m = dtm.getRowCount(); i < m; i++) {
                 points[idx].append(
-                    (int)(sx * dtm.getDouble(i, 0)), 
+                    (int)(sx * dtm.getDouble(i, 0)),
                     (int)(sy * dtm.getDouble(i, 1))
                 );
             }
@@ -2725,7 +2735,7 @@ public final class MainWindow extends javax.swing.JFrame {
         func.add(points[idx]);
         func.repaint();
     }
-    
+
     private double[] maxs(){
         double maxx = 0, maxy = 0;
         for (int idx = 0; idx < 3; idx++) {
@@ -2737,21 +2747,21 @@ public final class MainWindow extends javax.swing.JFrame {
         }
         return new double[]{maxx, maxy};
     }
-    
+
     private final String[] sfiles = {
-        i18n.__("__training.csv"), 
-        i18n.__("__validation.csv"), 
+        i18n.__("__training.csv"),
+        i18n.__("__validation.csv"),
         i18n.__("__generalization.csv"),
         i18n.__("__errors.csv")
     };
     private void saveData(String fname) {
         DatasetTableModel[] data = {train, validate, generalize};
-        
+
         for (int j = 0; j < 3; j++) {
             DatasetTableModel model = data[j];
             try (PrintStream out = new PrintStream(fname + sfiles[j])) {
                 for (int i = 0; i < model.getRowCount(); i++) {
-                    out.format("%f, %f%n", 
+                    out.format("%f, %f%n",
                         model.getDouble(i, 0),
                         model.getDouble(i, 1)
                     );
@@ -2767,7 +2777,7 @@ public final class MainWindow extends javax.swing.JFrame {
         info("Saving errors to '%s'", fname + sfiles[3]);
         try (PrintStream out = new PrintStream(fname + sfiles[3])) {
             for (int i = 0; i < errors.getRowCount(); i++) {
-                out.format("%d, %f, %f%n", 
+                out.format("%d, %f, %f%n",
                     (int)errors.getEpoch(i),
                     errors.getDouble(i, 0),
                     errors.getDouble(i, 1)
@@ -2776,17 +2786,15 @@ public final class MainWindow extends javax.swing.JFrame {
         } catch (Exception ex) {
             error("Error writing file '%s' (%s)", sfiles[3], ex.getLocalizedMessage());
         }
-        
+
     }
 
     private void readConfig(File file) {
         info("Cleaning current data");
         dataClearAllMI.doClick(0);
-        System.out.println(file);
         String path = file.getParent() + File.separator;
-        System.out.println(path);
         pathField.setText(path);
-        
+
         info("Loading Configuration File '%s'", file.getName());
         try (FileInputStream fis = new FileInputStream(file)) {
             ConfigWrapper cw = new ConfigWrapper(fis, path, this);
@@ -2801,23 +2809,23 @@ public final class MainWindow extends javax.swing.JFrame {
             error("Error reading file '%s' (%s)", file.getName(), e.getLocalizedMessage());
         }
     }
-    
+
     private final String INTERNAL_MLP_PATH    = "/res/i18n/mlp/default_%s.properties";
     private final String INTERNAL_MLP_PATH_EN = "/res/i18n/mlp/default.properties";
     private void saveConfig(String fname) {
         info("Saving configuration file '%s'", fname + "__mlp.conf");
         Locale locale = Locale.getDefault();
         String path = null;
-        
-        // Yeah we now have localized configs... 
+
+        // Yeah we now have localized configs...
         String fooPath = String.format(INTERNAL_MLP_PATH, locale.getLanguage());
         URL url = getClass().getResource(fooPath);
         if (url != null) {
             path = fooPath;
         }
-        
+
         if (path == null) path = INTERNAL_MLP_PATH_EN;
-        
+
         CommentedProperties save = new CommentedProperties();
         try (InputStream is = getClass().getResourceAsStream(path)) {
             save.load(is);
@@ -2825,7 +2833,7 @@ public final class MainWindow extends javax.swing.JFrame {
             //@TODO show error message(?)
             warn("Unable to read the default template! (%s)", ex.getLocalizedMessage());
         }
-        
+
         save.put("max.epochs", maxEpochsSpinner.getValue());
         save.put("save.every", saveEverySpinner.getValue());
         save.put("mce", ((Number) mseField.getValue()).doubleValue());
@@ -2850,19 +2858,19 @@ public final class MainWindow extends javax.swing.JFrame {
         save.put("plot.gener.color", Integer.toHexString(colors[GENER].getRGB()));
         save.put("smooth.errors", smoothErroCheck.isSelected());
         save.put("show.labels", showLabelsCheck.isSelected());
-        
+
         try (PrintStream out = new PrintStream(fname + "__mlp.conf")) {
             save.store(out, "");
         } catch (Exception ex) {
             error("Error writing file '%s' (%s)", fname + "__mlp.conf", ex.getLocalizedMessage());
         }
     }
-    
+
     private final SimpleAttributeSet STYLE_ERROR   = new SimpleAttributeSet();
     private final SimpleAttributeSet STYLE_INFO    = new SimpleAttributeSet();
     private final SimpleAttributeSet STYLE_DEBUG   = new SimpleAttributeSet();
     private final SimpleAttributeSet STYLE_WARNING = new SimpleAttributeSet();
-    {        
+    {
         StyleConstants.setFontFamily(STYLE_DEBUG,   c4g.get     ("debug.font"));
         StyleConstants.setForeground(STYLE_DEBUG,   c4g.getColor("debug.foreground"));
         StyleConstants.setBackground(STYLE_DEBUG,   c4g.getColor("debug.background"));
@@ -2877,57 +2885,57 @@ public final class MainWindow extends javax.swing.JFrame {
         StyleConstants.setBackground(STYLE_ERROR,   c4g.getColor("error.background"));
         StyleConstants.setBold      (STYLE_ERROR,   true);
     }
-        
+
     private final StyledDocument doc = logsTextPane.getStyledDocument();
     private final static long START = System.nanoTime();
-    
+
     private PrintStream PS = c4g.getBool("use.std.out") ? System.out : NullPrintStream.getInstance();
     private boolean DEBUG_ENABLED = c4g.getBool("enable.debug");
-    
+
     public final void info(String msg, Object... args) {
         write(STYLE_INFO, msg, args);
     }
-    
+
     public final void debug(String msg, Object... args) {
         if (DEBUG_ENABLED) {
             write(STYLE_DEBUG, msg, args);
         }
     }
-    
+
     public final void warn(String msg, Object... args) {
         write(STYLE_WARNING, msg, args);
     }
-    
+
     public final void error(String msg, Object... args) {
         write(STYLE_ERROR, msg, args);
     }
-    
+
     public final void write(SimpleAttributeSet type, String msg, Object... args) {
         final double time = System.nanoTime() - START;
         final String stime = String.format("[%.3fs]: ", time / 1e9);
         final String stmsg = i18n.__(msg, args) + "\n";
-        
+
         PS.append(stime);
         PS.append(stmsg);
-        
+
         try {
             doc.insertString(doc.getLength(), stime, type);
             doc.insertString(doc.getLength(), stmsg, type);
             logsTextPane.setCaretPosition(doc.getLength());
-        } catch(BadLocationException e) { 
-            PS.println(e); 
+        } catch(BadLocationException e) {
+            PS.println(e);
         }
     }
-    
+
     public void checkTrainEnabled() {
         final boolean trainEnabled = train     .getRowCount() > 0 &&
                                      validate  .getRowCount() > 0 &&
                                      generalize.getRowCount() > 0;
-        
+
         trainStartMI.setEnabled(trainEnabled);
         playPauseButton.setEnabled(trainEnabled);
     }
-    
+
     private final class DecimalFormatRenderer extends DefaultTableCellRenderer {
         public DecimalFormatRenderer() {
             setHorizontalAlignment(SwingConstants.TRAILING);

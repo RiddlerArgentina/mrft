@@ -23,8 +23,10 @@
  */
 package com.dkt.mrft.examples;
 
+import com.dkt.mrft.gui.MainWindow;
 import com.dkt.mrft.models.DatasetTableModel;
 import java.io.File;
+import libai.nn.supervised.MLP;
 
 /**
  *
@@ -64,7 +66,7 @@ public class ExampleSquare extends Example {
 
     @Override
     public int backpropagation() {
-        return 2;
+        return MLP.RESILENT_BACKPROPAGATION;
     }
     
     @Override
@@ -89,7 +91,6 @@ public class ExampleSquare extends Example {
     
     void load(DatasetTableModel data, int num) {
         for (double x = -2; x < 2; x += 0.01) {
-//            double x  = Math.random() * 4 - 2;
             data.addRow(x, f(x));
         }
     }
@@ -123,7 +124,7 @@ public class ExampleSquare extends Example {
 
     @Override
     public int trainingFormat() {
-        return 2;
+        return MainWindow.PLOT_PATHS;
     }
 
     @Override
@@ -133,7 +134,7 @@ public class ExampleSquare extends Example {
 
     @Override
     public int validationFormat() {
-        return 0;
+        return MainWindow.PLOT_POINT;
     }
 
     @Override
@@ -143,7 +144,7 @@ public class ExampleSquare extends Example {
 
     @Override
     public int generalizationFormat() {
-        return 1;
+        return MainWindow.PLOT_CROSS;
     }
     
 }
