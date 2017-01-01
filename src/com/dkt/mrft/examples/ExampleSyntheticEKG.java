@@ -30,6 +30,7 @@ import com.dkt.mrft.models.DatasetTableModel;
 import java.io.File;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import libai.nn.supervised.MLP;
 
 /**
  *
@@ -69,7 +70,7 @@ public class ExampleSyntheticEKG extends Example {
 
     @Override
     public int backpropagation() {
-        return 2;
+        return MLP.RESILENT_BACKPROPAGATION;
     }
     
     @Override

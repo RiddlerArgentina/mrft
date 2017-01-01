@@ -26,6 +26,7 @@ package com.dkt.mrft.examples;
 import com.dkt.mrft.gui.MainWindow;
 import com.dkt.mrft.models.DatasetTableModel;
 import java.io.File;
+import libai.nn.supervised.MLP;
 
 /**
  *
@@ -65,7 +66,7 @@ public class ExampleSin extends Example {
 
     @Override
     public int backpropagation() {
-        return 0;
+        return MLP.STANDARD_BACKPROPAGATION;
     }
     
     @Override

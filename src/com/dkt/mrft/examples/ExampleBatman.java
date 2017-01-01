@@ -26,6 +26,7 @@ package com.dkt.mrft.examples;
 import com.dkt.mrft.gui.MainWindow;
 import com.dkt.mrft.models.DatasetTableModel;
 import java.io.File;
+import libai.nn.supervised.MLP;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
@@ -68,7 +69,7 @@ public class ExampleBatman extends Example {
 
     @Override
     public int backpropagation() {
-        return 2;
+        return MLP.RESILENT_BACKPROPAGATION;
     }
 
     @Override
