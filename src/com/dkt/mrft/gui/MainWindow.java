@@ -157,9 +157,9 @@ public final class MainWindow extends javax.swing.JFrame {
     private static final int GENER = 2;
     private static final int ERROR = 3;
     
-    private static final int PLOT_POINT = 0;
-    private static final int PLOT_CROSS = 1;
-    private static final int PLOT_PATHS = 2;
+    public static final int PLOT_POINT = 0;
+    public static final int PLOT_CROSS = 1;
+    public static final int PLOT_PATHS = 2;
     
     private final LayersModel       layers     = new LayersModel();
     private final DatasetTableModel train      = new DatasetTableModel(i18n.__("training"));
