@@ -25,6 +25,7 @@ package com.dkt.mrft.examples;
 
 import com.dkt.mrft.examples.ekg.EcgCalc;
 import com.dkt.mrft.examples.ekg.EcgParam;
+import com.dkt.mrft.gui.MainWindow;
 import com.dkt.mrft.models.DatasetTableModel;
 import java.io.File;
 import java.util.Random;
@@ -144,7 +145,7 @@ public class ExampleSyntheticEKG extends Example {
 
     @Override
     public int trainingFormat() {
-        return 2;
+        return MainWindow.PLOT_PATHS;
     }
 
     @Override
@@ -154,7 +155,7 @@ public class ExampleSyntheticEKG extends Example {
 
     @Override
     public int validationFormat() {
-        return 0;
+        return MainWindow.PLOT_POINT;
     }
 
     @Override
@@ -164,7 +165,7 @@ public class ExampleSyntheticEKG extends Example {
 
     @Override
     public int generalizationFormat() {
-        return 1;
+        return MainWindow.PLOT_CROSS;
     }
     
 }

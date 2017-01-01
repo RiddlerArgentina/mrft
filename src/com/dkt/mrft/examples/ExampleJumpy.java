@@ -23,6 +23,7 @@
  */
 package com.dkt.mrft.examples;
 
+import com.dkt.mrft.gui.MainWindow;
 import com.dkt.mrft.models.DatasetTableModel;
 import java.io.File;
 
@@ -125,7 +126,7 @@ public class ExampleJumpy extends Example {
 
     @Override
     public int trainingFormat() {
-        return 2;
+        return MainWindow.PLOT_PATHS;
     }
 
     @Override
@@ -135,7 +136,7 @@ public class ExampleJumpy extends Example {
 
     @Override
     public int validationFormat() {
-        return 0;
+        return MainWindow.PLOT_POINT;
     }
 
     @Override
@@ -145,7 +146,7 @@ public class ExampleJumpy extends Example {
 
     @Override
     public int generalizationFormat() {
-        return 1;
+        return MainWindow.PLOT_CROSS;
     }
     
 }
