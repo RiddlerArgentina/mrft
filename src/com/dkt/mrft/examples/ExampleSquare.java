@@ -91,7 +91,6 @@ public class ExampleSquare extends Example {
     
     void load(DatasetTableModel data, int num) {
         for (double x = -2; x < 2; x += 0.01) {
-//            double x  = Math.random() * 4 - 2;
             data.addRow(x, f(x));
         }
     }
