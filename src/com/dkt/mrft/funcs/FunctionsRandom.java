@@ -37,16 +37,16 @@ public class FunctionsRandom {
     private static final int INDEX_GAUSS  = 2;
     private static final int INDEX_GAUSS2 = 3;
 
-    private static final Function[] builtinFunctions = new Function[4];
+    private static final Function[] FUNCTIONS = new Function[4];
 
     static {
-        builtinFunctions[INDEX_RAND] = new Function("rand", 0) {
+        FUNCTIONS[INDEX_RAND] = new Function("rand", 0) {
             @Override
             public double apply(double... args) {
                 return ThreadLocalRandom.current().nextDouble();
             }
         };
-        builtinFunctions[INDEX_RAND2] = new Function("rand2", 2) {
+        FUNCTIONS[INDEX_RAND2] = new Function("rand2", 2) {
             @Override
             public double apply(double... args) {
                 final double a = args[0];
@@ -54,13 +54,13 @@ public class FunctionsRandom {
                 return ThreadLocalRandom.current().nextDouble() * (b - a) + a;
             }
         };
-        builtinFunctions[INDEX_GAUSS] = new Function("gaussian", 0) {
+        FUNCTIONS[INDEX_GAUSS] = new Function("gaussian", 0) {
             @Override
             public double apply(double... args) {
                 return ThreadLocalRandom.current().nextGaussian();
             }
         };
-        builtinFunctions[INDEX_GAUSS2] = new Function("gaussian2", 2) {
+        FUNCTIONS[INDEX_GAUSS2] = new Function("gaussian2", 2) {
             @Override
             public double apply(double... args) {
                 final double a = args[0];
@@ -71,21 +71,7 @@ public class FunctionsRandom {
     }
     
     public static Function[] getFunctions() {
-        return Arrays.copyOf(builtinFunctions, builtinFunctions.length);
+        return Arrays.copyOf(FUNCTIONS, FUNCTIONS.length);
     }
-
-    public static Function getBuiltinFunctions(final String name) {
-        switch(name) {
-            case "rand":
-                return builtinFunctions[INDEX_RAND];
-            case "rand2":
-                return builtinFunctions[INDEX_RAND2];
-            case "gaussian":
-                return builtinFunctions[INDEX_GAUSS];
-            case "gaussian2":
-                return builtinFunctions[INDEX_GAUSS2];
-            default:
-                return null;
-        }
-    }
+    
 }
