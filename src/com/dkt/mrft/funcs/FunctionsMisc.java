@@ -32,14 +32,12 @@ import net.objecthunter.exp4j.function.Function;
  */
 public class FunctionsMisc {
     private static final int INDEX_SINC = 0;
-    private static final int INDEX_PI   = 1;
-    private static final int INDEX_E    = 2;
-    private static final int INDEX_R2D  = 3;
-    private static final int INDEX_D2R  = 4;
-    private static final int INDEX_F2C  = 5;
-    private static final int INDEX_C2F  = 6;
+    private static final int INDEX_R2D  = 1;
+    private static final int INDEX_D2R  = 2;
+    private static final int INDEX_F2C  = 3;
+    private static final int INDEX_C2F  = 4;
 
-    private static final Function[] FUNCTIONS = new Function[7];
+    private static final Function[] FUNCTIONS = new Function[5];
 
     static {
         FUNCTIONS[INDEX_SINC] = new Function("sinc") {
@@ -47,18 +45,6 @@ public class FunctionsMisc {
             public double apply(double... args) {
                 final double x = args[0];
                 return x == 0 ? 1 : Math.sin(x) / x;
-            }
-        };
-        FUNCTIONS[INDEX_PI] = new Function("pi", 0) {
-            @Override
-            public double apply(double... args) {
-                return Math.PI;
-            }
-        };
-        FUNCTIONS[INDEX_E] = new Function("e", 0) {
-            @Override
-            public double apply(double... args) {
-                return Math.E;
             }
         };
         FUNCTIONS[INDEX_R2D] = new Function("r2d", 1) {
