@@ -23,7 +23,6 @@
  */
 package com.dkt.mrft.models;
 
-import com.dkt.mrft.funcs.Sinc;
 import com.dkt.mrft.utils.BundleDecorator;
 import com.dkt.mrft.utils.Pair;
 import java.util.LinkedList;
@@ -34,6 +33,7 @@ import libai.common.functions.Gaussian;
 import libai.common.functions.HyperbolicTangent;
 import libai.common.functions.Identity;
 import libai.common.functions.Sigmoid;
+import libai.common.functions.Sinc;
 
 /**
  *
