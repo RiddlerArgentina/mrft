@@ -65,14 +65,14 @@ public class FunctionsMisc {
             @Override
             public double apply(double... args) {
                 final double r = args[0];
-                return r * 180. / Math.PI;
+                return Math.toDegrees(r);
             }
         };
         FUNCTIONS[INDEX_D2R] = new Function("d2r", 1) {
             @Override
             public double apply(double... args) {
                 final double d = args[0];
-                return d * Math.PI / 180;
+                return Math.toRadians(d);
             }
         };
         FUNCTIONS[INDEX_F2C] = new Function("f2c", 1) {
