@@ -291,7 +291,7 @@ public final class MainWindow extends javax.swing.JFrame {
         generTable.setAutoCreateRowSorter(true);
         generTableScrollPane.setViewportView(generTable);
 
-        buttonGroup1.add(selTrainButton);
+        selectionButtonGroup.add(selTrainButton);
         selTrainButton.setText(bundle.getString("TBL_SEL_TRAIN")); // NOI18N
         selTrainButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -299,7 +299,7 @@ public final class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(selValidButton);
+        selectionButtonGroup.add(selValidButton);
         selValidButton.setText(bundle.getString("TBL_SEL_VALID")); // NOI18N
         selValidButton.setActionCommand(bundle.getString("TBL_SEL_VALID")); // NOI18N
         selValidButton.addActionListener(new ActionListener() {
@@ -308,7 +308,7 @@ public final class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(selGenerButton);
+        selectionButtonGroup.add(selGenerButton);
         selGenerButton.setText(bundle.getString("TBL_SEL_GENER")); // NOI18N
         selGenerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -986,7 +986,7 @@ public final class MainWindow extends javax.swing.JFrame {
         });
         fileMenu.add(quitMI);
 
-        jMenuBar1.add(fileMenu);
+        menuBar.add(fileMenu);
 
         viewMenu.setMnemonic('V');
         viewMenu.setText(bundle1.getString("VIEW")); // NOI18N
@@ -1031,7 +1031,7 @@ public final class MainWindow extends javax.swing.JFrame {
         });
         viewMenu.add(outputPanelMI);
 
-        jMenuBar1.add(viewMenu);
+        menuBar.add(viewMenu);
 
         datasetMenu.setMnemonic('T');
         datasetMenu.setText(bundle1.getString("DATA")); // NOI18N
@@ -1140,7 +1140,7 @@ public final class MainWindow extends javax.swing.JFrame {
         });
         datasetMenu.add(dataClearAllMI);
 
-        jMenuBar1.add(datasetMenu);
+        menuBar.add(datasetMenu);
 
         trainMenu.setMnemonic('E');
         trainMenu.setText(bundle1.getString("TRAIN")); // NOI18N
@@ -1175,7 +1175,7 @@ public final class MainWindow extends javax.swing.JFrame {
         });
         trainMenu.add(trainStopMI);
 
-        jMenuBar1.add(trainMenu);
+        menuBar.add(trainMenu);
 
         plotsMenu.setMnemonic('G');
         plotsMenu.setText(bundle1.getString("PLOTS")); // NOI18N
@@ -1204,7 +1204,7 @@ public final class MainWindow extends javax.swing.JFrame {
         });
         plotsMenu.add(saveGifMI);
 
-        jMenuBar1.add(plotsMenu);
+        menuBar.add(plotsMenu);
 
         examplesMenu.setMnemonic('j');
         examplesMenu.setText(bundle1.getString("EXAMPLES")); // NOI18N
@@ -1253,7 +1253,7 @@ public final class MainWindow extends javax.swing.JFrame {
         exampleEkgSynthMI.setText(bundle1.getString("EXAMPLES_EKG_SYNTH")); // NOI18N
         examplesMenu.add(exampleEkgSynthMI);
 
-        jMenuBar1.add(examplesMenu);
+        menuBar.add(examplesMenu);
 
         helpMenu.setMnemonic('?');
         helpMenu.setText("?");
@@ -1304,9 +1304,9 @@ public final class MainWindow extends javax.swing.JFrame {
         });
         helpMenu.add(aboutMI);
 
-        jMenuBar1.add(helpMenu);
+        menuBar.add(helpMenu);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1950,7 +1950,6 @@ public final class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private final JComboBox<String> backpropBox = new JComboBox<>();
-    private final ButtonGroup buttonGroup1 = new ButtonGroup();
     private final JMenuItem dataClearAllMI = new JMenuItem();
     private final JMenuItem dataClearSelMI = new JMenuItem();
     private final JPanel dataPanel = new JPanel();
@@ -1981,12 +1980,12 @@ public final class MainWindow extends javax.swing.JFrame {
     private final JCheckBox generPlotCheck = new JCheckBox();
     private final JTable generTable = new JTable();
     private final JSplitPane horizontalSplit = new JSplitPane();
-    private final JMenuBar jMenuBar1 = new JMenuBar();
     private final JTable layerTable = new JTable();
     private final JSpinner layersSpinner = new JSpinner();
     private final JFormattedTextField learningRateField = new JFormattedTextField(FORMATTER);
     private final JTextPane logsTextPane = new JTextPane();
     private final JSpinner maxEpochsSpinner = new JSpinner();
+    private final JMenuBar menuBar = new JMenuBar();
     private final JPopupMenu.Separator menuSeparator2 = new JPopupMenu.Separator();
     private final JFormattedTextField mseField = new JFormattedTextField(FORMATTER);
     private final JSeparator optionsSeparator = new JSeparator();
@@ -2001,6 +2000,7 @@ public final class MainWindow extends javax.swing.JFrame {
     private final JRadioButton selValidButton = new JRadioButton();
     private final JFormattedTextField selectNumberField = new JFormattedTextField();
     private final JFormattedTextField selectPercentageField = new JFormattedTextField();
+    private final ButtonGroup selectionButtonGroup = new ButtonGroup();
     private final JSeparator selectionSeparator2 = new JSeparator();
     private final JCheckBox showLabelsCheck = new JCheckBox();
     private final JCheckBox smoothErroCheck = new JCheckBox();
