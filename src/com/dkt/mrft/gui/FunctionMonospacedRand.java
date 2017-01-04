@@ -113,7 +113,7 @@ public final class FunctionMonospacedRand extends JDialog {
             }
         });
 
-        jLabel6.setText(bundle.getString("F_MONO_RAND_INVALID")); // NOI18N
+        invalidIntervalLabel.setText(bundle.getString("F_MONO_RAND_INVALID")); // NOI18N
 
         startField.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter()));
         startField.setHorizontalAlignment(JTextField.CENTER);
@@ -136,7 +136,7 @@ public final class FunctionMonospacedRand extends JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(invalidIntervalLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(closeButton)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -192,7 +192,7 @@ public final class FunctionMonospacedRand extends JDialog {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(genCloseButton)
                     .addComponent(closeButton)
-                    .addComponent(jLabel6))
+                    .addComponent(invalidIntervalLabel))
                 .addContainerGap())
         );
 
@@ -213,7 +213,7 @@ public final class FunctionMonospacedRand extends JDialog {
     private final JFormattedTextField endField = new JFormattedTextField();
     private final JTextField expField = new JTextField();
     private final JButton genCloseButton = new JButton();
-    private final JLabel jLabel6 = new JLabel();
+    private final JLabel invalidIntervalLabel = new JLabel();
     private final JFormattedTextField pointsField = new JFormattedTextField();
     private final JFormattedTextField seedField = new JFormattedTextField();
     private final JFormattedTextField startField = new JFormattedTextField();
@@ -253,7 +253,7 @@ public final class FunctionMonospacedRand extends JDialog {
             endField.commitEdit();
             seedField.commitEdit();
         } catch (ParseException ignoreMe) {
-            jLabel6.setText(i18n.__("F_MONO_RAND_INVALID"));
+            invalidIntervalLabel.setText(i18n.__("F_MONO_RAND_INVALID"));
             return false;
         }
         
@@ -264,9 +264,9 @@ public final class FunctionMonospacedRand extends JDialog {
         boolean status = start < end && nval > 0;   
         
         if (status) {
-            jLabel6.setText(i18n.__("F_MONO_RAND_INVALID"));
+            invalidIntervalLabel.setText(i18n.__("F_MONO_RAND_INVALID"));
         } else {
-            jLabel6.setText("");
+            invalidIntervalLabel.setText("");
         }
         
         return status;
