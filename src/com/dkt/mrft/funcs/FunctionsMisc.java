@@ -31,22 +31,14 @@ import net.objecthunter.exp4j.function.Function;
  * @author Federico Vera {@literal <fedevera at unc.edu.ar>}
  */
 public class FunctionsMisc {
-    private static final int INDEX_SINC = 0;
-    private static final int INDEX_R2D  = 1;
-    private static final int INDEX_D2R  = 2;
-    private static final int INDEX_F2C  = 3;
-    private static final int INDEX_C2F  = 4;
+    private static final int INDEX_R2D  = 0;
+    private static final int INDEX_D2R  = 1;
+    private static final int INDEX_F2C  = 2;
+    private static final int INDEX_C2F  = 3;
 
-    private static final Function[] FUNCTIONS = new Function[5];
+    private static final Function[] FUNCTIONS = new Function[4];
 
     static {
-        FUNCTIONS[INDEX_SINC] = new Function("sinc") {
-            @Override
-            public double apply(double... args) {
-                final double x = args[0];
-                return x == 0 ? 1 : Math.sin(x) / x;
-            }
-        };
         FUNCTIONS[INDEX_R2D] = new Function("r2d", 1) {
             @Override
             public double apply(double... args) {
