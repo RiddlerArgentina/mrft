@@ -43,7 +43,7 @@
                       <Component id="validFXLabel" min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabel3" pref="271" max="32767" attributes="0"/>
+                      <Component id="availableVarsLabel" pref="271" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="closeButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -75,7 +75,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="applyButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="closeButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="availableVarsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -109,7 +109,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="expFXTextField">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="availableVarsLabel">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="res/i18n/dialogs.properties" key="F_CUSTOM_VARS" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>

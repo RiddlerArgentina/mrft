@@ -64,7 +64,7 @@ public final class CustomFunction extends javax.swing.JDialog {
 
         JLabel expXLabel = new JLabel();
         JLabel expFXLabel = new JLabel();
-        JLabel jLabel3 = new JLabel();
+        JLabel availableVarsLabel = new JLabel();
         JButton closeButton = new JButton();
 
         ResourceBundle bundle = ResourceBundle.getBundle("res/i18n/dialogs"); // NOI18N
@@ -74,7 +74,7 @@ public final class CustomFunction extends javax.swing.JDialog {
 
         expFXLabel.setText(bundle.getString("F_CUSTOM_FOR_FX")); // NOI18N
 
-        jLabel3.setText(bundle.getString("F_CUSTOM_VARS")); // NOI18N
+        availableVarsLabel.setText(bundle.getString("F_CUSTOM_VARS")); // NOI18N
 
         applyButton.setText(bundle.getString("F_CUSTOM_APPLY")); // NOI18N
         applyButton.addActionListener(new ActionListener() {
@@ -113,7 +113,7 @@ public final class CustomFunction extends javax.swing.JDialog {
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(validFXLabel, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE))
                     .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3, GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                        .addComponent(availableVarsLabel, GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(closeButton)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -137,7 +137,7 @@ public final class CustomFunction extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(applyButton)
                     .addComponent(closeButton)
-                    .addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(availableVarsLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
