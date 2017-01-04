@@ -4,12 +4,12 @@
     <property name="main.src.dir"   value="src"/>
     <property name="lib.dir"        value="lib"/>
     <property name="jar.dir"        value="dist"/>
-    <property name="proj.ver"       value ="1.0"/>
+    <property name="proj.ver"       value ="1.0.5"/>
 
     <path id="classpath.src">
         <pathelement location="lib/exp4j-fido-0.5.1.jar"/>
         <pathelement location="lib/jDrawingLib.jar"/>
-        <pathelement location="lib/libai-0.1.jar"/>
+        <pathelement location="lib/libai-1.0.1.jar"/>
         <pathelement location="${jar.dir}"/>
     </path>
     
