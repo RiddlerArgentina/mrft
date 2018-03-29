@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
+ * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,9 +34,19 @@ import libai.nn.supervised.MLP;
 
 /**
  *
- * @author Federico Vera {@literal <fedevera at unc.edu.ar>}
+ * @author Federico Vera {@literal <fede@riddler.com.ar>}
  */
 public class ExampleSyntheticEKG extends Example {
+    private final EcgParam param;
+    private final EcgCalc calc;
+
+    public ExampleSyntheticEKG() {
+        param = new EcgParam();
+        param.setN(1);
+        param.setANoise(0.01);
+        calc = new EcgCalc(param);
+        calc.calculateEcg();
+    }
 
     @Override
     public String getName() {
@@ -78,16 +88,6 @@ public class ExampleSyntheticEKG extends Example {
         return new String[]{"Identity(1)",  "TanH(16)", "Logistic(16)", "Identity(1)"};
     }
 
-    
-    private final EcgParam param;
-    private final EcgCalc calc;
-    {
-        param = new EcgParam();
-        param.setN(1);
-        param.setANoise(0.01);
-        calc = new EcgCalc(param);
-        calc.calculateEcg();
-    }
     @Override
     public void loadTrainData(DatasetTableModel data) {
         for (int i = 0; i < calc.getEcgResultNumRows(); i++) {
@@ -119,7 +119,7 @@ public class ExampleSyntheticEKG extends Example {
         load(data, 100);
     }
     
-    void load(DatasetTableModel data, int num) {
+    private void load(DatasetTableModel data, int num) {
         for (double x = -0.5; x < 0.5; x += 0.01) {
             data.addRow(x, 0.0);
         }
