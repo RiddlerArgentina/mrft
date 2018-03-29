@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
+ * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,10 +31,12 @@ import net.objecthunter.exp4j.Expression;
 
 /**
  *
- * @author Federico Vera {@literal <fedevera at unc.edu.ar>}
+ * @author Federico Vera {@literal <fede@riddler.com.ar>}
  */
 public class DatasetTableModel extends AbstractTableModel {
     private static final BundleDecorator i18n = new BundleDecorator("res.i18n.models");   
+    private final String[] cols = {i18n.__("Selection"), i18n.__("x"), i18n.__("f(x)")};
+    private final Class<?>[] colClass = {Boolean.class, Double.class, Double.class};
     
     private final ArrayList<Row> data = new ArrayList<>(128);
     
@@ -96,7 +98,6 @@ public class DatasetTableModel extends AbstractTableModel {
         return true;
     }
 
-    private final String[] cols = {i18n.__("Selection"), i18n.__("x"), i18n.__("f(x)")};
     @Override
     public String getColumnName(int column) {
         return cols[selecting ? column : column + 1];
@@ -124,7 +125,6 @@ public class DatasetTableModel extends AbstractTableModel {
         return counter;
     }
 
-    private final Class<?>[] colClass = {Boolean.class, Double.class, Double.class};
     @Override
     public Class<?> getColumnClass(int column) {
         return colClass[selecting ? column : column + 1];

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
+ * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -58,10 +58,12 @@ import net.objecthunter.exp4j.extras.OperatorsComparison;
 
 /**
  *
- * @author Federico Vera {@literal <fedevera at unc.edu.ar>}
+ * @author Federico Vera {@literal <fede@riddler.com.ar>}
  */
 public final class FunctionMonospacedRand extends JDialog {
     private static final BundleDecorator i18n = new BundleDecorator("res.i18n.dialogs");   
+    private final ImageIcon warn = new ImageIcon(getClass().getResource("/res/icons/warn.png"));
+    private final ImageIcon a_ok = new ImageIcon(getClass().getResource("/res/icons/a_ok.png"));
     
     private final MainWindow father;
 
@@ -73,7 +75,7 @@ public final class FunctionMonospacedRand extends JDialog {
     }
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         final JLabel expLabel = new JLabel();
@@ -197,19 +199,19 @@ public final class FunctionMonospacedRand extends JDialog {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     private boolean out;
-    private void closeButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+    private void closeButtonActionPerformed(ActionEvent evt) {                                            
         out = false;
         setVisible(false);
-    }//GEN-LAST:event_closeButtonActionPerformed
+    }                                           
 
-    private void genCloseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_genCloseButtonActionPerformed
+    private void genCloseButtonActionPerformed(ActionEvent evt) {                                               
         out = true;
         setVisible(false);
-    }//GEN-LAST:event_genCloseButtonActionPerformed
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    }                                              
+    // Variables declaration - do not modify                     
     private final JFormattedTextField endField = new JFormattedTextField();
     private final JTextField expField = new JTextField();
     private final JButton genCloseButton = new JButton();
@@ -218,7 +220,7 @@ public final class FunctionMonospacedRand extends JDialog {
     private final JFormattedTextField seedField = new JFormattedTextField();
     private final JFormattedTextField startField = new JFormattedTextField();
     private final JLabel validExpLabel = new JLabel();
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 
     private void initListners() {
         DocumentListener dl = new DocumentListener() {
@@ -272,8 +274,6 @@ public final class FunctionMonospacedRand extends JDialog {
         return status;
     }
 
-    private final ImageIcon warn = new ImageIcon(getClass().getResource("/res/icons/warn.png"));
-    private final ImageIcon a_ok = new ImageIcon(getClass().getResource("/res/icons/a_ok.png"));
     private boolean validateFunc() {
         String expString = expField.getText();
         if (expString.trim().isEmpty()) {

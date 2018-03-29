@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
+ * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,10 +37,16 @@ import libai.common.functions.Sinc;
 
 /**
  *
- * @author Federico Vera {@literal <fedevera at unc.edu.ar>}
+ * @author Federico Vera {@literal <fede@riddler.com.ar>}
  */
 public class LayersModel extends AbstractTableModel {
     private static final BundleDecorator i18n = new BundleDecorator("res.i18n.models");   
+    private final Class<?>[] clazz = {String.class, Integer.class, String.class};
+    private final String[] cols = {
+        i18n.__("Layers"),
+        i18n.__("Neurons"), 
+        i18n.__("Activation")
+    };
     
     private final LinkedList<Pair<Integer, String>> data = new LinkedList<>();
     
@@ -94,17 +100,11 @@ public class LayersModel extends AbstractTableModel {
         return rowIndex != 0 && rowIndex != data.size() - 1 && columnIndex != 0;
     }
 
-    private final Class<?>[] clazz = {String.class, Integer.class, String.class};
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         return clazz[columnIndex];
     }
 
-    private final String[] cols = {
-        i18n.__("Layers"),
-        i18n.__("Neurons"), 
-        i18n.__("Activation")
-    };
     @Override
     public String getColumnName(int column) {
         return cols[column];

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
+ * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -46,10 +46,12 @@ import net.objecthunter.exp4j.extras.OperatorsComparison;
 
 /**
  *
- * @author Federico Vera {@literal <fedevera at unc.edu.ar>}
+ * @author Federico Vera {@literal <fede@riddler.com.ar>}
  */
 public final class CustomFunction extends javax.swing.JDialog {
     private static final BundleDecorator i18n = new BundleDecorator("res.i18n.dialogs");
+    private final ImageIcon warn = new ImageIcon(getClass().getResource("/res/icons/warn.png"));
+    private final ImageIcon a_ok = new ImageIcon(getClass().getResource("/res/icons/a_ok.png"));
     
     public CustomFunction() {
         super((JFrame)null, true);
@@ -58,7 +60,7 @@ public final class CustomFunction extends javax.swing.JDialog {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         JLabel expXLabel = new JLabel();
@@ -141,21 +143,19 @@ public final class CustomFunction extends javax.swing.JDialog {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     private boolean noOutput;
-    private void closeButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+    private void closeButtonActionPerformed(ActionEvent evt) {                                            
         noOutput = true;
         setVisible(false);
-    }//GEN-LAST:event_closeButtonActionPerformed
+    }                                           
 
-    private void applyButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
+    private void applyButtonActionPerformed(ActionEvent evt) {                                            
         noOutput = false;
         setVisible(false);
-    }//GEN-LAST:event_applyButtonActionPerformed
+    }                                           
 
-    private final ImageIcon warn = new ImageIcon(getClass().getResource("/res/icons/warn.png"));
-    private final ImageIcon a_ok = new ImageIcon(getClass().getResource("/res/icons/a_ok.png"));
     private void initListners() {
         DocumentListener dl1 = new DocumentListener() {
             @Override public void insertUpdate(DocumentEvent e) {
@@ -267,11 +267,11 @@ public final class CustomFunction extends javax.swing.JDialog {
         return exp.build(true);
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private final JButton applyButton = new JButton();
     private final JTextField expFXTextField = new JTextField();
     private final JTextField expXTextField = new JTextField();
     private final JLabel validFXLabel = new JLabel();
     private final JLabel validXLabel = new JLabel();
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
