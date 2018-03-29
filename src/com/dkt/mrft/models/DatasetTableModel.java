@@ -67,7 +67,8 @@ public class DatasetTableModel extends AbstractTableModel {
             switch (column) {
                 case 0:  e.first  = (Boolean)aValue; break;
                 case 1:  e.second = (Double) aValue; break;
-                case 2:  e.third  = (Double) aValue;
+                case 2:  e.third  = (Double) aValue; break;
+                default: /*do nothing*/
             }
             
             if (!selecting) column--;
