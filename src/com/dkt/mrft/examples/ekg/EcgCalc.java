@@ -240,7 +240,7 @@ public class EcgCalc {
     /*--------------------------------------------------------------------------*/
     private void derivspqrst(double t0,double[] x, double[] dxdt){
         int i,k;
-        double a0,w0,r0,x0,y0,z0;
+        double a0,w0,r0,x0,y0;
         double t,dt,dt2,zbase;
         double[] xi, yi;
 
@@ -248,7 +248,7 @@ public class EcgCalc {
         xi = new double[k + 1];
         yi = new double[k + 1];
         w0 = angfreq(t0);
-        r0 = 1.0; x0 = 0.0;  y0 = 0.0;  z0 = 0.0;
+        r0 = 1.0; x0 = 0.0;  y0 = 0.0;
         a0 = 1.0 - Math.sqrt((x[1]-x0)*(x[1]-x0) + (x[2]-y0)*(x[2]-y0))/r0;
 
         for(i=1; i<=k; i++)
@@ -315,7 +315,7 @@ public class EcgCalc {
                           double flostd, double fhistd, double lfhfratio,  
                           double hrmean, double hrstd, double sf, int n)
     {
-        int i,j;
+        int i;
         double c1,c2,w1,w2,sig1,sig2,rrmean,rrstd,xstd,ratio;
         double df;//,dw1,dw2;
         double[] w, Hw, Sw, ph0, ph, SwC;

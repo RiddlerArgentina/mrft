@@ -423,12 +423,12 @@ public class FileDrop {
                     c.setDropTarget(null);
                 } // end if: null parent
                 else {
-                    DropTarget dt = new DropTarget(c, dropListener);
+                    new DropTarget(c, dropListener);
                 }   // end else: parent not null
             }   // end hierarchyChanged
         }); // end hierarchy listener
         if (c.getParent() != null) {
-            DropTarget dtt = new DropTarget(c, dropListener);
+            new DropTarget(c, dropListener);
         }
 
         if (recursive && (c instanceof Container)) {
