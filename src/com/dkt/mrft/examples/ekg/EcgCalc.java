@@ -114,12 +114,9 @@ public final class EcgCalc {
     /*    UNIFORM DEVIATES                                                      */
     /*--------------------------------------------------------------------------*/
     private double ran1() {
-        int j;
+        final boolean flg = iy != 0;
         long k;
         double temp;
-        boolean flg;
-
-        flg = iy != 0;
 
         if ((rseed <= 0) || !flg) {
             if (-(rseed) < 1) {
@@ -128,7 +125,7 @@ public final class EcgCalc {
                 rseed = -rseed;
             }
 
-            for (j = NTAB + 7; j >= 0; j--) {
+            for (int j = NTAB + 7; j >= 0; j--) {
                 k = (rseed) / IQ;
                 rseed = IA * (rseed - k * IQ) - IR * k;
                 if (rseed < 0) {
@@ -147,7 +144,7 @@ public final class EcgCalc {
             rseed += IM;
         }
 
-        j = (int) (iy / NDIV);
+        int j = (int) (iy / NDIV);
         iy = iv[j];
         iv[j] = rseed;
 
@@ -162,14 +159,22 @@ public final class EcgCalc {
      * FFT
      */
     private void ifft(double[] data, long nn, int isign) {
-        long n, mmax, m, istep, i, j;
-        double wtemp, wr, wpr, wpi, wi, theta;
-        double tempr, tempi;
+        final long n = nn << 1;
+        long mmax;
+        long m;
+        long istep;
+        long j = 1;
+        double wtemp;
+        double wr;
+        double wpr;
+        double wpi;
+        double wi;
+        double theta;
+        double tempr;
+        double tempi;
         double swap;
 
-        n = nn << 1;
-        j = 1;
-        for (i = 1; i < n; i += 2) {
+        for (long i = 1; i < n; i += 2) {
             if (j > i) {
                 //SWAP(data[j],data[i]);
                 swap = data[(int) j];
@@ -197,7 +202,7 @@ public final class EcgCalc {
             wr = 1.0;
             wi = 0.0;
             for (m = 1; m < mmax; m += 2) {
-                for (i = m; i <= n; i += istep) {
+                for (long i = m; i <= n; i += istep) {
                     j = i + mmax;
                     tempr = wr * data[(int) j] - wi * data[(int) j + 1];
                     tempi = wr * data[(int) j + 1] + wi * data[(int) j];
@@ -218,18 +223,20 @@ public final class EcgCalc {
      */
     /* n-by-1 vector, calculate standard deviation */
     private double stdev(double[] x, int n) {
-        int j;
-        double add, mean, diff, total;
+        final double mean;
+        double add;
+        double diff;
+        double total;
 
         add = 0.0;
-        for (j = 1; j <= n; j++) {
+        for (int j = 1; j <= n; j++) {
             add += x[j];
         }
 
         mean = add / n;
 
         total = 0.0;
-        for (j = 1; j <= n; j++) {
+        for (int j = 1; j <= n; j++) {
             diff = x[j] - mean;
             total += diff * diff;
         }
@@ -248,39 +255,28 @@ public final class EcgCalc {
     /*    THE EXACT NONLINEAR DERIVATIVES                                       */
     /*--------------------------------------------------------------------------*/
     private void derivspqrst(double t0, double[] x, double[] dxdt) {
-        int i, k;
-        double a0, w0, r0, x0, y0;
-        double t, dt, dt2, zbase;
-        double[] xi, yi;
-
-        k = 5;
-        xi = new double[k + 1];
-        yi = new double[k + 1];
-        w0 = angfreq(t0);
-        r0 = 1.0;
-        x0 = 0.0;
-        y0 = 0.0;
-        a0 = 1.0 - Math.sqrt((x[1] - x0) * (x[1] - x0) + (x[2] - y0) * (x[2] - y0)) / r0;
-
-        for (i = 1; i <= k; i++) {
-            xi[i] = Math.cos(ti[i]);
-        }
-        for (i = 1; i <= k; i++) {
-            yi[i] = Math.sin(ti[i]);
-        }
-
-        zbase = 0.005 * Math.sin(2.0 * PI * paramOb.getFHi() * t0);
-
-        t = Math.atan2(x[2], x[1]);
+        final int k = 5;
+        final double w0 = angfreq(t0);
+        final double r0 = 1.0;
+        final double x0 = 0.0;
+        final double y0 = 0.0;
+        final double a0 = 1.0 - Math.sqrt((x[1] - x0) * (x[1] - x0) 
+                              + (x[2] - y0) * (x[2] - y0)) / r0;
+        final double zbase = 0.005 * Math.sin(2.0 * PI * paramOb.getFHi() * t0);
+        final double t = Math.atan2(x[2], x[1]);
+        double dt;
+        double dt2;
+        
         dxdt[1] = a0 * (x[1] - x0) - w0 * (x[2] - y0);
         dxdt[2] = a0 * (x[2] - y0) + w0 * (x[1] - x0);
         dxdt[3] = 0.0;
 
-        for (i = 1; i <= k; i++) {
+        for (int i = 1; i <= k; i++) {
             dt = Math.IEEEremainder(t - ti[i], 2.0 * PI);
             dt2 = dt * dt;
             dxdt[3] += -ai[i] * dt * Math.exp(-0.5 * dt2 / (bi[i] * bi[i]));
         }
+        
         dxdt[3] += -1.0 * (x[3] - zbase);
     }
 
@@ -288,37 +284,32 @@ public final class EcgCalc {
      * RUNGA-KUTTA FOURTH ORDER INTEGRATION
      */
     private void Rk4(double[] y, int n, double x, double h, double[] yout) {
-        int i;
-        double xh, hh, h6;
-        double[] dydx, dym, dyt, yt;
-
-        dydx = new double[n + 1];
-        dym = new double[n + 1];
-        dyt = new double[n + 1];
-        yt = new double[n + 1];
-
-        hh = h * 0.5;
-        h6 = h / 6.0;
-        xh = x + hh;
+        final double[] dydx = new double[n + 1];
+        final double[] dym = new double[n + 1];
+        final double[] dyt = new double[n + 1];
+        final double[] yt = new double[n + 1];
+        final double hh = h * 0.5;
+        final double h6 = h / 6.0;
+        final double xh = x + hh;
 
         derivspqrst(x, y, dydx);
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             yt[i] = y[i] + hh * dydx[i];
         }
 
         derivspqrst(xh, yt, dyt);
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             yt[i] = y[i] + hh * dyt[i];
         }
 
         derivspqrst(xh, yt, dym);
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             yt[i] = y[i] + h * dym[i];
             dym[i] += dyt[i];
         }
 
         derivspqrst(x + h, yt, dyt);
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             yout[i] = y[i] + h6 * (dydx[i] + dyt[i] + 2.0 * dym[i]);
         }
     }
@@ -329,7 +320,6 @@ public final class EcgCalc {
     private void rrprocess(double[] rr, double flo, double fhi,
             double flostd, double fhistd, double lfhfratio,
             double hrmean, double hrstd, double sf, int n) {
-        int i;
         final double c1 = 2.0 * PI * flostd;
         final double c2 = 2.0 * PI * fhistd;
         final double w1 = 2.0 * PI * flo;
@@ -348,12 +338,11 @@ public final class EcgCalc {
         final double[] ph = new double[n + 1];
         final double[] SwC = new double[(2 * n) + 1];
         
-        
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             w[i] = (i - 1) * 2.0 * PI * df;
         }
 
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             //dw1 = w[i]-w1;
             //dw2 = w[i]-w2;
             Hw[i] = (sig1 * Math.exp(-0.5 * (Math.pow(w[i] - w1, 2) 
@@ -362,35 +351,35 @@ public final class EcgCalc {
                   / Math.pow(c2, 2))) / Math.sqrt(2 * PI * c2 * c2));
         }
 
-        for (i = 1; i <= n / 2; i++) {
+        for (int i = 1; i <= n / 2; i++) {
             Sw[i] = (sf / 2.0) * Math.sqrt(Hw[i]);
         }
 
-        for (i = n / 2 + 1; i <= n; i++) {
+        for (int i = n / 2 + 1; i <= n; i++) {
             Sw[i] = (sf / 2.0) * Math.sqrt(Hw[n - i + 1]);
         }
 
         /* randomise the phases */
-        for (i = 1; i <= n / 2 - 1; i++) {
+        for (int i = 1; i <= n / 2 - 1; i++) {
             ph0[i] = 2.0 * PI * ran1();
         }
 
         ph[1] = 0.0;
-        for (i = 1; i <= n / 2 - 1; i++) {
+        for (int i = 1; i <= n / 2 - 1; i++) {
             ph[i + 1] = ph0[i];
         }
 
         ph[n / 2 + 1] = 0.0;
-        for (i = 1; i <= n / 2 - 1; i++) {
+        for (int i = 1; i <= n / 2 - 1; i++) {
             ph[n - i + 1] = -ph0[i];
         }
 
         /* make complex spectrum */
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             SwC[2 * i - 1] = Sw[i] * Math.cos(ph[i]);
         }
 
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             SwC[2 * i] = Sw[i] * Math.sin(ph[i]);
         }
 
@@ -398,18 +387,18 @@ public final class EcgCalc {
         ifft(SwC, n, -1);
 
         /* extract real part */
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             rr[i] = (1.0 / (double) n) * SwC[2 * i - 1];
         }
 
         xstd = stdev(rr, n);
         ratio = rrstd / xstd;
 
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             rr[i] *= ratio;
         }
 
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             rr[i] += rrmean;
         }
 
@@ -419,8 +408,6 @@ public final class EcgCalc {
      * DETECT PEAKS
      */
     private void detectpeaks(double[] ipeak, double[] x, double[] y, double[] z, int n) {
-        int i;
-        int j;
         int j1;
         int j2;
         int jmin;
@@ -438,13 +425,13 @@ public final class EcgCalc {
         double zmin;
         double zmax;
 
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             ipeak[i] = 0.0;
         }
 
         theta1 = Math.atan2(y[1], x[1]);
 
-        for (i = 1; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             theta2 = Math.atan2(y[i + 1], x[i + 1]);
 
             if ((theta1 <= thetap1) && (thetap1 <= theta2)) {
@@ -493,14 +480,14 @@ public final class EcgCalc {
 
         /* correct the peaks */
         d = (int) Math.ceil(paramOb.getSfEcg() / 64);
-        for (i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             if (ipeak[i] == 1 || ipeak[i] == 3 || ipeak[i] == 5) {
 
                 j1 = (1 > (i - d) ? 1 : (i - d)); //MAX(1,i-d);
                 j2 = (n < (i + d) ? n : (i + d)); //MIN(n,i+d);
                 jmax = j1;
                 zmax = z[j1];
-                for (j = j1 + 1; j <= j2; j++) {
+                for (int j = j1 + 1; j <= j2; j++) {
                     if (z[j] > zmax) {
                         jmax = j;
                         zmax = z[j];
@@ -515,7 +502,7 @@ public final class EcgCalc {
                 j2 = (n < (i + d) ? n : (i + d)); //MIN(n,i+d);
                 jmin = j1;
                 zmin = z[j1];
-                for (j = j1 + 1; j <= j2; j++) {
+                for (int j = j1 + 1; j <= j2; j++) {
                     if (z[j] < zmin) {
                         jmin = j;
                         zmin = z[j];
@@ -534,10 +521,7 @@ public final class EcgCalc {
      */
     private boolean dorun() {
         boolean RetValue = true;
-
-        int i;
-        int j;
-        int k;
+        
         final int Nrr;
         final int Nt;
         final int Nts;
@@ -564,7 +548,7 @@ public final class EcgCalc {
         q = (int) Math.rint(paramOb.getSf() / paramOb.getSfEcg());
 
         /* convert angles from degrees to radians and copy a vector to ai*/
-        for (i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 5; i++) {
             ti[i] = paramOb.getTheta(i - 1) * PI / 180.0;
             ai[i] = paramOb.getA(i - 1);
         }
@@ -573,7 +557,7 @@ public final class EcgCalc {
         hrfact = Math.sqrt(paramOb.getHrMean() / 60);
         hrfact2 = Math.sqrt(hrfact);
 
-        for (i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 5; i++) {
             bi[i] = paramOb.getB(i - 1) * hrfact;
         }
 
@@ -646,12 +630,12 @@ public final class EcgCalc {
         /* create piecewise constant rr */
         rrpc = new double[(2 * Nrr) + 1];
         tecg = 0.0;
-        i = 1;
-        j = 1;
+        int i = 1;
+        int j = 1;
         while (i <= Nrr) {
             tecg += rr[j];
             j = (int) Math.rint(tecg / h);
-            for (k = i; k <= j; k++) {
+            for (int k = i; k <= j; k++) {
                 rrpc[k] = rr[i];
             }
             i = j + 1;
