@@ -76,12 +76,12 @@ public class ExampleSquare extends Example {
 
     @Override
     public void loadTrainData(DatasetTableModel data) {
-        load(data, 150);
+        load(data);
     }
 
     @Override
     public void loadValidationData(DatasetTableModel data) {
-        load(data, 20);
+        load(data);
     }
 
     @Override
