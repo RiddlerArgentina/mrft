@@ -86,11 +86,8 @@ public class EntryPoint {
         
         setLocale();
         
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new MainWindow().setVisible(true);
-            }
+        SwingUtilities.invokeLater(() -> {
+            new MainWindow().setVisible(true);
         });
         
         Runtime.getRuntime().addShutdownHook(new Thread(){

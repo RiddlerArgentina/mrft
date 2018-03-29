@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
+ * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -129,7 +129,6 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -146,7 +145,7 @@ import net.objecthunter.exp4j.Expression;
 
 /**
  *
- * @author Federico Vera {@literal <fedevera at unc.edu.ar>}
+ * @author Federico Vera {@literal <fede@riddler.com.ar>}
  */
 public final class MainWindow extends javax.swing.JFrame {
     private static final BundleDecorator i18n = new BundleDecorator("res.i18n.misc");
@@ -2066,39 +2065,30 @@ public final class MainWindow extends javax.swing.JFrame {
         errorTable.setModel(errors);
         train.selectEnabled(true);
 
-        train.addTableModelListener(new TableModelListener() {
-            @Override public void tableChanged(TableModelEvent e) {
-                final int sel = train.getSelectedCount();
-                final int row = train.getRowCount();
-                trainLabel.setText(String.format(header, i18n.__("Training"), sel, row));
-                checkTrainEnabled();
-                updateGraphics(TRAIN);
-            }
+        train.addTableModelListener((TableModelEvent e) -> {
+            final int sel = train.getSelectedCount();
+            final int row = train.getRowCount();
+            trainLabel.setText(String.format(header, i18n.__("Training"), sel, row));
+            checkTrainEnabled();
+            updateGraphics(TRAIN);
         });
-        validate.addTableModelListener(new TableModelListener() {
-            @Override public void tableChanged(TableModelEvent e) {
-                final int sel = validate.getSelectedCount();
-                final int row = validate.getRowCount();
-                validLabel.setText(String.format(header, i18n.__("Validation"), sel, row));
-                checkTrainEnabled();
-                updateGraphics(VALID);
-            }
+        validate.addTableModelListener((TableModelEvent e) -> {
+            final int sel = validate.getSelectedCount();
+            final int row = validate.getRowCount();
+            validLabel.setText(String.format(header, i18n.__("Validation"), sel, row));
+            checkTrainEnabled();
+            updateGraphics(VALID);
         });
-        generalize.addTableModelListener(new TableModelListener() {
-            @Override public void tableChanged(TableModelEvent e) {
-                final int sel = generalize.getSelectedCount();
-                final int row = generalize.getRowCount();
-                generLabel.setText(String.format(header, i18n.__("Generalization"), sel, row));
-                checkTrainEnabled();
-                updateGraphics(GENER);
-            }
+        generalize.addTableModelListener((TableModelEvent e) -> {
+            final int sel = generalize.getSelectedCount();
+            final int row = generalize.getRowCount();
+            generLabel.setText(String.format(header, i18n.__("Generalization"), sel, row));
+            checkTrainEnabled();
+            updateGraphics(GENER);
         });
-        errors.addTableModelListener(new TableModelListener() {
-            @Override
-            public void tableChanged(TableModelEvent e) {
-                drawErrors();
-                updateGraphics(GENER);
-            }
+        errors.addTableModelListener((TableModelEvent e) -> {
+            drawErrors();
+            updateGraphics(GENER);
         });
 
         final ListSelectionModel tsm = errorTable.getSelectionModel();
@@ -2402,7 +2392,7 @@ public final class MainWindow extends javax.swing.JFrame {
             return;
         }
 
-        if (menu != null) {
+        if (menu != null && ex != null) {
             info("Example '%s' loaded", ex.getName());
         }
 
@@ -2449,37 +2439,22 @@ public final class MainWindow extends javax.swing.JFrame {
     }
     
     private void initListners() {
-        FileDrop fd = new FileDrop(trainTable, new FileDrop.Listener() {
-            @Override
-            public void filesDropped(File[] files) {
-                readFiles(files, train);
-            }
+        new FileDrop(trainTable, (File[] files) -> {
+            readFiles(files, train);
         });
-        fd = new FileDrop(validTable, new FileDrop.Listener() {
-            @Override
-            public void filesDropped(File[] files) {
-                readFiles(files, validate);
-            }
+        new FileDrop(validTable, (File[] files) -> {
+            readFiles(files, validate);
         });
-        fd = new FileDrop(generTable, new FileDrop.Listener() {
-            @Override
-            public void filesDropped(File[] files) {
-                readFiles(files, generalize);
-            }
+        new FileDrop(generTable, (File[] files) -> {
+            readFiles(files, generalize);
         });
-        fd = new FileDrop(topologyPanel, new FileDrop.Listener() {
-            @Override
-            public void filesDropped(File[] files) {
-                readFiles(files, null);
-            }
+        new FileDrop(topologyPanel, (File[] files) -> {
+            readFiles(files, null);
         });
 
 
-        ActionListener exampleListner = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loadExample((JMenuItem)e.getSource(), exampleMap.get((JMenuItem)e.getSource()));
-            }
+        ActionListener exampleListner = (ActionEvent e) -> {
+            loadExample((JMenuItem)e.getSource(), exampleMap.get((JMenuItem)e.getSource()));
         };
 
         for (JMenuItem mi : exampleMap.keySet()) {
@@ -2548,12 +2523,9 @@ public final class MainWindow extends javax.swing.JFrame {
 
         for(int i = 0; i < idxs.length; i++) idxs[i] = i;
 
-        Arrays.sort(idxs, new Comparator<Integer>(){
-            @Override
-            public int compare(Integer o1, Integer o2){
-                return Double.compare(temp[0][o1], temp[0][o2]);
-            }
-        });
+        Arrays.sort(idxs, (Integer o1, Integer o2) -> 
+                Double.compare(temp[0][o1], temp[0][o2])
+        );
 
         final double[][]data = new double[3][temp[0].length - 1];
         for (int j = 0; j < temp[0].length - 1; j++) {
