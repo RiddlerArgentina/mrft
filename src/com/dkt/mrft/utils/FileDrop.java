@@ -258,7 +258,7 @@ public class FileDrop {
                     if (isDragOk(evt)) {
                         // If it's a Swing component, set its border
                         if (c instanceof JComponent) {
-                            javax.swing.JComponent jc = (JComponent) c;
+                            JComponent jc = (JComponent) c;
                             normalBorder = jc.getBorder();
                             jc.setBorder(dragBorder);
                         }   // end if: JComponent
@@ -417,7 +417,7 @@ public class FileDrop {
 
             @Override
             public void hierarchyChanged(HierarchyEvent evt) {
-                java.awt.Component parent = c.getParent();
+                Component parent = c.getParent();
                 
                 if (parent == null) {
                     c.setDropTarget(null);
