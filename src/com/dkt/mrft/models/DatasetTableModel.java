@@ -61,27 +61,29 @@ public class DatasetTableModel extends AbstractTableModel {
     @Override
     public void setValueAt(Object aValue, int row, int column) {
         synchronized(data) {
+            int col = column;
             final Row e = data.get(row);
-            if (!selecting) column++;
+            if (!selecting) col++;
             
-            switch (column) {
+            switch (col) {
                 case 0:  e.first  = (Boolean)aValue; break;
                 case 1:  e.second = (Double) aValue; break;
                 case 2:  e.third  = (Double) aValue; break;
                 default: /*do nothing*/
             }
             
-            if (!selecting) column--;
+            if (!selecting) col--;
             
-            fireTableCellUpdated(row, column);
+            fireTableCellUpdated(row, col);
         }
     }
 
     @Override
     public Object getValueAt(int row, int column) {
         final Row e = data.get(row);
-        if (!selecting) column++;
-        switch (column) {
+        int col = column;
+        if (!selecting) col++;
+        switch (col) {
             case 0:  return e.first;
             case 1:  return e.second;
             case 2:  return e.third;
@@ -97,8 +99,7 @@ public class DatasetTableModel extends AbstractTableModel {
     private final String[] cols = {i18n.__("Selection"), i18n.__("x"), i18n.__("f(x)")};
     @Override
     public String getColumnName(int column) {
-        if (!selecting) column++;
-        return cols[column];
+        return cols[selecting ? column : column + 1];
     }
 
     @Override
@@ -126,8 +127,7 @@ public class DatasetTableModel extends AbstractTableModel {
     private final Class<?>[] colClass = {Boolean.class, Double.class, Double.class};
     @Override
     public Class<?> getColumnClass(int column) {
-        if (!selecting) column++;
-        return colClass[column];
+        return colClass[selecting ? column : column + 1];
     }
     
     public void selectAll() {
