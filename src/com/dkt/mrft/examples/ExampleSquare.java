@@ -86,10 +86,10 @@ public class ExampleSquare extends Example {
 
     @Override
     public void loadGeneralizationData(DatasetTableModel data) {
-        load(data, 100);
+        load(data);
     }
     
-    private void load(DatasetTableModel data, int num) {
+    private void load(DatasetTableModel data) {
         for (double x = -2; x < 2; x += 0.01) {
             data.addRow(x, f(x));
         }

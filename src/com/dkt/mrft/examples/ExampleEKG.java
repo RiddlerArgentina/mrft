@@ -385,10 +385,10 @@ public class ExampleEKG extends Example {
 
     @Override
     public void loadGeneralizationData(DatasetTableModel data) {
-        load(data, 100);
+        load(data);
     }
     
-    private void load(DatasetTableModel data, int num) {
+    private void load(DatasetTableModel data) {
         for (double x = -1; x < 0.98; x += 0.01) {
             data.addRow(x, 0.0);
         }

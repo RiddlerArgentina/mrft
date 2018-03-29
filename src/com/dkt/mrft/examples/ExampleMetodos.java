@@ -306,10 +306,10 @@ public class ExampleMetodos extends Example {
 
     @Override
     public void loadGeneralizationData(DatasetTableModel data) {
-        load(data, 100);
+        load(data);
     }
     
-    private void load(DatasetTableModel data, int num) {
+    private void load(DatasetTableModel data) {
         for (double x = -10; x < 10; x += 0.1) {
             data.addRow(x, 0.0);
         }
