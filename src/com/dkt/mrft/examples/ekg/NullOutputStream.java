@@ -29,7 +29,8 @@ import java.io.OutputStream;
  * This class is thread safe.
  * </p>
  *
- * @author <a href="mailto:opalka dot richard at gmail dot com">Richard Opalka</a>
+ * @author <a href="mailto:opalka dot richard at gmail dot com">Richard
+ * Opalka</a>
  */
 public final class NullOutputStream extends OutputStream {
 
@@ -49,7 +50,7 @@ public final class NullOutputStream extends OutputStream {
      * Does nothing.
      */
     @Override
-    public void write( final int data ) throws IOException {
+    public void write(final int data) throws IOException {
         /*Does nothing.*/
     }
 
@@ -57,7 +58,7 @@ public final class NullOutputStream extends OutputStream {
      * Does nothing.
      */
     @Override
-    public void write( final byte[] data ) throws IOException {
+    public void write(final byte[] data) throws IOException {
         /*Does nothing.*/
     }
 
@@ -65,7 +66,7 @@ public final class NullOutputStream extends OutputStream {
      * Does nothing.
      */
     @Override
-    public void write( final byte[] data, final int offset, final int length ) throws IOException {
+    public void write(final byte[] data, final int offset, final int length) throws IOException {
         /*Does nothing.*/
     }
 
