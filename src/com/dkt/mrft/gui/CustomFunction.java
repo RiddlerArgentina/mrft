@@ -27,7 +27,6 @@ import com.dkt.mrft.funcs.FunctionsRandom;
 import com.dkt.mrft.utils.BundleDecorator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
