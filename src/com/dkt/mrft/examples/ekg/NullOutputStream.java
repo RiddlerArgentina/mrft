@@ -50,6 +50,7 @@ public final class NullOutputStream extends OutputStream {
      */
     @Override
     public void write( final int data ) throws IOException {
+        /*Does nothing.*/
     }
 
     /**
@@ -57,6 +58,7 @@ public final class NullOutputStream extends OutputStream {
      */
     @Override
     public void write( final byte[] data ) throws IOException {
+        /*Does nothing.*/
     }
 
     /**
@@ -64,6 +66,7 @@ public final class NullOutputStream extends OutputStream {
      */
     @Override
     public void write( final byte[] data, final int offset, final int length ) throws IOException {
+        /*Does nothing.*/
     }
 
     /**
@@ -71,6 +74,7 @@ public final class NullOutputStream extends OutputStream {
      */
     @Override
     public void flush() throws IOException {
+        /*Does nothing.*/
     }
 
     /**
@@ -78,6 +82,7 @@ public final class NullOutputStream extends OutputStream {
      */
     @Override
     public void close() throws IOException {
+        /*Does nothing.*/
     }
 
 }

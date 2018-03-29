@@ -52,6 +52,7 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void flush() {
+        /*Does nothing.*/
     }
 
     /**
@@ -59,6 +60,7 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void close() {
+        /*Does nothing.*/
     }
 
     /**
@@ -74,6 +76,7 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void write( final byte[] data ) throws IOException {
+        /*Does nothing.*/
     }
 
     /**
@@ -81,6 +84,7 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void write( final int data ) {
+        /*Does nothing.*/
     }
 
     /**
@@ -88,6 +92,7 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void write( final byte[] data, final int offset, final int length ) {
+        /*Does nothing.*/
     }
 
     /**
@@ -95,6 +100,7 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void print( final boolean data ) {
+        /*Does nothing.*/
     }
 
     /**
@@ -102,6 +108,7 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void print( final char data ) {
+        /*Does nothing.*/
     }
 
     /**
@@ -109,6 +116,7 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void print( final int data ) {
+        /*Does nothing.*/
     }
 
     /**
@@ -116,6 +124,7 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void print( final long data ) {
+        /*Does nothing.*/
     }
 
     /**
@@ -123,6 +132,7 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void print( final float data ) {
+        /*Does nothing.*/
     }
 
     /**
