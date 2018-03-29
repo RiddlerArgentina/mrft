@@ -388,7 +388,7 @@ public class ExampleEKG extends Example {
         load(data, 100);
     }
     
-    void load(DatasetTableModel data, int num) {
+    private void load(DatasetTableModel data, int num) {
         for (double x = -1; x < 0.98; x += 0.01) {
             data.addRow(x, 0.0);
         }

@@ -309,7 +309,7 @@ public class ExampleMetodos extends Example {
         load(data, 100);
     }
     
-    void load(DatasetTableModel data, int num) {
+    private void load(DatasetTableModel data, int num) {
         for (double x = -10; x < 10; x += 0.1) {
             data.addRow(x, 0.0);
         }

@@ -94,7 +94,7 @@ public class ExampleVeryJumpy extends Example {
         load(data, 200);
     }
     
-    void load(DatasetTableModel data, int num) {
+    private void load(DatasetTableModel data, int num) {
         for (int i = 0; i < num; i++) {
             double x  = Math.random() * 6 - 3;
             double fx = f(x);

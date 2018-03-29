@@ -89,7 +89,7 @@ public class ExampleSin extends Example {
         load(data, 100);
     }
     
-    void load(DatasetTableModel data, int num) {
+    private void load(DatasetTableModel data, int num) {
         for (int i = 0; i < num; i++) {
             double x  = Math.random() * 4 * Math.PI - 2 * Math.PI;
             double fx = Math.sin(x);
