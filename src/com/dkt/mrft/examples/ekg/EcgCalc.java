@@ -38,8 +38,6 @@ public final class EcgCalc {
     private final double[] bi = new double[6];
     /* new calculated b                    */
 
-    private final int Necg = 0;
-    /*  Number of ECG outputs              */
     private final int mstate = 3;
     /*  System state space dimension       */
     private final double xinitial = 1.0;
@@ -726,13 +724,6 @@ public final class EcgCalc {
             ecgResultTime[i - 1] = (i - 1) * tstep;
             ecgResultVoltage[i - 1] = zts[i];
             ecgResultPeak[i - 1] = (int) ipeak[i];
-            /*
-            Vector nuevoRow = new Vector(3);
-            nuevoRow.addElement(new String(Double.toString((i-1)*tstep)));
-            nuevoRow.addElement(new String(Double.toString(zts[i])));
-            nuevoRow.addElement(new String(Integer.toString((int)ipeak[i])));
-            tableValuesModel.addRow(nuevoRow);
-             */
         }
 
         ecgLog.println("Finished generating result matrix.");
