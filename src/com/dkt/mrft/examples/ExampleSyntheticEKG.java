@@ -116,10 +116,10 @@ public class ExampleSyntheticEKG extends Example {
 
     @Override
     public void loadGeneralizationData(DatasetTableModel data) {
-        load(data, 100);
+        load(data);
     }
     
-    private void load(DatasetTableModel data, int num) {
+    private void load(DatasetTableModel data) {
         for (double x = -0.5; x < 0.5; x += 0.01) {
             data.addRow(x, 0.0);
         }
