@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
+ * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ import libai.nn.supervised.MLP;
 
 /**
  *
- * @author Federico Vera {@literal <fedevera at unc.edu.ar>}
+ * @author Federico Vera {@literal <fede@riddler.com.ar>}
  */
 public class EntryPoint {
     private static final BundleDecorator i18n = new BundleDecorator("res.i18n.cli");   
@@ -123,7 +123,7 @@ public class EntryPoint {
         try {
             String laf = Config.get().get("default.laf");
             
-            if (laf.equals("system")) {
+            if ("system".equals(laf)) {
                 laf = UIManager.getSystemLookAndFeelClassName();
             }
             
