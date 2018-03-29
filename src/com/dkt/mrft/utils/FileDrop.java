@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
+ * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -363,9 +363,6 @@ public class FileDrop {
             // Make the component (and possibly children) drop targets
             makeDropTarget(c, recursive);
         } // end if: supports dnd
-        else {
-            //FileDrop: Drag and drop is not supported with this JVM
-        }   // end else: does not support DnD
     }   // end constructor
 
     private static boolean supportsDnD() {   // Static Boolean
@@ -782,14 +779,8 @@ public class FileDrop {
             if (flavor.equals(DATA_FLAVOR)) {
                 return true;
             }
-
-            // String
-            if (flavor.equals(DataFlavor.stringFlavor)) {
-                return true;
-            }
-
-            // We can't do anything else
-            return false;
+            
+            return flavor.equals(DataFlavor.stringFlavor);
         }   // end isDataFlavorSupported
 
 
