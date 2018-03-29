@@ -8,7 +8,7 @@
 
     <path id="classpath.src">
         <pathelement location="lib/exp4j-fido-0.5.1.jar"/>
-        <pathelement location="lib/jDrawingLib.jar"/>
+        <pathelement location="lib/jdrawinglib-0.4.1.jar"/>
         <pathelement location="lib/libai-1.0.1.jar"/>
         <pathelement location="${jar.dir}"/>
     </path>
