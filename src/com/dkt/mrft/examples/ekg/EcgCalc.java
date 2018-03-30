@@ -48,7 +48,7 @@ public final class EcgCalc {
     /*  Initial z co-ordinate value        */
     private long rseed;
     private double h;
-    private double[] rr, rrpc;
+    private double[] rrpc;
 
     /*
      * Variables for static function ran1()
@@ -283,7 +283,7 @@ public final class EcgCalc {
     /*
      * RUNGA-KUTTA FOURTH ORDER INTEGRATION
      */
-    private void Rk4(double[] y, int n, double x, double h, double[] yout) {
+    private void rk4(double[] y, int n, double x, double h, double[] yout) {
         final double[] dydx = new double[n + 1];
         final double[] dym = new double[n + 1];
         final double[] dyt = new double[n + 1];
@@ -622,7 +622,7 @@ public final class EcgCalc {
         ecgLog.println("Using " + Nrr + " = 2^ " + (int) (Math.log(1.0 * Nrr) / Math.log(2.0)) + " samples for calculating RR intervals");
 
         /* create rrprocess with required spectrum */
-        rr = new double[Nrr + 1];
+        final double[] rr = new double[Nrr + 1];
         rrprocess(rr, paramOb.getFLo(), paramOb.getFHi(), paramOb.getFLoStd(),
                 paramOb.getFHiStd(), paramOb.getLfHfRatio(), paramOb.getHrMean(),
                 paramOb.getHrStd(), paramOb.getSf(), Nrr);
@@ -651,7 +651,7 @@ public final class EcgCalc {
             xt[i] = x[1];
             yt[i] = x[2];
             zt[i] = x[3];
-            Rk4(x, mstate, timev, h, x);
+            rk4(x, mstate, timev, h, x);
             timev += h;
         }
 
