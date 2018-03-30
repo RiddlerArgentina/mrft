@@ -98,6 +98,8 @@ public class FileDrop {
     private static volatile Boolean supportsDnD;
     // Default border color
     private static Color defaultBorderColor = new Color(0f, 0f, 1f, 0.25f);
+    // BEGIN 2007-09-12 Nathan Blomquist -- Linux (KDE/Gnome) support added.
+    private static String ZERO_CHAR_STRING = "0";
 
     /**
      * Constructs a {@link FileDrop} with a default light-blue border
@@ -135,28 +137,6 @@ public class FileDrop {
         this(c, // Drop target
              BorderFactory.createMatteBorder(2, 2, 2, 2, defaultBorderColor), // Drag border
              recursive, // Recursive
-             listener);
-    }   // end constructor
-
-    /**
-     * Constructor with a default border and debugging optionally turned on.
-     * With Debugging turned on, more status messages will be displayed to
-     * <tt>out</tt>. A common way to use this constructor is with
-     * <tt>System.out</tt> or <tt>System.err</tt>. A <tt>null</tt> value for
-     * the parameter <tt>out</tt> will result in no debugging output.
-     *
-     * @param out PrintStream to record debugging info or null for no debugging.
-     * @param c Component on which files will be dropped.
-     * @param listener Listens for <tt>filesDropped</tt>.
-     * @since 1.0
-     */
-    public FileDrop(
-            final PrintStream out,
-            final Component c,
-            final Listener listener) {
-        this(c, // Drop target
-             BorderFactory.createMatteBorder(2, 2, 2, 2, defaultBorderColor),
-             false, // Recursive
              listener);
     }   // end constructor
 
@@ -378,8 +358,6 @@ public class FileDrop {
         return supportsDnD;
     }   // end supportsDnD
 
-    // BEGIN 2007-09-12 Nathan Blomquist -- Linux (KDE/Gnome) support added.
-    private static String ZERO_CHAR_STRING = "0";
     private static File[] createFileArray(BufferedReader bReader) {
         try {
             ArrayList<File> list = new ArrayList<>(10);
