@@ -806,7 +806,7 @@ public final class MainWindow extends javax.swing.JFrame {
 
         validBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
         validBox.addActionListener((evt) -> {
-            validBoxActionPerformed();
+            updateGraphics(VALID);
         });
 
         trainPlotCheck.setText(bundle.getString("PLOT_OPT_TRAIN")); // NOI18N
@@ -826,27 +826,29 @@ public final class MainWindow extends javax.swing.JFrame {
 
         generBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
         generBox.addActionListener((evt) -> {
-            generBoxActionPerformed();
+            updateGraphics(GENER);
         });
 
         trainBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
         trainBox.addActionListener((evt) -> {
-            trainBoxActionPerformed();
+            updateGraphics(TRAIN);
         });
 
         trainColorButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
         trainColorButton.addActionListener((evt) -> {
-            trainColorButtonActionPerformed();
+            chooseColor(i18n.__("Color for training"), TRAIN);
+            drawErrors();
         });
 
         validColorButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
         validColorButton.addActionListener((evt) -> {
-            validColorButtonActionPerformed();
+            chooseColor(i18n.__("Color for validation"), VALID);
+            drawErrors();
         });
 
         generColorButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
         generColorButton.addActionListener((evt) -> {
-            generColorButtonActionPerformed();
+            chooseColor(i18n.__("Color for generalization"), GENER);
         });
 
         optionsSeparator.setOrientation(SwingConstants.VERTICAL);
@@ -1115,7 +1117,7 @@ public final class MainWindow extends javax.swing.JFrame {
         dataAddRowMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, 0));
         dataAddRowMI.setText(bundle1.getString("DATA_ADD_ROW")); // NOI18N
         dataAddRowMI.addActionListener((evt) -> {
-            dataAddRowMIActionPerformed();
+            selected.addRow(null, null);
         });
         datasetMenu.add(dataAddRowMI);
 
@@ -1172,13 +1174,13 @@ public final class MainWindow extends javax.swing.JFrame {
 
         saveImageMI.setText(bundle1.getString("PLOTS_SAVE_IMG")); // NOI18N
         saveImageMI.addActionListener((evt) -> {
-            saveImageMIActionPerformed();
+            savePlot(i18n.__("Data"), func);
         });
         plotsMenu.add(saveImageMI);
 
         saveErrorMI.setText(bundle1.getString("PLOTS_SAVE_ERRORS")); // NOI18N
         saveErrorMI.addActionListener((evt) -> {
-            saveErrorMIActionPerformed();
+            savePlot(i18n.__("Errors"), errs);
         });
         plotsMenu.add(saveErrorMI);
 
@@ -1196,7 +1198,7 @@ public final class MainWindow extends javax.swing.JFrame {
         reloadExampleMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
         reloadExampleMI.setText(bundle1.getString("EXAMPLES_RELOAD")); // NOI18N
         reloadExampleMI.addActionListener((evt) -> {
-            reloadExampleMIActionPerformed();
+            loadExample(lastItem, null);
         });
         examplesMenu.add(reloadExampleMI);
         examplesMenu.add(menuSeparator2);
@@ -1402,10 +1404,6 @@ public final class MainWindow extends javax.swing.JFrame {
         updateGraphics(TRAIN);
     }
 
-    private void trainBoxActionPerformed() {
-        updateGraphics(TRAIN);
-    }
-
     private void generPlotCheckActionPerformed() {
         if (!generPlotCheck.isSelected()) {
             func.remove(points[2]);
@@ -1420,28 +1418,6 @@ public final class MainWindow extends javax.swing.JFrame {
             func.repaint();
         }
         updateGraphics(VALID);
-    }
-
-    private void validBoxActionPerformed() {
-        updateGraphics(VALID);
-    }
-
-    private void generBoxActionPerformed() {
-        updateGraphics(GENER);
-    }
-
-    private void trainColorButtonActionPerformed() {
-        chooseColor(i18n.__("Color for training"), TRAIN);
-        drawErrors();
-    }
-
-    private void validColorButtonActionPerformed() {
-        chooseColor(i18n.__("Color for validation"), VALID);
-        drawErrors();
-    }
-
-    private void generColorButtonActionPerformed() {
-        chooseColor(i18n.__("Color for generalization"), GENER);
     }
 
     private void copySelectedButtonActionPerformed() {
@@ -1676,14 +1652,6 @@ public final class MainWindow extends javax.swing.JFrame {
         }
     }
 
-    private void saveImageMIActionPerformed() {
-        savePlot(i18n.__("Data"), func);
-    }
-
-    private void saveErrorMIActionPerformed() {
-        savePlot(i18n.__("Errors"), errs);
-    }
-
     private void transAutoscaleSelMIActionPerformed() {
         double maxVal = train.getMax();
         maxVal = Math.max(maxVal, validate  .getMax());
@@ -1709,10 +1677,6 @@ public final class MainWindow extends javax.swing.JFrame {
             info("Applying '%s' to all the '%s' of table '%s'", sexp4x,  "x", sname);
             info("Applying '%s' to all the '%s' of table '%s'", sexp4fx, "f(x)", sname);
         }
-    }
-
-    private void dataAddRowMIActionPerformed() {
-        selected.addRow(null, null);
     }
 
     private void saveGifMIActionPerformed() {
@@ -1769,10 +1733,6 @@ public final class MainWindow extends javax.swing.JFrame {
     private void showLabelsCheckActionPerformed() {
         updateGraphics(TRAIN);
         drawErrors();
-    }
-
-    private void reloadExampleMIActionPerformed() {
-        loadExample(lastItem, null);
     }
 
     private void formWindowClosing() {
