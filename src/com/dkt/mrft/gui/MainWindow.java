@@ -1017,14 +1017,14 @@ public final class MainWindow extends javax.swing.JFrame {
         ResourceBundle bundle1 = ResourceBundle.getBundle("res/i18n/menu"); // NOI18N
         fileMenu.setText(bundle1.getString("FILE")); // NOI18N
 
-        loadConfigMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        loadConfigMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
         loadConfigMI.setMnemonic('c');
         loadConfigMI.setText(bundle1.getString("FILE_LOAD_CONF")); // NOI18N
         loadConfigMI.addActionListener((e) -> {loadConfigMIActionPerformed();});
         fileMenu.add(loadConfigMI);
         fileMenu.add(menuSeparator1);
 
-        quitMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
+        quitMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_DOWN_MASK));
         quitMI.setMnemonic('s');
         quitMI.setText(bundle1.getString("FILE_QUIT")); // NOI18N
         quitMI.addActionListener((e) -> {quitMIActionPerformed();});
@@ -1035,25 +1035,25 @@ public final class MainWindow extends javax.swing.JFrame {
         viewMenu.setMnemonic('V');
         viewMenu.setText(bundle1.getString("VIEW")); // NOI18N
 
-        dataPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_MASK));
+        dataPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_DOWN_MASK));
         dataPanelMI.setMnemonic('d');
         dataPanelMI.setText(bundle1.getString("VIEW_PANEL_DATA")); // NOI18N
         dataPanelMI.addActionListener((e) -> {tabbedPane.setSelectedIndex(0);});
         viewMenu.add(dataPanelMI);
 
-        topologyPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK));
+        topologyPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_DOWN_MASK));
         topologyPanelMI.setMnemonic('t');
         topologyPanelMI.setText(bundle1.getString("VIEW_PANEL_TOPOLOGY")); // NOI18N
         topologyPanelMI.addActionListener((e) -> {tabbedPane.setSelectedIndex(1);});
         viewMenu.add(topologyPanelMI);
 
-        errorPlotPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_MASK));
+        errorPlotPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_DOWN_MASK));
         errorPlotPanelMI.setMnemonic('f');
         errorPlotPanelMI.setText(bundle1.getString("VIEW_PANEL_ERROR_PLOT")); // NOI18N
         errorPlotPanelMI.addActionListener((e) -> {tabbedPane.setSelectedIndex(2);});
         viewMenu.add(errorPlotPanelMI);
 
-        outputPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_MASK));
+        outputPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_DOWN_MASK));
         outputPanelMI.setMnemonic('i');
         outputPanelMI.setText(bundle1.getString("VIEW_PANEL_OUTPUT")); // NOI18N
         outputPanelMI.addActionListener((e) -> {tabbedPane.setSelectedIndex(3);});
@@ -1066,17 +1066,17 @@ public final class MainWindow extends javax.swing.JFrame {
 
         populateMenu.setText(bundle1.getString("DATA_FILL")); // NOI18N
 
-        popFuncMonoMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        popFuncMonoMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK));
         popFuncMonoMI.setText(bundle1.getString("DATA_FILL_MONO")); // NOI18N
         popFuncMonoMI.addActionListener((e) -> {popFuncMonoMIActionPerformed();});
         populateMenu.add(popFuncMonoMI);
 
-        popFuncRandMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        popFuncRandMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK));
         popFuncRandMI.setText(bundle1.getString("DATA_FILL_RAND")); // NOI18N
         popFuncRandMI.addActionListener((e) -> {popFuncRandMIActionPerformed();});
         populateMenu.add(popFuncRandMI);
 
-        popFuncGaussMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        popFuncGaussMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK));
         popFuncGaussMI.setText(bundle1.getString("DATA_FILL_RAND_GAUSS")); // NOI18N
         popFuncGaussMI.addActionListener((e) -> {popFuncGaussMIActionPerformed();});
         populateMenu.add(popFuncGaussMI);
@@ -1085,7 +1085,7 @@ public final class MainWindow extends javax.swing.JFrame {
 
         transformMenu.setText(bundle1.getString("DATA_TRANSFORM")); // NOI18N
 
-        transAutoscaleAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        transAutoscaleAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK));
         transAutoscaleAllMI.setText(bundle1.getString("DATA_TRANSFORM_AUTO_ALL")); // NOI18N
         transAutoscaleAllMI.addActionListener((evt) -> {
             transAutoscaleAllMIActionPerformed();
@@ -1098,7 +1098,7 @@ public final class MainWindow extends javax.swing.JFrame {
         });
         transformMenu.add(transCustFuncAllMI);
 
-        transAutoscaleSelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
+        transAutoscaleSelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
         transAutoscaleSelMI.setText(bundle1.getString("DATA_TRANSFORM_AUTO_SEL")); // NOI18N
         transAutoscaleSelMI.addActionListener((evt) -> {
             transAutoscaleSelMIActionPerformed();
@@ -1126,14 +1126,14 @@ public final class MainWindow extends javax.swing.JFrame {
         });
         datasetMenu.add(dataRemSelRowsMI);
 
-        dataClearSelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_MASK));
+        dataClearSelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_DOWN_MASK));
         dataClearSelMI.setText(bundle1.getString("DATA_CLEAR_SELECTED_DATASET")); // NOI18N
         dataClearSelMI.addActionListener((evt) -> {
             dataClearSelMIActionPerformed();
         });
         datasetMenu.add(dataClearSelMI);
 
-        dataClearAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        dataClearAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_DOWN_MASK | InputEvent.CTRL_DOWN_MASK));
         dataClearAllMI.setText(bundle1.getString("DATA_CLEAR_ALL")); // NOI18N
         dataClearAllMI.addActionListener((evt) -> {
             dataClearAllMIActionPerformed();
