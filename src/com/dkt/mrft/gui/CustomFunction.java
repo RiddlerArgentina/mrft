@@ -2,17 +2,17 @@
  * MIT License
  *
  * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,7 +26,6 @@ package com.dkt.mrft.gui;
 import com.dkt.mrft.funcs.FunctionsRandom;
 import com.dkt.mrft.utils.BundleDecorator;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -52,15 +51,16 @@ public final class CustomFunction extends javax.swing.JDialog {
     private static final BundleDecorator i18n = new BundleDecorator("res.i18n.dialogs");
     private final ImageIcon warn = new ImageIcon(getClass().getResource("/res/icons/warn.png"));
     private final ImageIcon a_ok = new ImageIcon(getClass().getResource("/res/icons/a_ok.png"));
+    private boolean noOutput;
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify
     private final JButton applyButton = new JButton();
     private final JTextField expFXTextField = new JTextField();
     private final JTextField expXTextField = new JTextField();
     private final JLabel validFXLabel = new JLabel();
     private final JLabel validXLabel = new JLabel();
-    // End of variables declaration             
-    
+    // End of variables declaration
+
     public CustomFunction() {
         super((JFrame)null, true);
         initComponents();
@@ -68,7 +68,7 @@ public final class CustomFunction extends javax.swing.JDialog {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
         JLabel expXLabel = new JLabel();
@@ -86,17 +86,15 @@ public final class CustomFunction extends javax.swing.JDialog {
         availableVarsLabel.setText(bundle.getString("F_CUSTOM_VARS")); // NOI18N
 
         applyButton.setText(bundle.getString("F_CUSTOM_APPLY")); // NOI18N
-        applyButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                applyButtonActionPerformed(evt);
-            }
+        applyButton.addActionListener((ActionEvent evt) -> {
+            noOutput = false;
+            setVisible(false);
         });
 
         closeButton.setText(bundle.getString("F_CUSTOM_CLOSE")); // NOI18N
-        closeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                closeButtonActionPerformed(evt);
-            }
+        closeButton.addActionListener((ActionEvent evt) -> {
+            noOutput = true;
+            setVisible(false);
         });
 
         validXLabel.setIcon(new ImageIcon(getClass().getResource("/res/icons/a_ok.png"))); // NOI18N
@@ -151,18 +149,7 @@ public final class CustomFunction extends javax.swing.JDialog {
         );
 
         pack();
-    }// </editor-fold>                        
-
-    private boolean noOutput;
-    private void closeButtonActionPerformed(ActionEvent evt) {                                            
-        noOutput = true;
-        setVisible(false);
-    }                                           
-
-    private void applyButtonActionPerformed(ActionEvent evt) {                                            
-        noOutput = false;
-        setVisible(false);
-    }                                           
+    }// </editor-fold>
 
     private void initListners() {
         DocumentListener dl1 = new DocumentListener() {
@@ -176,7 +163,7 @@ public final class CustomFunction extends javax.swing.JDialog {
                 checkApplyButton(expXTextField, validXLabel);
             }
         };
-        
+
         DocumentListener dl2 = new DocumentListener() {
             @Override public void insertUpdate(DocumentEvent e) {
                 checkApplyButton(expFXTextField, validFXLabel);
@@ -188,28 +175,28 @@ public final class CustomFunction extends javax.swing.JDialog {
                 checkApplyButton(expFXTextField, validFXLabel);
             }
         };
-        
+
         expXTextField .getDocument().addDocumentListener(dl1);
         expFXTextField.getDocument().addDocumentListener(dl2);
-        
+
         expXTextField .setText("x");
         expFXTextField.setText("fx");
     }
-    
+
 
     private void checkApplyButton(JTextField txtField, JLabel expLabel) {
-        applyButton.setEnabled(validateFunc(txtField, expLabel) 
+        applyButton.setEnabled(validateFunc(txtField, expLabel)
                             && validXLabel .getIcon() == a_ok
                             && validFXLabel.getIcon() == a_ok);
     }
-    
+
     private boolean validateFunc(JTextField tField, JLabel label) {
         String expString = tField.getText();
         if (expString.trim().isEmpty()) {
             label.setIcon(warn);
             return false;
         }
-        
+
         try {
             ExpressionBuilder exp = new ExpressionBuilder(expString);
             exp.variables("x", "fx");
@@ -217,10 +204,10 @@ public final class CustomFunction extends javax.swing.JDialog {
             exp.functions(FunctionsBoolean.getFunctions());
             exp.functions(FunctionsRandom.getFunctions());
             exp.operators(OperatorsComparison.getOperators());
-            
+
             Expression e = exp.build(true);
             ValidationResult vr = e.validate(false);
-            
+
             if (vr.isValid()) {
                 label.setIcon(a_ok);
                 label.setToolTipText("");
@@ -236,20 +223,20 @@ public final class CustomFunction extends javax.swing.JDialog {
         }
         return true;
     }
-    
+
     public String getExp4XStr() {
         if (noOutput) return null;
         return expXTextField.getText();
     }
-    
+
     public String getExp4FXStr() {
         if (noOutput) return null;
         return expFXTextField.getText();
     }
-    
+
     public Expression getExp4X() {
         if (noOutput) return null;
-        
+
         String expString = expXTextField.getText();
         ExpressionBuilder exp = new ExpressionBuilder(expString);
         exp.variables("x", "fx");
@@ -257,13 +244,13 @@ public final class CustomFunction extends javax.swing.JDialog {
         exp.functions(FunctionsBoolean.getFunctions());
         exp.functions(FunctionsRandom.getFunctions());
         exp.operators(OperatorsComparison.getOperators());
-        
+
         return exp.build(true);
     }
-    
+
     public Expression getExp4FX() {
         if (noOutput) return null;
-        
+
         String expString = expFXTextField.getText();
         ExpressionBuilder exp = new ExpressionBuilder(expString);
         exp.variables("x", "fx");
@@ -271,7 +258,7 @@ public final class CustomFunction extends javax.swing.JDialog {
         exp.functions(FunctionsBoolean.getFunctions());
         exp.functions(FunctionsRandom.getFunctions());
         exp.operators(OperatorsComparison.getOperators());
-        
+
         return exp.build(true);
-    }      
+    }
 }

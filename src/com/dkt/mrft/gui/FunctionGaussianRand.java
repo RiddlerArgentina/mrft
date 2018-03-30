@@ -2,17 +2,17 @@
  * MIT License
  *
  * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,7 +28,6 @@ import com.dkt.mrft.models.DatasetTableModel;
 import com.dkt.mrft.utils.BundleDecorator;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -60,11 +59,11 @@ import net.objecthunter.exp4j.extras.OperatorsComparison;
  * @author Federico Vera {@literal <fede@riddler.com.ar>}
  */
 public final class FunctionGaussianRand extends JDialog {
-    private static final BundleDecorator i18n = new BundleDecorator("res.i18n.dialogs");   
+    private static final BundleDecorator i18n = new BundleDecorator("res.i18n.dialogs");
     private final ImageIcon warn = new ImageIcon(getClass().getResource("/res/icons/warn.png"));
-    private final ImageIcon a_ok = new ImageIcon(getClass().getResource("/res/icons/a_ok.png"));        
+    private final ImageIcon a_ok = new ImageIcon(getClass().getResource("/res/icons/a_ok.png"));
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify
     final JFormattedTextField averageField = new JFormattedTextField();
     final JButton closeButton = new JButton();
     final JFormattedTextField endField = new JFormattedTextField();
@@ -76,8 +75,9 @@ public final class FunctionGaussianRand extends JDialog {
     final JFormattedTextField startField = new JFormattedTextField();
     final JLabel validExpLabel = new JLabel();
     final JFormattedTextField varianceField = new JFormattedTextField();
-    // End of variables declaration          
-    
+    // End of variables declaration
+
+    private boolean out;
     private final MainWindow father;
 
     public FunctionGaussianRand(MainWindow father) {
@@ -88,7 +88,7 @@ public final class FunctionGaussianRand extends JDialog {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
         JLabel expLabel = new JLabel();
@@ -98,8 +98,6 @@ public final class FunctionGaussianRand extends JDialog {
         JLabel seedLabel = new JLabel();
         JLabel averageLabel = new JLabel();
         JLabel varianceLabel = new JLabel();
-
-        FormListener formListener = new FormListener();
 
         ResourceBundle bundle = ResourceBundle.getBundle("res/i18n/dialogs"); // NOI18N
         setTitle(bundle.getString("F_GAUSS_RAND_TITLE")); // NOI18N
@@ -115,10 +113,16 @@ public final class FunctionGaussianRand extends JDialog {
         pointsLabel.setText(bundle.getString("F_GAUSS_RAND_POINTS")); // NOI18N
 
         genCloseButton.setText(bundle.getString("F_GAUSS_RAND_GENERATE")); // NOI18N
-        genCloseButton.addActionListener(formListener);
+        genCloseButton.addActionListener((ActionEvent e) -> {
+            out = true;
+            setVisible(false);
+        });
 
         closeButton.setText(bundle.getString("F_GAUSS_RAND_CLOSE")); // NOI18N
-        closeButton.addActionListener(formListener);
+        closeButton.addActionListener((ActionEvent e) -> {
+            out = false;
+            setVisible(false);
+        });
 
         startField.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter()));
         startField.setHorizontalAlignment(JTextField.CENTER);
@@ -232,31 +236,6 @@ public final class FunctionGaussianRand extends JDialog {
         pack();
     }
 
-    // Code for dispatching events from components to event handlers.
-
-    private class FormListener implements ActionListener {
-        FormListener() {}
-        public void actionPerformed(ActionEvent evt) {
-            if (evt.getSource() == genCloseButton) {
-                FunctionGaussianRand.this.genCloseButtonActionPerformed(evt);
-            }
-            else if (evt.getSource() == closeButton) {
-                FunctionGaussianRand.this.closeButtonActionPerformed(evt);
-            }
-        }
-    }// </editor-fold>                        
-
-    private boolean out;
-    private void closeButtonActionPerformed(ActionEvent evt) {                                            
-        out = false;
-        setVisible(false);
-    }                                           
-
-    private void genCloseButtonActionPerformed(ActionEvent evt) {                                               
-        out = true;
-        setVisible(false);
-    }                                               
-
     private void initListners() {
         DocumentListener dl = new DocumentListener() {
             @Override public void insertUpdate(DocumentEvent e) {
@@ -271,7 +250,7 @@ public final class FunctionGaussianRand extends JDialog {
                 genCloseButton.setEnabled(checkInterval() && validateFunc());
             }
         };
-        
+
         expField.getDocument().addDocumentListener(dl);
         startField.getDocument().addDocumentListener(dl);
         pointsField.getDocument().addDocumentListener(dl);
@@ -279,7 +258,7 @@ public final class FunctionGaussianRand extends JDialog {
         seedField.getDocument().addDocumentListener(dl);
         averageField.getDocument().addDocumentListener(dl);
         varianceField.getDocument().addDocumentListener(dl);
-        
+
         expField.setText("if(x == 0, 1, sin(x) / x)");
         startField.setValue(-3);
         endField.setValue(3);
@@ -288,7 +267,7 @@ public final class FunctionGaussianRand extends JDialog {
         averageField.setValue(0.0);
         varianceField.setValue(1.0);
     }
-    
+
     private boolean checkInterval() {
         try {
             startField.commitEdit();
@@ -301,23 +280,23 @@ public final class FunctionGaussianRand extends JDialog {
             numPointsLabel.setText(i18n.__("F_GAUSS_RAND_INVALID"));
             return false;
         }
-        
+
         final double start = ((Number)startField.getValue()).doubleValue();
         final double end   = ((Number)endField.getValue()).doubleValue();
         final int    nval  = ((Number)pointsField.getValue()).intValue();
         final double mean  = ((Number)averageField.getValue()).doubleValue();
         final double var   = ((Number)varianceField.getValue()).doubleValue();
-        
-        boolean status = start < end && nval > 0;   
+
+        boolean status = start < end && nval > 0;
         status = status && mean >= start && mean <= end;
         status = status && var > 0;
-        
+
         if (!status) {
             numPointsLabel.setText(i18n.__("F_GAUSS_RAND_INVALID"));
         } else {
             numPointsLabel.setText("");
         }
-        
+
         return status;
     }
 
@@ -335,7 +314,7 @@ public final class FunctionGaussianRand extends JDialog {
             exp.operators(OperatorsComparison.getOperators());
             Expression e = exp.build(true);
             ValidationResult vr = e.validate(false);
-            
+
             if (vr.isValid()) {
                 validExpLabel.setIcon(a_ok);
                 validExpLabel.setToolTipText("");
@@ -356,16 +335,16 @@ public final class FunctionGaussianRand extends JDialog {
         if (!out) {
             return new ArrayList<>(0);
         }
-        
+
         final double start = ((Number)startField.getValue()).doubleValue();
         final double end   = ((Number)endField.getValue()).doubleValue();
         final int    nval  = ((Number)pointsField.getValue()).intValue();
         final long   seed  = ((Number)seedField.getValue()).longValue();
         final double mean  = ((Number)averageField.getValue()).doubleValue();
         final double var   = ((Number)varianceField.getValue()).doubleValue();
-        
+
         ArrayList<DatasetTableModel.Row> ret = new ArrayList<>(nval);
-        
+
         String expString = expField.getText();
         try {
             ExpressionBuilder exp = new ExpressionBuilder(expString).variable("x");
@@ -384,18 +363,18 @@ public final class FunctionGaussianRand extends JDialog {
                 ret.add(new DatasetTableModel.Row(false, x, f.setVariable("x", x).evaluate()));
             }
             father.info(
-                "Evaluating: '%s' in [%f,%f] with %d random gaussian points N(%f, %f) and seed = %d", 
+                "Evaluating: '%s' in [%f,%f] with %d random gaussian points N(%f, %f) and seed = %d",
                 expString, start, end, nval, mean, var, seed
             );
         } catch (Exception ex) {
             father.error(
-                "Error evaluating: '%s' in [%f,%f] with %d random gaussian points N(%f, %f) and seed = %d (%s)", 
+                "Error evaluating: '%s' in [%f,%f] with %d random gaussian points N(%f, %f) and seed = %d (%s)",
                 expString, start, end, nval, mean, var, seed, ex.getMessage()
             );
             validExpLabel.setToolTipText(ex.getMessage());
             validExpLabel.setIcon(warn);
         }
-        
+
         return ret;
     }
 }
