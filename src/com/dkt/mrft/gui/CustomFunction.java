@@ -52,6 +52,14 @@ public final class CustomFunction extends javax.swing.JDialog {
     private static final BundleDecorator i18n = new BundleDecorator("res.i18n.dialogs");
     private final ImageIcon warn = new ImageIcon(getClass().getResource("/res/icons/warn.png"));
     private final ImageIcon a_ok = new ImageIcon(getClass().getResource("/res/icons/a_ok.png"));
+
+    // Variables declaration - do not modify                     
+    private final JButton applyButton = new JButton();
+    private final JTextField expFXTextField = new JTextField();
+    private final JTextField expXTextField = new JTextField();
+    private final JLabel validFXLabel = new JLabel();
+    private final JLabel validXLabel = new JLabel();
+    // End of variables declaration             
     
     public CustomFunction() {
         super((JFrame)null, true);
@@ -265,13 +273,5 @@ public final class CustomFunction extends javax.swing.JDialog {
         exp.operators(OperatorsComparison.getOperators());
         
         return exp.build(true);
-    }
-
-    // Variables declaration - do not modify                     
-    private final JButton applyButton = new JButton();
-    private final JTextField expFXTextField = new JTextField();
-    private final JTextField expXTextField = new JTextField();
-    private final JLabel validFXLabel = new JLabel();
-    private final JLabel validXLabel = new JLabel();
-    // End of variables declaration                   
+    }      
 }

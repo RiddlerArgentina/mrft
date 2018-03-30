@@ -47,6 +47,13 @@ import javax.swing.WindowConstants;
 public final class AboutDialog extends JDialog {
     private final MainWindow father;
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private final JToggleButton aboutButton = new JToggleButton();
+    private final JToggleButton creditsButton = new JToggleButton();
+    private final JToggleButton licenseButton = new JToggleButton();
+    private JTextPane textPane;
+    // End of variables declaration//GEN-END:variables
+
     public AboutDialog(MainWindow father) {
         super((JFrame)null, true);
         this.father = father;
@@ -57,7 +64,7 @@ public final class AboutDialog extends JDialog {
         licenseButton.addActionListener((ActionEvent e) -> {load("LICENSE");});
     }
 
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         final ButtonGroup buttonGroup1 = new ButtonGroup();
@@ -102,14 +109,7 @@ public final class AboutDialog extends JDialog {
         );
 
         pack();
-    }// </editor-fold>                        
-
-    // Variables declaration - do not modify                     
-    private final JToggleButton aboutButton = new JToggleButton();
-    private final JToggleButton creditsButton = new JToggleButton();
-    private final JToggleButton licenseButton = new JToggleButton();
-    private JTextPane textPane;
-    // End of variables declaration                   
+    }// </editor-fold>//GEN-END:initComponents
 
     private void load(String file) {
         StringBuilder content = new StringBuilder(4096);

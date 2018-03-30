@@ -62,7 +62,21 @@ import net.objecthunter.exp4j.extras.OperatorsComparison;
 public final class FunctionGaussianRand extends JDialog {
     private static final BundleDecorator i18n = new BundleDecorator("res.i18n.dialogs");   
     private final ImageIcon warn = new ImageIcon(getClass().getResource("/res/icons/warn.png"));
-    private final ImageIcon a_ok = new ImageIcon(getClass().getResource("/res/icons/a_ok.png"));
+    private final ImageIcon a_ok = new ImageIcon(getClass().getResource("/res/icons/a_ok.png"));        
+
+    // Variables declaration - do not modify                     
+    final JFormattedTextField averageField = new JFormattedTextField();
+    final JButton closeButton = new JButton();
+    final JFormattedTextField endField = new JFormattedTextField();
+    final JTextField expField = new JTextField();
+    final JButton genCloseButton = new JButton();
+    final JLabel numPointsLabel = new JLabel();
+    final JFormattedTextField pointsField = new JFormattedTextField();
+    final JFormattedTextField seedField = new JFormattedTextField();
+    final JFormattedTextField startField = new JFormattedTextField();
+    final JLabel validExpLabel = new JLabel();
+    final JFormattedTextField varianceField = new JFormattedTextField();
+    // End of variables declaration          
     
     private final MainWindow father;
 
@@ -241,21 +255,7 @@ public final class FunctionGaussianRand extends JDialog {
     private void genCloseButtonActionPerformed(ActionEvent evt) {                                               
         out = true;
         setVisible(false);
-    }                                              
-
-    // Variables declaration - do not modify                     
-    final JFormattedTextField averageField = new JFormattedTextField();
-    final JButton closeButton = new JButton();
-    final JFormattedTextField endField = new JFormattedTextField();
-    final JTextField expField = new JTextField();
-    final JButton genCloseButton = new JButton();
-    final JLabel numPointsLabel = new JLabel();
-    final JFormattedTextField pointsField = new JFormattedTextField();
-    final JFormattedTextField seedField = new JFormattedTextField();
-    final JFormattedTextField startField = new JFormattedTextField();
-    final JLabel validExpLabel = new JLabel();
-    final JFormattedTextField varianceField = new JFormattedTextField();
-    // End of variables declaration                   
+    }                                               
 
     private void initListners() {
         DocumentListener dl = new DocumentListener() {
