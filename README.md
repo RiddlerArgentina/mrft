@@ -1,4 +1,4 @@
-# mrft (mlp real function trainer)
+# mrft (mlp real function trainer) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8332ce381fe54bc5bd24aec375443cc3)](https://www.codacy.com/app/dktcoding/mrft?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dktcoding/mrft&amp;utm_campaign=Badge_Grade)
 Small GUI used for training MLP with real functions.
 
 Libraries used

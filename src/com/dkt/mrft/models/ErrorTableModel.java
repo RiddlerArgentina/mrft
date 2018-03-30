@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
+ * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,10 +31,16 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author Federico Vera {@literal <fedevera at unc.edu.ar>}
+ * @author Federico Vera {@literal <fede@riddler.com.ar>}
  */
 public class ErrorTableModel extends AbstractTableModel {
     private static final BundleDecorator i18n = new BundleDecorator("res.i18n.models");   
+    private final Class<?> clazz[] = {Integer.class, Double.class, Double.class};
+    private final String[] cols = {
+        i18n.__("Epoch"), 
+        i18n.__("Training Error"), 
+        i18n.__("Validation Error")
+    };
     
     private final ArrayList<Row> data = new ArrayList<>(2048);
     
@@ -92,17 +98,11 @@ public class ErrorTableModel extends AbstractTableModel {
         return false;
     }
 
-    private final Class<?> clazz[] = {Integer.class, Double.class, Double.class};
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         return clazz[columnIndex];
     }
-
-    private final String[] cols = {
-        i18n.__("Epoch"), 
-        i18n.__("Training Error"), 
-        i18n.__("Validation Error")
-    };
+    
     @Override
     public String getColumnName(int column) {
         return cols[column];

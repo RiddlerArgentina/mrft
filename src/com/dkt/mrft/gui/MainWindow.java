@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
+ * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -51,15 +51,11 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
@@ -76,7 +72,6 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -124,12 +119,9 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -144,18 +136,101 @@ import libai.common.Matrix;
 import libai.nn.supervised.MLP;
 import net.objecthunter.exp4j.Expression;
 
+import static java.awt.event.KeyEvent.*;
+
 /**
  *
- * @author Federico Vera {@literal <fedevera at unc.edu.ar>}
+ * @author Federico Vera {@literal <fede@riddler.com.ar>}
  */
 public final class MainWindow extends javax.swing.JFrame {
     private static final BundleDecorator i18n = new BundleDecorator("res.i18n.misc");
     private static final Config c4g = Config.get();
 
+    // Variables declaration - do not modify
+    private final JComboBox<String> backpropBox = new JComboBox<>();
+    private final JMenuItem dataClearAllMI = new JMenuItem();
+    private final JMenuItem dataClearSelMI = new JMenuItem();
+    private final JPanel dataPanel = new JPanel();
+    private final JMenu datasetMenu = new JMenu();
+    private final JCheckBoxMenuItem debugPrintMI = new JCheckBoxMenuItem();
+    private final JCheckBoxMenuItem debugShowFpsMI = new JCheckBoxMenuItem();
+    private final JCheckBoxMenuItem debugStdoutMI = new JCheckBoxMenuItem();
+    private final JCheckBoxMenuItem debugUseAAMI = new JCheckBoxMenuItem();
+    private final JFormattedTextField degradationField = new JFormattedTextField(FORMATTER);
+    private final JComboBox<String> destinationBox = new JComboBox<>();
+    private final JPanel errorPlotPanel = new JPanel();
+    private final JTable errorTable = new JTable();
+    private final JMenuItem exampleBatmanMI = new JMenuItem();
+    private final JMenuItem exampleCosMI = new JMenuItem();
+    private final JMenuItem exampleDunnoMI = new JMenuItem();
+    private final JMenuItem exampleEkgRealMI = new JMenuItem();
+    private final JMenuItem exampleEkgSynthMI = new JMenuItem();
+    private final JMenuItem exampleJumpyMI = new JMenuItem();
+    private final JMenuItem exampleSinMI = new JMenuItem();
+    private final JMenuItem exampleSincMI = new JMenuItem();
+    private final JMenuItem exampleSquareMI = new JMenuItem();
+    private final JMenuItem exampleTriangleMI = new JMenuItem();
+    private final JMenuItem exampleVeryJumpyMI = new JMenuItem();
+    private final JMenu examplesMenu = new JMenu();
+    private final JPanel functPlotPanel = new JPanel();
+    private final JComboBox<String> generBox = new JComboBox<>();
+    private final JLabel generLabel = new JLabel();
+    private final JCheckBox generPlotCheck = new JCheckBox();
+    private final JTable generTable = new JTable();
+    private final JSplitPane horizontalSplit = new JSplitPane();
+    private final JTable layerTable = new JTable();
+    private final JSpinner layersSpinner = new JSpinner();
+    private final JFormattedTextField learningRateField = new JFormattedTextField(FORMATTER);
+    private final JTextPane logsTextPane = new JTextPane();
+    private final JSpinner maxEpochsSpinner = new JSpinner();
+    private final JMenuBar menuBar = new JMenuBar();
+    private final JPopupMenu.Separator menuSeparator2 = new JPopupMenu.Separator();
+    private final JFormattedTextField mseField = new JFormattedTextField(FORMATTER);
+    private final JSeparator optionsSeparator = new JSeparator();
+    private final JTextField pathField = new JTextField();
+    private final JButton pathSelectionButton = new JButton();
+    private final JButton playPauseButton = new JButton();
+    private final JCheckBox randomSelectionCheck = new JCheckBox();
+    private final JMenuItem reloadExampleMI = new JMenuItem();
+    private final JSpinner saveEverySpinner = new JSpinner();
+    private final JRadioButton selGenerButton = new JRadioButton();
+    private final JRadioButton selTrainButton = new JRadioButton();
+    private final JRadioButton selValidButton = new JRadioButton();
+    private final JFormattedTextField selectNumberField = new JFormattedTextField();
+    private final JFormattedTextField selectPercentageField = new JFormattedTextField();
+    private final ButtonGroup selectionButtonGroup = new ButtonGroup();
+    private final JSeparator selectionSeparator2 = new JSeparator();
+    private final JCheckBox showLabelsCheck = new JCheckBox();
+    private final JCheckBox smoothErroCheck = new JCheckBox();
+    private final JButton stopButton = new JButton();
+    private final JTabbedPane tabbedPane = new JTabbedPane();
+    private final JPanel topologyPanel = new JPanel();
+    private final JComboBox<String> trainBox = new JComboBox<>();
+    private final JLabel trainLabel = new JLabel();
+    private final JMenu trainMenu = new JMenu();
+    private final JMenuItem trainPauseMI = new JMenuItem();
+    private final JCheckBox trainPlotCheck = new JCheckBox();
+    private final JMenuItem trainStartMI = new JMenuItem();
+    private final JMenuItem trainStopMI = new JMenuItem();
+    private final JTable trainTable = new JTable();
+    private final JProgressBar trainingProgress = new JProgressBar();
+    private final JMenuItem transAutoscaleSelMI = new JMenuItem();
+    private final JMenuItem transCustFuncSelMI = new JMenuItem();
+    private final JComboBox<String> validBox = new JComboBox<>();
+    private final JLabel validLabel = new JLabel();
+    private final JCheckBox validPlotCheck = new JCheckBox();
+    private final JTable validTable = new JTable();
+    private final JSplitPane verticalSplit = new JSplitPane();
+    private final JTextField weightField = new JTextField();
+    // End of variables declaration
+
     private static final int TRAIN = 0;
     private static final int VALID = 1;
     private static final int GENER = 2;
     private static final int ERROR = 3;
+
+    private FunctionMonospacedRand dialogMonospacedRand;
+    private FunctionGaussianRand dialogGaussianRand;
 
     /**
      * Plot the graphs using points
@@ -170,6 +245,8 @@ public final class MainWindow extends javax.swing.JFrame {
      */
     public static final int PLOT_PATHS = 2;
 
+    private final BundleDecorator MSTR = new BundleDecorator("res.i18n.menu");
+
     private final LayersModel       layers     = new LayersModel();
     private final DatasetTableModel train      = new DatasetTableModel(i18n.__("training"));
     private final DatasetTableModel validate   = new DatasetTableModel(i18n.__("validation"));
@@ -183,7 +260,52 @@ public final class MainWindow extends javax.swing.JFrame {
     private static final int ERR_X_OFFSET = 15;
     private static final int ERR_Y_OFFSET = 15;
 
+    private final GString strTrain = new GString(0, 0, i18n.__("Training"));
+    private final GString strValid = new GString(0, 0, i18n.__("Validation"));
+    private CustomFunction dialogCustomFunc;
+    private SwingWorker<Void, ErrorTableModel.Row> worker;
+    private volatile boolean paused;
+    private MLP mlp;
+    private final ImageIcon play  = new ImageIcon(getClass().getResource("/res/icons/play.png"));
+    private final ImageIcon pause = new ImageIcon(getClass().getResource("/res/icons/pause.png"));
+    private boolean currently_training;
+    private final String header = "<html><b>%s (%d/%d)</b></html>";
+    private GLine epLine;
+    private JMenuItem lastItem;
+    private static final DecimalFormat FORMATTER = new DecimalFormat(c4g.get("number.format"));
+    private final GMultiPoint[] errorPoints = new GMultiPoint[2];
+    private final BasicStroke errStroke = new BasicStroke(1.5f);
+    private final int errRes = c4g.getInt("smooth.error.res");
+    private GString labTrain, labValid, labGen;
+    private final GMultiPoint[] points = new GMultiPoint[3];
+    private final JComboBox<?>[] list;
+    private final DatasetTableModel[] datas;
+    private final JCheckBox[] selections;
+    private final Color[] colors = {new Color(0x6666FF), new Color(0xFF9900), new Color(0xFF0000)};
+    private final String[] sfiles = {
+        i18n.__("__training.csv"),
+        i18n.__("__validation.csv"),
+        i18n.__("__generalization.csv"),
+        i18n.__("__errors.csv")
+    };
+    private final String INTERNAL_MLP_PATH    = "/res/i18n/mlp/default_%s.properties";
+    private final String INTERNAL_MLP_PATH_EN = "/res/i18n/mlp/default.properties";
+    private final SimpleAttributeSet STYLE_ERROR   = new SimpleAttributeSet();
+    private final SimpleAttributeSet STYLE_INFO    = new SimpleAttributeSet();
+    private final SimpleAttributeSet STYLE_DEBUG   = new SimpleAttributeSet();
+    private final SimpleAttributeSet STYLE_WARNING = new SimpleAttributeSet();
+    private final StyledDocument doc;
+    private final static long START = System.nanoTime();
+
+    private PrintStream PS = c4g.getBool("use.std.out") ? System.out : NullPrintStream.getInstance();
+    private boolean DEBUG_ENABLED = c4g.getBool("enable.debug");
+
     public MainWindow() {
+        loadAttributes();
+        doc = logsTextPane.getStyledDocument();
+        list = new JComboBox<?>[]{trainBox, validBox, generBox};
+        selections = new JCheckBox[]{trainPlotCheck, validPlotCheck, generPlotCheck};
+        datas = new DatasetTableModel[]{train, validate, generalize};
         initComponents();
         info("Program Started - %s", new Date());
         centerHeaders();
@@ -195,7 +317,7 @@ public final class MainWindow extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
         final JScrollPane trainTableScrollPane = new JScrollPane();
@@ -259,20 +381,18 @@ public final class MainWindow extends javax.swing.JFrame {
         final JMenuItem aboutMI = new JMenuItem();
 
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("MLP Real Function Trainer - v1.0");
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt) {
-                formWindowClosing(evt);
+                formWindowClosing();
             }
         });
 
         tabbedPane.addFocusListener(new FocusAdapter() {
             public void focusGained(FocusEvent evt) {
-                tabbedPaneFocusGained(evt);
+                drawErrors();
             }
         });
 
-        trainTable.setAutoCreateRowSorter(true);
         trainTableScrollPane.setViewportView(trainTable);
 
         trainLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -282,38 +402,30 @@ public final class MainWindow extends javax.swing.JFrame {
         validLabel.setHorizontalAlignment(SwingConstants.CENTER);
         validLabel.setText(bundle.getString("TBL_LBL_VALID")); // NOI18N
 
-        validTable.setAutoCreateRowSorter(true);
         validTableScrollPane.setViewportView(validTable);
 
         generLabel.setHorizontalAlignment(SwingConstants.CENTER);
         generLabel.setText(bundle.getString("TBL_LBL_GENER")); // NOI18N
 
-        generTable.setAutoCreateRowSorter(true);
         generTableScrollPane.setViewportView(generTable);
 
         selectionButtonGroup.add(selTrainButton);
         selTrainButton.setText(bundle.getString("TBL_SEL_TRAIN")); // NOI18N
-        selTrainButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                selTrainButtonActionPerformed(evt);
-            }
+        selTrainButton.addActionListener((evt) -> {
+            setSelected(train);
         });
 
         selectionButtonGroup.add(selValidButton);
         selValidButton.setText(bundle.getString("TBL_SEL_VALID")); // NOI18N
         selValidButton.setActionCommand(bundle.getString("TBL_SEL_VALID")); // NOI18N
-        selValidButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                selValidButtonActionPerformed(evt);
-            }
+        selValidButton.addActionListener((evt) -> {
+            setSelected(validate);
         });
 
         selectionButtonGroup.add(selGenerButton);
         selGenerButton.setText(bundle.getString("TBL_SEL_GENER")); // NOI18N
-        selGenerButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                selGenerButtonActionPerformed(evt);
-            }
+        selGenerButton.addActionListener((evt) -> {
+            setSelected(generalize);
         });
 
         selectionPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("PNL_SEL"))); // NOI18N
@@ -323,49 +435,36 @@ public final class MainWindow extends javax.swing.JFrame {
         destinationBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Training"), i18n.__("Validation"), i18n.__("Generalization") }));
 
         selectAllButton.setText(bundle.getString("PNL_SEL_ALL")); // NOI18N
-        selectAllButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                selectAllButtonActionPerformed(evt);
-            }
+        selectAllButton.addActionListener((evt) -> {
+            selectAllButtonActionPerformed();
         });
 
         selectNonButton.setText(bundle.getString("PNL_SEL_NONE")); // NOI18N
-        selectNonButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                selectNonButtonActionPerformed(evt);
-            }
+        selectNonButton.addActionListener((evt) -> {
+            selectNonButtonActionPerformed();
         });
 
         toggleSelButton.setText(bundle.getString("PNL_SEL_TOGGLE")); // NOI18N
-        toggleSelButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                toggleSelButtonActionPerformed(evt);
-            }
+        toggleSelButton.addActionListener((evt) -> {
+            toggleSelButtonActionPerformed();
         });
 
         selectionSeparator1.setOrientation(SwingConstants.VERTICAL);
 
         selectPercentageField.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(NumberFormat.getPercentInstance())));
-        selectPercentageField.setText("10%");
 
         selectPercentageButton.setText(bundle.getString("PNL_SEL_SELECT")); // NOI18N
-        selectPercentageButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                selectPercentageButtonActionPerformed(evt);
-            }
+        selectPercentageButton.addActionListener((evt) -> {
+            selectPercentageButtonActionPerformed();
         });
 
         selectNumberField.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(NumberFormat.getIntegerInstance())));
-        selectNumberField.setText("50");
 
         selectNumberButton.setText(bundle.getString("PNL_SEL_SELECT")); // NOI18N
-        selectNumberButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                selectNumberButtonActionPerformed(evt);
-            }
+        selectNumberButton.addActionListener((evt) -> {
+            selectNumberButtonActionPerformed();
         });
 
-        randomSelectionCheck.setSelected(true);
         randomSelectionCheck.setText(bundle.getString("PNL_SEL_RAND")); // NOI18N
         randomSelectionCheck.setHorizontalAlignment(SwingConstants.TRAILING);
         randomSelectionCheck.setHorizontalTextPosition(SwingConstants.LEADING);
@@ -373,17 +472,13 @@ public final class MainWindow extends javax.swing.JFrame {
         selectionSeparator2.setOrientation(SwingConstants.VERTICAL);
 
         moveSelectedButton.setText(bundle.getString("PNL_SEL_MOVE")); // NOI18N
-        moveSelectedButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                moveSelectedButtonActionPerformed(evt);
-            }
+        moveSelectedButton.addActionListener((evt) -> {
+            moveSelectedButtonActionPerformed();
         });
 
         copySelectedButton.setText(bundle.getString("PNL_SEL_COPY")); // NOI18N
-        copySelectedButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                copySelectedButtonActionPerformed(evt);
-            }
+        copySelectedButton.addActionListener((evt) -> {
+            copySelectedButtonActionPerformed();
         });
 
         GroupLayout selectionPanelLayout = new GroupLayout(selectionPanel);
@@ -519,10 +614,8 @@ public final class MainWindow extends javax.swing.JFrame {
         layersLabel.setText(bundle.getString("TOPO_HIDDEN_NUMBER")); // NOI18N
 
         layersSpinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
-        layersSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent evt) {
-                layersSpinnerStateChanged(evt);
-            }
+        layersSpinner.addChangeListener((evt) -> {
+            layersSpinnerStateChanged();
         });
 
         backpropLabel.setText(bundle.getString("TOPO_BACKPROP")); // NOI18N
@@ -639,18 +732,12 @@ public final class MainWindow extends javax.swing.JFrame {
 
         pathLabel.setText(bundle.getString("TOPO_FOLDER_PATH")); // NOI18N
 
-        pathField.setText("/dev/shm/FinalIA");
-
         pathSelectionButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/find.png"))); // NOI18N
-        pathSelectionButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                pathSelectionButtonActionPerformed(evt);
-            }
+        pathSelectionButton.addActionListener((e) -> {
+            pathSelectionButtonActionPerformed();
         });
 
         weightLabel.setText(bundle.getString("TOPO_WEIGHTS_NAME")); // NOI18N
-
-        weightField.setText("foo_{epoch}_algo.dat");
 
         GroupLayout outputPanelLayout = new GroupLayout(outputPanel);
         outputPanel.setLayout(outputPanelLayout);
@@ -709,110 +796,79 @@ public final class MainWindow extends javax.swing.JFrame {
 
         plotsPanel.addComponentListener(new ComponentAdapter() {
             public void componentShown(ComponentEvent evt) {
-                plotsPanelComponentShown(evt);
+                plotsPanelComponentShown();
             }
         });
 
         optionsPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("PLOT_FORMAT"))); // NOI18N
 
         validBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
-        validBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                validBoxActionPerformed(evt);
-            }
+        validBox.addActionListener((evt) -> {
+            updateGraphics(VALID);
         });
 
         trainPlotCheck.setText(bundle.getString("PLOT_OPT_TRAIN")); // NOI18N
-        trainPlotCheck.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                trainPlotCheckActionPerformed(evt);
-            }
+        trainPlotCheck.addActionListener((evt) -> {
+            trainPlotCheckActionPerformed();
         });
 
         validPlotCheck.setText(bundle.getString("PLOT_OPT_VALID")); // NOI18N
-        validPlotCheck.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                validPlotCheckActionPerformed(evt);
-            }
+        validPlotCheck.addActionListener((evt) -> {
+            validPlotCheckActionPerformed();
         });
 
-        generPlotCheck.setSelected(true);
         generPlotCheck.setText(bundle.getString("PLOT_OPT_GENER")); // NOI18N
-        generPlotCheck.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                generPlotCheckActionPerformed(evt);
-            }
+        generPlotCheck.addActionListener((evt) -> {
+            generPlotCheckActionPerformed();
         });
 
         generBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
-        generBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                generBoxActionPerformed(evt);
-            }
+        generBox.addActionListener((evt) -> {
+            updateGraphics(GENER);
         });
 
         trainBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
-        trainBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                trainBoxActionPerformed(evt);
-            }
+        trainBox.addActionListener((evt) -> {
+            updateGraphics(TRAIN);
         });
 
         trainColorButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
-        trainColorButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                trainColorButtonActionPerformed(evt);
-            }
+        trainColorButton.addActionListener((evt) -> {
+            chooseColor(i18n.__("Color for training"), TRAIN);
+            drawErrors();
         });
 
         validColorButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
-        validColorButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                validColorButtonActionPerformed(evt);
-            }
+        validColorButton.addActionListener((evt) -> {
+            chooseColor(i18n.__("Color for validation"), VALID);
+            drawErrors();
         });
 
         generColorButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
-        generColorButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                generColorButtonActionPerformed(evt);
-            }
+        generColorButton.addActionListener((evt) -> {
+            chooseColor(i18n.__("Color for generalization"), GENER);
         });
 
         optionsSeparator.setOrientation(SwingConstants.VERTICAL);
 
-        trainingProgress.setStringPainted(true);
-
-        smoothErroCheck.setSelected(true);
         smoothErroCheck.setText(bundle.getString("PLOT_SMOOTH")); // NOI18N
-        smoothErroCheck.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                smoothErroCheckActionPerformed(evt);
-            }
+        smoothErroCheck.addActionListener((evt) -> {
+            smoothErroCheckActionPerformed();
         });
 
         playPauseButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/play.png"))); // NOI18N
-        playPauseButton.setEnabled(false);
-        playPauseButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                playPauseButtonActionPerformed(evt);
-            }
+        playPauseButton.addActionListener((evt) -> {
+            playPauseButtonActionPerformed();
         });
 
         stopButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/stop.png"))); // NOI18N
-        stopButton.setEnabled(false);
-        stopButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                stopButtonActionPerformed(evt);
-            }
+        stopButton.addActionListener((evt) -> {
+            stopButtonActionPerformed();
         });
 
-        showLabelsCheck.setSelected(true);
         showLabelsCheck.setText(bundle.getString("PLOT_SHOW_LABELS")); // NOI18N
-        showLabelsCheck.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                showLabelsCheckActionPerformed(evt);
-            }
+        showLabelsCheck.addActionListener((evt) -> {
+            showLabelsCheckActionPerformed();
         });
 
         GroupLayout optionsPanelLayout = new GroupLayout(optionsPanel);
@@ -887,18 +943,14 @@ public final class MainWindow extends javax.swing.JFrame {
 
         optionsPanelLayout.linkSize(SwingConstants.VERTICAL, new Component[] {stopButton, trainingProgress});
 
-        horizontalSplit.setDividerLocation(250);
-
         errorTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         errorTableScrollPane.setViewportView(errorTable);
 
         horizontalSplit.setLeftComponent(errorTableScrollPane);
 
-        verticalSplit.setDividerLocation(100);
         verticalSplit.setOrientation(JSplitPane.VERTICAL_SPLIT);
 
         functPlotPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("PLOT_FUNCTION"))); // NOI18N
-        functPlotPanel.setDoubleBuffered(false);
 
         GroupLayout functPlotPanelLayout = new GroupLayout(functPlotPanel);
         functPlotPanel.setLayout(functPlotPanelLayout);
@@ -912,7 +964,6 @@ public final class MainWindow extends javax.swing.JFrame {
         verticalSplit.setTopComponent(functPlotPanel);
 
         errorPlotPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("PLOT_ERRS"))); // NOI18N
-        errorPlotPanel.setDoubleBuffered(false);
 
         GroupLayout errorPlotPanelLayout = new GroupLayout(errorPlotPanel);
         errorPlotPanel.setLayout(errorPlotPanelLayout);
@@ -965,25 +1016,17 @@ public final class MainWindow extends javax.swing.JFrame {
         ResourceBundle bundle1 = ResourceBundle.getBundle("res/i18n/menu"); // NOI18N
         fileMenu.setText(bundle1.getString("FILE")); // NOI18N
 
-        loadConfigMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        loadConfigMI.setAccelerator(KeyStroke.getKeyStroke(VK_O, CTRL_DOWN_MASK));
         loadConfigMI.setMnemonic('c');
         loadConfigMI.setText(bundle1.getString("FILE_LOAD_CONF")); // NOI18N
-        loadConfigMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                loadConfigMIActionPerformed(evt);
-            }
-        });
+        loadConfigMI.addActionListener((e) -> {loadConfigMIActionPerformed();});
         fileMenu.add(loadConfigMI);
         fileMenu.add(menuSeparator1);
 
-        quitMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
+        quitMI.setAccelerator(KeyStroke.getKeyStroke(VK_F4, ALT_DOWN_MASK));
         quitMI.setMnemonic('s');
         quitMI.setText(bundle1.getString("FILE_QUIT")); // NOI18N
-        quitMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                quitMIActionPerformed(evt);
-            }
-        });
+        quitMI.addActionListener((e) -> {quitMIActionPerformed();});
         fileMenu.add(quitMI);
 
         menuBar.add(fileMenu);
@@ -991,44 +1034,28 @@ public final class MainWindow extends javax.swing.JFrame {
         viewMenu.setMnemonic('V');
         viewMenu.setText(bundle1.getString("VIEW")); // NOI18N
 
-        dataPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_MASK));
+        dataPanelMI.setAccelerator(KeyStroke.getKeyStroke(VK_1, CTRL_DOWN_MASK));
         dataPanelMI.setMnemonic('d');
         dataPanelMI.setText(bundle1.getString("VIEW_PANEL_DATA")); // NOI18N
-        dataPanelMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                dataPanelMIActionPerformed(evt);
-            }
-        });
+        dataPanelMI.addActionListener((e) -> {tabbedPane.setSelectedIndex(0);});
         viewMenu.add(dataPanelMI);
 
-        topologyPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK));
+        topologyPanelMI.setAccelerator(KeyStroke.getKeyStroke(VK_2, CTRL_DOWN_MASK));
         topologyPanelMI.setMnemonic('t');
         topologyPanelMI.setText(bundle1.getString("VIEW_PANEL_TOPOLOGY")); // NOI18N
-        topologyPanelMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                topologyPanelMIActionPerformed(evt);
-            }
-        });
+        topologyPanelMI.addActionListener((e) -> {tabbedPane.setSelectedIndex(1);});
         viewMenu.add(topologyPanelMI);
 
-        errorPlotPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_MASK));
+        errorPlotPanelMI.setAccelerator(KeyStroke.getKeyStroke(VK_3, CTRL_DOWN_MASK));
         errorPlotPanelMI.setMnemonic('f');
         errorPlotPanelMI.setText(bundle1.getString("VIEW_PANEL_ERROR_PLOT")); // NOI18N
-        errorPlotPanelMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                errorPlotPanelMIActionPerformed(evt);
-            }
-        });
+        errorPlotPanelMI.addActionListener((e) -> {tabbedPane.setSelectedIndex(2);});
         viewMenu.add(errorPlotPanelMI);
 
-        outputPanelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_MASK));
+        outputPanelMI.setAccelerator(KeyStroke.getKeyStroke(VK_4, CTRL_DOWN_MASK));
         outputPanelMI.setMnemonic('i');
         outputPanelMI.setText(bundle1.getString("VIEW_PANEL_OUTPUT")); // NOI18N
-        outputPanelMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                outputPanelMIActionPerformed(evt);
-            }
-        });
+        outputPanelMI.addActionListener((e) -> {tabbedPane.setSelectedIndex(3);});
         viewMenu.add(outputPanelMI);
 
         menuBar.add(viewMenu);
@@ -1038,105 +1065,77 @@ public final class MainWindow extends javax.swing.JFrame {
 
         populateMenu.setText(bundle1.getString("DATA_FILL")); // NOI18N
 
-        popFuncMonoMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        popFuncMonoMI.setAccelerator(KeyStroke.getKeyStroke(VK_F, SHIFT_DOWN_MASK | CTRL_DOWN_MASK));
         popFuncMonoMI.setText(bundle1.getString("DATA_FILL_MONO")); // NOI18N
-        popFuncMonoMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                popFuncMonoMIActionPerformed(evt);
-            }
-        });
+        popFuncMonoMI.addActionListener((e) -> {popFuncMonoMIActionPerformed();});
         populateMenu.add(popFuncMonoMI);
 
-        popFuncRandMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        popFuncRandMI.setAccelerator(KeyStroke.getKeyStroke(VK_R, SHIFT_DOWN_MASK | CTRL_DOWN_MASK));
         popFuncRandMI.setText(bundle1.getString("DATA_FILL_RAND")); // NOI18N
-        popFuncRandMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                popFuncRandMIActionPerformed(evt);
-            }
-        });
+        popFuncRandMI.addActionListener((e) -> {popFuncRandMIActionPerformed();});
         populateMenu.add(popFuncRandMI);
 
-        popFuncGaussMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        popFuncGaussMI.setAccelerator(KeyStroke.getKeyStroke(VK_G, SHIFT_DOWN_MASK | CTRL_DOWN_MASK));
         popFuncGaussMI.setText(bundle1.getString("DATA_FILL_RAND_GAUSS")); // NOI18N
-        popFuncGaussMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                popFuncGaussMIActionPerformed(evt);
-            }
-        });
+        popFuncGaussMI.addActionListener((e) -> {popFuncGaussMIActionPerformed();});
         populateMenu.add(popFuncGaussMI);
 
         datasetMenu.add(populateMenu);
 
         transformMenu.setText(bundle1.getString("DATA_TRANSFORM")); // NOI18N
 
-        transAutoscaleAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        transAutoscaleAllMI.setAccelerator(KeyStroke.getKeyStroke(VK_E, SHIFT_DOWN_MASK | CTRL_DOWN_MASK));
         transAutoscaleAllMI.setText(bundle1.getString("DATA_TRANSFORM_AUTO_ALL")); // NOI18N
-        transAutoscaleAllMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                transAutoscaleAllMIActionPerformed(evt);
-            }
+        transAutoscaleAllMI.addActionListener((evt) -> {
+            transAutoscaleAllMIActionPerformed();
         });
         transformMenu.add(transAutoscaleAllMI);
 
         transCustFuncAllMI.setText(bundle1.getString("DATA_TRANSFORM_CUST_ALL")); // NOI18N
-        transCustFuncAllMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                transCustFuncAllMIActionPerformed(evt);
-            }
+        transCustFuncAllMI.addActionListener((evt) -> {
+            transCustFuncAllMIActionPerformed();
         });
         transformMenu.add(transCustFuncAllMI);
 
-        transAutoscaleSelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
+        transAutoscaleSelMI.setAccelerator(KeyStroke.getKeyStroke(VK_E, CTRL_DOWN_MASK));
         transAutoscaleSelMI.setText(bundle1.getString("DATA_TRANSFORM_AUTO_SEL")); // NOI18N
-        transAutoscaleSelMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                transAutoscaleSelMIActionPerformed(evt);
-            }
+        transAutoscaleSelMI.addActionListener((evt) -> {
+            transAutoscaleSelMIActionPerformed();
         });
         transformMenu.add(transAutoscaleSelMI);
 
         transCustFuncSelMI.setText(bundle1.getString("DATA_TRANSFORM_CUST_SEL")); // NOI18N
-        transCustFuncSelMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                transCustFuncSelMIActionPerformed(evt);
-            }
+        transCustFuncSelMI.addActionListener((evt) -> {
+            transCustFuncSelMIActionPerformed();
         });
         transformMenu.add(transCustFuncSelMI);
 
         datasetMenu.add(transformMenu);
 
-        dataAddRowMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, 0));
+        dataAddRowMI.setAccelerator(KeyStroke.getKeyStroke(VK_ADD, 0));
         dataAddRowMI.setText(bundle1.getString("DATA_ADD_ROW")); // NOI18N
-        dataAddRowMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                dataAddRowMIActionPerformed(evt);
-            }
+        dataAddRowMI.addActionListener((evt) -> {
+            selected.addRow(null, null);
         });
         datasetMenu.add(dataAddRowMI);
 
         dataRemSelRowsMI.setText(bundle1.getString("DATA_REMOVE_SELECTED")); // NOI18N
-        dataRemSelRowsMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                dataRemSelRowsMIActionPerformed(evt);
-            }
+        dataRemSelRowsMI.addActionListener((evt) -> {
+            selected.removeSelected();
         });
         datasetMenu.add(dataRemSelRowsMI);
 
-        dataClearSelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_MASK));
+        dataClearSelMI.setAccelerator(KeyStroke.getKeyStroke(VK_DELETE, SHIFT_DOWN_MASK));
         dataClearSelMI.setText(bundle1.getString("DATA_CLEAR_SELECTED_DATASET")); // NOI18N
-        dataClearSelMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                dataClearSelMIActionPerformed(evt);
-            }
+        dataClearSelMI.addActionListener((evt) -> {
+            dataClearSelMIActionPerformed();
         });
         datasetMenu.add(dataClearSelMI);
 
-        dataClearAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
+        dataClearAllMI.setAccelerator(KeyStroke.getKeyStroke(VK_DELETE, SHIFT_DOWN_MASK | CTRL_DOWN_MASK));
         dataClearAllMI.setText(bundle1.getString("DATA_CLEAR_ALL")); // NOI18N
-        dataClearAllMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                dataClearAllMIActionPerformed(evt);
-            }
+        dataClearAllMI.addActionListener((evt) -> {
+            dataClearAllMIActionPerformed();
         });
         datasetMenu.add(dataClearAllMI);
 
@@ -1145,33 +1144,24 @@ public final class MainWindow extends javax.swing.JFrame {
         trainMenu.setMnemonic('E');
         trainMenu.setText(bundle1.getString("TRAIN")); // NOI18N
 
-        trainStartMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
+        trainStartMI.setAccelerator(KeyStroke.getKeyStroke(VK_F5, 0));
         trainStartMI.setText(bundle1.getString("TRAIN_NOW")); // NOI18N
-        trainStartMI.setEnabled(false);
-        trainStartMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                trainStartMIActionPerformed(evt);
-            }
+        trainStartMI.addActionListener((evt) -> {
+            trainStartMIActionPerformed();
         });
         trainMenu.add(trainStartMI);
 
-        trainPauseMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
+        trainPauseMI.setAccelerator(KeyStroke.getKeyStroke(VK_F7, 0));
         trainPauseMI.setText(bundle1.getString("TRAIN_PAUSE")); // NOI18N
-        trainPauseMI.setEnabled(false);
-        trainPauseMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                trainPauseMIActionPerformed(evt);
-            }
+        trainPauseMI.addActionListener((evt) -> {
+            trainPauseMIActionPerformed();
         });
         trainMenu.add(trainPauseMI);
 
-        trainStopMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
+        trainStopMI.setAccelerator(KeyStroke.getKeyStroke(VK_F6, 0));
         trainStopMI.setText(bundle1.getString("TRAIN_STOP")); // NOI18N
-        trainStopMI.setEnabled(false);
-        trainStopMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                trainStopMIActionPerformed(evt);
-            }
+        trainStopMI.addActionListener((evt) -> {
+            trainStopMIActionPerformed();
         });
         trainMenu.add(trainStopMI);
 
@@ -1181,26 +1171,20 @@ public final class MainWindow extends javax.swing.JFrame {
         plotsMenu.setText(bundle1.getString("PLOTS")); // NOI18N
 
         saveImageMI.setText(bundle1.getString("PLOTS_SAVE_IMG")); // NOI18N
-        saveImageMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                saveImageMIActionPerformed(evt);
-            }
+        saveImageMI.addActionListener((evt) -> {
+            savePlot(i18n.__("Data"), func);
         });
         plotsMenu.add(saveImageMI);
 
         saveErrorMI.setText(bundle1.getString("PLOTS_SAVE_ERRORS")); // NOI18N
-        saveErrorMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                saveErrorMIActionPerformed(evt);
-            }
+        saveErrorMI.addActionListener((evt) -> {
+            savePlot(i18n.__("Errors"), errs);
         });
         plotsMenu.add(saveErrorMI);
 
         saveGifMI.setText(bundle1.getString("PLOTS_SAVE_GIF")); // NOI18N
-        saveGifMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                saveGifMIActionPerformed(evt);
-            }
+        saveGifMI.addActionListener((evt) -> {
+            saveGifMIActionPerformed();
         });
         plotsMenu.add(saveGifMI);
 
@@ -1209,13 +1193,10 @@ public final class MainWindow extends javax.swing.JFrame {
         examplesMenu.setMnemonic('j');
         examplesMenu.setText(bundle1.getString("EXAMPLES")); // NOI18N
 
-        reloadExampleMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
+        reloadExampleMI.setAccelerator(KeyStroke.getKeyStroke(VK_F2, 0));
         reloadExampleMI.setText(bundle1.getString("EXAMPLES_RELOAD")); // NOI18N
-        reloadExampleMI.setEnabled(false);
-        reloadExampleMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                reloadExampleMIActionPerformed(evt);
-            }
+        reloadExampleMI.addActionListener((evt) -> {
+            loadExample(lastItem, null);
         });
         examplesMenu.add(reloadExampleMI);
         examplesMenu.add(menuSeparator2);
@@ -1256,51 +1237,38 @@ public final class MainWindow extends javax.swing.JFrame {
         menuBar.add(examplesMenu);
 
         helpMenu.setMnemonic('?');
-        helpMenu.setText("?");
 
         debugMenu.setText(bundle1.getString("DEBUG")); // NOI18N
 
         debugPrintMI.setText(bundle1.getString("DEBUG_SHOW")); // NOI18N
-        debugPrintMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                debugPrintMIActionPerformed(evt);
-            }
+        debugPrintMI.addActionListener((evt) -> {
+            debugPrintMIActionPerformed();
         });
         debugMenu.add(debugPrintMI);
 
-        debugStdoutMI.setSelected(true);
         debugStdoutMI.setText(bundle1.getString("DEBUG_STD_OUT")); // NOI18N
-        debugStdoutMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                debugStdoutMIActionPerformed(evt);
-            }
+        debugStdoutMI.addActionListener((evt) -> {
+            debugStdoutMIActionPerformed();
         });
         debugMenu.add(debugStdoutMI);
 
-        debugUseAAMI.setSelected(true);
         debugUseAAMI.setText(bundle1.getString("DEBUG_AA")); // NOI18N
-        debugUseAAMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                debugUseAAMIActionPerformed(evt);
-            }
+        debugUseAAMI.addActionListener((evt) -> {
+            debugUseAAMIActionPerformed();
         });
         debugMenu.add(debugUseAAMI);
 
         debugShowFpsMI.setText(bundle1.getString("DEBUG_FPS")); // NOI18N
-        debugShowFpsMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                debugShowFpsMIActionPerformed(evt);
-            }
+        debugShowFpsMI.addActionListener((evt) -> {
+            debugShowFpsMIActionPerformed();
         });
         debugMenu.add(debugShowFpsMI);
 
         helpMenu.add(debugMenu);
 
         aboutMI.setText(bundle1.getString("ABOUT")); // NOI18N
-        aboutMI.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                aboutMIActionPerformed(evt);
-            }
+        aboutMI.addActionListener((evt) -> {
+            new AboutDialog(MainWindow.this).setVisible(true);
         });
         helpMenu.add(aboutMI);
 
@@ -1318,28 +1286,15 @@ public final class MainWindow extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>
 
     private FunctionMonospaced dialogMonospaced;
-    private void popFuncMonoMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_popFuncMonoMIActionPerformed
+    private void popFuncMonoMIActionPerformed() {
         if(dialogMonospaced == null) dialogMonospaced = new FunctionMonospaced(MainWindow.this);
         dialogMonospaced.setVisible(true);
         selected.addAll(dialogMonospaced.getData());
-    }//GEN-LAST:event_popFuncMonoMIActionPerformed
+    }
 
-    private void selTrainButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selTrainButtonActionPerformed
-        setSelected(train);
-    }//GEN-LAST:event_selTrainButtonActionPerformed
-
-    private void selValidButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selValidButtonActionPerformed
-        setSelected(validate);
-    }//GEN-LAST:event_selValidButtonActionPerformed
-
-    private void selGenerButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selGenerButtonActionPerformed
-        setSelected(generalize);
-    }//GEN-LAST:event_selGenerButtonActionPerformed
-
-    private final BundleDecorator MSTR = new BundleDecorator("res.i18n.menu");
     private void setSelected(DatasetTableModel model) {
         selected = model;
         train     .selectEnabled(model == train);
@@ -1350,22 +1305,22 @@ public final class MainWindow extends javax.swing.JFrame {
         transCustFuncSelMI.setText(MSTR.__("DATA_TRANSFORM_CUST_SEL", selected.getName()));
     }
 
-    private void selectAllButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selectAllButtonActionPerformed
+    private void selectAllButtonActionPerformed() {
         selected.selectAll();
         info("Selecting all elements of the '%s' dataset", selected.getName());
-    }//GEN-LAST:event_selectAllButtonActionPerformed
+    }
 
-    private void toggleSelButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_toggleSelButtonActionPerformed
+    private void toggleSelButtonActionPerformed() {
         selected.selectToggle();
         info("Inverting selection of the '%s' dataset", selected.getName());
-    }//GEN-LAST:event_toggleSelButtonActionPerformed
+    }
 
-    private void selectNonButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selectNonButtonActionPerformed
+    private void selectNonButtonActionPerformed() {
         selected.selectNone();
         info("Removing selection of the '%s' dataset", selected.getName());
-    }//GEN-LAST:event_selectNonButtonActionPerformed
+    }
 
-    private void selectPercentageButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selectPercentageButtonActionPerformed
+    private void selectPercentageButtonActionPerformed() {
         try {
             selectPercentageField.commitEdit();
             final double value = ((Number)selectPercentageField.getValue()).doubleValue();
@@ -1376,9 +1331,9 @@ public final class MainWindow extends javax.swing.JFrame {
         } catch (ParseException ignoreMe) {
             error("'%s' is not a decimal number", selectPercentageField.getText());
         }
-    }//GEN-LAST:event_selectPercentageButtonActionPerformed
+    }
 
-    private void selectNumberButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_selectNumberButtonActionPerformed
+    private void selectNumberButtonActionPerformed() {
         try {
             selectNumberField.commitEdit();
             final int value = ((Number)selectNumberField.getValue()).intValue();
@@ -1388,9 +1343,9 @@ public final class MainWindow extends javax.swing.JFrame {
         } catch (ParseException ignoreMe) {
             error("'%s' is not an integer", selectNumberField.getText());
         }
-    }//GEN-LAST:event_selectNumberButtonActionPerformed
+    }
 
-    private void moveSelectedButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_moveSelectedButtonActionPerformed
+    private void moveSelectedButtonActionPerformed() {
         final int idx = destinationBox.getSelectedIndex();
         final ArrayList<DatasetTableModel.Row> foo = selected.removeSelected();
         final String dest;
@@ -1400,41 +1355,35 @@ public final class MainWindow extends javax.swing.JFrame {
             default: generalize.addAll(foo); dest = generalize.getName(); break;
         }
         info("Moving %d elements from '%s' -> '%s'", foo.size(), selected.getName(), dest);
-    }//GEN-LAST:event_moveSelectedButtonActionPerformed
+    }
 
-    private void dataRemSelRowsMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_dataRemSelRowsMIActionPerformed
-        selected.removeSelected();
-    }//GEN-LAST:event_dataRemSelRowsMIActionPerformed
-
-    private FunctionMonospacedRand dialogMonospacedRand;
-    private void popFuncRandMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_popFuncRandMIActionPerformed
+    private void popFuncRandMIActionPerformed() {
         if (dialogMonospacedRand == null) dialogMonospacedRand = new FunctionMonospacedRand(MainWindow.this);
         dialogMonospacedRand.setVisible(true);
         selected.addAll(dialogMonospacedRand.getData());
-    }//GEN-LAST:event_popFuncRandMIActionPerformed
+    }
 
-    private FunctionGaussianRand dialogGaussianRand;
-    private void popFuncGaussMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_popFuncGaussMIActionPerformed
+    private void popFuncGaussMIActionPerformed() {
         if (dialogGaussianRand == null) dialogGaussianRand = new FunctionGaussianRand(MainWindow.this);
         dialogGaussianRand.setVisible(true);
         selected.addAll(dialogGaussianRand.getData());
-    }//GEN-LAST:event_popFuncGaussMIActionPerformed
+    }
 
-    private void dataClearSelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_dataClearSelMIActionPerformed
+    private void dataClearSelMIActionPerformed() {
         selected.selectAll();
         selected.removeSelected();
-    }//GEN-LAST:event_dataClearSelMIActionPerformed
+    }
 
-    private void dataClearAllMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_dataClearAllMIActionPerformed
+    private void dataClearAllMIActionPerformed() {
         train.selectAll();
         validate.selectAll();
         generalize.selectAll();
         train.removeSelected();
         validate.removeSelected();
         generalize.removeSelected();
-    }//GEN-LAST:event_dataClearAllMIActionPerformed
+    }
 
-    private void transAutoscaleAllMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_transAutoscaleAllMIActionPerformed
+    private void transAutoscaleAllMIActionPerformed() {
         double maxVal = train.getMax();
         maxVal = Math.max(maxVal, validate  .getMax());
         maxVal = Math.max(maxVal, generalize.getMax());
@@ -1443,61 +1392,33 @@ public final class MainWindow extends javax.swing.JFrame {
         validate  .scale(scale);
         generalize.scale(scale);
         info("Table values scaled using s = %f", scale);
-    }//GEN-LAST:event_transAutoscaleAllMIActionPerformed
+    }
 
-    private void trainPlotCheckActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainPlotCheckActionPerformed
+    private void trainPlotCheckActionPerformed() {
         if (!trainPlotCheck.isSelected()) {
             func.remove(points[0]);
             func.repaint();
         }
         updateGraphics(TRAIN);
-    }//GEN-LAST:event_trainPlotCheckActionPerformed
+    }
 
-    private void trainBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainBoxActionPerformed
-        updateGraphics(TRAIN);
-    }//GEN-LAST:event_trainBoxActionPerformed
-
-    private void generPlotCheckActionPerformed(ActionEvent evt) {//GEN-FIRST:event_generPlotCheckActionPerformed
+    private void generPlotCheckActionPerformed() {
         if (!generPlotCheck.isSelected()) {
             func.remove(points[2]);
             func.repaint();
         }
         updateGraphics(GENER);
-    }//GEN-LAST:event_generPlotCheckActionPerformed
+    }
 
-    private void validPlotCheckActionPerformed(ActionEvent evt) {//GEN-FIRST:event_validPlotCheckActionPerformed
+    private void validPlotCheckActionPerformed() {
         if (!validPlotCheck.isSelected()) {
             func.remove(points[1]);
             func.repaint();
         }
         updateGraphics(VALID);
-    }//GEN-LAST:event_validPlotCheckActionPerformed
+    }
 
-    private void validBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_validBoxActionPerformed
-        updateGraphics(VALID);
-    }//GEN-LAST:event_validBoxActionPerformed
-
-    private void generBoxActionPerformed(ActionEvent evt) {//GEN-FIRST:event_generBoxActionPerformed
-        updateGraphics(GENER);
-    }//GEN-LAST:event_generBoxActionPerformed
-
-    private final GString strTrain = new GString(0, 0, i18n.__("Training"));
-    private final GString strValid = new GString(0, 0, i18n.__("Validation"));
-    private void trainColorButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainColorButtonActionPerformed
-        chooseColor(i18n.__("Color for training"), TRAIN);
-        drawErrors();
-    }//GEN-LAST:event_trainColorButtonActionPerformed
-
-    private void validColorButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_validColorButtonActionPerformed
-        chooseColor(i18n.__("Color for validation"), VALID);
-        drawErrors();
-    }//GEN-LAST:event_validColorButtonActionPerformed
-
-    private void generColorButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_generColorButtonActionPerformed
-        chooseColor(i18n.__("Color for generalization"), GENER);
-    }//GEN-LAST:event_generColorButtonActionPerformed
-
-    private void copySelectedButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_copySelectedButtonActionPerformed
+    private void copySelectedButtonActionPerformed() {
         final int idx = destinationBox.getSelectedIndex();
         final ArrayList<DatasetTableModel.Row> foo = selected.removeSelected();
         selected.addAll(foo);
@@ -1508,15 +1429,15 @@ public final class MainWindow extends javax.swing.JFrame {
             default: generalize.addAll(foo); dest = generalize.getName(); break;
         }
         info("Copying %d elements from '%s' -> '%s'", foo.size(), selected.getName(), dest);
-    }//GEN-LAST:event_copySelectedButtonActionPerformed
+    }
 
-    private void layersSpinnerStateChanged(ChangeEvent evt) {//GEN-FIRST:event_layersSpinnerStateChanged
+    private void layersSpinnerStateChanged() {
         final int newNum = (Integer)layersSpinner.getValue();
         while (layers.getRowCount() - 2 < newNum) layers.addRow   ();
         while (layers.getRowCount() - 2 > newNum) layers.removeRow();
-    }//GEN-LAST:event_layersSpinnerStateChanged
-    private CustomFunction dialogCustomFunc;
-    private void transCustFuncAllMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_transCustFuncAllMIActionPerformed
+    }
+
+    private void transCustFuncAllMIActionPerformed() {
         if (dialogCustomFunc == null) dialogCustomFunc = new CustomFunction();
         dialogCustomFunc.setVisible(true);
         if (dialogCustomFunc.getExp4X() != null) {
@@ -1532,12 +1453,9 @@ public final class MainWindow extends javax.swing.JFrame {
             info("Applying '%s' to all the '%s'", sexp4x,  "x");
             info("Applying '%s' to all the '%s'", sexp4fx, "f(x)");
         }
-    }//GEN-LAST:event_transCustFuncAllMIActionPerformed
+    }
 
-    private SwingWorker<Void, ErrorTableModel.Row> worker;
-    private volatile boolean paused;
-    private MLP mlp;
-    private void trainStartMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainStartMIActionPerformed
+    private void trainStartMIActionPerformed() {
         tabbedPane.setSelectedIndex(2);
         if (worker != null) {
             worker.cancel(true);
@@ -1673,11 +1591,8 @@ public final class MainWindow extends javax.swing.JFrame {
             }
         };
         worker.execute();
-    }//GEN-LAST:event_trainStartMIActionPerformed
+    }
 
-    private final ImageIcon play  = new ImageIcon(getClass().getResource("/res/icons/play.png"));
-    private final ImageIcon pause = new ImageIcon(getClass().getResource("/res/icons/pause.png"));
-    private boolean currently_training;
     private void setTraining(boolean training) {
         currently_training = training;
         trainStartMI.setEnabled(!training);
@@ -1692,7 +1607,7 @@ public final class MainWindow extends javax.swing.JFrame {
         enableComponents(topologyPanel, !training);
     }
 
-    private void pathSelectionButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_pathSelectionButtonActionPerformed
+    private void pathSelectionButtonActionPerformed() {
         JFileChooser jfc = new JFileChooser(pathField.getText()){
             @Override
             public void approveSelection() {
@@ -1711,9 +1626,9 @@ public final class MainWindow extends javax.swing.JFrame {
             pathField.setText(jfc.getSelectedFile().getAbsolutePath() + File.separator);
             info("Current working directory: %s", pathField.getText());
         }
-    }//GEN-LAST:event_pathSelectionButtonActionPerformed
+    }
 
-    private void quitMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_quitMIActionPerformed
+    private void quitMIActionPerformed() {
         final int opt = JOptionPane.showConfirmDialog(null,
                 i18n.__("Do really want to quit?"),
                 i18n.__("Are you sure?"),
@@ -1726,33 +1641,25 @@ public final class MainWindow extends javax.swing.JFrame {
             }
             System.exit(0);
         }
-    }//GEN-LAST:event_quitMIActionPerformed
+    }
 
-    private void trainStopMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainStopMIActionPerformed
+    private void trainStopMIActionPerformed() {
         if (worker != null){
             worker.cancel(true);
             paused = false;
         }
-    }//GEN-LAST:event_trainStopMIActionPerformed
+    }
 
-    private void saveImageMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_saveImageMIActionPerformed
-        savePlot(i18n.__("Data"), func);
-    }//GEN-LAST:event_saveImageMIActionPerformed
-
-    private void saveErrorMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_saveErrorMIActionPerformed
-        savePlot(i18n.__("Errors"), errs);
-    }//GEN-LAST:event_saveErrorMIActionPerformed
-
-    private void transAutoscaleSelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_transAutoscaleSelMIActionPerformed
+    private void transAutoscaleSelMIActionPerformed() {
         double maxVal = train.getMax();
         maxVal = Math.max(maxVal, validate  .getMax());
         maxVal = Math.max(maxVal, generalize.getMax());
         final double scale = 1 / maxVal;
         selected.scale(scale);
         info("Table '%s' values scaled using s = %f", selected.getName(), scale);
-    }//GEN-LAST:event_transAutoscaleSelMIActionPerformed
+    }
 
-    private void transCustFuncSelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_transCustFuncSelMIActionPerformed
+    private void transCustFuncSelMIActionPerformed() {
         if (dialogCustomFunc == null) dialogCustomFunc = new CustomFunction();
         dialogCustomFunc.setVisible(true);
         if (dialogCustomFunc.getExp4X() != null) {
@@ -1768,13 +1675,9 @@ public final class MainWindow extends javax.swing.JFrame {
             info("Applying '%s' to all the '%s' of table '%s'", sexp4x,  "x", sname);
             info("Applying '%s' to all the '%s' of table '%s'", sexp4fx, "f(x)", sname);
         }
-    }//GEN-LAST:event_transCustFuncSelMIActionPerformed
+    }
 
-    private void dataAddRowMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_dataAddRowMIActionPerformed
-        selected.addRow(null, null);
-    }//GEN-LAST:event_dataAddRowMIActionPerformed
-
-    private void saveGifMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_saveGifMIActionPerformed
+    private void saveGifMIActionPerformed() {
         final JFileChooser jfc = new JFileChooser(pathField.getText());
         jfc.setSelectedFile(new File(pathField.getText(), "funcion.gif"));
         final int res = jfc.showSaveDialog(null);
@@ -1798,63 +1701,39 @@ public final class MainWindow extends javax.swing.JFrame {
 
         if (pRow != -1) errorTable.setRowSelectionInterval(pRow, pRow);
         gif.write(jfc.getSelectedFile().getAbsolutePath());
-    }//GEN-LAST:event_saveGifMIActionPerformed
+    }
 
-    private void smoothErroCheckActionPerformed(ActionEvent evt) {//GEN-FIRST:event_smoothErroCheckActionPerformed
+    private void smoothErroCheckActionPerformed() {
         errs.remove(errorPoints[TRAIN]);
         errs.remove(errorPoints[VALID]);
         errorPoints[TRAIN] = null;
         errorPoints[VALID] = null;
         drawErrors();
-    }//GEN-LAST:event_smoothErroCheckActionPerformed
+    }
 
-    private void trainPauseMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_trainPauseMIActionPerformed
+    private void trainPauseMIActionPerformed() {
         paused = !paused;
         trainPauseMI.setText(paused ? i18n.__("Resume") : i18n.__("Pause"));
         playPauseButton.setIcon(paused ? play : pause);
-    }//GEN-LAST:event_trainPauseMIActionPerformed
+    }
 
-    private void playPauseButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_playPauseButtonActionPerformed
+    private void playPauseButtonActionPerformed() {
         if (worker != null && !worker.isCancelled()) {
             trainPauseMI.doClick(0);
         }
         trainStartMI.doClick(0);
-    }//GEN-LAST:event_playPauseButtonActionPerformed
+    }
 
-    private void stopButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
+    private void stopButtonActionPerformed() {
         trainStopMI.doClick(0);
-    }//GEN-LAST:event_stopButtonActionPerformed
+    }
 
-    private void showLabelsCheckActionPerformed(ActionEvent evt) {//GEN-FIRST:event_showLabelsCheckActionPerformed
+    private void showLabelsCheckActionPerformed() {
         updateGraphics(TRAIN);
         drawErrors();
-    }//GEN-LAST:event_showLabelsCheckActionPerformed
+    }
 
-    private void aboutMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_aboutMIActionPerformed
-        new AboutDialog(this).setVisible(true);
-    }//GEN-LAST:event_aboutMIActionPerformed
-
-    private void reloadExampleMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_reloadExampleMIActionPerformed
-        loadExample(lastItem, null);
-    }//GEN-LAST:event_reloadExampleMIActionPerformed
-
-    private void topologyPanelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_topologyPanelMIActionPerformed
-        tabbedPane.setSelectedIndex(1);
-    }//GEN-LAST:event_topologyPanelMIActionPerformed
-
-    private void dataPanelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_dataPanelMIActionPerformed
-        tabbedPane.setSelectedIndex(0);
-    }//GEN-LAST:event_dataPanelMIActionPerformed
-
-    private void errorPlotPanelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_errorPlotPanelMIActionPerformed
-        tabbedPane.setSelectedIndex(2);
-    }//GEN-LAST:event_errorPlotPanelMIActionPerformed
-
-    private void outputPanelMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_outputPanelMIActionPerformed
-        tabbedPane.setSelectedIndex(3);
-    }//GEN-LAST:event_outputPanelMIActionPerformed
-
-    private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    private void formWindowClosing() {
         final int opt = JOptionPane.showConfirmDialog(null,
                 i18n.__("Do really want to quit?"),
                 i18n.__("Are you sure?"),
@@ -1870,9 +1749,9 @@ public final class MainWindow extends javax.swing.JFrame {
             }
             System.exit(0);
         }
-    }//GEN-LAST:event_formWindowClosing
+    }
 
-    private void loadConfigMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_loadConfigMIActionPerformed
+    private void loadConfigMIActionPerformed() {
         final JFileChooser jfc = new JFileChooser(pathField.getText());
         jfc.setFileFilter(new FileNameExtensionFilter("MLP config", "conf"));
 
@@ -1885,39 +1764,35 @@ public final class MainWindow extends javax.swing.JFrame {
         if (file != null && file.exists()) {
             readConfig(file);
         }
-    }//GEN-LAST:event_loadConfigMIActionPerformed
+    }
 
-    private void plotsPanelComponentShown(ComponentEvent evt) {//GEN-FIRST:event_plotsPanelComponentShown
+    private void plotsPanelComponentShown() {
         updateGraphics(TRAIN);
         updateGraphics(VALID);
         updateGraphics(GENER);
-    }//GEN-LAST:event_plotsPanelComponentShown
+    }
 
-    private void debugUseAAMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_debugUseAAMIActionPerformed
+    private void debugUseAAMIActionPerformed() {
         errs.setUseAntiAliasing(debugUseAAMI.isSelected());
         func.setUseAntiAliasing(debugUseAAMI.isSelected());
         c4g.put("use.aa", debugUseAAMI.isSelected());
-    }//GEN-LAST:event_debugUseAAMIActionPerformed
+    }
 
-    private void debugShowFpsMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_debugShowFpsMIActionPerformed
+    private void debugShowFpsMIActionPerformed() {
         errs.setShowFPS(debugShowFpsMI.isSelected());
         func.setShowFPS(debugShowFpsMI.isSelected());
         c4g.put("show.fps", debugShowFpsMI.isSelected());
-    }//GEN-LAST:event_debugShowFpsMIActionPerformed
+    }
 
-    private void debugPrintMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_debugPrintMIActionPerformed
+    private void debugPrintMIActionPerformed() {
         DEBUG_ENABLED = debugPrintMI.isSelected();
         c4g.put("enable.debug", DEBUG_ENABLED);
-    }//GEN-LAST:event_debugPrintMIActionPerformed
+    }
 
-    private void debugStdoutMIActionPerformed(ActionEvent evt) {//GEN-FIRST:event_debugStdoutMIActionPerformed
+    private void debugStdoutMIActionPerformed() {
         PS = debugStdoutMI.isSelected() ? System.out : NullPrintStream.getInstance();
         c4g.put("use.std.out", debugStdoutMI.isSelected());
-    }//GEN-LAST:event_debugStdoutMIActionPerformed
-
-    private void tabbedPaneFocusGained(FocusEvent evt) {//GEN-FIRST:event_tabbedPaneFocusGained
-        drawErrors();
-    }//GEN-LAST:event_tabbedPaneFocusGained
+    }
 
     private void chooseColor(String title, int idx) {
         final Color c = JColorChooser.showDialog(null, title, colors[idx]);
@@ -1948,84 +1823,6 @@ public final class MainWindow extends javax.swing.JFrame {
         }
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private final JComboBox<String> backpropBox = new JComboBox<>();
-    private final JMenuItem dataClearAllMI = new JMenuItem();
-    private final JMenuItem dataClearSelMI = new JMenuItem();
-    private final JPanel dataPanel = new JPanel();
-    private final JMenu datasetMenu = new JMenu();
-    private final JCheckBoxMenuItem debugPrintMI = new JCheckBoxMenuItem();
-    private final JCheckBoxMenuItem debugShowFpsMI = new JCheckBoxMenuItem();
-    private final JCheckBoxMenuItem debugStdoutMI = new JCheckBoxMenuItem();
-    private final JCheckBoxMenuItem debugUseAAMI = new JCheckBoxMenuItem();
-    private final JFormattedTextField degradationField = new JFormattedTextField(FORMATTER);
-    private final JComboBox<String> destinationBox = new JComboBox<>();
-    private final JPanel errorPlotPanel = new JPanel();
-    private final JTable errorTable = new JTable();
-    private final JMenuItem exampleBatmanMI = new JMenuItem();
-    private final JMenuItem exampleCosMI = new JMenuItem();
-    private final JMenuItem exampleDunnoMI = new JMenuItem();
-    private final JMenuItem exampleEkgRealMI = new JMenuItem();
-    private final JMenuItem exampleEkgSynthMI = new JMenuItem();
-    private final JMenuItem exampleJumpyMI = new JMenuItem();
-    private final JMenuItem exampleSinMI = new JMenuItem();
-    private final JMenuItem exampleSincMI = new JMenuItem();
-    private final JMenuItem exampleSquareMI = new JMenuItem();
-    private final JMenuItem exampleTriangleMI = new JMenuItem();
-    private final JMenuItem exampleVeryJumpyMI = new JMenuItem();
-    private final JMenu examplesMenu = new JMenu();
-    private final JPanel functPlotPanel = new JPanel();
-    private final JComboBox<String> generBox = new JComboBox<>();
-    private final JLabel generLabel = new JLabel();
-    private final JCheckBox generPlotCheck = new JCheckBox();
-    private final JTable generTable = new JTable();
-    private final JSplitPane horizontalSplit = new JSplitPane();
-    private final JTable layerTable = new JTable();
-    private final JSpinner layersSpinner = new JSpinner();
-    private final JFormattedTextField learningRateField = new JFormattedTextField(FORMATTER);
-    private final JTextPane logsTextPane = new JTextPane();
-    private final JSpinner maxEpochsSpinner = new JSpinner();
-    private final JMenuBar menuBar = new JMenuBar();
-    private final JPopupMenu.Separator menuSeparator2 = new JPopupMenu.Separator();
-    private final JFormattedTextField mseField = new JFormattedTextField(FORMATTER);
-    private final JSeparator optionsSeparator = new JSeparator();
-    private final JTextField pathField = new JTextField();
-    private final JButton pathSelectionButton = new JButton();
-    private final JButton playPauseButton = new JButton();
-    private final JCheckBox randomSelectionCheck = new JCheckBox();
-    private final JMenuItem reloadExampleMI = new JMenuItem();
-    private final JSpinner saveEverySpinner = new JSpinner();
-    private final JRadioButton selGenerButton = new JRadioButton();
-    private final JRadioButton selTrainButton = new JRadioButton();
-    private final JRadioButton selValidButton = new JRadioButton();
-    private final JFormattedTextField selectNumberField = new JFormattedTextField();
-    private final JFormattedTextField selectPercentageField = new JFormattedTextField();
-    private final ButtonGroup selectionButtonGroup = new ButtonGroup();
-    private final JSeparator selectionSeparator2 = new JSeparator();
-    private final JCheckBox showLabelsCheck = new JCheckBox();
-    private final JCheckBox smoothErroCheck = new JCheckBox();
-    private final JButton stopButton = new JButton();
-    private final JTabbedPane tabbedPane = new JTabbedPane();
-    private final JPanel topologyPanel = new JPanel();
-    private final JComboBox<String> trainBox = new JComboBox<>();
-    private final JLabel trainLabel = new JLabel();
-    private final JMenu trainMenu = new JMenu();
-    private final JMenuItem trainPauseMI = new JMenuItem();
-    private final JCheckBox trainPlotCheck = new JCheckBox();
-    private final JMenuItem trainStartMI = new JMenuItem();
-    private final JMenuItem trainStopMI = new JMenuItem();
-    private final JTable trainTable = new JTable();
-    private final JProgressBar trainingProgress = new JProgressBar();
-    private final JMenuItem transAutoscaleSelMI = new JMenuItem();
-    private final JMenuItem transCustFuncSelMI = new JMenuItem();
-    private final JComboBox<String> validBox = new JComboBox<>();
-    private final JLabel validLabel = new JLabel();
-    private final JCheckBox validPlotCheck = new JCheckBox();
-    private final JTable validTable = new JTable();
-    private final JSplitPane verticalSplit = new JSplitPane();
-    private final JTextField weightField = new JTextField();
-    // End of variables declaration//GEN-END:variables
-
     private void centerHeaders() {
         layerTable.setDefaultRenderer(Double.class, new DecimalFormatRenderer());
         trainTable.setDefaultRenderer(Double.class, new DecimalFormatRenderer());
@@ -2050,7 +1847,6 @@ public final class MainWindow extends javax.swing.JFrame {
         }
     }
 
-    private final String header = "<html><b>%s (%d/%d)</b></html>";
     private void initModels() {
         layerTable.setModel(layers);
         trainTable.setModel(train);
@@ -2059,39 +1855,30 @@ public final class MainWindow extends javax.swing.JFrame {
         errorTable.setModel(errors);
         train.selectEnabled(true);
 
-        train.addTableModelListener(new TableModelListener() {
-            @Override public void tableChanged(TableModelEvent e) {
-                final int sel = train.getSelectedCount();
-                final int row = train.getRowCount();
-                trainLabel.setText(String.format(header, i18n.__("Training"), sel, row));
-                checkTrainEnabled();
-                updateGraphics(TRAIN);
-            }
+        train.addTableModelListener((TableModelEvent e) -> {
+            final int sel = train.getSelectedCount();
+            final int row = train.getRowCount();
+            trainLabel.setText(String.format(header, i18n.__("Training"), sel, row));
+            checkTrainEnabled();
+            updateGraphics(TRAIN);
         });
-        validate.addTableModelListener(new TableModelListener() {
-            @Override public void tableChanged(TableModelEvent e) {
-                final int sel = validate.getSelectedCount();
-                final int row = validate.getRowCount();
-                validLabel.setText(String.format(header, i18n.__("Validation"), sel, row));
-                checkTrainEnabled();
-                updateGraphics(VALID);
-            }
+        validate.addTableModelListener((TableModelEvent e) -> {
+            final int sel = validate.getSelectedCount();
+            final int row = validate.getRowCount();
+            validLabel.setText(String.format(header, i18n.__("Validation"), sel, row));
+            checkTrainEnabled();
+            updateGraphics(VALID);
         });
-        generalize.addTableModelListener(new TableModelListener() {
-            @Override public void tableChanged(TableModelEvent e) {
-                final int sel = generalize.getSelectedCount();
-                final int row = generalize.getRowCount();
-                generLabel.setText(String.format(header, i18n.__("Generalization"), sel, row));
-                checkTrainEnabled();
-                updateGraphics(GENER);
-            }
+        generalize.addTableModelListener((TableModelEvent e) -> {
+            final int sel = generalize.getSelectedCount();
+            final int row = generalize.getRowCount();
+            generLabel.setText(String.format(header, i18n.__("Generalization"), sel, row));
+            checkTrainEnabled();
+            updateGraphics(GENER);
         });
-        errors.addTableModelListener(new TableModelListener() {
-            @Override
-            public void tableChanged(TableModelEvent e) {
-                drawErrors();
-                updateGraphics(GENER);
-            }
+        errors.addTableModelListener((TableModelEvent e) -> {
+            drawErrors();
+            updateGraphics(GENER);
         });
 
         final ListSelectionModel tsm = errorTable.getSelectionModel();
@@ -2143,7 +1930,6 @@ public final class MainWindow extends javax.swing.JFrame {
         errorTable.getTableHeader().setReorderingAllowed(false);
     }
 
-    private GLine epLine;
     private void selectEpoch(int epoch) {
         final int epno = Math.round((float)errors.getEpoch(epoch));
         //@TODO check if the epoch is actually in range before plotting...
@@ -2178,6 +1964,7 @@ public final class MainWindow extends javax.swing.JFrame {
 
         return null;
     }
+
     private void initGraphs() {
         BorderLayout layout = new BorderLayout();
         functPlotPanel.setLayout(layout);
@@ -2193,17 +1980,13 @@ public final class MainWindow extends javax.swing.JFrame {
         funcAxis.drawLinesV(true);
         func.addFixed(funcAxis);
 
-        func.addComponentListener(new ComponentListener() {
+        func.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 updateGraphics(TRAIN);
                 updateGraphics(VALID);
                 updateGraphics(GENER);
             }
-
-            @Override public void componentMoved(ComponentEvent e) {}
-            @Override public void componentShown(ComponentEvent e) {}
-            @Override public void componentHidden(ComponentEvent e) {}
         });
 
         layout = new BorderLayout();
@@ -2213,17 +1996,13 @@ public final class MainWindow extends javax.swing.JFrame {
         errs.setUseFullArea(true);
         errs.setCenterOrigin(false);
         errs.setInvertYAxis(true);
-        errs.addComponentListener(new ComponentListener() {
+        errs.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 final Dimension dim = errs.getSize();
                 errs.moveOrigin(ERR_X_OFFSET, dim.height - ERR_X_OFFSET);
                 drawErrors();
             }
-
-            @Override public void componentMoved(ComponentEvent e) {}
-            @Override public void componentShown(ComponentEvent e) {}
-            @Override public void componentHidden(ComponentEvent e) {}
         });
 
         GAxis axis = new GAxis(-50, 1500, -50, 500);
@@ -2389,14 +2168,13 @@ public final class MainWindow extends javax.swing.JFrame {
         }
     }
 
-    private JMenuItem lastItem;
     private void loadExample(JMenuItem menu, Example ex) {
         if (ex == null && menu != null) {
             menu.doClick(0);
             return;
         }
 
-        if (menu != null) {
+        if (menu != null && ex != null) {
             info("Example '%s' loaded", ex.getName());
         }
 
@@ -2427,7 +2205,6 @@ public final class MainWindow extends javax.swing.JFrame {
         showLabelsCheck.setSelected(ex.showLabels());
     }
 
-    private static final DecimalFormat FORMATTER = new DecimalFormat(c4g.get("number.format"));
     private final Map<JMenuItem, Example> exampleMap = new HashMap<>(11);
     {
         exampleMap.put(exampleSinMI,       new com.dkt.mrft.examples.ExampleSin());
@@ -2442,38 +2219,24 @@ public final class MainWindow extends javax.swing.JFrame {
         exampleMap.put(exampleEkgRealMI,   new com.dkt.mrft.examples.ExampleEKG());
         exampleMap.put(exampleEkgSynthMI,  new com.dkt.mrft.examples.ExampleSyntheticEKG());
     }
+
     private void initListners() {
-        FileDrop fd = new FileDrop(trainTable, new FileDrop.Listener() {
-            @Override
-            public void filesDropped(File[] files) {
-                readFiles(files, train);
-            }
+        new FileDrop(trainTable, (File[] files) -> {
+            readFiles(files, train);
         });
-        fd = new FileDrop(validTable, new FileDrop.Listener() {
-            @Override
-            public void filesDropped(File[] files) {
-                readFiles(files, validate);
-            }
+        new FileDrop(validTable, (File[] files) -> {
+            readFiles(files, validate);
         });
-        fd = new FileDrop(generTable, new FileDrop.Listener() {
-            @Override
-            public void filesDropped(File[] files) {
-                readFiles(files, generalize);
-            }
+        new FileDrop(generTable, (File[] files) -> {
+            readFiles(files, generalize);
         });
-        fd = new FileDrop(topologyPanel, new FileDrop.Listener() {
-            @Override
-            public void filesDropped(File[] files) {
-                readFiles(files, null);
-            }
+        new FileDrop(topologyPanel, (File[] files) -> {
+            readFiles(files, null);
         });
 
 
-        ActionListener exampleListner = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loadExample((JMenuItem)e.getSource(), exampleMap.get((JMenuItem)e.getSource()));
-            }
+        ActionListener exampleListner = (e) -> {
+            loadExample((JMenuItem)e.getSource(), exampleMap.get((JMenuItem)e.getSource()));
         };
 
         for (JMenuItem mi : exampleMap.keySet()) {
@@ -2510,9 +2273,6 @@ public final class MainWindow extends javax.swing.JFrame {
         }
     }
 
-    private final GMultiPoint[] errorPoints = new GMultiPoint[2];
-    private final BasicStroke errStroke = new BasicStroke(1.5f);
-    private final int errRes = c4g.getInt("smooth.error.res");
     private synchronized void drawErrors0() {
         if (errors.getRowCount() == 0) {
             errs.repaint();
@@ -2545,12 +2305,9 @@ public final class MainWindow extends javax.swing.JFrame {
 
         for(int i = 0; i < idxs.length; i++) idxs[i] = i;
 
-        Arrays.sort(idxs, new Comparator<Integer>(){
-            @Override
-            public int compare(Integer o1, Integer o2){
-                return Double.compare(temp[0][o1], temp[0][o2]);
-            }
-        });
+        Arrays.sort(idxs, (Integer o1, Integer o2) ->
+                Double.compare(temp[0][o1], temp[0][o2])
+        );
 
         final double[][]data = new double[3][temp[0].length - 1];
         for (int j = 0; j < temp[0].length - 1; j++) {
@@ -2629,12 +2386,6 @@ public final class MainWindow extends javax.swing.JFrame {
         errs.repaint();
     }
 
-    private GString labTrain, labValid, labGen;
-    private final GMultiPoint[] points = new GMultiPoint[3];
-    private final JComboBox<?>[] list = {trainBox, validBox, generBox};
-    private final DatasetTableModel[] datas = {train, validate, generalize};
-    private final JCheckBox[] selections = {trainPlotCheck, validPlotCheck, generPlotCheck};
-    private final Color[] colors = {new Color(0x6666FF), new Color(0xFF9900), new Color(0xFF0000)};
     private synchronized void updateGraphics(int idx) {
         if (!shouldDraw()) return;
         //@FIXME this sucks... but c'mon! do you want to write it???
@@ -2737,7 +2488,8 @@ public final class MainWindow extends javax.swing.JFrame {
     }
 
     private double[] maxs(){
-        double maxx = 0, maxy = 0;
+        double maxx = 0;
+        double maxy = 0;
         for (int idx = 0; idx < 3; idx++) {
             DatasetTableModel dtm = datas[idx];
             for (int i = 0, m = dtm.getRowCount(); i < m; i++) {
@@ -2748,12 +2500,6 @@ public final class MainWindow extends javax.swing.JFrame {
         return new double[]{maxx, maxy};
     }
 
-    private final String[] sfiles = {
-        i18n.__("__training.csv"),
-        i18n.__("__validation.csv"),
-        i18n.__("__generalization.csv"),
-        i18n.__("__errors.csv")
-    };
     private void saveData(String fname) {
         DatasetTableModel[] data = {train, validate, generalize};
 
@@ -2810,8 +2556,6 @@ public final class MainWindow extends javax.swing.JFrame {
         }
     }
 
-    private final String INTERNAL_MLP_PATH    = "/res/i18n/mlp/default_%s.properties";
-    private final String INTERNAL_MLP_PATH_EN = "/res/i18n/mlp/default.properties";
     private void saveConfig(String fname) {
         info("Saving configuration file '%s'", fname + "__mlp.conf");
         Locale locale = Locale.getDefault();
@@ -2866,11 +2610,7 @@ public final class MainWindow extends javax.swing.JFrame {
         }
     }
 
-    private final SimpleAttributeSet STYLE_ERROR   = new SimpleAttributeSet();
-    private final SimpleAttributeSet STYLE_INFO    = new SimpleAttributeSet();
-    private final SimpleAttributeSet STYLE_DEBUG   = new SimpleAttributeSet();
-    private final SimpleAttributeSet STYLE_WARNING = new SimpleAttributeSet();
-    {
+    public void loadAttributes() {
         StyleConstants.setFontFamily(STYLE_DEBUG,   c4g.get     ("debug.font"));
         StyleConstants.setForeground(STYLE_DEBUG,   c4g.getColor("debug.foreground"));
         StyleConstants.setBackground(STYLE_DEBUG,   c4g.getColor("debug.background"));
@@ -2885,12 +2625,6 @@ public final class MainWindow extends javax.swing.JFrame {
         StyleConstants.setBackground(STYLE_ERROR,   c4g.getColor("error.background"));
         StyleConstants.setBold      (STYLE_ERROR,   true);
     }
-
-    private final StyledDocument doc = logsTextPane.getStyledDocument();
-    private final static long START = System.nanoTime();
-
-    private PrintStream PS = c4g.getBool("use.std.out") ? System.out : NullPrintStream.getInstance();
-    private boolean DEBUG_ENABLED = c4g.getBool("enable.debug");
 
     public final void info(String msg, Object... args) {
         write(STYLE_INFO, msg, args);

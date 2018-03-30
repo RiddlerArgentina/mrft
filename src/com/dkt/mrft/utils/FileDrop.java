@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
+ * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -98,6 +98,8 @@ public class FileDrop {
     private static volatile Boolean supportsDnD;
     // Default border color
     private static Color defaultBorderColor = new Color(0f, 0f, 1f, 0.25f);
+    // BEGIN 2007-09-12 Nathan Blomquist -- Linux (KDE/Gnome) support added.
+    private static String ZERO_CHAR_STRING = "0";
 
     /**
      * Constructs a {@link FileDrop} with a default light-blue border
@@ -135,28 +137,6 @@ public class FileDrop {
         this(c, // Drop target
              BorderFactory.createMatteBorder(2, 2, 2, 2, defaultBorderColor), // Drag border
              recursive, // Recursive
-             listener);
-    }   // end constructor
-
-    /**
-     * Constructor with a default border and debugging optionally turned on.
-     * With Debugging turned on, more status messages will be displayed to
-     * <tt>out</tt>. A common way to use this constructor is with
-     * <tt>System.out</tt> or <tt>System.err</tt>. A <tt>null</tt> value for
-     * the parameter <tt>out</tt> will result in no debugging output.
-     *
-     * @param out PrintStream to record debugging info or null for no debugging.
-     * @param c Component on which files will be dropped.
-     * @param listener Listens for <tt>filesDropped</tt>.
-     * @since 1.0
-     */
-    public FileDrop(
-            final PrintStream out,
-            final Component c,
-            final Listener listener) {
-        this(c, // Drop target
-             BorderFactory.createMatteBorder(2, 2, 2, 2, defaultBorderColor),
-             false, // Recursive
              listener);
     }   // end constructor
 
@@ -258,7 +238,7 @@ public class FileDrop {
                     if (isDragOk(evt)) {
                         // If it's a Swing component, set its border
                         if (c instanceof JComponent) {
-                            javax.swing.JComponent jc = (JComponent) c;
+                            JComponent jc = (JComponent) c;
                             normalBorder = jc.getBorder();
                             jc.setBorder(dragBorder);
                         }   // end if: JComponent
@@ -363,9 +343,6 @@ public class FileDrop {
             // Make the component (and possibly children) drop targets
             makeDropTarget(c, recursive);
         } // end if: supports dnd
-        else {
-            //FileDrop: Drag and drop is not supported with this JVM
-        }   // end else: does not support DnD
     }   // end constructor
 
     private static boolean supportsDnD() {   // Static Boolean
@@ -381,8 +358,6 @@ public class FileDrop {
         return supportsDnD;
     }   // end supportsDnD
 
-    // BEGIN 2007-09-12 Nathan Blomquist -- Linux (KDE/Gnome) support added.
-    private static String ZERO_CHAR_STRING = "0";
     private static File[] createFileArray(BufferedReader bReader) {
         try {
             ArrayList<File> list = new ArrayList<>(10);
@@ -420,18 +395,18 @@ public class FileDrop {
 
             @Override
             public void hierarchyChanged(HierarchyEvent evt) {
-                java.awt.Component parent = c.getParent();
+                Component parent = c.getParent();
                 
                 if (parent == null) {
                     c.setDropTarget(null);
                 } // end if: null parent
                 else {
-                    DropTarget dt = new DropTarget(c, dropListener);
+                    new DropTarget(c, dropListener);
                 }   // end else: parent not null
             }   // end hierarchyChanged
         }); // end hierarchy listener
         if (c.getParent() != null) {
-            DropTarget dtt = new DropTarget(c, dropListener);
+            new DropTarget(c, dropListener);
         }
 
         if (recursive && (c instanceof Container)) {
@@ -782,14 +757,8 @@ public class FileDrop {
             if (flavor.equals(DATA_FLAVOR)) {
                 return true;
             }
-
-            // String
-            if (flavor.equals(DataFlavor.stringFlavor)) {
-                return true;
-            }
-
-            // We can't do anything else
-            return false;
+            
+            return flavor.equals(DataFlavor.stringFlavor);
         }   // end isDataFlavorSupported
 
 

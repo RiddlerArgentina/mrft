@@ -30,14 +30,15 @@ import java.util.Locale;
  * This class is thread safe.
  * </p>
  *
- * @author <a href="mailto:opalka dot richard at gmail dot com">Richard Opalka</a>
+ * @author <a href="mailto:opalka dot richard at gmail dot com">Richard
+ * Opalka</a>
  */
 public final class NullPrintStream extends PrintStream {
 
     private static final NullPrintStream INSTANCE = new NullPrintStream();
 
     private NullPrintStream() {
-        super( NullOutputStream.getInstance() );
+        super(NullOutputStream.getInstance());
     }
 
     /**
@@ -52,6 +53,7 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void flush() {
+        /*Does nothing.*/
     }
 
     /**
@@ -59,6 +61,7 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void close() {
+        /*Does nothing.*/
     }
 
     /**
@@ -73,84 +76,96 @@ public final class NullPrintStream extends PrintStream {
      * Does nothing.
      */
     @Override
-    public void write( final byte[] data ) throws IOException {
+    public void write(final byte[] data) throws IOException {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void write( final int data ) {
+    public void write(final int data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void write( final byte[] data, final int offset, final int length ) {
+    public void write(final byte[] data, final int offset, final int length) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void print( final boolean data ) {
+    public void print(final boolean data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void print( final char data ) {
+    public void print(final char data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void print( final int data ) {
+    public void print(final int data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void print( final long data ) {
+    public void print(final long data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void print( final float data ) {
+    public void print(final float data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void print( final double data ) {
+    public void print(final double data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void print( final char[] data ) {
+    public void print(final char[] data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void print( final String data ) {
+    public void print(final String data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void print( final Object data ) {
+    public void print(final Object data) {
+        /*Does nothing.*/
     }
 
     /**
@@ -158,76 +173,86 @@ public final class NullPrintStream extends PrintStream {
      */
     @Override
     public void println() {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void println( final boolean data ) {
+    public void println(final boolean data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void println( final char data ) {
+    public void println(final char data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void println( final int data ) {
+    public void println(final int data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void println( final long data ) {
+    public void println(final long data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void println( final float data ) {
+    public void println(final float data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void println( final double data ) {
+    public void println(final double data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void println( final char[] data ) {
+    public void println(final char[] data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void println( final String data ) {
+    public void println(final String data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public void println( final Object data ) {
+    public void println(final Object data) {
+        /*Does nothing.*/
     }
 
     /**
      * Does nothing.
      */
     @Override
-    public PrintStream printf( final String format, final Object ... args ) {
+    public PrintStream printf(final String format, final Object... args) {
         return this;
     }
 
@@ -235,7 +260,7 @@ public final class NullPrintStream extends PrintStream {
      * Does nothing.
      */
     @Override
-    public PrintStream printf( final Locale locale, final String format, final Object ... args ) {
+    public PrintStream printf(final Locale locale, final String format, final Object... args) {
         return this;
     }
 
@@ -243,7 +268,7 @@ public final class NullPrintStream extends PrintStream {
      * Does nothing.
      */
     @Override
-    public PrintStream format( final String format, final Object ... args ) {
+    public PrintStream format(final String format, final Object... args) {
         return this;
     }
 
@@ -251,7 +276,7 @@ public final class NullPrintStream extends PrintStream {
      * Does nothing.
      */
     @Override
-    public PrintStream format( final Locale locale, final String format, final Object ... args ) {
+    public PrintStream format(final Locale locale, final String format, final Object... args) {
         return this;
     }
 
@@ -259,7 +284,7 @@ public final class NullPrintStream extends PrintStream {
      * Does nothing.
      */
     @Override
-    public PrintStream append( final CharSequence data ) {
+    public PrintStream append(final CharSequence data) {
         return this;
     }
 
@@ -267,7 +292,7 @@ public final class NullPrintStream extends PrintStream {
      * Does nothing.
      */
     @Override
-    public PrintStream append( final CharSequence data, final int start, final int end ) {
+    public PrintStream append(final CharSequence data, final int start, final int end) {
         return this;
     }
 
@@ -275,7 +300,7 @@ public final class NullPrintStream extends PrintStream {
      * Does nothing.
      */
     @Override
-    public PrintStream append( final char data ) {
+    public PrintStream append(final char data) {
         return this;
     }
 

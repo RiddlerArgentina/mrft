@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2016 Federico Vera <https://github.com/dktcoding>
+ * Copyright (c) 2016-2018 Federico Vera <https://github.com/dktcoding>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,8 +30,6 @@ import java.io.File;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -40,7 +38,7 @@ import libai.nn.supervised.MLP;
 
 /**
  *
- * @author Federico Vera {@literal <fedevera at unc.edu.ar>}
+ * @author Federico Vera {@literal <fede@riddler.com.ar>}
  */
 public class EntryPoint {
     private static final BundleDecorator i18n = new BundleDecorator("res.i18n.cli");   
@@ -70,80 +68,26 @@ public class EntryPoint {
                                 vals.add(Double.parseDouble(arg));
                             } catch (Exception e) {
                                 out.println(i18n.__("Err: '%s' doesn't seem to be a number", arg));
-                                System.exit(0);
+                                return;
                             }
                         }
                     }
                 }
             }
             
-            if (!help) {
-                File file = new File(fname);
-                if (!file.exists()) {
-                    out.println(i18n.__("Err: Unable to parse '%s'", fname));
-                    System.exit(0);
-                }
-                
-                MLP mlp = MLP.open(fname);
-                if (mlp == null) {
-                    out.println(i18n.__("Err: '%s' doesn't seem to have a valid matrix", fname));
-                    System.exit(0);
-                } 
-                if (vals.isEmpty()) {
-                    out.println(i18n.__("Err: Input values needed"));
-                    System.exit(0);
-                }
-                Matrix m = new Matrix(1,1);
-                for (double v : vals) {
-                    m.position(0, 0, v);
-                    double res = mlp.simulate(m).position(0, 0);
-                    if (csv) {
-                        out.println(i18n.__("%f, %f%n", v, res));
-                    } else if (tsv) {
-                        out.println(i18n.__("%f\t%f%n", v, res));
-                    } else {
-                        out.println(res);
-                    }
-                }
-            }
+            analyseData(help, out, fname, vals, csv, tsv);
             
-            if (help) {
-                out.println(i18n.__("Usage:     java -jar FinalAI.jar FLAG DAT_FILR VALUES"));
-                out.println(i18n.__("java -jar FinalAI.jar -csv matrix.dat 0.1 0.2 0.3 0.4"));
-                out.println(i18n.__("Flags:"));
-                out.println(i18n.__(" -h --help  -> This help"));
-                out.println(i18n.__(" -csv       -> comma separated std::out"));
-                out.println(i18n.__(" -tsv       -> tab separated std::out"));
-                out.println(i18n.__("            -> returns the value of the prediction"));
-            }
+            printHelp(help, out);
             
-            System.exit(0);
+            return;
         }
         
-        try {
-            String laf = Config.get().get("default.laf");
-            
-            if (laf.equals("system")) {
-                laf = UIManager.getSystemLookAndFeelClassName();
-            }
-            
-            UIManager.setLookAndFeel(laf);
-        } catch (ClassNotFoundException | 
-                 InstantiationException | 
-                 IllegalAccessException | 
-                 UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(EntryPoint.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        setLookAndFeel();
         
-        if (Config.get().getBool("locale.force")) {
-            Locale.setDefault(new Locale(Config.get().get("locale.preferred")));
-        }
+        setLocale();
         
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new MainWindow().setVisible(true);
-            }
+        SwingUtilities.invokeLater(() -> {
+            new MainWindow().setVisible(true);
         });
         
         Runtime.getRuntime().addShutdownHook(new Thread(){
@@ -152,6 +96,81 @@ public class EntryPoint {
                 Config.get().save();
             }
         });
+    }
+
+    private static void printHelp(boolean help, PrintStream out) {
+        if (help) {
+            out.println(i18n.__("Usage:     java -jar FinalAI.jar FLAG DAT_FILE VALUES"));
+            out.println(i18n.__("java -jar FinalAI.jar -csv matrix.dat 0.1 0.2 0.3 0.4"));
+            out.println(i18n.__("Flags:"));
+            out.println(i18n.__(" -h --help  -> This help"));
+            out.println(i18n.__(" -csv       -> comma separated std::out"));
+            out.println(i18n.__(" -tsv       -> tab separated std::out"));
+            out.println(i18n.__("            -> returns the value of the prediction"));
+        }
+    }
+
+    private static void setLocale() {
+        if (Config.get().getBool("locale.force")) {
+            Locale.setDefault(new Locale(Config.get().get("locale.preferred")));
+        }
+    }
+
+    private static void setLookAndFeel() {
+        try {
+            String laf = Config.get().get("default.laf");
+            
+            if ("system".equals(laf)) {
+                laf = UIManager.getSystemLookAndFeelClassName();
+            }
+            if (laf != null) {
+                UIManager.setLookAndFeel(laf);
+            }
+        } catch (ClassNotFoundException | 
+                 InstantiationException | 
+                 IllegalAccessException | 
+                 UnsupportedLookAndFeelException ex) {
+            /*Do nothing*/
+        }
+    }
+
+    private static void analyseData(
+            boolean help, 
+            PrintStream out, 
+            String fname, 
+            ArrayList<Double> vals,
+            boolean csv, 
+            boolean tsv) 
+    {
+        if (!help) {
+            File file = new File(fname);
+            if (!file.exists()) {
+                out.println(i18n.__("Err: Unable to parse '%s'", fname));
+                return;
+            }
+
+            MLP mlp = MLP.open(fname);
+            if (mlp == null) {
+                out.println(i18n.__("Err: '%s' doesn't seem to have a valid matrix", fname));
+                return;
+            } 
+            if (vals.isEmpty()) {
+                out.println(i18n.__("Err: Input values needed"));
+                return;
+            }
+            Matrix m = new Matrix(1,1);
+            for (double v : vals) {
+                m.position(0, 0, v);
+                double res = mlp.simulate(m).position(0, 0);
+                if (csv) {
+                    out.println(i18n.__("%f, %f%n", v, res));
+                } else if (tsv) {
+                    out.println(i18n.__("%f\t%f%n", v, res));
+                } else {
+                    out.println(res);
+                }
+            }
+        }
     }
     
 }
