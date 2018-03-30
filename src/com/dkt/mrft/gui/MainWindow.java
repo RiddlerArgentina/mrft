@@ -122,7 +122,6 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -616,7 +615,7 @@ public final class MainWindow extends javax.swing.JFrame {
         layersLabel.setText(bundle.getString("TOPO_HIDDEN_NUMBER")); // NOI18N
 
         layersSpinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
-        layersSpinner.addChangeListener((ChangeEvent evt) -> {
+        layersSpinner.addChangeListener((evt) -> {
             layersSpinnerStateChanged();
         });
 
