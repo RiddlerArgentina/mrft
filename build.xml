@@ -4,7 +4,7 @@
     <property name="main.src.dir"   value="src"/>
     <property name="lib.dir"        value="lib"/>
     <property name="jar.dir"        value="dist"/>
-    <property name="proj.ver"       value ="1.0.5"/>
+    <property name="proj.ver"       value ="1.1.0"/>
 
     <path id="classpath.src">
         <pathelement location="lib/exp4j-fido-0.5.1.jar"/>
@@ -12,16 +12,16 @@
         <pathelement location="lib/libai-1.0.1.jar"/>
         <pathelement location="${jar.dir}"/>
     </path>
-    
+
     <target name="compile">
         <mkdir dir="${main.build.dir}"/>
         <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" includeantruntime="false">
             <classpath>
                 <path refid="classpath.src" />
-            </classpath>  
+            </classpath>
         </javac>
     </target>
-    
+
     <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}-${proj.ver}-need-dependecies.jar" basedir="${main.build.dir}">
@@ -38,13 +38,13 @@
 
     <target name="fat-jar" depends="jar" >
         <jar destfile="${ant.project.name}-${proj.ver}.jar" filesetmanifest="skip">
-            <zipgroupfileset dir="${jar.dir}" includes="*.jar" /> 
-            <zipgroupfileset dir="${lib.dir}" includes="*.jar" /> 
+            <zipgroupfileset dir="${jar.dir}" includes="*.jar" />
+            <zipgroupfileset dir="${lib.dir}" includes="*.jar" />
             <manifest>
                 <attribute name="Main-Class" value="com.dkt.mrft.EntryPoint" />
             </manifest>
         </jar>
     </target>
-    
+
     <target name="build-all" depends="fat-jar,clean" />
 </project>
