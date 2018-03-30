@@ -1981,17 +1981,13 @@ public final class MainWindow extends javax.swing.JFrame {
         funcAxis.drawLinesV(true);
         func.addFixed(funcAxis);
 
-        func.addComponentListener(new ComponentListener() {
+        func.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 updateGraphics(TRAIN);
                 updateGraphics(VALID);
                 updateGraphics(GENER);
             }
-
-            @Override public void componentMoved(ComponentEvent e) {}
-            @Override public void componentShown(ComponentEvent e) {}
-            @Override public void componentHidden(ComponentEvent e) {}
         });
 
         layout = new BorderLayout();
@@ -2001,17 +1997,13 @@ public final class MainWindow extends javax.swing.JFrame {
         errs.setUseFullArea(true);
         errs.setCenterOrigin(false);
         errs.setInvertYAxis(true);
-        errs.addComponentListener(new ComponentListener() {
+        errs.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 final Dimension dim = errs.getSize();
                 errs.moveOrigin(ERR_X_OFFSET, dim.height - ERR_X_OFFSET);
                 drawErrors();
             }
-
-            @Override public void componentMoved(ComponentEvent e) {}
-            @Override public void componentShown(ComponentEvent e) {}
-            @Override public void componentHidden(ComponentEvent e) {}
         });
 
         GAxis axis = new GAxis(-50, 1500, -50, 500);
@@ -2497,7 +2489,8 @@ public final class MainWindow extends javax.swing.JFrame {
     }
 
     private double[] maxs(){
-        double maxx = 0, maxy = 0;
+        double maxx = 0;
+        double maxy = 0;
         for (int idx = 0; idx < 3; idx++) {
             DatasetTableModel dtm = datas[idx];
             for (int i = 0, m = dtm.getRowCount(); i < m; i++) {
