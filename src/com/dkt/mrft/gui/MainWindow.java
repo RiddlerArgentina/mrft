@@ -51,7 +51,6 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -76,7 +75,6 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -125,7 +123,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
@@ -416,21 +413,21 @@ public final class MainWindow extends javax.swing.JFrame {
 
         selectionButtonGroup.add(selTrainButton);
         selTrainButton.setText(bundle.getString("TBL_SEL_TRAIN")); // NOI18N
-        selTrainButton.addActionListener((ActionEvent evt) -> {
-            selTrainButtonActionPerformed();
+        selTrainButton.addActionListener((evt) -> {
+            setSelected(train);
         });
 
         selectionButtonGroup.add(selValidButton);
         selValidButton.setText(bundle.getString("TBL_SEL_VALID")); // NOI18N
         selValidButton.setActionCommand(bundle.getString("TBL_SEL_VALID")); // NOI18N
-        selValidButton.addActionListener((ActionEvent evt) -> {
-            selValidButtonActionPerformed();
+        selValidButton.addActionListener((evt) -> {
+            setSelected(validate);
         });
 
         selectionButtonGroup.add(selGenerButton);
         selGenerButton.setText(bundle.getString("TBL_SEL_GENER")); // NOI18N
-        selGenerButton.addActionListener((ActionEvent evt) -> {
-            selGenerButtonActionPerformed();
+        selGenerButton.addActionListener((evt) -> {
+            setSelected(generalize);
         });
 
         selectionPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("PNL_SEL"))); // NOI18N
@@ -440,17 +437,17 @@ public final class MainWindow extends javax.swing.JFrame {
         destinationBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Training"), i18n.__("Validation"), i18n.__("Generalization") }));
 
         selectAllButton.setText(bundle.getString("PNL_SEL_ALL")); // NOI18N
-        selectAllButton.addActionListener((ActionEvent evt) -> {
+        selectAllButton.addActionListener((evt) -> {
             selectAllButtonActionPerformed();
         });
 
         selectNonButton.setText(bundle.getString("PNL_SEL_NONE")); // NOI18N
-        selectNonButton.addActionListener((ActionEvent evt) -> {
+        selectNonButton.addActionListener((evt) -> {
             selectNonButtonActionPerformed();
         });
 
         toggleSelButton.setText(bundle.getString("PNL_SEL_TOGGLE")); // NOI18N
-        toggleSelButton.addActionListener((ActionEvent evt) -> {
+        toggleSelButton.addActionListener((evt) -> {
             toggleSelButtonActionPerformed();
         });
 
@@ -459,14 +456,14 @@ public final class MainWindow extends javax.swing.JFrame {
         selectPercentageField.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(NumberFormat.getPercentInstance())));
 
         selectPercentageButton.setText(bundle.getString("PNL_SEL_SELECT")); // NOI18N
-        selectPercentageButton.addActionListener((ActionEvent evt) -> {
+        selectPercentageButton.addActionListener((evt) -> {
             selectPercentageButtonActionPerformed();
         });
 
         selectNumberField.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(NumberFormat.getIntegerInstance())));
 
         selectNumberButton.setText(bundle.getString("PNL_SEL_SELECT")); // NOI18N
-        selectNumberButton.addActionListener((ActionEvent evt) -> {
+        selectNumberButton.addActionListener((evt) -> {
             selectNumberButtonActionPerformed();
         });
 
@@ -477,12 +474,12 @@ public final class MainWindow extends javax.swing.JFrame {
         selectionSeparator2.setOrientation(SwingConstants.VERTICAL);
 
         moveSelectedButton.setText(bundle.getString("PNL_SEL_MOVE")); // NOI18N
-        moveSelectedButton.addActionListener((ActionEvent evt) -> {
+        moveSelectedButton.addActionListener((evt) -> {
             moveSelectedButtonActionPerformed();
         });
 
         copySelectedButton.setText(bundle.getString("PNL_SEL_COPY")); // NOI18N
-        copySelectedButton.addActionListener((ActionEvent evt) -> {
+        copySelectedButton.addActionListener((evt) -> {
             copySelectedButtonActionPerformed();
         });
 
@@ -808,69 +805,69 @@ public final class MainWindow extends javax.swing.JFrame {
         optionsPanel.setBorder(BorderFactory.createTitledBorder(bundle.getString("PLOT_FORMAT"))); // NOI18N
 
         validBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
-        validBox.addActionListener((ActionEvent evt) -> {
+        validBox.addActionListener((evt) -> {
             validBoxActionPerformed();
         });
 
         trainPlotCheck.setText(bundle.getString("PLOT_OPT_TRAIN")); // NOI18N
-        trainPlotCheck.addActionListener((ActionEvent evt) -> {
+        trainPlotCheck.addActionListener((evt) -> {
             trainPlotCheckActionPerformed();
         });
 
         validPlotCheck.setText(bundle.getString("PLOT_OPT_VALID")); // NOI18N
-        validPlotCheck.addActionListener((ActionEvent evt) -> {
+        validPlotCheck.addActionListener((evt) -> {
             validPlotCheckActionPerformed();
         });
 
         generPlotCheck.setText(bundle.getString("PLOT_OPT_GENER")); // NOI18N
-        generPlotCheck.addActionListener((ActionEvent evt) -> {
+        generPlotCheck.addActionListener((evt) -> {
             generPlotCheckActionPerformed();
         });
 
         generBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
-        generBox.addActionListener((ActionEvent evt) -> {
+        generBox.addActionListener((evt) -> {
             generBoxActionPerformed();
         });
 
         trainBox.setModel(new DefaultComboBoxModel<>(new String[] { i18n.__("Point"), i18n.__("Cross"), i18n.__("Path") }));
-        trainBox.addActionListener((ActionEvent evt) -> {
+        trainBox.addActionListener((evt) -> {
             trainBoxActionPerformed();
         });
 
         trainColorButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
-        trainColorButton.addActionListener((ActionEvent evt) -> {
+        trainColorButton.addActionListener((evt) -> {
             trainColorButtonActionPerformed();
         });
 
         validColorButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
-        validColorButton.addActionListener((ActionEvent evt) -> {
+        validColorButton.addActionListener((evt) -> {
             validColorButtonActionPerformed();
         });
 
         generColorButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/color-wheel.png"))); // NOI18N
-        generColorButton.addActionListener((ActionEvent evt) -> {
+        generColorButton.addActionListener((evt) -> {
             generColorButtonActionPerformed();
         });
 
         optionsSeparator.setOrientation(SwingConstants.VERTICAL);
 
         smoothErroCheck.setText(bundle.getString("PLOT_SMOOTH")); // NOI18N
-        smoothErroCheck.addActionListener((ActionEvent evt) -> {
+        smoothErroCheck.addActionListener((evt) -> {
             smoothErroCheckActionPerformed();
         });
 
         playPauseButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/play.png"))); // NOI18N
-        playPauseButton.addActionListener((ActionEvent evt) -> {
+        playPauseButton.addActionListener((evt) -> {
             playPauseButtonActionPerformed();
         });
 
         stopButton.setIcon(new ImageIcon(getClass().getResource("/res/icons/stop.png"))); // NOI18N
-        stopButton.addActionListener((ActionEvent evt) -> {
+        stopButton.addActionListener((evt) -> {
             stopButtonActionPerformed();
         });
 
         showLabelsCheck.setText(bundle.getString("PLOT_SHOW_LABELS")); // NOI18N
-        showLabelsCheck.addActionListener((ActionEvent evt) -> {
+        showLabelsCheck.addActionListener((evt) -> {
             showLabelsCheckActionPerformed();
         });
 
@@ -1089,26 +1086,26 @@ public final class MainWindow extends javax.swing.JFrame {
 
         transAutoscaleAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
         transAutoscaleAllMI.setText(bundle1.getString("DATA_TRANSFORM_AUTO_ALL")); // NOI18N
-        transAutoscaleAllMI.addActionListener((ActionEvent evt) -> {
+        transAutoscaleAllMI.addActionListener((evt) -> {
             transAutoscaleAllMIActionPerformed();
         });
         transformMenu.add(transAutoscaleAllMI);
 
         transCustFuncAllMI.setText(bundle1.getString("DATA_TRANSFORM_CUST_ALL")); // NOI18N
-        transCustFuncAllMI.addActionListener((ActionEvent evt) -> {
+        transCustFuncAllMI.addActionListener((evt) -> {
             transCustFuncAllMIActionPerformed();
         });
         transformMenu.add(transCustFuncAllMI);
 
         transAutoscaleSelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
         transAutoscaleSelMI.setText(bundle1.getString("DATA_TRANSFORM_AUTO_SEL")); // NOI18N
-        transAutoscaleSelMI.addActionListener((ActionEvent evt) -> {
+        transAutoscaleSelMI.addActionListener((evt) -> {
             transAutoscaleSelMIActionPerformed();
         });
         transformMenu.add(transAutoscaleSelMI);
 
         transCustFuncSelMI.setText(bundle1.getString("DATA_TRANSFORM_CUST_SEL")); // NOI18N
-        transCustFuncSelMI.addActionListener((ActionEvent evt) -> {
+        transCustFuncSelMI.addActionListener((evt) -> {
             transCustFuncSelMIActionPerformed();
         });
         transformMenu.add(transCustFuncSelMI);
@@ -1117,27 +1114,27 @@ public final class MainWindow extends javax.swing.JFrame {
 
         dataAddRowMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ADD, 0));
         dataAddRowMI.setText(bundle1.getString("DATA_ADD_ROW")); // NOI18N
-        dataAddRowMI.addActionListener((ActionEvent evt) -> {
+        dataAddRowMI.addActionListener((evt) -> {
             dataAddRowMIActionPerformed();
         });
         datasetMenu.add(dataAddRowMI);
 
         dataRemSelRowsMI.setText(bundle1.getString("DATA_REMOVE_SELECTED")); // NOI18N
-        dataRemSelRowsMI.addActionListener((ActionEvent evt) -> {
-            dataRemSelRowsMIActionPerformed();
+        dataRemSelRowsMI.addActionListener((evt) -> {
+            selected.removeSelected();
         });
         datasetMenu.add(dataRemSelRowsMI);
 
         dataClearSelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_MASK));
         dataClearSelMI.setText(bundle1.getString("DATA_CLEAR_SELECTED_DATASET")); // NOI18N
-        dataClearSelMI.addActionListener((ActionEvent evt) -> {
+        dataClearSelMI.addActionListener((evt) -> {
             dataClearSelMIActionPerformed();
         });
         datasetMenu.add(dataClearSelMI);
 
         dataClearAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, InputEvent.SHIFT_MASK | InputEvent.CTRL_MASK));
         dataClearAllMI.setText(bundle1.getString("DATA_CLEAR_ALL")); // NOI18N
-        dataClearAllMI.addActionListener((ActionEvent evt) -> {
+        dataClearAllMI.addActionListener((evt) -> {
             dataClearAllMIActionPerformed();
         });
         datasetMenu.add(dataClearAllMI);
@@ -1149,21 +1146,21 @@ public final class MainWindow extends javax.swing.JFrame {
 
         trainStartMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
         trainStartMI.setText(bundle1.getString("TRAIN_NOW")); // NOI18N
-        trainStartMI.addActionListener((ActionEvent evt) -> {
+        trainStartMI.addActionListener((evt) -> {
             trainStartMIActionPerformed();
         });
         trainMenu.add(trainStartMI);
 
         trainPauseMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
         trainPauseMI.setText(bundle1.getString("TRAIN_PAUSE")); // NOI18N
-        trainPauseMI.addActionListener((ActionEvent evt) -> {
+        trainPauseMI.addActionListener((evt) -> {
             trainPauseMIActionPerformed();
         });
         trainMenu.add(trainPauseMI);
 
         trainStopMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
         trainStopMI.setText(bundle1.getString("TRAIN_STOP")); // NOI18N
-        trainStopMI.addActionListener((ActionEvent evt) -> {
+        trainStopMI.addActionListener((evt) -> {
             trainStopMIActionPerformed();
         });
         trainMenu.add(trainStopMI);
@@ -1174,19 +1171,19 @@ public final class MainWindow extends javax.swing.JFrame {
         plotsMenu.setText(bundle1.getString("PLOTS")); // NOI18N
 
         saveImageMI.setText(bundle1.getString("PLOTS_SAVE_IMG")); // NOI18N
-        saveImageMI.addActionListener((ActionEvent evt) -> {
+        saveImageMI.addActionListener((evt) -> {
             saveImageMIActionPerformed();
         });
         plotsMenu.add(saveImageMI);
 
         saveErrorMI.setText(bundle1.getString("PLOTS_SAVE_ERRORS")); // NOI18N
-        saveErrorMI.addActionListener((ActionEvent evt) -> {
+        saveErrorMI.addActionListener((evt) -> {
             saveErrorMIActionPerformed();
         });
         plotsMenu.add(saveErrorMI);
 
         saveGifMI.setText(bundle1.getString("PLOTS_SAVE_GIF")); // NOI18N
-        saveGifMI.addActionListener((ActionEvent evt) -> {
+        saveGifMI.addActionListener((evt) -> {
             saveGifMIActionPerformed();
         });
         plotsMenu.add(saveGifMI);
@@ -1198,7 +1195,7 @@ public final class MainWindow extends javax.swing.JFrame {
 
         reloadExampleMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
         reloadExampleMI.setText(bundle1.getString("EXAMPLES_RELOAD")); // NOI18N
-        reloadExampleMI.addActionListener((ActionEvent evt) -> {
+        reloadExampleMI.addActionListener((evt) -> {
             reloadExampleMIActionPerformed();
         });
         examplesMenu.add(reloadExampleMI);
@@ -1244,25 +1241,25 @@ public final class MainWindow extends javax.swing.JFrame {
         debugMenu.setText(bundle1.getString("DEBUG")); // NOI18N
 
         debugPrintMI.setText(bundle1.getString("DEBUG_SHOW")); // NOI18N
-        debugPrintMI.addActionListener((ActionEvent evt) -> {
+        debugPrintMI.addActionListener((evt) -> {
             debugPrintMIActionPerformed();
         });
         debugMenu.add(debugPrintMI);
 
         debugStdoutMI.setText(bundle1.getString("DEBUG_STD_OUT")); // NOI18N
-        debugStdoutMI.addActionListener((ActionEvent evt) -> {
+        debugStdoutMI.addActionListener((evt) -> {
             debugStdoutMIActionPerformed();
         });
         debugMenu.add(debugStdoutMI);
 
         debugUseAAMI.setText(bundle1.getString("DEBUG_AA")); // NOI18N
-        debugUseAAMI.addActionListener((ActionEvent evt) -> {
+        debugUseAAMI.addActionListener((evt) -> {
             debugUseAAMIActionPerformed();
         });
         debugMenu.add(debugUseAAMI);
 
         debugShowFpsMI.setText(bundle1.getString("DEBUG_FPS")); // NOI18N
-        debugShowFpsMI.addActionListener((ActionEvent evt) -> {
+        debugShowFpsMI.addActionListener((evt) -> {
             debugShowFpsMIActionPerformed();
         });
         debugMenu.add(debugShowFpsMI);
@@ -1270,7 +1267,7 @@ public final class MainWindow extends javax.swing.JFrame {
         helpMenu.add(debugMenu);
 
         aboutMI.setText(bundle1.getString("ABOUT")); // NOI18N
-        aboutMI.addActionListener((ActionEvent evt) -> {
+        aboutMI.addActionListener((evt) -> {
             new AboutDialog(MainWindow.this).setVisible(true);
         });
         helpMenu.add(aboutMI);
@@ -1296,18 +1293,6 @@ public final class MainWindow extends javax.swing.JFrame {
         if(dialogMonospaced == null) dialogMonospaced = new FunctionMonospaced(MainWindow.this);
         dialogMonospaced.setVisible(true);
         selected.addAll(dialogMonospaced.getData());
-    }
-
-    private void selTrainButtonActionPerformed() {
-        setSelected(train);
-    }
-
-    private void selValidButtonActionPerformed() {
-        setSelected(validate);
-    }
-
-    private void selGenerButtonActionPerformed() {
-        setSelected(generalize);
     }
 
     private void setSelected(DatasetTableModel model) {
@@ -1370,10 +1355,6 @@ public final class MainWindow extends javax.swing.JFrame {
             default: generalize.addAll(foo); dest = generalize.getName(); break;
         }
         info("Moving %d elements from '%s' -> '%s'", foo.size(), selected.getName(), dest);
-    }
-
-    private void dataRemSelRowsMIActionPerformed() {
-        selected.removeSelected();
     }
 
     private void popFuncRandMIActionPerformed() {
@@ -2304,7 +2285,7 @@ public final class MainWindow extends javax.swing.JFrame {
         });
 
 
-        ActionListener exampleListner = (ActionEvent e) -> {
+        ActionListener exampleListner = (e) -> {
             loadExample((JMenuItem)e.getSource(), exampleMap.get((JMenuItem)e.getSource()));
         };
 
