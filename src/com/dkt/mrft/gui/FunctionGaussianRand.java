@@ -64,17 +64,17 @@ public final class FunctionGaussianRand extends JDialog {
     private final ImageIcon a_ok = new ImageIcon(getClass().getResource("/res/icons/a_ok.png"));
 
     // Variables declaration - do not modify
-    final JFormattedTextField averageField = new JFormattedTextField();
-    final JButton closeButton = new JButton();
-    final JFormattedTextField endField = new JFormattedTextField();
-    final JTextField expField = new JTextField();
-    final JButton genCloseButton = new JButton();
-    final JLabel numPointsLabel = new JLabel();
-    final JFormattedTextField pointsField = new JFormattedTextField();
-    final JFormattedTextField seedField = new JFormattedTextField();
-    final JFormattedTextField startField = new JFormattedTextField();
-    final JLabel validExpLabel = new JLabel();
-    final JFormattedTextField varianceField = new JFormattedTextField();
+    private final JFormattedTextField averageField = new JFormattedTextField();
+    private final JButton closeButton = new JButton();
+    private final JFormattedTextField endField = new JFormattedTextField();
+    private final JTextField expField = new JTextField();
+    private final JButton genCloseButton = new JButton();
+    private final JLabel numPointsLabel = new JLabel();
+    private final JFormattedTextField pointsField = new JFormattedTextField();
+    private final JFormattedTextField seedField = new JFormattedTextField();
+    private final JFormattedTextField startField = new JFormattedTextField();
+    private final JLabel validExpLabel = new JLabel();
+    private final JFormattedTextField varianceField = new JFormattedTextField();
     // End of variables declaration
 
     private boolean out;
